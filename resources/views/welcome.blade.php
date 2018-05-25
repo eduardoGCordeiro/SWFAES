@@ -12,9 +12,23 @@
 
         <!-- Styles -->
         <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
+            html{
+                background-image: url("bg.png") ;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+
+            #bg{
+                background-color: #222;
+                opacity: 0.5;
+                height: 100%;
+                width: 100%;
+                position: fixed;
+
+            }
+            body {
+                
+                color: lightgreen;
                 font-family: 'Raleway', sans-serif;
                 font-weight: 100;
                 height: 100vh;
@@ -49,21 +63,32 @@
                 font-size: 84px;
             }
 
-            .links > a {
-                color: #636b6f;
+            .links > a,.links-bottom > a {
+                color: lightgreen;
                 padding: 0 25px;
                 font-size: 12px;
                 font-weight: 600;
                 letter-spacing: .1rem;
                 text-decoration: none;
                 text-transform: uppercase;
+
             }
 
             .m-b-md {
+                float: left;
                 margin-bottom: 30px;
+                margin-top:10%;
+
+            }
+            .links-bottom   {
+                left: 10px;
+                position: fixed;
+                bottom: 10px;
+                
             }
         </style>
     </head>
+    <div id="bg"></div>
     <body>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
@@ -78,11 +103,11 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
-                    Laravel
+                <div>
+                    <img src="logo.png">
+                    <div class="title m-b-md">SWFAES</div>
                 </div>
-
-                <div class="links">
+                <div class="links-bottom">
                     <a href="https://laravel.com/docs">Documentation</a>
                     <a href="https://laracasts.com">Laracasts</a>
                     <a href="https://laravel-news.com">News</a>

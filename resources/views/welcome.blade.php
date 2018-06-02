@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>SWFAES | SISTEMA WEB FAZENDA ESCOLA</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -19,8 +19,8 @@
             }
 
             #bg{
-                background-color: #222;
-                opacity: 0.5;
+                background-image: url("bg2.jpg");
+                opacity: 0.6;
                 height: 100%;
                 width: 100%;
                 position: fixed;
@@ -96,8 +96,7 @@
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
+                        <a href="{{ route('login') }}">Entrar</a>
                     @endauth
                 </div>
             @endif
@@ -108,11 +107,8 @@
                     <div class="title m-b-md">SWFAES</div>
                 </div>
                 <div class="links-bottom">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="#">Documentação</a>
+                    <a href="https://github.com/luisthiagop/swfaes">GitHub</a>
                 </div>
             </div>
         </div>

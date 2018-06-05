@@ -5,7 +5,11 @@
     <div class="row mt-5">
         <div class="col-md-8 offset-md-2">
             <div class="card">
-                <div class="card-header">Painel principal</div>
+                
+                <div class="card-header">
+
+                Cadastro de Usuários</div>
+
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success">
@@ -14,11 +18,6 @@
                     @endif
 
                     Você está logado!
-
-<br>
-                    <p>Partes que estão em dev:</p>
-                    <a href="/usuarios">Usuários</a><br>
-                    <a href="/usuarios/create/">--lista</a>
                 </div>
             </div>
         </div>

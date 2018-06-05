@@ -14,6 +14,7 @@ DROP TABLE IF EXISTS public.tipos_itens CASCADE;
 DROP TABLE IF EXISTS public.itens CASCADE;
 DROP TABLE IF EXISTS public.saidas CASCADE;
 DROP TABLE IF EXISTS public.entradas CASCADE;
+DROP TABLE IF EXISTS public.password_resets CASCADE;
 
 
 
@@ -38,16 +39,14 @@ CREATE TABLE public.funcionarios(
 	id_funcionarios serial NOT NULL,
 	cpf varchar(11),
 	nome varchar(45) NOT NULL,
-	id_usuarios_usuarios integer,
-	CONSTRAINT funcionarios_pk PRIMARY KEY (id_funcionarios),
-	CONSTRAINT cpf UNIQUE (cpf) DEFERRABLE INITIALLY IMMEDIATE
-);
+	CONSTRAINT funcionarios_pk PRIMARY KEY (id_funcionarios)
+	);
 
 CREATE TABLE public.adms_geral(
 	id_adms_geral serial NOT NULL,
 	data_inicio date NOT NULL,
 	data_fim date,
-	id_usuarios_usuarios integer,
+	id_usuarios_usuarios integer NOT NULL,
 	CONSTRAINT adms_geral_pk PRIMARY KEY (id_adms_geral),
 	CONSTRAINT adms_geral_fk FOREIGN KEY (id_usuarios_usuarios) REFERENCES public.usuarios (id_usuarios)
 );
@@ -56,7 +55,7 @@ CREATE TABLE public.adms_talhoes(
 	id_adms_talhoes serial NOT NULL,
 	data_inicio date NOT NULL,
 	data_fim date,
-	id_usuarios_usuarios integer,
+	id_usuarios_usuarios integer NOT NULL,
 	CONSTRAINT adms_talhoes_pk PRIMARY KEY (id_adms_talhoes),
 	CONSTRAINT adms_talhoes_fk FOREIGN KEY (id_usuarios_usuarios) REFERENCES public.usuarios (id_usuarios)
 );
@@ -72,13 +71,13 @@ CREATE TABLE public.requisicoes(
 	data date NOT NULL DEFAULT CURRENT_DATE CHECK (data=CURRENT_DATE),
 	descricao varchar(100),
 	descricao_adms_geral varchar(100),
-	id_adms_talhoes_adms_talhoes integer,
+	id_adms_talhoes_adms_talhoes integer NOT NULL,
 	id_adms_geral_adms_geral integer,
-	id_requisicoes_status_requisicoes integer,
+	id_requisicoes_status_requisicoes integer NOT NULL,
 	CONSTRAINT requisicoes_pk PRIMARY KEY (id_requisicoes),
- CONSTRAINT adms_talhoes_fk FOREIGN KEY (id_adms_talhoes_adms_talhoes) REFERENCES public.adms_talhoes (id_adms_talhoes),
- CONSTRAINT adms_geral_fk FOREIGN KEY (id_adms_geral_adms_geral) REFERENCES public.adms_geral (id_adms_geral),
- CONSTRAINT status_requisicoes_fk FOREIGN KEY (id_requisicoes_status_requisicoes) REFERENCES public.status_requisicoes (id_requisicoes)
+ 	CONSTRAINT adms_talhoes_fk FOREIGN KEY (id_adms_talhoes_adms_talhoes) REFERENCES public.adms_talhoes (id_adms_talhoes),
+ 	CONSTRAINT adms_geral_fk FOREIGN KEY (id_adms_geral_adms_geral) REFERENCES public.adms_geral (id_adms_geral),
+ 	CONSTRAINT status_requisicoes_fk FOREIGN KEY (id_requisicoes_status_requisicoes) REFERENCES public.status_requisicoes (id_requisicoes)
 );
 
 CREATE TABLE public.talhoes(
@@ -94,9 +93,9 @@ CREATE TABLE public.culturas(
 	descricao varchar(100),
 	data_fim date,
 	tipos_safra boolean,
-	id_talhoes_talhoes integer,
+	id_talhoes_talhoes integer NOT NULL,
 	CONSTRAINT culturas_pk PRIMARY KEY (id_culturas),
- CONSTRAINT talhoes_fk FOREIGN KEY (id_talhoes_talhoes) REFERENCES public.talhoes (id_talhoes)
+ 	CONSTRAINT talhoes_fk FOREIGN KEY (id_talhoes_talhoes) REFERENCES public.talhoes (id_talhoes)
 );
 
 CREATE TABLE public.tipos_atividades(
@@ -110,24 +109,24 @@ CREATE TABLE public.atividades(
 	data date NOT NULL DEFAULT CURRENT_DATE CHECK (data=CURRENT_DATE),
 	data_registro date NOT NULL,
 	descricao varchar(100),
-	id_adms_geral_adms_geral integer,
-	id_tipos_atividades_tipos_atividades integer,
+	id_adms_geral_adms_geral integer NOT NULL,
+	id_tipos_atividades_tipos_atividades integer NOT NULL,
 	id_culturas_culturas smallint,
 	id_requisicoes_requisicoes integer,
 	id_talhoes_talhoes integer,
 	CONSTRAINT atividades_pk PRIMARY KEY (id_atividades),
- CONSTRAINT adms_geral_fk FOREIGN KEY (id_adms_geral_adms_geral) REFERENCES public.adms_geral (id_adms_geral),
- CONSTRAINT tipos_atividades_fk FOREIGN KEY (id_tipos_atividades_tipos_atividades) REFERENCES public.tipos_atividades (id_tipos_atividades),
- CONSTRAINT culturas_fk FOREIGN KEY (id_culturas_culturas) REFERENCES public.culturas (id_culturas),
- CONSTRAINT requisicoes_fk FOREIGN KEY (id_requisicoes_requisicoes) REFERENCES public.requisicoes (id_requisicoes),
- CONSTRAINT talhoes_fk FOREIGN KEY (id_talhoes_talhoes) REFERENCES public.talhoes (id_talhoes)
+ 	CONSTRAINT adms_geral_fk FOREIGN KEY (id_adms_geral_adms_geral) REFERENCES public.adms_geral (id_adms_geral),
+ 	CONSTRAINT tipos_atividades_fk FOREIGN KEY (id_tipos_atividades_tipos_atividades) REFERENCES public.tipos_atividades (id_tipos_atividades),
+ 	CONSTRAINT culturas_fk FOREIGN KEY (id_culturas_culturas) REFERENCES public.culturas (id_culturas),
+ 	CONSTRAINT requisicoes_fk FOREIGN KEY (id_requisicoes_requisicoes) REFERENCES public.requisicoes (id_requisicoes),
+ 	CONSTRAINT talhoes_fk FOREIGN KEY (id_talhoes_talhoes) REFERENCES public.talhoes (id_talhoes)
 );
 
 CREATE TABLE public.funcionarios_tem_atividades(
-	id_atividades_atividades integer,
-	id_funcionarios_funcionarios integer,
- CONSTRAINT atividades_fk FOREIGN KEY (id_atividades_atividades) REFERENCES public.atividades (id_atividades),
- CONSTRAINT funcionarios_fk FOREIGN KEY (id_funcionarios_funcionarios) REFERENCES public.funcionarios (id_funcionarios)
+	id_atividades_atividades integer NOT NULL,
+	id_funcionarios_funcionarios integer NOT NULL,
+ 	CONSTRAINT atividades_fk FOREIGN KEY (id_atividades_atividades) REFERENCES public.atividades (id_atividades),
+ 	CONSTRAINT funcionarios_fk FOREIGN KEY (id_funcionarios_funcionarios) REFERENCES public.funcionarios (id_funcionarios)
 );
 
 CREATE TABLE public.unidades(
@@ -148,8 +147,8 @@ CREATE TABLE public.itens(
 	nome varchar(46) NOT NULL,
 	custo_por_unidades float NOT NULL,
 	quantidade float NOT NULL,
-	id_unidades_unidades integer,
-	id_tipos_itens_tipos_itens integer,
+	id_unidades_unidades integer NOT NULL,
+	id_tipos_itens_tipos_itens integer NOT NULL,
 	CONSTRAINT itens_pk PRIMARY KEY (id_itens),
  CONSTRAINT unidades_fk FOREIGN KEY (id_unidades_unidades) REFERENCES public.unidades (id_unidades),
  CONSTRAINT tipos_itens_fk FOREIGN KEY (id_tipos_itens_tipos_itens) REFERENCES public.tipos_itens (id_tipos_itens)
@@ -160,8 +159,8 @@ CREATE TABLE public.saidas(
 	custo float NOT NULL,
 	quantidade float NOT NULL,
 	descricao varchar(45),
-	id_itens_itens integer,
-	id_atividades_atividades integer,
+	id_itens_itens integer NOT NULL,
+	id_atividades_atividades integer NOT NULL,
 	CONSTRAINT saidas_pk PRIMARY KEY (id_saidas),
  CONSTRAINT itens_fk FOREIGN KEY (id_itens_itens) REFERENCES public.itens (id_itens) ON DELETE	CASCADE ON UPDATE CASCADE,
 CONSTRAINT atividades_fk FOREIGN KEY (id_atividades_atividades) REFERENCES public.atividades (id_atividades)ON DELETE	CASCADE ON UPDATE CASCADE
@@ -172,8 +171,8 @@ CREATE TABLE public.entradas(
 	custo float NOT NULL,
     quantidade float NOT NULL,
 	descricao varchar(45) NOT NULL,
-	id_itens_itens integer,
-	id_atividades_atividades integer,
+	id_itens_itens integer NOT NULL,
+	id_atividades_atividades integer NOT NULL,
 	CONSTRAINT entradas_pk PRIMARY KEY (id_entradas),
  CONSTRAINT itens_fk FOREIGN KEY (id_itens_itens) REFERENCES public.itens (id_itens) ON DELETE CASCADE ON UPDATE CASCADE,
  CONSTRAINT atividades_fk FOREIGN KEY (id_atividades_atividades) REFERENCES public.atividades (id_atividades) ON DELETE	CASCADE ON UPDATE CASCADE
@@ -295,97 +294,6 @@ $body$
 $body$
 LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION fk_requisicoes() RETURNS TRIGGER AS
-$body$
-		BEGIN
-				IF (new.id_adms_talhoes_adms_talhoes = NULL) THEN
-						DELETE FROM public.requisicoes WHERE (id_requisicoes = new.id_requisicoes);
-						RAISE EXCEPTION 	'Não é possível inserir uma requisição sem o id do administrador de talhoes';
-				ELSE 
-						RETURN NEW;
-				END IF;
-		END;
-$body$
-LANGUAGE plpgsql;
-
-CREATE OR REPLACE FUNCTION fk_atividades() RETURNS TRIGGER AS
-$body$
-		BEGIN
-				IF ((new.id_tipos_atividades_tipos_atividades != NULL) AND (new.id_adms_geral_adms_geral != NULL)) THEN
-						RETURN NEW;
-				ELSE 
-						DELETE FROM public.atividades WHERE (id_atividades = new.id_atividades);
-						RAISE EXCEPTION 	'Não é possível inserir uma requisição sem o id do administrador geral ou tipos de atividades';
-				END IF;
-		END;
-$body$
-LANGUAGE plpgsql;
-
-CREATE OR REPLACE FUNCTION fk_entradas() RETURNS TRIGGER AS
-$body$
-		BEGIN
-				IF ((new.id_itens_itens != NULL) AND (new.id_atividades_atividades != NULL)) THEN
-						RETURN NEW;
-				ELSE 
-						DELETE FROM public.entradas WHERE (id_entradas = new.id_entradas);
-						RAISE EXCEPTION 	'Não é possível inserir uma entradas sem o id da atividades ou id do itens';
-				END IF;
-		END;
-$body$
-LANGUAGE plpgsql;
-
-CREATE OR REPLACE FUNCTION fk_saidas() RETURNS TRIGGER AS
-$body$
-		BEGIN
-				IF ((new.id_itens_itens != NULL) AND (new.id_atividades_atividades != NULL)) THEN
-						RETURN NEW;
-				ELSE 
-						DELETE FROM public.saidas WHERE (id_saidas = new.id_saidas);
-						RAISE EXCEPTION 	'Não é possível inserir uma saída sem o id da atividades ou id do itens';
-				END IF;
-		END;
-$body$
-LANGUAGE plpgsql;
-
-CREATE OR REPLACE FUNCTION fk_itens() RETURNS TRIGGER AS
-$body$
-		BEGIN
-				IF ((new.id_unidades_unidades != NULL) AND (new.id_tipos_itens_tipos_itens != NULL)) THEN
-						RETURN NEW;
-				ELSE 
-						DELETE FROM public.itens WHERE (id_itens = new.id_itens);
-						RAISE EXCEPTION 	'Não é possível inserir um ítem sem o id de sua unidades ou sem o id do seu tipos';
-				END IF;
-		END;
-$body$
-LANGUAGE plpgsql;
-
-CREATE OR REPLACE FUNCTION fk_funcionarios_tem_atividades() RETURNS TRIGGER AS
-$body$
-		BEGIN
-				IF ((new.id_atividades_atividades != NULL) AND (new.id_funcionarios_funcionarios != NULL)) THEN
-						RETURN NEW;
-				ELSE 
-						DELETE FROM public.funcionarios_tem_atividades WHERE (id_funcionarios_tem_atividades = new.id_funcionarios_tem_atividades);
-						RAISE EXCEPTION 	'Não é possível inserir um ítem sem o id da atividades ou id do funcionarios';
-				END IF;
-		END;
-$body$
-LANGUAGE plpgsql;
-
-CREATE OR REPLACE FUNCTION fk_culturas() RETURNS TRIGGER AS
-$body$
-		BEGIN
-				IF (new.id_talhoes_talhoes != NULL) THEN
-						RETURN NEW;
-				ELSE 
-						DELETE FROM public.culturas WHERE (id_culturas = new.id_culturas);
-						RAISE EXCEPTION 	'Não é possível inserir uma cultura sem id do talhão';
-				END IF;
-		END;
-$body$
-LANGUAGE plpgsql;
-
 CREATE TRIGGER requisicoes_data
 		BEFORE INSERT ON public.requisicoes
 		FOR EACH ROW 
@@ -431,37 +339,3 @@ CREATE TRIGGER talhoes_culturas
 		FOR EACH ROW
 		EXECUTE PROCEDURE talhoes_culturas();
 
-CREATE TRIGGER fk_requisicoes
-		AFTER INSERT ON public.requisicoes
-		FOR EACH ROW
-		EXECUTE PROCEDURE fk_requisicoes();
-
-CREATE TRIGGER fk_atividades
-		AFTER INSERT ON public.atividades
-		FOR EACH ROW
-		EXECUTE PROCEDURE fk_atividades();
-
-CREATE TRIGGER fk_entradas
-		AFTER INSERT ON public.entradas
-		FOR EACH ROW
-		EXECUTE PROCEDURE fk_entradas();
-
-CREATE TRIGGER fk_saidas
-		AFTER INSERT ON public.saidas
-		FOR EACH ROW
-		EXECUTE PROCEDURE fk_saidas();
-
-CREATE TRIGGER fk_itens
-		AFTER INSERT ON public.itens
-		FOR EACH ROW
-		EXECUTE PROCEDURE fk_itens();
-
-CREATE TRIGGER fk_funcionarios_tem_atividades
-		AFTER INSERT ON public.funcionarios_tem_atividades
-		FOR EACH ROW
-		EXECUTE PROCEDURE fk_funcionarios_tem_atividades();
-
-CREATE TRIGGER fk_culturas
-		AFTER INSERT ON public.culturas
-		FOR EACH ROW
-		EXECUTE PROCEDURE fk_culturas();

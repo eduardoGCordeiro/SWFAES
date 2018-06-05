@@ -25,6 +25,12 @@
                 width: 100%;
                 position: fixed;
             }
+            .navbar-brand{
+                
+                font-family: "Raleway", sans-serif !important;
+    
+
+            }
     </style>
 </head>
     <div id="bg"></div>

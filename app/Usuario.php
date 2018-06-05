@@ -9,8 +9,9 @@ class Usuario extends Authenticatable
 {
     use Notifiable;
 
-    protected $table = 'usuario';
-    protected $primaryKey = 'id_usuario';
+    protected $table = 'usuarios';
+    protected $primaryKey = 'id_usuarios';
+    public $timestamps = false;
 
 
     /**
@@ -19,7 +20,7 @@ class Usuario extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'cpf','login','name', 'email', 'password',
+        'cpf','nome','email', 'login', 'password',
     ];
 
     /**

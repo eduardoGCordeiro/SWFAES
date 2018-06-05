@@ -17,8 +17,25 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/inicio', 'HomeController@index')->name('home');
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('administradores', 'AdministradoresController');
+
+Route::resource('atividades', 'AtividadesController');
+
+Route::resource('cadernetas', 'CadernetasController');
+
+Route::resource('culturas', 'CulturasController');
+
+Route::resource('funcionarios', 'FuncionariosController');
+
+Route::resource('itens', 'ItensController');
+
+Route::resource('movimentacoes', 'MovimentacoesController');
+
+Route::resource('requisicoes', 'RequisicoesController');
+
+Route::resource('talhoes', 'TalhoesController');
+
+Route::resource('usuarios', 'UsuariosController');

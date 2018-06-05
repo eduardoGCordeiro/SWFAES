@@ -14,12 +14,12 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style type="text/css">
             body{
-                background-image: url("bg.png") ;
+                background-image: url("/bg.png") ;
                 background-repeat: no-repeat;
                 background-size: cover;
             }
             #bg{
-                background-image: url("bg2.jpg");
+                background-image: url("/bg2.jpg");
                 opacity: 0.6;
                 height: 100%;
                 width: 100%;
@@ -40,7 +40,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }} <img height="15%" width="15%" src="logo2.png">
+                {{ config('app.name', 'Laravel') }} <img height="15%" width="15%" src="/logo2.png">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

@@ -17,8 +17,15 @@
 
 <br>
                     <p>Partes que estão em dev:</p>
-                    <a href="/usuarios">Usuários</a><br>
-                    <a href="/usuarios/create/">--lista</a>
+                    <ul>
+                        <li>
+                            <a href="/usuarios">Usuários</a><br>
+                            <a href="/usuarios/create/">--lista</a>
+                        </li>
+                        <li>
+                            <a href="/talhoes/">Talhões</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

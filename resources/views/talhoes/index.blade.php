@@ -22,7 +22,7 @@
 
                     
                   @foreach($talhoes as $talhao)
-                    <div class="card border-success mb-3" style="max-width: 20rem;">
+                    <div class="card text-white bg-success  mb-3" style="max-width: 20rem;">
                       <div class="card-header">Talhão {{$talhao->id_talhoes}}</div>
                       <div class="card-body">
                         <h4 class="card-title">safra de @if($talhao->culturas->first()->tipos_safra) inverno @else verão @endif</h4>
@@ -34,6 +34,23 @@
                   @endforeach
                       
                   <button type="button" class="btn btn-primary">Criar Novo</button>
+
+
+
+                  <ul class="list-group">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Cras justo odio
+    <span class="badge badge-primary badge-pill">14</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Dapibus ac facilisis in
+    <span class="badge badge-primary badge-pill">2</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Morbi leo risus
+    <span class="badge badge-primary badge-pill">1</span>
+  </li>
+</ul> 
                 </div>
             </div>
         </div>

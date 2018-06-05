@@ -17,14 +17,12 @@
                 background-repeat: no-repeat;
                 background-size: cover;
             }
-
             #bg{
                 background-image: url("bg2.jpg");
                 opacity: 0.6;
                 height: 100%;
                 width: 100%;
                 position: fixed;
-
             }
             body {
                 
@@ -34,35 +32,28 @@
                 height: 100vh;
                 margin: 0;
             }
-
             .full-height {
                 height: 100vh;
             }
-
             .flex-center {
                 align-items: center;
                 display: flex;
                 justify-content: center;
             }
-
             .position-ref {
                 position: relative;
             }
-
             .top-right {
                 position: absolute;
                 right: 10px;
                 top: 18px;
             }
-
             .content {
                 text-align: center;
             }
-
             .title {
                 font-size: 84px;
             }
-
             .links > a,.links-bottom > a {
                 color: lightgreen;
                 padding: 0 25px;
@@ -71,14 +62,11 @@
                 letter-spacing: .1rem;
                 text-decoration: none;
                 text-transform: uppercase;
-
             }
-
             .m-b-md {
                 float: left;
                 margin-bottom: 30px;
                 margin-top:10%;
-
             }
             .links-bottom   {
                 left: 10px;
@@ -94,7 +82,7 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/inicio') }}">Início</a>
                     @else
                         <a href="{{ route('login') }}">Entrar</a>
                     @endauth

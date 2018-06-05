@@ -1,23 +1,3 @@
-DROP TABLE IF EXISTS public.usuarios CASCADE;
-DROP TABLE IF EXISTS public.funcionarios CASCADE;
-DROP TABLE IF EXISTS public.adms_geral CASCADE;
-DROP TABLE IF EXISTS public.adms_talhoes CASCADE;
-DROP TABLE IF EXISTS public.status_requisicoes CASCADE;
-DROP TABLE IF EXISTS public.requisicoes CASCADE;
-DROP TABLE IF EXISTS public.talhoes CASCADE;
-DROP TABLE IF EXISTS public.culturas CASCADE;
-DROP TABLE IF EXISTS public.tipos_atividades CASCADE;
-DROP TABLE IF EXISTS public.atividades CASCADE;
-DROP TABLE IF EXISTS public.funcionarios_tem_atividades CASCADE;
-DROP TABLE IF EXISTS public.unidades CASCADE;
-DROP TABLE IF EXISTS public.tipos_itens CASCADE;
-DROP TABLE IF EXISTS public.itens CASCADE;
-DROP TABLE IF EXISTS public.saidas CASCADE;
-DROP TABLE IF EXISTS public.entradas CASCADE;
-DROP TABLE IF EXISTS public.password_resets CASCADE;
-
-
-
 CREATE TABLE public.password_resets(
 	email varchar(45) NOT NULL,
 	token varchar(100),

@@ -33,7 +33,7 @@
 
                   @endforeach
                       
-                  <button type="button" class="btn btn-primary">Criar Novo</button>
+                  <a href="{{Route('talhoes.create')}}"><button type="button" class="btn btn-primary">Criar Novo</button></a>
 
 
 

@@ -14,7 +14,7 @@ class UsuariosController extends Controller
      */
     public function index()
     {
-        $usuarios = Usuario::all();
+        $usuarios = Usuario::orderBy('acesso_sistema')->get();
         //dd($usuarios);
         return view('usuarios.index')->with(compact('usuarios'));
     }
@@ -59,7 +59,8 @@ class UsuariosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $usuario = Usuario::find($id);
+        return view('usuarios.edit')->with(compact('usuario'));
     }
 
     /**
@@ -71,7 +72,7 @@ class UsuariosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd();
     }
 
     /**

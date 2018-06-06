@@ -20,10 +20,12 @@
                     <ul>
                         <li>
                             <a href="/usuarios">Usuários</a><br>
-                            <a href="/usuarios/create/">--lista</a>
+                            <a href="/usuarios/create/">---Novo</a><br>
+                            <a href="/usuarios/1/edit/">---Editar</a><br>
                         </li>
                         <li>
-                            <a href="/talhoes/">Talhões</a>
+                            <a href="/talhoes/">Talhões</a><br>
+                            <a href="/talhoes/create">---Novo</a>
                         </li>
                     </ul>
                 </div>

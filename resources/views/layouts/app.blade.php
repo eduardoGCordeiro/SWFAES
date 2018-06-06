@@ -39,7 +39,7 @@
 <div id="app">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
+            <a class="navbar-brand" href="{{ url('/inicio') }}">
                 {{ config('app.name', 'Laravel') }} <img height="15%" width="15%" src="/logo2.png">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"

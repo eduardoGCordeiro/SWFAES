@@ -6,8 +6,8 @@
         <div class="col-md-12">
             <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/inicio">Início</a></li>
-                        <li class="breadcrumb-item"><a href="#">Usuarios</a></li>
-                        <li class="breadcrumb-item active">Lista</li>
+                        <li class="breadcrumb-item active"><a href="#">Usuarios</a></li>
+                        
                     </ol>
             <div class="card">
                 <div class="card-header">
@@ -28,17 +28,18 @@
                           <th scope="col">Nome de Usuário</th>
                           <th scope="col">CPF</th>
                           <th scope="col">email</th>
-                          <th scope="col">Manter</th>
+                          <th scope="col">Acesso ao sistema</th>
+
                         </tr>
                       </thead>
                       <tbody>
                         @foreach($usuarios as $usuario)
                           <tr class="">
-                            <th scope="row">{{$usuario->nome}}</th>
+                            <th scope="row"><a href="{{Route('usuarios.edit',[$usuario->id_usuarios])}}">{{$usuario->nome}}</a></th>
                             <td>{{$usuario->login}}</td>
                             <td>{{$usuario->cpf}}</td>
                             <td>{{$usuario->email}}</td>
-                            <td><button type="button" class="btn btn-outline-danger"><i class="fa fa-trash"></i></button></td>
+                            <td>@if($usuario->acesso_sistema) sim @else não @endif</td>
                           </tr>
                           
 

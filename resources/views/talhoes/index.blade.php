@@ -22,19 +22,24 @@
 
                     
                   @foreach($talhoes as $talhao)
-                    <div class="card text-white bg-success  mb-3" style="max-width: 20rem;">
-                      <div class="card-header">Talhão {{$talhao->id_talhoes}}</div>
+                    <div class="card  border-dark col-md-3 mb-3" style="margin:10px;float:left;height: 15rem;width: 18rem !important ;">
+                      <div class="card-header">Talhão {{$talhao->id_talhoes}}<span style="float: right" class="badge badge-success">1</span></div>
                       <div class="card-body">
-                        <h4 class="card-title">safra de @if($talhao->culturas->first()->tipos_safra) inverno @else verão @endif</h4>
+                        @if($talhao->culturas->first())
+                          <h4 class="card-title">safra de @if($talhao->culturas->first()->tipos_safra) inverno @else verão @endif</h4>
+                        @else
+                          <h4 class="card-title">Sem cultura atualmente</h4>
+                        @endif
                         <p class="card-text">{{$talhao->descricao}}</p>
                       </div>
                     </div>        
 
 
                   @endforeach
-                      
+                </div>
+                <div class="card-footer ">
                   <a href="{{Route('talhoes.create')}}"><button type="button" class="btn btn-primary">Criar Novo</button></a>
-
+                </div>
 
 
 

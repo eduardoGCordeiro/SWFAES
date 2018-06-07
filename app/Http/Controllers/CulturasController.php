@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Talhao;
+use App\Cultura;
 
-class TalhoesController extends Controller
+class CulturasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class TalhoesController extends Controller
      */
     public function index()
     {
-        $talhoes = Talhao::all();
-        //dd($usuarios);
-        return view('talhoes.index')->with(compact('talhoes'));
+        $cultura = Cultura::all();
+        
+        return view('culturas.index')->with(compact('cultura'));
     }
 
     /**
@@ -26,7 +26,7 @@ class TalhoesController extends Controller
      */
     public function create()
     {
-        return view('talhoes.create');
+        return view('culturas.create');
     }
 
     /**
@@ -37,7 +37,7 @@ class TalhoesController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        //
     }
 
     /**
@@ -59,8 +59,8 @@ class TalhoesController extends Controller
      */
     public function edit($id)
     {
-        $talhao = Talhao::find($id);
-        return view('talhoes.edit')->with(compact('talhao'));    
+        $cultura = Cultura::find($id);
+        return view('culturas.edit')->with(compact('cultura'));
     }
 
     /**

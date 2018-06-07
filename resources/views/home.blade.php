@@ -61,7 +61,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="{{Route('talhoes.index')}}">Talhões</a>
+                            <a href="{{Route('talhoes.index')}}">Talhões<i class="fa fa-check"></i></a>
                             <ul>
                                 <li><a href="{{Route('talhoes.create')}}">Novo<i class="fa fa-check"></i></a></li>
                                 <li><a href="{{Route('talhoes.edit',1)}}">Editar<i class="fa fa-check"></i></a></li>

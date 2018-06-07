@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Requisicao;
 use Illuminate\Http\Request;
-use App\Talhao;
 
-class TalhoesController extends Controller
+class RequisicoesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class TalhoesController extends Controller
      */
     public function index()
     {
-        $talhoes = Talhao::all();
-        //dd($usuarios);
-        return view('talhoes.index')->with(compact('talhoes'));
+        $requisicao = Requisicao::all();
+        
+        return view('requisicoes.index')->with(compact('requisicao'));
     }
 
     /**
@@ -26,7 +26,7 @@ class TalhoesController extends Controller
      */
     public function create()
     {
-        return view('talhoes.create');
+        return view('requisicoes.create');
     }
 
     /**
@@ -37,16 +37,16 @@ class TalhoesController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Requisicao  $requisicao
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Requisicao $requisicao)
     {
         //
     }
@@ -54,34 +54,34 @@ class TalhoesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Requisicao  $requisicao
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $talhao = Talhao::find($id);
-        return view('talhoes.edit')->with(compact('talhao'));    
+        $requisicao = Requisicao::find($id);
+        return view('requisicoes.edit')->with(compact('requisicao'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Requisicao  $requisicao
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Requisicao $requisicao)
     {
-        //
+        dd('testando');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Requisicao  $requisicao
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Requisicao $requisicao)
     {
         //
     }

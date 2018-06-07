@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Atividade;
 use Illuminate\Http\Request;
-use App\Talhao;
 
-class TalhoesController extends Controller
+class atividadesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class TalhoesController extends Controller
      */
     public function index()
     {
-        $talhoes = Talhao::all();
-        //dd($usuarios);
-        return view('talhoes.index')->with(compact('talhoes'));
+        $atividade = Atividade::all();
+        
+        return view('atividades.index')->with(compact('atividade'));
     }
 
     /**
@@ -26,7 +26,7 @@ class TalhoesController extends Controller
      */
     public function create()
     {
-        return view('talhoes.create');
+        return view('atividades.create');
     }
 
     /**
@@ -37,16 +37,16 @@ class TalhoesController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Atividade  $atividade
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Atividade $atividade)
     {
         //
     }
@@ -54,34 +54,35 @@ class TalhoesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Atividade  $atividade
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $talhao = Talhao::find($id);
-        return view('talhoes.edit')->with(compact('talhao'));    
+        $atividade = Atividade::find($id);
+        return view('atividades.edit')->with(compact('atividade'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Atividade  $atividade
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Atividade $atividade)
     {
-        //
+        dd('testando');
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Atividade  $atividade
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Atividade $atividade)
     {
         //
     }

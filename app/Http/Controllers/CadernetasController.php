@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Caderneta;
 use Illuminate\Http\Request;
-use App\Talhao;
 
-class TalhoesController extends Controller
+class CadernetasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,10 @@ class TalhoesController extends Controller
      */
     public function index()
     {
-        $talhoes = Talhao::all();
+        // $caderneta = Caderneta::all();
+        $caderneta = '';
         //dd($usuarios);
-        return view('talhoes.index')->with(compact('talhoes'));
+        return view('cadernetas.index')->with(compact('caderneta'));
     }
 
     /**
@@ -26,7 +27,7 @@ class TalhoesController extends Controller
      */
     public function create()
     {
-        return view('talhoes.create');
+        return view('cadernetas.create');
     }
 
     /**
@@ -37,16 +38,16 @@ class TalhoesController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Caderneta  $caderneta
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Caderneta $caderneta)
     {
         //
     }
@@ -54,34 +55,36 @@ class TalhoesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Caderneta  $caderneta
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $talhao = Talhao::find($id);
-        return view('talhoes.edit')->with(compact('talhao'));    
+        //$caderneta = Caderneta::find($id);
+        $caderneta = '';
+        return view('cadernetas.edit')->with(compact('caderneta'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Caderneta  $caderneta
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Caderneta $caderneta)
     {
-        //
+        dd('testando');
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Caderneta  $caderneta
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Caderneta $caderneta)
     {
         //
     }

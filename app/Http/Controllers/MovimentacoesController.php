@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Movimentacao;
 use Illuminate\Http\Request;
-use App\Talhao;
 
-class TalhoesController extends Controller
+class MovimentacoesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class TalhoesController extends Controller
      */
     public function index()
     {
-        $talhoes = Talhao::all();
-        //dd($usuarios);
-        return view('talhoes.index')->with(compact('talhoes'));
+        $movimentacao = Movimentacao::all();
+        
+        return view('movimentacoes.index')->with(compact('movimentacao'));
     }
 
     /**
@@ -26,7 +26,7 @@ class TalhoesController extends Controller
      */
     public function create()
     {
-        return view('talhoes.create');
+        return view('movimentacoes.create');
     }
 
     /**
@@ -37,16 +37,16 @@ class TalhoesController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Movimentacao  $movimentacao
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Movimentacao $movimentacao)
     {
         //
     }
@@ -54,23 +54,23 @@ class TalhoesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Movimentacao  $movimentacao
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $talhao = Talhao::find($id);
-        return view('talhoes.edit')->with(compact('talhao'));    
+        $movimentacao = Movimentacao::find($id);
+        return view('movimentacoes.edit')->with(compact('movimentacao'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Movimentacao  $movimentacao
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Movimentacao $movimentacao)
     {
         //
     }
@@ -78,10 +78,10 @@ class TalhoesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Movimentacao  $movimentacao
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Movimentacao $movimentacao)
     {
         //
     }

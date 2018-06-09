@@ -14,9 +14,9 @@ class atividadesController extends Controller
      */
     public function index()
     {
-        $atividade = Atividade::all();
+        $atividades = Atividade::all();
         
-        return view('atividades.index')->with(compact('atividade'));
+        return view('atividades.index')->with(compact('atividades'));
     }
 
     /**
@@ -70,7 +70,7 @@ class atividadesController extends Controller
      * @param  \App\Atividade  $atividade
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Atividade $atividade)
+    public function update()
     {
         dd('testando');
 

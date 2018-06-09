@@ -26,4 +26,9 @@ class Atividade extends Model
     * @var array
     */
    protected $hidden = [ ];
+
+  public function movimentacao()
+  {
+    return $this->hasMany('App\Movimentacao','id_atividades_atividades');
+  }
 }

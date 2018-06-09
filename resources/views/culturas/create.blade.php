@@ -6,70 +6,44 @@
         <div class="col-md-12 ">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/inicio">Início</a></li>
-                <li class="breadcrumb-item"><a href="{{Route('requisicoes.index')}}">Talhões</a></li>
-                <li class="breadcrumb-item active">Novo Requisições</li>
+                <li class="breadcrumb-item"><a href="{{Route('culturas.index')}}">Culturas</a></li>
+                <li class="breadcrumb-item active">Nova cultura</li>
             </ol>
             <div class="card">
                 
                 <div class="card-header">
 
-                    <h3>Cadastro de Requisições</h3>
+                    <h3>Cadastro de Culturas</h3>
 
 
                 </div>
 
                 <div class="card-body col-md-8 offset-lg-2" >
                     
-                    <form role="form" method="POST" action="{{ Route('talhoes.store') }}">
+                    <form role="form" method="POST" action="{{ Route('culturas.store') }}">
                         {!! csrf_field() !!}
 
 
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">Identificação</label>
+                            <label class="col-lg-4 col-form-label text-lg-right">Data de ínicio</label>
 
                             <div class="col-lg-6">
                                 <input
-                                        type="text"
-                                        class="form-control{{ $errors->has('identificacao') ? ' is-invalid' : '' }}"
-                                        name="nome"
-                                        value="{{ old('identificacao') }}"
+                                        type="date"
+                                        class="form-control{{ $errors->has('data') ? ' is-invalid' : '' }}"
+                                        name="data_inicio"
+                                        value="{{ old('data_inicio') }}"
                                         required
                                 >
-                                @if ($errors->has('identificacao'))
+                                @if ($errors->has('data_inicio'))
                                     <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('identificacao') }}</strong>
+                                        <strong>{{ $errors->first('data_inicio') }}</strong>
                                     </div>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="form-group row">
-
-
-
-                            <label class="col-lg-4 col-form-label text-lg-right">Área</label>
-
-                            <div class="col-lg-6">
-
-                                <div class="input-group mb-3">
-                                    
-                                    <input 
-                                        class="form-control"
-                                        type="text"
-                                        name="area" 
-                                    >
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">m²</span>
-                                    </div>
-                                </div>
-
-                                @if ($errors->has('area'))
-                                    <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('area') }}</strong>
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
+                        
 
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Descrição</label>
@@ -92,19 +66,39 @@
 
 
                         <div class="form-group row">
-                          <label class="col-lg-4 col-form-label text-lg-right">Tipo</label>
-                          <div class="col-lg-6">
+                            <label class="col-lg-4 col-form-label text-lg-right">Tipo de safra</label>
 
-                            <div class="custom-control custom-radio">
-                              <input id="customRadio1" name="administrador_geral" class="custom-control-input" checked="" type="radio">
-                              <label class="custom-control-label" for="customRadio1">Agricultura</label>
+                            <div class="col-lg-6">
+                                <select name="tipo_atividade" class="form-control" id="exampleSelect1">
+                                    <option>Verão</option>
+                                    <option>Inverno</option>
+                                    
+                                </select>
+                                
+                                @if ($errors->has('tipo_atividade'))
+                                    <div class="invalid-feedback">
+                                        <strong>{{ $errors->first('tipo_atividade') }}</strong>
+                                    </div>
+                                @endif
                             </div>
-                            <div class="custom-control custom-radio">
-                              <input id="customRadio2" name="administrador_geral" class="custom-control-input" type="radio">
-                              <label class="custom-control-label" for="customRadio2">Pecuária</label>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-lg-4 col-form-label text-lg-right">Talhão</label>
+
+                            <div class="col-lg-6">
+                                <select name="talhao" class="form-control" id="exampleSelect1">
+                                    <option>talhão 1</option>
+                                    <option>talhão 2</option>
+                                    
+                                </select>
+                                
+                                @if ($errors->has('talhao'))
+                                    <div class="invalid-feedback">
+                                        <strong>{{ $errors->first('talhao') }}</strong>
+                                    </div>
+                                @endif
                             </div>
-                          </div>
-                          
                         </div>
 
                         

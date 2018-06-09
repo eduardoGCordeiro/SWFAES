@@ -19,45 +19,40 @@
                     <p>Partes que estão em dev:</p>
                     <ul>
                         <li>
-                            <a href="{{Route('atividades.index')}}">Atividades</a>
+                            <a href="{{Route('atividades.index')}}">Atividades<i class="fa fa-check"></i></a>
                             <ul>
-                                <li><a href="{{Route('atividades.create')}}">Novo</a></li>
-                                <li><a href="{{Route('atividades.edit',1)}}">Editar</a></li>
+                                <li><a href="{{Route('atividades.create')}}">Novo<i class="fa fa-check"></i></a></li>
+                                <li><a href="{{Route('atividades.edit',2)}}">Editar<i class="fa fa-check"></i></a></li>
+                                
+                            </ul>
+                        </li>
+                        
+                        <li>
+                            <a href="{{Route('culturas.index')}}">Culturas<i class="fa fa-check"></i></a>
+                            <ul>
+                                <li><a href="{{Route('culturas.create')}}">Novo<i class="fa fa-check"></i></a></li>
+                                <li><a href="{{Route('culturas.edit',1)}}">Editar<i class="fa fa-check"></i></a></li>
                             </ul>
                         </li>
                         <li>
-                            <a href="{{Route('cadernetas.index')}}">Cadernetas</a>
-                            <ul>
-                                <li><a href="{{Route('cadernetas.create')}}">Novo</a></li>
-                                <li><a href="{{Route('cadernetas.edit',1)}}">Editar</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="{{Route('culturas.index')}}">Culturas</a>
-                            <ul>
-                                <li><a href="{{Route('culturas.create')}}">Novo</a></li>
-                                <li><a href="{{Route('culturas.edit',1)}}">Editar</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="{{Route('itens.index')}}">Itens</a>
+                            <a href="{{Route('itens.index')}}">Itens<i class="fa fa-check"></i></a>
                             <ul>
                                 <li><a href="{{Route('itens.create')}}">Novo<i class="fa fa-check"></i></a></li>
-                                <li><a href="{{Route('itens.edit',1)}}">Itens</a></li>
+                                <li><a href="{{Route('itens.edit',1)}}">Editar<i class="fa fa-check"></i></a></li>
                             </ul>
                         </li>
                         <li>
                             <a href="{{Route('movimentacoes.index')}}">Movimentações</a>
                             <ul>
-                                <li><a href="{{Route('movimentacoes.create')}}">Novo</a></li>
-                                <li><a href="{{Route('movimentacoes.edit',1)}}">Editar</a></li>
+                                <li><a href="{{Route('movimentacoes.create')}}">Novo<i class="fa fa-check"></i></a></li>
+                                <li><a href="{{Route('movimentacoes.edit',1)}}"><i class="fa fa-check"></i>Editar</a></li>
                             </ul>
                         </li>
                         <li>
                             <a href="{{Route('requisicoes.index')}}">Requisicoes</a>
                             <ul>
-                                <li><a href="{{Route('requisicoes.create')}}">Novo</a></li>
-                                <li><a href="{{Route('requisicoes.edit',1)}}">Editar</a></li>
+                                <li><a href="{{Route('requisicoes.create')}}">Novo<i class="fa fa-check"></i></a></li>
+                                <li><a href="{{Route('requisicoes.edit',1)}}">Editar<i class="fa fa-check"></i></a></li>
                             </ul>
                         </li>
                         <li>
@@ -68,7 +63,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="{{Route('usuarios.index')}}">Usuários</a>
+                            <a href="{{Route('usuarios.index')}}">Usuários<i class="fa fa-check"></i></a>
                             <ul>
                                 <li><a href="{{Route('usuarios.create')}}">Novo<i class="fa fa-check"></i></a></li>
                                 <li><a href="{{Route('usuarios.edit',1)}}">Editar<i class="fa fa-check"></i></a></li>

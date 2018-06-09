@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/inicio">Início</a></li>
-                        <li class="breadcrumb-item active"><a href="#">Usuarios</a></li>
+                        <li class="breadcrumb-item active">Usuarios</li>
                         
                     </ol>
             <div class="card">

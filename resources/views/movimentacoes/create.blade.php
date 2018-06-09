@@ -7,13 +7,13 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/inicio">Início</a></li>
                 <li class="breadcrumb-item"><a href="{{Route('requisicoes.index')}}">Talhões</a></li>
-                <li class="breadcrumb-item active">Novo Requisições</li>
+                <li class="breadcrumb-item active">Nova movimentação</li>
             </ol>
             <div class="card">
                 
                 <div class="card-header">
 
-                    <h3>Cadastro de Requisições</h3>
+                    <h3>Cadastro de movimentações</h3>
 
 
                 </div>
@@ -24,30 +24,31 @@
                         {!! csrf_field() !!}
 
 
+
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">Identificação</label>
+                            <label class="col-lg-4 col-form-label text-lg-right">Item</label>
 
                             <div class="col-lg-6">
-                                <input
-                                        type="text"
-                                        class="form-control{{ $errors->has('identificacao') ? ' is-invalid' : '' }}"
-                                        name="nome"
-                                        value="{{ old('identificacao') }}"
-                                        required
-                                >
-                                @if ($errors->has('identificacao'))
+                                <select name="tipo_atividade" class="form-control" id="exampleSelect1">
+                                    <option>Item 1</option>
+                                    <option>Item 2</option>
+                                    
+                                </select>
+                                
+                                @if ($errors->has('tipo_atividade'))
                                     <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('identificacao') }}</strong>
+                                        <strong>{{ $errors->first('tipo_atividade') }}</strong>
                                     </div>
                                 @endif
                             </div>
                         </div>
 
+
                         <div class="form-group row">
 
 
 
-                            <label class="col-lg-4 col-form-label text-lg-right">Área</label>
+                            <label class="col-lg-4 col-form-label text-lg-right">Quantidade</label>
 
                             <div class="col-lg-6">
 
@@ -59,7 +60,7 @@
                                         name="area" 
                                     >
                                     <div class="input-group-append">
-                                        <span class="input-group-text">m²</span>
+                                        <span class="input-group-text">Kg</span>
                                     </div>
                                 </div>
 
@@ -72,19 +73,56 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">Descrição</label>
+
+
+
+                            <label class="col-lg-4 col-form-label text-lg-right">Valor por unidade</label>
 
                             <div class="col-lg-6">
-                                <textarea 
-                                    class="form-control" 
-                                    id="exampleTextarea" 
-                                    rows="3"
-                                    name="descricao"
 
-                                ></textarea>
-                                @if ($errors->has('descricao'))
+                                <div class="input-group mb-3">
+                                    
+                                    <input 
+                                        class="form-control"
+                                        type="text"
+                                        name="area" 
+                                    >
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">R$</span>
+                                    </div>
+                                </div>
+
+                                @if ($errors->has('area'))
                                     <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('descricao') }}</strong>
+                                        <strong>{{ $errors->first('area') }}</strong>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+
+
+
+                            <label class="col-lg-4 col-form-label text-lg-right">Valor Total</label>
+
+                            <div class="col-lg-6">
+
+                                <div class="input-group mb-3">
+                                    
+                                    <input 
+                                        class="form-control"
+                                        type="text"
+                                        name="area" 
+                                    >
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">R$</span>
+                                    </div>
+                                </div>
+
+                                @if ($errors->has('area'))
+                                    <div class="invalid-feedback">
+                                        <strong>{{ $errors->first('area') }}</strong>
                                     </div>
                                 @endif
                             </div>
@@ -92,20 +130,25 @@
 
 
                         <div class="form-group row">
-                          <label class="col-lg-4 col-form-label text-lg-right">Tipo</label>
-                          <div class="col-lg-6">
+                            <label class="col-lg-4 col-form-label text-lg-right">Identificador da Atividade</label>
 
-                            <div class="custom-control custom-radio">
-                              <input id="customRadio1" name="administrador_geral" class="custom-control-input" checked="" type="radio">
-                              <label class="custom-control-label" for="customRadio1">Agricultura</label>
+                            <div class="col-lg-6">
+                                <select name="tipo_atividade" class="form-control" id="exampleSelect1">
+                                    <option>00001</option>
+                                    <option>00002</option>
+                                    
+                                </select>
+                                
+                                @if ($errors->has('tipo_atividade'))
+                                    <div class="invalid-feedback">
+                                        <strong>{{ $errors->first('tipo_atividade') }}</strong>
+                                    </div>
+                                @endif
                             </div>
-                            <div class="custom-control custom-radio">
-                              <input id="customRadio2" name="administrador_geral" class="custom-control-input" type="radio">
-                              <label class="custom-control-label" for="customRadio2">Pecuária</label>
-                            </div>
-                          </div>
-                          
                         </div>
+
+
+
 
                         
                         

@@ -138,6 +138,17 @@
                           
                         </div>
                        
+                       <hr>
+                       <div class="form-group row">
+                           <div class="col-lg-6 offset-lg-4">
+                               <div class="alert alert-dismissible alert-danger">
+                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                 <strong>Excluir usuário!</strong> Para deletar esse usuário clique no botão abaixo, mas lembre-se que isso é irreversível.
+                               </div>
+                               <p></p>
+                               <button type="button" class="btn btn-danger">Deletar</button>
+                           </div>
+                       </div>
 
                         <div class="form-group row">
                             <div class="col-lg-6 offset-lg-4">

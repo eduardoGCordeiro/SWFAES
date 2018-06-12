@@ -13,7 +13,7 @@
                 
                 <div class="card-header">
 
-                    <h3>Cadastro de Talhão</h3>
+                    <h3>Cadastro de talhão</h3>
 
 
                 </div>
@@ -105,6 +105,24 @@
                             </div>
                           </div>
                           
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-lg-4 col-form-label text-lg-right">Administrador do talhão</label>
+
+                            <div class="col-lg-6">
+                                <select name="tipo_atividade" class="form-control" id="exampleSelect1">
+                                    <option>Adm 1</option>
+                                    <option>adm 2</option>
+                                    
+                                </select>
+                                
+                                @if ($errors->has('tipo_atividade'))
+                                    <div class="invalid-feedback">
+                                        <strong>{{ $errors->first('tipo_atividade') }}</strong>
+                                    </div>
+                                @endif
+                            </div>
                         </div>
 
                         

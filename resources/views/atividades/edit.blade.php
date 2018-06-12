@@ -7,7 +7,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/inicio">Início</a></li>
                 <li class="breadcrumb-item"><a href="{{Route('atividades.index')}}">Atividades</a></li>
-                <li class="breadcrumb-item active">Editar Atividade</li>
+                <li class="breadcrumb-item active">Editando atividade</li>
             </ol>
             <div class="card">
                 

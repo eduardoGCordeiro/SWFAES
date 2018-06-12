@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row mt-5">
-        <div class="col-md-8 offset-md-2">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">Painel principal</div>
                 <div class="card-body">
@@ -13,7 +13,12 @@
                         </div>
                     @endif
 
-                    Você está logado!
+                    
+
+                    <div class="row">
+                        <div style="border-right: 1px solid grey" class="col-md-7"><img width="90%" src="p1.png"></div>
+                        <div class="col-md-4"><img width="130%" src="p2.png"></div>
+                    </div>
 
 <br>
                     <p>Partes que estão em dev:</p>

@@ -13,7 +13,7 @@
                 
                 <div class="card-header">
 
-                    <h3>Cadastro de Atividades</h3>
+                    <h3>Cadastro de atividade</h3>
 
 
                 </div>

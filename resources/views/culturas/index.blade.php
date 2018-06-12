@@ -12,7 +12,7 @@
                 <div class="card-header">
 
 
-                    <h3>Lista de Culturas</h3>
+                    <h3>Listando culturas</h3>
 
                     
 

@@ -13,7 +13,7 @@
                 
                 <div class="card-header">
 
-                    <h3>Cadastro de Itens</h3>
+                    <h3>Cadastro de item</h3>
 
 
                 </div>

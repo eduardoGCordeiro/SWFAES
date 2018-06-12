@@ -13,7 +13,7 @@
                 
                 <div class="card-header">
 
-                    <h3>Cadastro de Culturas</h3>
+                    <h3>Cadastro de cultura</h3>
 
 
                 </div>

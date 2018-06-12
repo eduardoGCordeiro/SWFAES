@@ -35,6 +35,9 @@ Route::resource('itens', 'ItensController');
 Route::resource('movimentacoes', 'MovimentacoesController');
 
 Route::resource('requisicoes', 'RequisicoesController');
+Route::resource('requisicoes/{id}/moderar', 'RequisicoesController@moderarget');
+
+
 
 Route::resource('talhoes', 'TalhoesController');
 

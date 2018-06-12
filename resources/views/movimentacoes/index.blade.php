@@ -12,7 +12,7 @@
                 <div class="card-header">
 
 
-                    <h4>Listando movimentações da fazenda</h4>  
+                    <h4>Listando movimentações</h4>  
 
 
                                         <table class="table  table-hover">

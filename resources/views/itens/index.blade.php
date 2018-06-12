@@ -12,7 +12,7 @@
                 <div class="card-header">
 
 
-                    <h3>Lista de Itens</h3>
+                    <h3>Listando itens</h3>
 
                     
 

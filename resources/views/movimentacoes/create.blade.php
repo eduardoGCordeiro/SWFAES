@@ -13,7 +13,7 @@
                 
                 <div class="card-header">
 
-                    <h3>Cadastro de movimentações</h3>
+                    <h3>Cadastro de movimentação</h3>
 
 
                 </div>

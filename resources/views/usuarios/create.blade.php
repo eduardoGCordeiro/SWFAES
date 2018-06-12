@@ -13,7 +13,7 @@
                 
                 <div class="card-header">
 
-                    <h3>Cadastro de Usuários</h3>
+                    <h3>Cadastro de usuário</h3>
 
 
                 </div>

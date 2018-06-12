@@ -60,8 +60,10 @@ class RequisicoesController extends Controller
     public function edit($id)
     {
         $requisicao = Requisicao::find($id);
-        return view('requisicoes.edit')->with(compact('requisicao'));
+        return view('requisicoes.moderar')->with(compact('requisicao'));
     }
+
+
 
     /**
      * Update the specified resource in storage.
@@ -85,4 +87,6 @@ class RequisicoesController extends Controller
     {
         //
     }
+
+   
 }

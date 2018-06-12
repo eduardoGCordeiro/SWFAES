@@ -13,7 +13,7 @@
                 
                 <div class="card-header">
 
-                    <h3>Edição de Itens</h3>
+                    <h3>Editando de Itens</h3>
 
 
                 </div>

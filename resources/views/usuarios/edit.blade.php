@@ -13,7 +13,7 @@
                 <div class="card-header">
 
 
-                    <h3>Editando Usuário</h3>
+                    <h3>Editando usuário</h3>
 
 
                     
@@ -140,7 +140,15 @@
                        
                        <hr>
                        <div class="form-group row">
+
                            <div class="col-lg-6 offset-lg-4">
+                                <div class="form-group row">
+                                    <div class="col-lg-6 offset-lg-4">
+                                        <button type="submit" class="btn btn-primary">
+                                            Salvar
+                                        </button>
+                                    </div>
+                                </div>
                                <div class="alert alert-dismissible alert-danger">
                                  <button type="button" class="close" data-dismiss="alert">&times;</button>
                                  <strong>Excluir usuário!</strong> Para deletar esse usuário clique no botão abaixo, mas lembre-se que isso é irreversível.
@@ -150,13 +158,7 @@
                            </div>
                        </div>
 
-                        <div class="form-group row">
-                            <div class="col-lg-6 offset-lg-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Salvar
-                                </button>
-                            </div>
-                        </div>
+                        
                     </form>
                     
                 </div>

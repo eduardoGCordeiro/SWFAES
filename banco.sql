@@ -1,4 +1,22 @@
-CREATE OR REPLACE FUNCTION requisicoes_data() RETURNS TRIGGER AS
+DROP TABLE IF EXISTS public.password_resets CASCADE;
+DROP TABLE IF EXISTS public.funcionario CASCADE;
+DROP TABLE IF EXISTS public.adm_geral CASCADE;
+DROP TABLE IF EXISTS public.adm_talhao CASCADE;
+DROP TABLE IF EXISTS public.status_requisicao CASCADE;
+DROP TABLE IF EXISTS public.requisicao CASCADE;
+DROP TABLE IF EXISTS public.talhao CASCADE;
+DROP TABLE IF EXISTS public.cultura CASCADE;
+DROP TABLE IF EXISTS public.tipo_atividade CASCADE;
+DROP TABLE IF EXISTS public.atividade CASCADE;
+DROP TABLE IF EXISTS public.funcionario_tem_atividade CASCADE;
+DROP TABLE IF EXISTS public.unidade CASCADE;
+DROP TABLE IF EXISTS public.tipos_item CASCADE;
+DROP TABLE IF EXISTS public.item CASCADE;
+DROP TABLE IF EXISTS public.movimentacao CASCADE;
+DROP TABLE IF EXISTS public.moderar_requisicao CASCADE;
+
+
+CREATE OR REPLACE FUNCTION requisicao_data() RETURNS TRIGGER AS
 $body$
 		BEGIN
 				new.data = CURRENT_DATE;
@@ -7,16 +25,16 @@ $body$
 $body$
 LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION requisicoes_status() RETURNS TRIGGER AS
+CREATE OR REPLACE FUNCTION requisicao_status() RETURNS TRIGGER AS
 $body$
 		BEGIN
-				new.id_requisicoes_status_requisicoes = 1;
+				new.id_requisicao_status_requisicao = 1;
 				RETURN NEW;
 		END;
 $body$
 LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION atividades_data() RETURNS TRIGGER AS
+CREATE OR REPLACE FUNCTION atividade_data() RETURNS TRIGGER AS
 $body$
 		BEGIN
 				new.data = CURRENT_DATE;
@@ -25,7 +43,7 @@ $body$
 $body$
 LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION culturas_data() RETURNS TRIGGER AS
+CREATE OR REPLACE FUNCTION cultura_data() RETURNS TRIGGER AS
 $body$
 		BEGIN
 				new.data_inicio = CURRENT_DATe;
@@ -35,16 +53,16 @@ $body$
 $body$
 LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION movimentacoes_itens() RETURNS TRIGGER AS
+CREATE OR REPLACE FUNCTION movimentacao_item() RETURNS TRIGGER AS
 $body$
 		BEGIN
-				IF (SELECT id_itens FROM public.itens WHERE  (id_itens = new.id_itens_itens) = TRUE) THEN
-					IF (new.tipo_movimentacoes = 'E') THEN
-							UPDATE public.itens SET quantidade = quantidade + new.quantidade WHERE id_itens = new.id_itens_itens;
+				IF (SELECT id_item FROM public.item WHERE  (id_item = new.id_item_item) = TRUE) THEN
+					IF (new.tipo_movimentacao = 'E') THEN
+							UPDATE public.item SET quantidade = quantidade + new.quantidade WHERE id_item = new.id_item_item;
 							RETURN NEW	;
 					END IF;
-					IF (new.tipo_movimentacoes = 'S') THEN
-							UPDATE public.itens SET quantidade = quantidade - new.quantidade WHERE id_itens = new.id_itens_itens;
+					IF (new.tipo_movimentacao = 'S') THEN
+							UPDATE public.item SET quantidade = quantidade - new.quantidade WHERE id_item = new.id_item_item;
 							RETURN NEW	;
 					END IF;
 				ELSE 
@@ -55,25 +73,25 @@ $body$
 $body$
 LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION culturas_safra() RETURNS TRIGGER AS
+CREATE OR REPLACE FUNCTION cultura_safra() RETURNS TRIGGER AS
 $body$
 		DECLARE 
 			 mes_data integer;
 		BEGIN
 				new.data_inicio = CURRENT_DATE;
-				SELECT EXTRACT('Month' FROM data_inicio) INTO mes_data FROM public.culturas WHERE (id_culturas = new.id_culturas);
+				SELECT EXTRACT('Month' FROM data_inicio) INTO mes_data FROM public.cultura WHERE (id_cultura = new.id_cultura);
 				IF (mes_data <= 6) THEN
-					 UPDATE public.culturas SET tipos_safra = 'I' WHERE (id_culturas = new.id_culturas);
+					 UPDATE public.cultura SET tipos_safra = 'I' WHERE (id_cultura = new.id_cultura);
 					 RETURN NEW;
 				ELSE
-					UPDATE public.culturas SET tipos_safra = 'V' WHERE (id_culturas = new.id_culturas);
+					UPDATE public.cultura SET tipos_safra = 'V' WHERE (id_cultura = new.id_cultura);
 					RETURN NEW;
 				END IF;
 		END;
 $body$
 LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION culturas_fim() RETURNS TRIGGER AS
+CREATE OR REPLACE FUNCTION cultura_fim() RETURNS TRIGGER AS
 $body$
 		DECLARE 
 			res_fim_inicio integer;
@@ -90,26 +108,26 @@ $body$
 $body$
 LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION talhoes_culturas() RETURNS TRIGGER AS
+CREATE OR REPLACE FUNCTION talhao_cultura() RETURNS TRIGGER AS
 $body$
 		BEGIN
-				IF (SELECT data_fim FROM public.culturas WHERE  (id_talhoes_talhoes = old.id_talhoes) = TRUE) THEN
-						DELETE FROM public.talhoes WHERE (id_talhoes = old.id_talhoes);
+				IF (SELECT data_fim FROM public.cultura WHERE  (id_tahao_talhao = old.id_talhao) = TRUE) THEN
+						DELETE FROM public.talhao WHERE (id_talhao = old.id_talhao);
 				ELSE 
-						RAISE EXCEPTION 'Não é possível deletar um talhão que ainda tem cultura';
+						RAISE EXCEPTION 'Não é possível deletar talhões que ainda possuem uma cultura.';
 						RETURN NULL;
 				END IF;
 		END;
 $body$
 LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION public.verifica_adms_talhoes(id_func integer) RETURNS boolean AS
+CREATE OR REPLACE FUNCTION public.verifica_adm_talhao(id_func integer) RETURNS boolean AS 
 $$
 	DECLARE
-		geral_talhoes integer;
+		geral_talhao integer;
 	BEGIN
-		SELECT id_funcionarios_funcionarios INTO geral_talhoes FROM public.adms_talhoes WHERE (id_funcionarios_funcionarios = id_func);
-		IF(geral_talhoes = id_func) THEN
+		SELECT id_funcionario_funcionario INTO geral_talhao FROM public.adm_talhao WHERE (id_funcionario_funcionario = id_func);
+		IF(geral_talhao = id_func) THEN
 			RETURN FALSE;
 		ELSE
 			RETURN TRUE;
@@ -118,13 +136,13 @@ $$
 $$
 LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION public.verifica_adms_geral ( id_func integer) RETURNS boolean AS
+CREATE OR REPLACE FUNCTION public.verifica_adm_geral ( id_func integer) RETURNS boolean AS 
 $$
 	DECLARE
-		talhoes_geral integer;
+		talhao_geral integer;
 	BEGIN
-		SELECT id_funcionarios_funcionarios INTO talhoes_geral FROM public.adms_geral WHERE (id_funcionarios_funcionarios = id_func);
-		IF(talhoes_geral = id_func) THEN
+		SELECT id_funcionario_funcionario INTO talhao_geral FROM public.adm_geral WHERE (id_funcionario_funcionario = id_func);
+		IF(talhao_geral = id_func) THEN
 			RETURN FALSE;
 		ELSE
 			RETURN TRUE;
@@ -143,7 +161,7 @@ $$
 		dv1     char(1);
 		dv2     char(1);
 		dvr     char(2);
-		lmod	  integer;
+		lmod	    integer;
 		res     numeric;
 	BEGIN		
 		str_cod = lpad(cod_cpf::text,11,'0');
@@ -174,7 +192,7 @@ $$
 	END;
 $$ LANGUAGE 'plpgsql' STRICT IMMUTABLE;
 
-CREATE OR REPLACE public.valida_email ( email varchar) RETURNS boolean AS
+CREATE OR REPLACE FUNCTION public.valida_email (email varchar) RETURNS boolean AS 
 $$
 	BEGIN		
 		IF email !~ '^[a-z0-9._%-]+@[A-Za-z0-9.-]+[.][a-z]+$' THEN
@@ -186,14 +204,14 @@ $$
 $$
 LANGUAGE plpgsql;
 
-CREATE OR REPLACE public.valida_senha ( senha varchar) RETURNS boolean AS
+CREATE OR REPLACE FUNCTION public.valida_senha (password varchar) RETURNS boolean AS 
 $$
 	BEGIN	
-		IF (length(senha) > 8) THEN
-			IF senha !~ '[A-Za-z]' OR senha !~'[0-9]' THEN
-				RETURN FALSE;
-			ELSE
+		IF (length(password) > 8) THEN
+			IF password ~ '[A-Za-z0-9]' THEN
 				RETURN TRUE;
+			ELSE
+				RETURN FAlSE;
 			END IF;
 		ELSE
 			RETURN FALSE;
@@ -202,7 +220,7 @@ $$
 $$ 
 LANGUAGE plpgsql;
 
-CREATE OR REPLACE public.valida_login ( login varchar) RETURNS boolean AS
+CREATE OR REPLACE FUNCTION public.valida_login (login varchar) RETURNS boolean AS 
 $$
 	BEGIN	
 			IF login !~ '[A-Za-z0-9]' THEN
@@ -214,13 +232,13 @@ $$
 $$
 LANGUAGE plpgsql;
 
-CREATE OR REPLACE public.valida_nome ( nome varchar) RETURNS boolean AS
+CREATE OR REPLACE FUNCTION public.valida_nome ( nome varchar) RETURNS boolean AS 
 $$
 	BEGIN	
-			IF nome !~ '[A-Z]' THEN
-				RETURN FALSE;
-			ELSE
+			IF nome !~ '[a-z]' THEN
 				RETURN TRUE;
+			ELSE
+				RETURN FALSE;
 			END IF;
 	END;
 $$
@@ -232,186 +250,194 @@ CREATE TABLE public.password_resets(
 	created_at timestamp
 );
 
-CREATE TABLE public.funcionarios(
-	id_funcionarios serial NOT NULL,
-	cpf bigint NOT NULL CHECK(valida_cpf(cpf) = true),
+CREATE TABLE public.funcionario(
+	id_funcionario serial NOT NULL,
+	cpf bigint NOT NULL UNIQUE CHECK(valida_cpf(cpf) = true),
 	nome varchar(45) NOT NULL CHECK (valida_nome(nome) = true),
 	email varchar(45) NOT NULL CHECK (valida_email(email) = true),
-	login varchar(13) NOT NULL CHECK (valida_login(login) = true),
+	acesso_sistema boolean NOT NULL DEFAULT FALSE,
+	login varchar(13) NOT NULL UNIQUE CHECK (valida_login(login) = true),
 	password varchar(60) NOT NULL CHECK (valida_senha(password) = true),
-	acesso_sistema boolean NOT NULL,
-	CONSTRAINT funcionarios_pk PRIMARY KEY (id_funcionarios),
-    CONSTRAINT cpf UNIQUE (cpf),
-	CONSTRAINT login UNIQUE (login)
-
+	CONSTRAINT funcionario_pk PRIMARY KEY (id_funcionario)
 );
 
-CREATE TABLE public.adms_geral(
-	id_adms_geral serial NOT NULL,
+CREATE TABLE public.adm_geral(
+	id_adm_geral serial NOT NULL,
 	data_inicio date NOT NULL,
 	data_fim date,
-	id_funcionarios_funcionarios integer NOT NULL CHECK (verifica_adms_talhoes(id_funcionarios_funcionarios) = true),
-	CONSTRAINT adms_geral_pk PRIMARY KEY (id_adms_geral),
-	CONSTRAINT adms_geral_fk FOREIGN KEY (id_funcionarios_funcionarios) REFERENCES public.funcionarios (id_funcionarios)
+	id_funcionario_funcionario integer NOT NULL CHECK (verifica_adm_talhao(id_funcionario_funcionario) = true),
+	CONSTRAINT adm_geral_pk PRIMARY KEY (id_adm_geral),
+	CONSTRAINT adm_geral_fk FOREIGN KEY (id_funcionario_funcionario) REFERENCES public.funcionario (id_funcionario)
 );
 
-CREATE TABLE public.adms_talhoes(
-	id_adms_talhoes serial NOT NULL,
+CREATE TABLE public.adm_talhao(
+	id_adm_talhao serial NOT NULL,
 	data_inicio date NOT NULL,
 	data_fim date,
-	id_funcionarios_funcionarios integer NOT NULL CHECK (verifica_adms_geral(id_funcionarios_funcionarios) = true),
-	CONSTRAINT adms_talhoes_pk PRIMARY KEY (id_adms_talhoes),
-	CONSTRAINT adms_talhoes_fk FOREIGN KEY (id_funcionarios_funcionarios) REFERENCES public.funcionarios (id_funcionarios)
+	id_funcionario_funcionario integer NOT NULL CHECK (verifica_adm_geral(id_funcionario_funcionario) = true),
+	CONSTRAINT adm_talhao_pk PRIMARY KEY (id_adm_talhao),
+	CONSTRAINT adm_talhao_fk FOREIGN KEY (id_funcionario_funcionario) REFERENCES public.funcionario (id_funcionario)
 );
 
-CREATE TABLE public.status_requisicoes(
-	id_requisicoes serial NOT NULL,
-	nome varchar(45) NOT NULL,
-	CONSTRAINT status_requisicoes_pk PRIMARY KEY (id_requisicoes)
+CREATE TABLE public.status_requisicao(
+	id_status_requisicao serial NOT NULL,
+	nome varchar(45) NOT NULL CHECK (valida_nome(nome) = true),
+	CONSTRAINT status_requisicao_pk PRIMARY KEY (id_status_requisicao)
 );
 
-CREATE TABLE public.requisicoes(
-	id_requisicoes serial NOT NULL,
+CREATE TABLE public.requisicao(
+	id_requisicao serial NOT NULL,
 	data date NOT NULL DEFAULT CURRENT_DATE CHECK (data=CURRENT_DATE),
 	descricao varchar(100),
-	descricao_adms_geral varchar(100),
-	id_adms_talhoes_adms_talhoes integer NOT NULL,
-	id_adms_geral_adms_geral integer,
-	id_requisicoes_status_requisicoes integer NOT NULL,
-	CONSTRAINT requisicoes_pk PRIMARY KEY (id_requisicoes),
- 	CONSTRAINT adms_talhoes_fk FOREIGN KEY (id_adms_talhoes_adms_talhoes) REFERENCES public.adms_talhoes (id_adms_talhoes),
- 	CONSTRAINT adms_geral_fk FOREIGN KEY (id_adms_geral_adms_geral) REFERENCES public.adms_geral (id_adms_geral),
- 	CONSTRAINT status_requisicoes_fk FOREIGN KEY (id_requisicoes_status_requisicoes) REFERENCES public.status_requisicoes (id_requisicoes)
+	descricao_adm_geral varchar(100),
+	id_adm_talhao_adm_talhao integer NOT NULL,
+	id_adm_geral_adm_geral integer,
+	id_requisicao_status_requisicao integer NOT NULL,
+	CONSTRAINT requisicao_pk PRIMARY KEY (id_requisicao),
+ 	CONSTRAINT adm_talhao_fk FOREIGN KEY (id_adm_talhao_adm_talhao) REFERENCES public.adm_talhao (id_adm_talhao)
 );
 
-CREATE TABLE public.talhoes(
-	id_talhoes serial NOT NULL,
+CREATE TABLE public.moderar_requisicao(
+	data date NOT NULL DEFAULT CURRENT_DATE CHECK (data=CURRENT_DATE),
+	descricao varchar(100),
+	id_requisicao_requisicao integer,
+	id_adm_geral_adm_geral integer,
+	id_requisicao_status_requisicao integer NOT NULL,
+	CONSTRAINT moderar_requisicao_pk PRIMARY KEY (id_requisicao_requisicao, id_adm_geral_adm_geral, id_requisicao_status_requisicao),
+ 	CONSTRAINT adm_geral_fk FOREIGN KEY (id_adm_geral_adm_geral) REFERENCES public.adm_geral (id_adm_geral),
+ 	CONSTRAINT status_requisicao_fk FOREIGN KEY (id_requisicao_status_requisicao) REFERENCES public.status_requisicao (id_status_requisicao),
+    CONSTRAINT requisicao_fk FOREIGN KEY (id_requisicao_requisicao) REFERENCES public.requisicao (id_requisicao)
+);
+
+CREATE TABLE public.talhao(
+	id_talhao serial NOT NULL,
 	area float NOT NULL,
 	descricao varchar(45),
-	CONSTRAINT talhoes_pk PRIMARY KEY (id_talhoes)
+	CONSTRAINT talhao_pk PRIMARY KEY (id_talhao)
 );
 
-CREATE TABLE public.culturas(
-	id_culturas serial NOT NULL,
+CREATE TABLE public.cultura(
+	id_cultura serial NOT NULL,
 	data_inicio date NOT NULL DEFAULT CURRENT_DATE CHECK (data_inicio=CURRENT_DATE),
 	descricao varchar(100),
 	data_fim date,
 	tipos_safra char(1) CHECK (tipos_safra = 'I' OR tipos_safra = 'V'),
-	id_talhoes_talhoes integer,
-	CONSTRAINT culturas_pk PRIMARY KEY (id_culturas),
- 	CONSTRAINT talhoes_fk FOREIGN KEY (id_talhoes_talhoes) REFERENCES public.talhoes (id_talhoes)
+	id_talhao_talhao integer,
+	CONSTRAINT cultura_pk PRIMARY KEY (id_cultura),
+ 	CONSTRAINT talhao_fk FOREIGN KEY (id_talhao_talhao) REFERENCES public.talhao (id_talhao)
 );
 
-CREATE TABLE public.tipos_atividades(
-	id_tipos_atividades serial NOT NULL,
-	nome varchar(45),
-	CONSTRAINT tipos_atividades_pk PRIMARY KEY (id_tipos_atividades)
+CREATE TABLE public.tipo_atividade(
+	id_tipo_atividade serial NOT NULL,
+	nome varchar(45) CHECK (valida_nome(nome) = true),
+	CONSTRAINT tipo_atividade_pk PRIMARY KEY (id_tipo_atividade)
 );
 
-CREATE TABLE public.atividades(
-	id_atividades serial NOT NULL,
+CREATE TABLE public.atividade(
+	id_atividade serial NOT NULL,
 	data date NOT NULL DEFAULT CURRENT_DATE CHECK (data=CURRENT_DATE),
 	data_registro date NOT NULL,
 	descricao varchar(100),
-	id_adms_geral_adms_geral integer NOT NULL,
-	id_tipos_atividades_tipos_atividades integer NOT NULL,
-	id_culturas_culturas smallint,
-	id_requisicoes_requisicoes integer,
-	id_talhoes_talhoes integer,
-	CONSTRAINT atividades_pk PRIMARY KEY (id_atividades),
- 	CONSTRAINT adms_geral_fk FOREIGN KEY (id_adms_geral_adms_geral) REFERENCES public.adms_geral (id_adms_geral),
- 	CONSTRAINT tipos_atividades_fk FOREIGN KEY (id_tipos_atividades_tipos_atividades) REFERENCES public.tipos_atividades (id_tipos_atividades),
- 	CONSTRAINT culturas_fk FOREIGN KEY (id_culturas_culturas) REFERENCES public.culturas (id_culturas),
- 	CONSTRAINT requisicoes_fk FOREIGN KEY (id_requisicoes_requisicoes) REFERENCES public.requisicoes (id_requisicoes),
- 	CONSTRAINT talhoes_fk FOREIGN KEY (id_talhoes_talhoes) REFERENCES public.talhoes (id_talhoes)
+	id_adm_geral_adm_geral integer NOT NULL,
+	id_tipo_atividade_tipo_atividade integer NOT NULL,
+	id_cultura_cultura smallint,
+	id_requisicao_requisicao integer,
+	id_talhao_talhao integer,
+	CONSTRAINT atividade_pk PRIMARY KEY (id_atividade),
+ 	CONSTRAINT adm_geral_fk FOREIGN KEY (id_adm_geral_adm_geral) REFERENCES public.adm_geral (id_adm_geral),
+ 	CONSTRAINT tipo_atividade_fk FOREIGN KEY (id_tipo_atividade_tipo_atividade) REFERENCES public.tipo_atividade (id_tipo_atividade),
+ 	CONSTRAINT cultura_fk FOREIGN KEY (id_cultura_cultura) REFERENCES public.cultura (id_cultura),
+ 	CONSTRAINT requisicao_fk FOREIGN KEY (id_requisicao_requisicao) REFERENCES public.requisicao (id_requisicao),
+ 	CONSTRAINT talhao_fk FOREIGN KEY (id_talhao_talhao) REFERENCES public.talhao (id_talhao)
 );
 
-CREATE TABLE public.funcionarios_tem_atividades(
-	id_atividades_atividades integer NOT NULL,
-	id_funcionarios_funcionarios integer NOT NULL,
- 	CONSTRAINT atividades_fk FOREIGN KEY (id_atividades_atividades) REFERENCES public.atividades (id_atividades),
- 	CONSTRAINT funcionarios_fk FOREIGN KEY (id_funcionarios_funcionarios) REFERENCES public.funcionarios (id_funcionarios)
+CREATE TABLE public.funcionario_tem_atividade(
+	id_atividade_atividade integer NOT NULL,
+	id_funcionario_funcionario integer NOT NULL,
+ 	CONSTRAINT funcionario_tem_atividade_pk PRIMARY KEY (id_atividade_atividade, id_funcionario_funcionario)
 );
 
-CREATE TABLE public.unidades(
-	id_unidades serial NOT NULL,
-	sigla varchar(10) NOT NULL,
-	nome varchar(45),
-	CONSTRAINT unidades_pk PRIMARY KEY (id_unidades)
+CREATE TABLE public.unidade(
+	id_unidade serial NOT NULL,
+	sigla varchar(10) NOT NULL CHECK (valida_nome(sigla) = true),
+	nome varchar(45) CHECK (valida_nome(nome) = true),
+	CONSTRAINT unidade_pk PRIMARY KEY (id_unidade)
 );
 
-CREATE TABLE public.tipos_itens(
-	id_tipos_itens serial NOT NULL,
+CREATE TABLE public.tipos_item(
+	id_tipos_item serial NOT NULL,
 	nome varchar(45) NOT NULL,
-	CONSTRAINT tipos_itens_pk PRIMARY KEY (id_tipos_itens)
+	CONSTRAINT tipos_item_pk PRIMARY KEY (id_tipos_item)
 );
 
-CREATE TABLE public.itens(
-	id_itens serial NOT NULL,
-	nome varchar(46) NOT NULL,
-	custo_por_unidades float NOT NULL,
+CREATE TABLE public.item(
+	id_item serial NOT NULL,
+	nome varchar(46) NOT NULL CHECK (valida_nome(nome) = true),
+	custo_por_unidade float NOT NULL,
 	quantidade float NOT NULL,
-	id_unidades_unidades integer,
-	id_tipos_itens_tipos_itens integer,
-	CONSTRAINT itens_pk PRIMARY KEY (id_itens),
- CONSTRAINT unidades_fk FOREIGN KEY (id_unidades_unidades) REFERENCES public.unidades (id_unidades),
- CONSTRAINT tipos_itens_fk FOREIGN KEY (id_tipos_itens_tipos_itens) REFERENCES public.tipos_itens (id_tipos_itens)
+	id_unidade_unidade integer,
+	id_tipos_item_tipos_item integer,
+	CONSTRAINT item_pk PRIMARY KEY (id_item),
+ CONSTRAINT unidade_fk FOREIGN KEY (id_unidade_unidade) REFERENCES public.unidade (id_unidade),
+ CONSTRAINT tipos_item_fk FOREIGN KEY (id_tipos_item_tipos_item) REFERENCES public.tipos_item (id_tipos_item)
 );
 
-CREATE TABLE public.movimentacoes(
-	id_movimentacoes serial NOT NULL,
+CREATE TABLE public.movimentacao(
+	id_movimentacao serial NOT NULL,
 	custo float NOT NULL,
 	quantidade float NOT NULL,
-	tipo_movimentacoes char(1) NOT NULL CHECK (tipo_movimentacoes = 'E' OR tipo_movimentacoes = 'S'),
-	id_itens_itens integer NOT NULL,
-	id_atividades_atividades integer NOT NULL,
+	tipo_movimentacao char(1) NOT NULL CHECK (tipo_movimentacao = 'E' OR tipo_movimentacao = 'S'),
+	id_item_item integer NOT NULL,
+	id_atividade_atividade integer NOT NULL,
 	descricao varchar(45),
-	CONSTRAINT movimentacoes_pk PRIMARY KEY (id_movimentacoes),
- 	CONSTRAINT itens_fk FOREIGN KEY (id_itens_itens) REFERENCES public.itens (id_itens) ON DELETE	CASCADE ON UPDATE CASCADE,
-	CONSTRAINT atividades_fk FOREIGN KEY (id_atividades_atividades) REFERENCES public.atividades (id_atividades)ON DELETE	CASCADE ON UPDATE CASCADE
+	CONSTRAINT movimentacao_pk PRIMARY KEY (id_movimentacao),
+ 	CONSTRAINT item_fk FOREIGN KEY (id_item_item) REFERENCES public.item (id_item) ON DELETE	CASCADE ON UPDATE CASCADE,
+	CONSTRAINT atividade_fk FOREIGN KEY (id_atividade_atividade) REFERENCES public.atividade (id_atividade)ON DELETE	CASCADE ON UPDATE CASCADE
 );
 
-INSERT INTO public.status_requisicoes VALUES (DEFAULT, 'ABERTA');
-INSERT INTO public.status_requisicoes VALUES (DEFAULT, 'PENDENTE');
-INSERT INTO public.status_requisicoes VALUES (DEFAULT, 'FECHADA');
+INSERT INTO public.status_requisicao VALUES (DEFAULT, 'ABERTA');
+INSERT INTO public.status_requisicao VALUES (DEFAULT, 'PENDENTE');
+INSERT INTO public.status_requisicao VALUES (DEFAULT, 'FECHADA');
 
-CREATE TRIGGER requisicoes_data
-		BEFORE INSERT ON public.requisicoes
+CREATE TRIGGER requisicao_data
+		BEFORE INSERT ON public.requisicao
 		FOR EACH ROW 
-		EXECUTE PROCEDURE requisicoes_data();
+		EXECUTE PROCEDURE requisicao_data();
 
-CREATE TRIGGER requisicoes_status
-		BEFORE INSERT ON public.requisicoes
+CREATE TRIGGER requisicao_status
+		BEFORE INSERT ON public.requisicao
 		FOR EACH ROW 
-		EXECUTE PROCEDURE requisicoes_status();
+		EXECUTE PROCEDURE requisicao_status();
 
-CREATE TRIGGER atividades_data
-		BEFORE INSERT ON public.atividades
+CREATE TRIGGER atividade_data
+		BEFORE INSERT ON public.atividade
 		FOR EACH ROW 
-		EXECUTE PROCEDURE atividades_data();
+		EXECUTE PROCEDURE atividade_data();
 
-CREATE TRIGGER culturas_data
-		BEFORE INSERT ON public.culturas
+CREATE TRIGGER cultura_data
+		BEFORE INSERT ON public.cultura
 		FOR EACH ROW 
-		EXECUTE PROCEDURE culturas_data();
+		EXECUTE PROCEDURE cultura_data();
 
-CREATE TRIGGER movimentacoes_itens
-		AFTER INSERT ON public.movimentacoes
+CREATE TRIGGER movimentacao_item
+		AFTER INSERT ON public.movimentacao
 		FOR EACH ROW
-		EXECUTE PROCEDURE  movimentacoes_itens();
+		EXECUTE PROCEDURE  movimentacao_item();
 
-CREATE TRIGGER culturas_safra
-		AFTER INSERT ON public.culturas
+CREATE TRIGGER cultura_safra
+		AFTER INSERT ON public.cultura
 		FOR EACH ROW 
-		EXECUTE PROCEDURE culturas_safra();
+		EXECUTE PROCEDURE cultura_safra();
 
-CREATE TRIGGER culturas_fim
-		BEFORE UPDATE ON public.culturas
+CREATE TRIGGER cultura_fim
+		BEFORE UPDATE ON public.cultura
 		FOR EACH ROW 
-		EXECUTE PROCEDURE culturas_fim();
+		EXECUTE PROCEDURE cultura_fim();
 
-CREATE TRIGGER talhoes_culturas
-		BEFORE DELETE ON public.talhoes
+CREATE TRIGGER talhao_cultura
+		BEFORE DELETE ON public.talhao
 		FOR EACH ROW
-		EXECUTE PROCEDURE talhoes_culturas();
+		EXECUTE PROCEDURE talhao_cultura();
 
+INSERT INTO public.funcionario VALUES (DEFAULT, '10456436960', 'EDUARDO','eduardoguilhermecordeiro@hotmail.com', TRUE, 'eduardo987', 'eduardo334958');
+SELECT * FROM public.funcionario;

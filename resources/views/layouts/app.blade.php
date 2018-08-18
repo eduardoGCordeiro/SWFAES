@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
     <style type="text/css">
             body{
                 background-image: url("/bg.png") ;
@@ -26,12 +27,13 @@
                 position: fixed;
             }
             .navbar-brand{
-                
+
                 font-family: "Raleway", sans-serif !important;
-    
+
 
             }
     </style>
+    @yield('style')
 </head>
     <div id="bg"></div>
 
@@ -82,10 +84,12 @@
 
 
 
-    
+
 </div>
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
+
+    @yield('script')
 </body>
 </html>

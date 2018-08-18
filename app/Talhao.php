@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Talhao extends Model
 {
-    protected $table = 'talhoes';
+    protected $table = 'talhao';
     protected $primaryKey = 'id_talhoes';
     public $timestamps = false;
 
@@ -35,5 +35,5 @@ class Talhao extends Model
         return $this->hasMany('App\Cultura','id_talhoes_talhoes');
     }
 
- 
+
 }

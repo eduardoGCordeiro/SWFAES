@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Movimentacao extends Model
 {
-   protected $table = 'entradas';
+   protected $table = 'entrada';
    protected $primaryKey = 'id_entradas';
    public $timestamps = false;
 
@@ -17,7 +17,7 @@ class Movimentacao extends Model
     * @var array
     */
    protected $fillable = [
-       
+
    ];
 
    /**

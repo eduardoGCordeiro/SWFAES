@@ -20,7 +20,7 @@ Auth::routes();
 Route::get('/inicio', 'HomeController@index')->name('home');
 
 
-Route::resource('administradores', 'AdministradoresController');
+//Route::resource('administradores', 'AdministradoresController');
 
 Route::resource('atividades', 'AtividadesController');
 
@@ -28,17 +28,17 @@ Route::resource('cadernetas', 'CadernetasController');
 
 Route::resource('culturas', 'CulturasController');
 
-Route::resource('funcionarios', 'FuncionariosController');
+//Route::resource('funcionarios', 'FuncionariosController');
 
+// data tables
+Route::get('itens/getdata', 'ItensController@data_tables')->name('data_table_itens');
 Route::resource('itens', 'ItensController');
 
 Route::resource('movimentacoes', 'MovimentacoesController');
 
 Route::resource('requisicoes', 'RequisicoesController');
 Route::resource('requisicoes/{id}/moderar', 'RequisicoesController@moderarget');
-
-
-
 Route::resource('talhoes', 'TalhoesController');
 
 Route::resource('usuarios', 'UsuariosController');
+

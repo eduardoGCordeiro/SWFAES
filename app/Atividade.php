@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Atividade extends Model
 {
-   protected $table = 'atividades';
+   protected $table = 'atividade';
    protected $primaryKey = 'id_atividades';
    public $timestamps = false;
 
@@ -17,7 +17,7 @@ class Atividade extends Model
     * @var array
     */
    protected $fillable = [
-        
+
    ];
 
    /**

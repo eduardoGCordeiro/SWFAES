@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Item;
 use Illuminate\Http\Request;
+use DB;
+use DataTables;
+use Redirect;
 
 class ItensController extends Controller
 {
@@ -12,13 +15,20 @@ class ItensController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+
     public function index()
     {
-        $item = Item::all();
-        
-        return view('itens.index')->with(compact('itens'));
+
+        return view('itens.index');
     }
 
+    public function data_tables()
+    {
+        return \DataTables::of(Item::query())->make(true);
+
+    }
     /**
      * Show the form for creating a new resource.
      *

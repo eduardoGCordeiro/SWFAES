@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cultura extends Model
 {
-	protected $table = 'culturas';
+	protected $table = 'cultura';
 	protected $primaryKey = 'id_culturas';
 	public $timestamps = false;
 

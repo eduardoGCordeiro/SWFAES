@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/inicio', 'HomeController@index')->name('home');
+Route::post('/inicio', 'HomeController@index')->name('home');
 
 
 //Route::resource('administradores', 'AdministradoresController');
@@ -39,6 +39,8 @@ Route::resource('movimentacoes', 'MovimentacoesController');
 Route::resource('requisicoes', 'RequisicoesController');
 Route::resource('requisicoes/{id}/moderar', 'RequisicoesController@moderarget');
 Route::resource('talhoes', 'TalhoesController');
+
+Route::resource('unidades', 'UnidadesController');
 
 Route::resource('usuarios', 'UsuariosController');
 

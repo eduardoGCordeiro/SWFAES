@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Talhao extends Model
+class Unidade extends Model
 {
-    protected $table = 'talhoes';
-    protected $primaryKey = 'id_talhoes';
+    protected $table = 'unidades';
+    protected $primaryKey = 'id_unidades';
     public $timestamps = false;
 
 
@@ -17,7 +17,7 @@ class Talhao extends Model
      * @var array
      */
     protected $fillable = [
-        'area','descricao'
+        'sigla','nome'
     ];
 
     /**
@@ -28,12 +28,4 @@ class Talhao extends Model
     protected $hidden = [
         //
     ];
-
-
-    public function culturas()
-    {
-        return $this->hasMany('App\Cultura','id_talhoes_talhoes');
-    }
-
-
 }

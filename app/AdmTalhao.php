@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Movimentacao extends Model
+class AdmTalhao extends Model
 {
-   protected $table = 'mvimentacoes';
-   protected $primaryKey = 'id_movimentacoes';
+    protected $table = 'adms_talhoes';
+   protected $primaryKey = 'id_adms_talhoes';
    public $timestamps = false;
 
 
@@ -17,8 +17,7 @@ class Movimentacao extends Model
     * @var array
     */
    protected $fillable = [
-    'custo','quantidade','tipo_movimentacoes','id_itens_itens','id_atividades_atividades','descricao'
-
+      "data_inicio","data_fim","id_funcionarios_funcionarios"
    ];
 
    /**

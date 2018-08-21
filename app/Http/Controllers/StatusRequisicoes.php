@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Caderneta;
+use App\StatusRequisicoes;
 use Illuminate\Http\Request;
 
-class CadernetasController extends Controller
+class StatusRequisicoes extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +14,7 @@ class CadernetasController extends Controller
      */
     public function index()
     {
-        // $caderneta = Caderneta::all();
-        $caderneta = '';
-        //dd($usuarios);
-        return view('cadernetas.index')->with(compact('caderneta'));
+        //
     }
 
     /**
@@ -27,7 +24,7 @@ class CadernetasController extends Controller
      */
     public function create()
     {
-        return view('cadernetas.create');
+        //
     }
 
     /**
@@ -44,10 +41,10 @@ class CadernetasController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Caderneta  $caderneta
+     * @param  \App\StatusRequisicoes  $statusRequisicoes
      * @return \Illuminate\Http\Response
      */
-    public function show(Caderneta $caderneta)
+    public function show(StatusRequisicoes $statusRequisicoes)
     {
         //
     }
@@ -55,36 +52,33 @@ class CadernetasController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Caderneta  $caderneta
+     * @param  \App\StatusRequisicoes  $statusRequisicoes
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(StatusRequisicoes $statusRequisicoes)
     {
-        //$caderneta = Caderneta::find($id);
-        $caderneta = '';
-        return view('cadernetas.edit')->with(compact('caderneta'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Caderneta  $caderneta
+     * @param  \App\StatusRequisicoes  $statusRequisicoes
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Caderneta $caderneta)
+    public function update(Request $request, StatusRequisicoes $statusRequisicoes)
     {
-        dd('testando');
-
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Caderneta  $caderneta
+     * @param  \App\StatusRequisicoes  $statusRequisicoes
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Caderneta $caderneta)
+    public function destroy(StatusRequisicoes $statusRequisicoes)
     {
         //
     }

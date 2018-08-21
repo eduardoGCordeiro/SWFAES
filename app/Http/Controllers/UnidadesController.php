@@ -14,7 +14,7 @@ class UnidadesController extends Controller
      */
     public function index()
     {
-        //
+        return view('unidades.index');
     }
 
     /**
@@ -24,7 +24,7 @@ class UnidadesController extends Controller
      */
     public function create()
     {
-        //
+        return view('unidades.create');
     }
 
     /**
@@ -35,7 +35,15 @@ class UnidadesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $unidade = new Unidade();
+        $unidade->nome = strtoupper($request->nome);
+        $unidade->sigla = $request->sigla;
+
+        if($unidade->save()){
+            return redirect()->back()->with('success','Salvo com sucesso');
+        }else{
+            return redirect()->back()->with('error','Erro ao salvar');
+        }
     }
 
     /**
@@ -46,7 +54,7 @@ class UnidadesController extends Controller
      */
     public function show(Unidade $unidade)
     {
-        //
+
     }
 
     /**
@@ -57,7 +65,7 @@ class UnidadesController extends Controller
      */
     public function edit(Unidade $unidade)
     {
-        //
+        return view('unidades.edit')->with(compact('unidade'));
     }
 
     /**
@@ -67,9 +75,18 @@ class UnidadesController extends Controller
      * @param  \App\Unidade  $unidade
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Unidade $unidade)
+    public function update(Request $request,  $id)
     {
-        //
+
+        $unidade = Unidade::find($id);
+        $unidade->nome = strtoupper($request->nome);
+        $unidade->sigla = $request->sigla;
+
+        if($unidade->update()){
+            return redirect()->back()->with('success','Salvo com sucesso');
+        }else{
+            return redirect()->back()->with('error','Erro ao salvar');
+        }
     }
 
     /**

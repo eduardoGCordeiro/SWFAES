@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cultura extends Model
 {
-	protected $table = 'cultura';
+	protected $table = 'culturas';
 	protected $primaryKey = 'id_culturas';
 	public $timestamps = false;
 
@@ -17,7 +17,7 @@ class Cultura extends Model
 	 * @var array
 	 */
 	protected $fillable = [
-	    'data_inicio','data_fim','descricao','tipo_safra','id_talhoes_talhoes'
+	    'data_inicio','data_fim','descricao','tipos_safra','id_talhoes_talhoes'
 	];
 
 	/**

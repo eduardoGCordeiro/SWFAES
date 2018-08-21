@@ -25,7 +25,7 @@
                 position: fixed;
             }
             body {
-                
+
                 color: lightgreen;
                 font-family: 'Raleway', sans-serif;
                 font-weight: 100;
@@ -72,7 +72,7 @@
                 left: 10px;
                 position: fixed;
                 bottom: 10px;
-                
+
             }
         </style>
     </head>

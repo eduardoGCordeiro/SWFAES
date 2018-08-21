@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Talhao extends Model
+class TipoItem extends Model
 {
-    protected $table = 'talhoes';
-    protected $primaryKey = 'id_talhoes';
+    protected $table = 'tipos_itens';
+    protected $primaryKey = 'id_tipos_itens';
     public $timestamps = false;
 
 
@@ -17,7 +17,7 @@ class Talhao extends Model
      * @var array
      */
     protected $fillable = [
-        'area','descricao'
+        'nome'
     ];
 
     /**
@@ -28,12 +28,4 @@ class Talhao extends Model
     protected $hidden = [
         //
     ];
-
-
-    public function culturas()
-    {
-        return $this->hasMany('App\Cultura','id_talhoes_talhoes');
-    }
-
-
 }

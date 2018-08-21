@@ -24,7 +24,7 @@ Route::get('/inicio', 'HomeController@index')->name('home');
 
 Route::resource('atividades', 'AtividadesController');
 
-Route::resource('cadernetas', 'CadernetasController');
+Route::resource('funcionarios', 'FuncionariosController');
 
 Route::resource('culturas', 'CulturasController');
 

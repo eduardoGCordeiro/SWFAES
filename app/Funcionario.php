@@ -5,12 +5,12 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Usuario extends Authenticatable
+class Funcionario extends Authenticatable
 {
-    use Notifiable;
+     use Notifiable;
 
-    protected $table = 'funcionario';
-    protected $primaryKey = 'id_funcionario';
+    protected $table = 'funcionarios';
+    protected $primaryKey = 'id_funcionarios';
     public $timestamps = false;
 
 
@@ -20,7 +20,7 @@ class Usuario extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'cpf','nome','email', 'login', 'password','acesso_sistema'
+        'cpf','nome','email', 'acesso_sistema', 'login','password'
     ];
 
     /**
@@ -31,10 +31,4 @@ class Usuario extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
-
-    public function adm()
-    {
-        return $this->hasMany('App\Adm');
-    }
 }

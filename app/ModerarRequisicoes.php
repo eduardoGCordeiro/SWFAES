@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Movimentacao extends Model
+class ModerarRequisicoes extends Model
 {
-   protected $table = 'mvimentacoes';
-   protected $primaryKey = 'id_movimentacoes';
+    protected $table = 'moderar_requisicoes';
+   protected $primaryKey = 'id_moderar_requisicoes';
    public $timestamps = false;
 
 
@@ -17,8 +17,7 @@ class Movimentacao extends Model
     * @var array
     */
    protected $fillable = [
-    'custo','quantidade','tipo_movimentacoes','id_itens_itens','id_atividades_atividades','descricao'
-
+      'data','descricao','id_requisicoes_requisicoes','id_requisicoes_status_requisicoes'
    ];
 
    /**

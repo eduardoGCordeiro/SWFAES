@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Requisicao extends Model
 {
-   protected $table = 'requisicao';
+   protected $table = 'requisicoes';
    protected $primaryKey = 'id_requisicoes';
    public $timestamps = false;
 
@@ -17,7 +17,7 @@ class Requisicao extends Model
     * @var array
     */
    protected $fillable = [
-       'data_inicio','descricao','data_fim', 'tipos_safra', 'id_talhoes_talhoes'
+       'data','descricao','descricao_adms_gerais', 'id_adms_talhoes_adms_talhoes', 'id_requisicoes_status_requisicoes'
    ];
 
    /**

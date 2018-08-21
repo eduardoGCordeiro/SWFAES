@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
 {
-   protected $table = 'item';
-   protected $primaryKey = 'id_item';
+   protected $table = 'itens';
+   protected $primaryKey = 'id_itens';
    public $timestamps = false;
 
 
@@ -17,7 +17,7 @@ class Item extends Model
     * @var array
     */
    protected $fillable = [
-      'nome','custo_por_unidade','quantidade','id_unidade_unidade','id_tipos_item_tipos_item'
+      'nome','custo_por_unidade','quantidade','id_unidades_unidades','id_tipos_item_tipos_item'
    ];
 
    /**

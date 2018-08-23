@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Unidade;
 use Illuminate\Http\Request;
+use Yajra\Datatables\Datatables;
+use Session;
+use Form;
 
 class UnidadesController extends Controller
 {
@@ -15,6 +18,18 @@ class UnidadesController extends Controller
     public function index()
     {
         return view('unidades.index');
+    }
+
+    public function data_tables()
+    {
+        //return \DataTables::of(Unidade::query())->make(true);
+         $unidades = Unidade::select(['id_unidades', 'nome', 'sigla'])->get();
+
+        return Datatables::of($unidades)
+            ->addColumn('action', function ($unidade) {
+                return '<a href="'.Route('unidades.edit',[$unidade->id_unidades]).'" class="btn btn-primary">Editar</a>'.'<form action="'.Route('unidades.destroy',[$unidade->id_unidades]).'" method="POST"> '.csrf_field().'
+ <input name="_method" type="hidden" value="DELETE"> <button type="submit" class="btn btn-danger">deletar</button>';
+            })->make(true);
     }
 
     /**
@@ -40,9 +55,11 @@ class UnidadesController extends Controller
         $unidade->sigla = $request->sigla;
 
         if($unidade->save()){
-            return redirect()->back()->with('success','Salvo com sucesso');
+            Session::flash('alert-success', 'Nova unidade cadastrada com sucesso!');
+            return redirect()->route('unidades.index');
         }else{
-            return redirect()->back()->with('error','Erro ao salvar');
+            Session::flash('alert-danger', 'Erro ao cadastrar unidade!');
+            return redirect()->route('unidades.index');
         }
     }
 
@@ -83,9 +100,12 @@ class UnidadesController extends Controller
         $unidade->sigla = $request->sigla;
 
         if($unidade->update()){
-            return redirect()->back()->with('success','Salvo com sucesso');
+
+            Session::flash('alert-success', 'Editado com sucesso!');
+            return redirect()->route('unidades.index');
         }else{
-            return redirect()->back()->with('error','Erro ao salvar');
+            Session::flash('alert-danger', 'Erro ao editar!');
+            return redirect()->route('unidades.index');
         }
     }
 
@@ -95,8 +115,16 @@ class UnidadesController extends Controller
      * @param  \App\Unidade  $unidade
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Unidade $unidade)
+    public function destroy($id)
     {
-        //
+        $unidade = Unidade::find($id);
+        if($unidade->delete()){
+
+            Session::flash('alert-success', 'deletado com sucesso!');
+            return redirect()->route('unidades.index');
+        }else{
+            Session::flash('alert-danger', 'Erro ao editar!');
+            return redirect()->route('unidades.index');
+        }
     }
 }

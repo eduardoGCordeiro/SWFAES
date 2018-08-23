@@ -6,7 +6,7 @@
         <div class="col-md-12 ">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/inicio">Início</a></li>
-                <li class="breadcrumb-item"><a href="{{Route('itens.index')}}">Unidades</a></li>
+                <li class="breadcrumb-item"><a href="{{Route('unidades.index')}}">Unidades</a></li>
                 <li class="breadcrumb-item active">Editar unidade</li>
             </ol>
             <div class="card">

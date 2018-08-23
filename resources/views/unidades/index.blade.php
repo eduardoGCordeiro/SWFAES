@@ -6,7 +6,62 @@
 @section('content')
 <div class="container">
 
-    listando unidades
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/inicio">Início</a></li>
+                        <li class="breadcrumb-item active">Unidades de medida</li>
+                    </ol>
+            <div class="card">
+                <div class="card-header">
+
+
+                    <h3>Listando unidades</h3>
+                    <a href="{{Route('unidades.create')}}"><button type="button" class="btn btn-outline-success">Cadastrar nova</button></a>
+
+
+
+
+
+                </div>
+
+
+
+
+                <div class="card-body">
+                    <div class="flash-message">
+                      @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                        @if(Session::has('alert-' . $msg))
+
+                            <div class="alert alert-{{ $msg }} alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <p class="mb-0">{{ Session::get('alert-' . $msg) }}</p>
+                            </div>
+
+
+
+                        @endif
+                      @endforeach
+                    </div>
+
+
+                    <table id="data-table-unidades" class="table  table-striped">
+
+                      <thead>
+                        <tr>
+
+                            <th scope="col">Nome</th>
+                            <th scope="col">Sigla</th>
+                            <th scope="col">Ações</th>
+
+                        </tr>
+                      </thead>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 @endsection
@@ -15,7 +70,7 @@
 <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#data-table-itens').DataTable({
+    $('#data-table-unidades').DataTable({
         language:{
             "sEmptyTable": "Nenhum registro encontrado",
             "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
@@ -42,15 +97,19 @@ $(document).ready(function() {
 
         processing: true,
         serverSide: true,
-        ajax: '{{ route('data_table_itens') }}',
+        ajax: '{{ route('data_table_unidades') }}',
         columns: [
-            {data: 'id_item', name: 'id_item'},
-            {data: 'nome', name: 'nome'},
-            {data: 'custo_por_unidade', name: 'custo_por_unidade'},
-            {data: 'quantidade', name: 'quantidade'},
-            {data: 'id_unidade_unidade', name: 'id_unidade_unidade'},
-            {data: 'id_tipos_item_tipos_item', name: 'id_tipos_item_tipos_item'},
 
+            {data: 'nome', name: 'nome'},
+            {data: 'sigla', name: 'sigla'},
+            {data: 'action', name: 'action', orderable: false, searchable: false}
+
+        ],
+        fields:[
+            {
+                label: "First name:",
+                name: "first_name"
+            }
         ]
     });
 });

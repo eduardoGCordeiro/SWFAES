@@ -72,7 +72,7 @@
                         <div class="form-group row">
                             <div class="col-lg-6 offset-lg-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Alterar
+                                    Cadastrar
                                 </button>
                             </div>
                         </div>
@@ -88,4 +88,7 @@
 </div>
 @endsection
 
+@section('styles')
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 
+@endsection

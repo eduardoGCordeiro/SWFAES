@@ -43,6 +43,14 @@ Route::get('unidades/getdata', 'UnidadesController@data_tables')->name('data_tab
 Route::resource('unidades', 'UnidadesController');
 //------------------------------------------------------------------------------//
 
+//-------------------- rotas referentes à TipoItemController ------------------ //
+// data tables
+Route::get('tipo_item/getdata', 'TipoItemController@data_tables')->name('data_table_tipo_item');
+//ressource
+Route::resource('tipo_item', 'TipoItemController');
+//------------------------------------------------------------------------------//
+
+
 Route::resource('movimentacoes', 'MovimentacoesController');
 
 Route::resource('requisicoes', 'RequisicoesController');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Item;
 use Illuminate\Http\Request;
+use App\Http\Requests\ItensRequest;
 use DB;
 use DataTables;
 use Redirect;
@@ -47,7 +48,7 @@ class ItensController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**

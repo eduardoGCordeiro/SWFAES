@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div class="row mt-5">
+    <div class="row mt-4">
         <div class="col-md-12">
             <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/inicio">Início</a></li>
@@ -19,8 +19,6 @@
                 </div>
 
                 <div class="card-body">
-
-                    
                   @foreach($talhoes as $talhao)
                     <div class="card  border-dark col-md-3 mb-3" style="margin:10px;float:left;height: 15rem;width: 18rem !important ;">
                       <div class="card-header">Talhão {{$talhao->id_talhoes}}<span style="float: right" class="badge badge-success">1</span></div>
@@ -36,13 +34,12 @@
 
 
                   @endforeach
+
+
                 </div>
                 <div class="card-footer ">
                   <a href="{{Route('talhoes.create')}}"><button type="button" class="btn btn-primary">Criar Novo</button></a>
                 </div>
-
-
-
                 </div>
             </div>
         </div>

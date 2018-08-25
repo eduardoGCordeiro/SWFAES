@@ -93,7 +93,7 @@
 
                         <div class="form-group row">
                           <label class="col-lg-4 col-form-label text-lg-right">Tipo</label>
-                          <div class="col-lg-6">
+                          <div class="col-lg-4">
 
                             <div class="custom-control custom-radio">
                               <input id="customRadio1" name="administrador_geral" class="custom-control-input" checked="" type="radio">
@@ -129,7 +129,7 @@
                         
 
                         <div class="form-group row">
-                            <div class="col-lg-6 offset-lg-4">
+                            <div class="col-lg-6 offset-lg-6">
                                 <button type="submit" class="btn btn-primary">
                                     Cadastrar
                                 </button>

@@ -23,7 +23,7 @@ class ItensRequest extends FormRequest
      */
     public function rules()
     {
-        dd();
+
         return [
             'nome'=>,'required'
             'custo_por_unidade'=>'required',

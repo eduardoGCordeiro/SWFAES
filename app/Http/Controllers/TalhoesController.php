@@ -42,12 +42,13 @@ class TalhoesController extends Controller
         $talhao->area = $request->area;
         $talhao->descricao = $request->descricao;
 
-        if($talhao->save()){
-            return \Redirect::to('talhoes.store')->with('success', true)->with('message','Talhão criado com sucesso');
-        }else{
-            return \Redirect::to('talhoes.store') -> withErrors($request);
+
+        if ($talhao->save()) {
+            return \Redirect::to('talhoes')->with('Talhão inserido com sucesso');
+        } else {
+            return \Redirect::to('talhoes')->withErrors($request);
         }
-        dd($request);
+
     }
 
     /**
@@ -70,7 +71,7 @@ class TalhoesController extends Controller
     public function edit($id)
     {
         $talhao = Talhao::find($id);
-        return view('talhoes.edit')->with(compact('talhao'));    
+        return view('talhoes')->with(compact('talhoes'));
     }
 
     /**

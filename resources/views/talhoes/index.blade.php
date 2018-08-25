@@ -30,9 +30,7 @@
                         @endif
                         <p class="card-text">{{$talhao->descricao}}</p>
                       </div>
-                    </div>        
-
-
+                    </div>
                   @endforeach
 
 
@@ -40,6 +38,9 @@
                 <div class="card-footer ">
                   <a href="{{Route('talhoes.create')}}"><button type="button" class="btn btn-primary">Criar Novo</button></a>
                 </div>
+
+
+
                 </div>
             </div>
         </div>

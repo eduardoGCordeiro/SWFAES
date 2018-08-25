@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TalhoesRequest;
 use Illuminate\Http\Request;
 use App\Talhao;
 
@@ -35,8 +36,17 @@ class TalhoesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TalhoesRequest $request)
     {
+        $talhao = new Talhao();
+        $talhao->area = $request->area;
+        $talhao->descricao = $request->descricao;
+
+        if($talhao->save()){
+            return \Redirect::to('talhoes.store')->with('success', true)->with('message','Talhão criado com sucesso');
+        }else{
+            return \Redirect::to('talhoes.store') -> withErrors($request);
+        }
         dd($request);
     }
 

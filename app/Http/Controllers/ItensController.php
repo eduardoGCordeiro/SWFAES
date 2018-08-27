@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Item;
-use Illuminate\Http\Request;
+use App\Unidade;
+use App\TipoItem;
+use App\Movimentacao;
 use App\Http\Requests\ItensRequest;
+use Illuminate\Http\Request;
 use DB;
 use DataTables;
 use Redirect;
+use Session;
 
 class ItensController extends Controller
 {
@@ -27,8 +31,21 @@ class ItensController extends Controller
 
     public function data_tables()
     {
-        return \DataTables::of(Item::query())->make(true);
-
+        //return \DataTables::of(Unidade::query())->make(true);
+         $itens = Item::select(['*'])->get();
+        // dd($itens[0]->unidade->nome);
+        return Datatables::of($itens)
+            ->addColumn('action', function ($item) {
+                return '<a href="'.Route('itens.edit',[$item->id_itens]).'" class="btn btn-primary">Editar</a>'.'<form action="'.Route('itens.destroy',[$item->id_itens]).'" method="POST"> '.csrf_field().'
+ <input name="_method" type="hidden" value="DELETE"> <button type="submit" class="btn btn-danger">deletar</button>';
+            })
+            ->editColumn('id_unidades_unidades', function ($item){
+                return $item->unidade->nome.'('.$item->unidade->sigla.')';
+            })
+            ->editColumn('id_tipos_itens_tipos_itens', function ($item){
+                return $item->tipo_item->nome;
+            })
+            ->make(true);
     }
     /**
      * Show the form for creating a new resource.
@@ -37,7 +54,9 @@ class ItensController extends Controller
      */
     public function create()
     {
-        return view('itens.create');
+        $unidades = Unidade::all();
+        $tipos_itens = TipoItem::all();
+        return view('itens.create')->with(compact('unidades','tipos_itens'));
     }
 
     /**
@@ -46,9 +65,23 @@ class ItensController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ItensRequest $request)
     {
-        dd($request);
+
+        $item = new Item();
+        $item->nome = strtoupper($request->nome);
+        $item->custo_por_unidade = $request->custo_por_unidade;
+        $item->quantidade = $request->quantidade;
+        $item->id_unidades_unidades = $request->id_unidades_unidades;
+        $item->id_tipos_itens_tipos_itens = $request->id_tipos_itens_tipos_itens;
+
+        if($item->save()){
+            Session::flash('alert-success', 'Novo item cadastrado com sucesso!');
+            return redirect()->route('itens.index');
+        }else{
+            Session::flash('alert-danger', 'Erro ao cadastrar item!');
+            return redirect()->route('itens.index');
+        }
     }
 
     /**
@@ -70,8 +103,17 @@ class ItensController extends Controller
      */
     public function edit($id)
     {
-        $item = Item::find($id);
-        return view('itens.edit')->with(compact('item'));
+        $movimentacoes = Movimentacao::where('id_itens_itens',$id)->get();
+        if(!count($movimentacoes)){
+            $item = Item::find($id);
+            $unidades = Unidade::all();
+            $tipos_itens = TipoItem::all();
+            return view('itens.edit')->with(compact('item','unidades','tipos_itens'));
+        }else{
+            Session::flash('alert-warning', 'Esse item não pode ser editado pois já está sendo usado em uma movimentação!');
+            return redirect()->route('itens.index');
+        }
+
     }
 
     /**
@@ -81,9 +123,22 @@ class ItensController extends Controller
      * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Item $item)
+    public function update(ItensRequest $request,$id)
     {
-        //
+        $item = Item::find($id);
+        $item->nome = strtoupper($request->nome);
+        $item->custo_por_unidade = $request->custo_por_unidade;
+        $item->quantidade = $request->quantidade;
+        $item->id_unidades_unidades = $request->id_unidades_unidades;
+        $item->id_tipos_itens_tipos_itens = $request->id_tipos_itens_tipos_itens;
+
+        if($item->save()){
+            Session::flash('alert-success', 'Item editado com sucesso!');
+            return redirect()->route('itens.index');
+        }else{
+            Session::flash('alert-danger', 'Erro ao editar item!');
+            return redirect()->route('itens.index');
+        }
     }
 
     /**
@@ -92,8 +147,18 @@ class ItensController extends Controller
      * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Item $item)
+    public function destroy($id)
     {
-        //
+
+        $movimentacoes = Movimentacao::where('id_itens_itens',$id)->get();
+        if(!count($movimentacoes)){
+            $item = Item::find($id);
+            $item->delete();
+            Session::flash('alert-success', 'item removido com sucesso!');
+            return redirect()->route('itens.index');
+        }else{
+            Session::flash('alert-danger', 'Esse item não pode ser removido pois já está sendo usado em movimentações dentro do sistema!');
+            return redirect()->route('itens.index');
+        }
     }
 }

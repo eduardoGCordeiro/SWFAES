@@ -10,17 +10,18 @@
                 <li class="breadcrumb-item active">Editar item - NOME DO ITEM</li>
             </ol>
             <div class="card">
-                
+
                 <div class="card-header">
 
-                    <h3>Editando de Itens</h3>
+                    <h3>Editando Item {{$item->nome}}</h3>
 
 
                 </div>
 
                 <div class="card-body col-md-8 offset-lg-2" >
-                    
-                    <form role="form" method="POST" action="{{ Route('itens.store') }}">
+
+                    <form role="form" method="POST" action="{{ Route('itens.update',[$item->id_itens]) }}">
+                        {{ method_field('PUT') }}
                         {!! csrf_field() !!}
 
 
@@ -30,14 +31,14 @@
                             <div class="col-lg-6">
                                 <input
                                         type="text"
-                                        class="form-control{{ $errors->has('identificacao') ? ' is-invalid' : '' }}"
+                                        class="form-control{{ $errors->has('nome') ? ' is-invalid' : '' }}"
                                         name="nome"
-                                        value="{{ $item->nome }}"
+                                        value="{{$item->nome}}"
                                         required
                                 >
-                                @if ($errors->has('identificacao'))
+                                @if ($errors->has('nome'))
                                     <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('identificacao') }}</strong>
+                                        <strong>{{ $errors->first('nome') }}</strong>
                                     </div>
                                 @endif
                             </div>
@@ -48,29 +49,53 @@
                             <label class="col-lg-4 col-form-label text-lg-right">Unidade de medida</label>
 
                             <div class="col-lg-6">
-                                <select name="unidade" class="form-control" id="exampleSelect1">
-                                    <option>Kg</option>
-                                    <option>g</option>
-                                    <option>m</option>
-                                    <option>L</option>
-                                    <option>cm</option>
-                                    <option>ml</option>
+                                <select  name="id_unidades_unidades" class="form-control" id="select_unidades">
+                                    <option value="">Selecione</option>
+                                    @foreach($unidades as $unidade)
+
+                                    <option value="{{$unidade->id_unidades}}">{{$unidade->nome}}</option>
+
+
+                                    @endforeach
                                 </select>
-                                
-                                @if ($errors->has('unidade'))
+
+                                @if ($errors->has('id_unidades_unidades'))
                                     <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('unidade') }}</strong>
+                                        <strong>{{ $errors->first('id_unidades_unidades') }}</strong>
                                     </div>
                                 @endif
                             </div>
                         </div>
 
-                        
+
+                        <div class="form-group row">
+                            <label class="col-lg-4 col-form-label text-lg-right">Tipo de item</label>
+
+                            <div class="col-lg-6">
+                                <select  name="id_tipos_itens_tipos_itens" class="form-control" id="select_tipo">
+                                    <option value="">Selecione</option>
+                                    @foreach($tipos_itens as $tipo_item)
+
+                                    <option value="{{$tipo_item->id_tipos_itens}}">{{$tipo_item->nome}}</option>
+
+
+                                    @endforeach
+                                </select>
+
+                                @if ($errors->has('id_tipos_itens_tipos_itens'))
+                                    <div class="invalid-feedback">
+                                        <strong>{{ $errors->first('id_tipos_itens_tipos_itens') }}</strong>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+
+
 
 
 
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">Preço por unidade</label>
+                            <label class="col-lg-4 col-form-label text-lg-right">Custo por unidade</label>
 
                             <div class="col-lg-6">
 
@@ -78,35 +103,35 @@
                                     <div class="input-group-prepend">
                                             <span class="input-group-text">R$</span>
                                           </div>
-                                    <input 
+                                    <input
                                         class="form-control"
                                         type="text"
-                                        name="preco" 
-                                        placeholder="00.00" 
-                                        value="{{$item->custo_por_unidades}}" 
+                                        name="custo_por_unidade"
+                                        value="{{$item->custo_por_unidade}}"
+                                        placeholder="00.00"
                                     >
-                                    
+
                                 </div>
 
-                                @if ($errors->has('preco'))
+                                @if ($errors->has('custo_por_unidade'))
                                     <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('preco') }}</strong>
+                                        <strong>{{ $errors->first('custo_por_unidade') }}</strong>
                                     </div>
                                 @endif
                             </div>
                         </div>
-
+<!--
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Descrição</label>
 
                             <div class="col-lg-6">
-                                <textarea 
-                                    class="form-control" 
-                                    id="exampleTextarea" 
+                                <textarea
+                                    class="form-control"
+                                    id="exampleTextarea"
                                     rows="3"
                                     name="descricao"
 
-                                >{{$item->descricao}}</textarea>
+                                ></textarea>
                                 @if ($errors->has('descricao'))
                                     <div class="invalid-feedback">
                                         <strong>{{ $errors->first('descricao') }}</strong>
@@ -114,7 +139,7 @@
                                 @endif
                             </div>
                         </div>
-
+ -->
 
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Qauntidade inicial</label>
@@ -124,7 +149,7 @@
                                         type="text"
                                         class="form-control{{ $errors->has('quantidade') ? ' is-invalid' : '' }}"
                                         name="quantidade"
-                                        value="{{ $item->quantidade }}"
+                                        value="{{$item->quantidade}}"
                                         placeholder="00.00"
                                         required
                                 >
@@ -136,32 +161,18 @@
                             </div>
                         </div>
 
-                                            
-                        
-                        
+
+
+
 
                         <div class="form-group row">
                             <div class="col-lg-6 offset-lg-4">
                                 <button type="submit" class="btn btn-primary">
-                                    salvar
+                                    Alterar
                                 </button>
                             </div>
                         </div>
 
-
-                            
-                        <hr>
-                        <div class="form-group row">
-                            <div class="col-lg-6 offset-lg-4">
-                                <div class="alert alert-dismissible alert-danger">
-                                  <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                  <strong>Excluir Item!</strong> Para deletar esse item clique no botão abaixo, mas lembre-se que isso é irreversível.
-                                </div>
-                                <p></p>
-                                <button type="button" class="btn btn-danger">Deletar</button>
-                            </div>
-                        </div>
-                            
                     </form>
 
                 </div>
@@ -169,4 +180,13 @@
         </div>
     </div>
 </div>
+@endsection
+@section('script')
+<script type="text/javascript">
+
+    document.getElementById('select_unidades').value={{$item->id_unidades_unidades}};
+    document.getElementById('select_tipo').value={{$item->id_tipos_itens_tipos_itens}};
+
+</script>
+
 @endsection

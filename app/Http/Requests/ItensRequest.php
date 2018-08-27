@@ -23,13 +23,8 @@ class ItensRequest extends FormRequest
      */
     public function rules()
     {
-
         return [
-            'nome'=>,'required'
-            'custo_por_unidade'=>'required',
-            'quantidade'=>'required',
-            'id_unidades_unidades'=>'required',
-            'id_tipos_item_tipos_item'=>'required'
+            //
         ];
     }
 }

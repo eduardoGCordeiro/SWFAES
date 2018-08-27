@@ -17,7 +17,7 @@ class Item extends Model
     * @var array
     */
    protected $fillable = [
-      'nome','custo_por_unidade','quantidade','id_unidades_unidades','id_tipos_item_tipos_item'
+      'nome','custo_por_unidade','quantidade','id_unidades_unidades','id_tipos_itens_tipos_itens'
    ];
 
    /**
@@ -26,4 +26,14 @@ class Item extends Model
     * @var array
     */
    protected $hidden = [ ];
+
+  public function unidade()
+  {
+        return $this->belongsTo('App\Unidade','id_unidades_unidades');
+  }
+
+  public function tipo_item()
+  {
+        return $this->belongsTo('App\TipoItem','id_tipos_itens_tipos_itens');
+  }
 }

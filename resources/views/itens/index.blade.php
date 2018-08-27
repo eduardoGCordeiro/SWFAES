@@ -22,61 +22,37 @@
                 </div>
 
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col form-group">
-                            <label for="exampleSelect2">Selecione um dos itens:</label>
-                            <select multiple="" class="form-control" id="exampleSelect2">
-                                <option>Item 1</option>
-                                <option>Item 2</option>
-                                <option>Item 3</option>
-                                <option>Item 4</option>
-                                <option>Item 5</option>
-                            </select>
-                        </div>
+
+                    <div class="flash-message">
+                      @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                        @if(Session::has('alert-' . $msg))
+
+                            <div class="alert alert-{{ $msg }} alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <p class="mb-0">{{ Session::get('alert-' . $msg) }}</p>
+                            </div>
+
+                        @endif
+                      @endforeach
                     </div>
 
-                    <button type="button" class="btn btn-secondary">Ver item</button>
-                    <br>
-                    <hr>
 
-                        <h4>Descrição do Item</h4>
-                    <hr>
 
-                        <div class="card border-primary mb-3" style="max-width: 20rem;">
-                          <div class="card-header">Item 1</div>
-                          <div class="card-body">
-                            <p class="card-text"><b>Custo por item(R$):</b> 1.00</p>
-                            <p class="card-text"><b>Quantidade(Kg):</b> 700.00</p>
-                            <p class="card-text"><b>Tipo:</b> tipo item</p>
-                          </div>
-                        </div>
 
-                        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                          <button type="button" class="btn btn-info">ações</button>
-                          <div class="btn-group" role="group">
-                            <button id="btnGroupDrop3" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                            <div class="dropdown-menu" aria-labelledby="btnGroupDrop3" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px);">
-                              <a class="dropdown-item" href="#">Editar</a>
-                              <a class="dropdown-item" href="#">Deletar</a>
-                            </div>
-                          </div>
-                        </div>
 
-                    <hr>
-
-                    <h4>Listando movimentações do Item</h4>
 
 
                     <table id="data-table-itens" class="table  table-striped">
 
                       <thead>
                         <tr>
-                            <th scope="col">id_item</th>
-                            <th scope="col">nome</th>
-                            <th scope="col">custo_por_unidade</th>
-                            <th scope="col">quantidade</th>
-                            <th scope="col">id_unidade_unidade</th>
-                            <th scope="col">id_tipos_item_tipos_item</th>
+
+                            <th scope="col">Nome</th>
+                            <th scope="col">Custo por Unidade</th>
+                            <th scope="col">Quantidade</th>
+                            <th scope="col">Unidade de Medida</th>
+                            <th scope="col">Tipo do item</th>
+                            <th scope="col">Ações</th>
 
                         </tr>
                       </thead>
@@ -127,12 +103,13 @@ $(document).ready(function() {
         serverSide: true,
         ajax: '{{ route('data_table_itens') }}',
         columns: [
-            {data: 'id_item', name: 'id_item'},
+
             {data: 'nome', name: 'nome'},
             {data: 'custo_por_unidade', name: 'custo_por_unidade'},
             {data: 'quantidade', name: 'quantidade'},
-            {data: 'id_unidade_unidade', name: 'id_unidade_unidade'},
-            {data: 'id_tipos_item_tipos_item', name: 'id_tipos_item_tipos_item'},
+            {data: 'id_unidades_unidades', name: 'id_unidades_unidades'},
+            {data: 'id_tipos_itens_tipos_itens', name: 'id_tipos_itens_tipos_itens'},
+            {data: 'action', name: 'action'},
 
         ]
     });

@@ -16,6 +16,7 @@
 
 
                     <h3>Listando itens</h3>
+                    <a href="{{Route('itens.create')}}"><button type="button" class="btn btn-outline-success">Cadastrar novo</button></a>
 
 
 
@@ -105,7 +106,7 @@ $(document).ready(function() {
         columns: [
 
             {data: 'nome', name: 'nome'},
-            {data: 'custo_por_unidade', name: 'custo_por_unidade'},
+            {data: 'custo_por_unidades', name: 'custo_por_unidades'},
             {data: 'quantidade', name: 'quantidade'},
             {data: 'id_unidades_unidades', name: 'id_unidades_unidades'},
             {data: 'id_tipos_itens_tipos_itens', name: 'id_tipos_itens_tipos_itens'},

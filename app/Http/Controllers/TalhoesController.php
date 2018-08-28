@@ -62,7 +62,8 @@ class TalhoesController extends Controller
      */
     public function show($id)
     {
-        //
+        $talhao  = Talhao::find($id);
+        return view("talhoes.show")->with(compact('talhao'));
     }
 
     /**

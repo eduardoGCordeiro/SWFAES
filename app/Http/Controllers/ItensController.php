@@ -70,7 +70,7 @@ class ItensController extends Controller
 
         $item = new Item();
         $item->nome = strtoupper($request->nome);
-        $item->custo_por_unidade = $request->custo_por_unidade;
+        $item->custo_por_unidades = $request->custo_por_unidades;
         $item->quantidade = $request->quantidade;
         $item->id_unidades_unidades = $request->id_unidades_unidades;
         $item->id_tipos_itens_tipos_itens = $request->id_tipos_itens_tipos_itens;
@@ -127,7 +127,7 @@ class ItensController extends Controller
     {
         $item = Item::find($id);
         $item->nome = strtoupper($request->nome);
-        $item->custo_por_unidade = $request->custo_por_unidade;
+        $item->custo_por_unidades = $request->custo_por_unidades;
         $item->quantidade = $request->quantidade;
         $item->id_unidades_unidades = $request->id_unidades_unidades;
         $item->id_tipos_itens_tipos_itens = $request->id_tipos_itens_tipos_itens;

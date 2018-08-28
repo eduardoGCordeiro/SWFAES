@@ -105,15 +105,15 @@
                                     <input
                                         class="form-control"
                                         type="text"
-                                        name="custo_por_unidade"
+                                        name="custo_por_unidades"
                                         placeholder="00.00"
                                     >
 
                                 </div>
 
-                                @if ($errors->has('custo_por_unidade'))
+                                @if ($errors->has('custo_por_unidades'))
                                     <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('custo_por_unidade') }}</strong>
+                                        <strong>{{ $errors->first('custo_por_unidades') }}</strong>
                                     </div>
                                 @endif
                             </div>

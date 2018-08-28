@@ -20,7 +20,7 @@
 
                 <div class="card-body col-md-8 offset-lg-2" >
 
-                    <form role="form" method="POST" action="{{ Route('unidades.update',[$unidade->id_unidades]) }}">
+                    <form role="form" method="POST" action="{{ Route('unidades.update',[$tipo->id_unidades]) }}">
                         {{ method_field('PUT') }}
                         {!! csrf_field() !!}
 
@@ -33,7 +33,7 @@
                                         type="text"
                                         class="form-control{{ $errors->has('nome') ? ' is-invalid' : '' }}"
                                         name="nome"
-                                        value="{{ $unidade->nome }}"
+                                        value="{{ $tipo->nome }}"
                                         required
                                 >
                                 @if ($errors->has('nome'))
@@ -44,7 +44,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <!-- <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Sigla</label>
 
                             <div class="col-lg-2">
@@ -52,7 +52,7 @@
                                         type="text"
                                         class="form-control{{ $errors->has('sigla') ? ' is-invalid' : '' }}"
                                         name="sigla"
-                                        value="{{ $unidade->sigla }}"
+                                        value="{{ $tipo->sigla }}"
                                         required
                                 >
                                 @if ($errors->has('sigla'))
@@ -61,7 +61,7 @@
                                     </div>
                                 @endif
                             </div>
-                        </div>
+                        </div> -->
 
 
 

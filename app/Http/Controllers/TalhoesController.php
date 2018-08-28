@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TalhoesRequest;
 use Illuminate\Http\Request;
 use App\Talhao;
+use Session;
+Use form;
 
 class TalhoesController extends Controller
 {
@@ -42,11 +44,12 @@ class TalhoesController extends Controller
         $talhao->area = $request->area;
         $talhao->descricao = $request->descricao;
 
-
-        if ($talhao->save()) {
-            return \Redirect::to('talhoes')->with('Talhão inserido com sucesso');
-        } else {
-            return \Redirect::to('talhoes')->withErrors($request);
+        if($talhao->save()){
+            Session::flash('alert-success', 'Novo talhao cadastrado com sucesso!');
+            return redirect()->route('talhoes.index');
+        }else{
+            Session::flash('alert-danger', 'Erro ao cadastrar o talhao!');
+            return redirect()->route('talhoes.index');
         }
 
     }
@@ -94,6 +97,15 @@ class TalhoesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $id_talhao = TalhoesRequest::find($id);
+        if($id_talhao->delete())
+        {
+            Session::flash('alert-sucess', 'Talhão deletado com sucesso!');
+            return redirect()->route('talhoes.index');
+        }else
+        {
+            Session::flash('alert-danger', 'Talhão não pode ser deletado!');
+            reuturn redirect()->route('talhoes.index');
+        }
     }
 }

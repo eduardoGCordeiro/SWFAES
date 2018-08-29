@@ -75,7 +75,7 @@ class TalhoesController extends Controller
     public function edit($id)
     {
         $talhao = Talhao::find($id);
-        return view('talhoes')->with(compact('talhoes'));
+        return view('talhoes.edit')->with(compact('talhao'));
     }
 
     /**
@@ -85,9 +85,19 @@ class TalhoesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TalhoesRequest $request, $id)
     {
-        //
+        $talhao = Talhao::find($id);
+        $talhao->area = $request->area;
+        $talhao->descricao = $request->descricao;
+
+        if($talhao->save()){
+            Session::flash('alert-success', 'Talhão editado com sucesso!');
+            return redirect()->route('talhoes.index');
+        }else{
+            Session::flash('alert-danger', 'Erro ao editar talhão!');
+            return redirect()->route('talhoes.index');
+        }
     }
 
     /**
@@ -98,15 +108,15 @@ class TalhoesController extends Controller
      */
     public function destroy($id)
     {
-        $id_talhao = TalhoesRequest::find($id);
-        if($id_talhao->delete())
+        $talhao = Talhao::find($id);
+        if($talhao->delete())
         {
             Session::flash('alert-sucess', 'Talhão deletado com sucesso!');
             return redirect()->route('talhoes.index');
         }else
         {
             Session::flash('alert-danger', 'Talhão não pode ser deletado!');
-            reuturn redirect()->route('talhoes.index');
+            return redirect()->route('talhoes.index');
         }
     }
 }

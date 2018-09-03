@@ -19,28 +19,47 @@
                 </div>
 
                 <div class="card-body">
-                  @foreach($talhoes as $talhao)
-                    <div class="card  border-dark col-md-3 mb-3" style="margin:10px;float:left;height: 15rem;width: 18rem !important ;">
-                      <div class="card-header">Talhão {{$talhao->id_talhoes}}<span style="float: right" class="badge badge-success">1</span></div>
-                      <div class="card-body">
-                        @if($talhao->culturas->first())
-                          <h4 class="card-title">safra de @if($talhao->culturas->first()->tipos_safra) inverno @else verão @endif</h4>
-                        @else
-                          <h4 class="card-title">Sem cultura atualmente</h4>
-                        @endif
-                        <p class="card-text">{{$talhao->descricao}}</p>
-                      </div>
+                    <div class="flash-message">
+                        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                            @if(Session::has('alert-' . $msg))
+
+                                <div class="alert alert-{{ $msg }} alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                    <p class="mb-0">{{ Session::get('alert-' . $msg) }}</p>
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
-                  @endforeach
-
-
+                    @foreach($talhoes as $talhao)
+                            <div class="card  border-dark mb-3" style="margin:3%;float:left;height: 15rem;width: 18rem !important ;">
+                                <a href = "{{Route('talhoes.show',[$talhao->id_talhoes])}}">
+                                    <div class="card-header">Talhão {{$talhao->id_identificador}}
+                                        <span style="float: center" class="ml-4">Área: {{$talhao->area}}</span>
+                                        <span style="float: right" class="badge badge-success">nº de requisições</span>
+                                    </div>
+                                </a>
+                                <div class="card-body">
+                                    @if($talhao->culturas->first())
+                                        <h4 class="card-title text-dark">safra de @if($talhao->culturas->first()->tipo_safra = "I") inverno @else verão @endif</h4>
+                                    @else
+                                        <h4 class="card-title text-dark">Sem cultura atualmente</h4>
+                                    @endif
+                                    <p class="card-text text-dark">{{$talhao->descricao}}</p>
+                                </div>
+                                <div class="card-footer">
+                                    @if($talhao->tipo != "pecuaria" && $talhao->tipo != "agricultura")
+                                        <h4 class="card-title text-dark"> Talhão sem tipo definido.</h4>
+                                    @else
+                                        <h4 class="card-title text-dark">Talhão de {{$talhao->tipo}}.</h4>
+                                    @endif
+                                </div>
+                            </div>
+                        </a>
+                    @endforeach
                 </div>
+                <a href="{{Route('talhoes.index')}}" class="text-center mb-3"><button type="button" class="btn btn-primary">Mostrar mais</button></a>
                 <div class="card-footer ">
                   <a href="{{Route('talhoes.create')}}"><button type="button" class="btn btn-primary">Criar Novo</button></a>
-                </div>
-
-
-
                 </div>
             </div>
         </div>

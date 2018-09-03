@@ -55,9 +55,8 @@ Route::resource('movimentacoes', 'MovimentacoesController');
 
 Route::resource('requisicoes', 'RequisicoesController');
 Route::resource('requisicoes/{id}/moderar', 'RequisicoesController@moderarget');
+
 Route::resource('talhoes', 'TalhoesController');
-
-
 
 Route::resource('usuarios', 'UsuariosController');
 

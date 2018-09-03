@@ -13,7 +13,7 @@
                 <div class="card-header">
 
 
-                    <h3>Editando talhão</h3>
+                    <h3>Editando talhão {{$talhao -> id_talhoes}}</h3>
 
 
                     
@@ -23,7 +23,8 @@
 
 
                 <div class="card-body col-md-8 offset-lg-2">
-                    <form role="form" method="POST" action="{{ Route('talhoes.store') }}">
+                    <form role="form" method="POST" action="{{ Route('talhoes.update', [$talhao->id_talhoes]) }}">
+                        {{ method_field('PUT') }}
                         {!! csrf_field() !!}
 
 
@@ -35,7 +36,7 @@
                                         type="text"
                                         class="form-control{{ $errors->has('identificacao') ? ' is-invalid' : '' }}"
                                         name="nome"
-                                        value="{{ $talhao->identificacao }}"
+                                        value="{{ $talhao->id_talhoes}}"
                                         required
                                 >
                                 @if ($errors->has('identificacao'))
@@ -133,7 +134,7 @@
                         
 
                         <div class="form-group row">
-                            <div class="col-lg-6 offset-lg-4">
+                            <div class="col-lg-6 offset-lg-6">
                                 <button type="submit" class="btn btn-primary">
                                     Salvar
                                 </button>
@@ -141,16 +142,6 @@
                             </div>
                         </div>
                         <hr>
-                        <div class="form-group row">
-                            <div class="col-lg-6 offset-lg-4">
-                                <div class="alert alert-dismissible alert-danger">
-                                  <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                  <strong>Excluir talhão!</strong> Para deletar esse talhão clique no botão abaixo, mas lembre-se que isso é irreversível.
-                                </div>
-                                <p></p>
-                                <button type="button" class="btn btn-danger">Deletar</button>
-                            </div>
-                        </div>
                     </form>
 
                     

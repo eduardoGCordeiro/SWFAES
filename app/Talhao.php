@@ -17,7 +17,7 @@ class Talhao extends Model
      * @var array
      */
     protected $fillable = [
-            'area','descricao'
+        'identificador','area','descricao','tipo'
     ];
 
     /**

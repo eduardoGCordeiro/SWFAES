@@ -47,7 +47,7 @@
                                     <p class="card-text text-dark">{{$talhao->descricao}}</p>
                                 </div>
                                 <div class="card-footer">
-                                    @if($talhao->tipo != "pecuaria" && $talhao->tipo != "agricultura")
+                                    @if($talhao->tipo != "pecuaria' && $talhao->tipo != "agricultura")
                                         <h4 class="card-title text-dark"> Talhão sem tipo definido.</h4>
                                     @else
                                         <h4 class="card-title text-dark">Talhão de {{$talhao->tipo}}.</h4>

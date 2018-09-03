@@ -24,8 +24,10 @@ class TalhoesRequest extends FormRequest
     public function rules()
     {
         return [
+            'identificador' => 'required',
             'area' => 'required',
-            'descricao' => 'required|string|max:400'
+            'descricao' => 'required|string|max:400',
+            'tipo'=>'required|string|max:15'
         ];
     }
 }

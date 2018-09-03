@@ -30,33 +30,36 @@
                             @endif
                         @endforeach
                     </div>
-
-
                     @foreach($talhoes as $talhao)
                             <div class="card  border-dark mb-3" style="margin:3%;float:left;height: 15rem;width: 18rem !important ;">
                                 <a href = "{{Route('talhoes.show',[$talhao->id_talhoes])}}">
-                                    <div class="card-header">Talhão {{$talhao->id_talhoes}}<span style="float: right">Área: {{$talhao->area}}</span></div>
+                                    <div class="card-header">Talhão {{$talhao->id_identificador}}
+                                        <span style="float: center" class="ml-4">Área: {{$talhao->area}}</span>
+                                        <span style="float: right" class="badge badge-success">nº de requisições</span>
+                                    </div>
                                 </a>
                                 <div class="card-body">
                                     @if($talhao->culturas->first())
-                                        <h4 class="card-title text-dark">safra de @if($talhao->culturas->first()->tipos_safra) inverno @else verão @endif</h4>
+                                        <h4 class="card-title text-dark">safra de @if($talhao->culturas->first()->tipo_safra = "I") inverno @else verão @endif</h4>
                                     @else
                                         <h4 class="card-title text-dark">Sem cultura atualmente</h4>
                                     @endif
                                     <p class="card-text text-dark">{{$talhao->descricao}}</p>
                                 </div>
+                                <div class="card-footer">
+                                    @if($talhao->tipo != "pecuaria" && $talhao->tipo != "agricultura")
+                                        <h4 class="card-title text-dark"> Talhão sem tipo definido.</h4>
+                                    @else
+                                        <h4 class="card-title text-dark">Talhão de {{$talhao->tipo}}.</h4>
+                                    @endif
+                                </div>
                             </div>
                         </a>
                     @endforeach
-
-
                 </div>
+                <a href="{{Route('talhoes.index')}}" class="text-center mb-3"><button type="button" class="btn btn-primary">Mostrar mais</button></a>
                 <div class="card-footer ">
                   <a href="{{Route('talhoes.create')}}"><button type="button" class="btn btn-primary">Criar Novo</button></a>
-                </div>
-
-
-
                 </div>
             </div>
         </div>

@@ -17,8 +17,7 @@ class TalhoesController extends Controller
      */
     public function index()
     {
-        $talhoes = Talhao::all();
-        //dd($usuarios);
+        $talhoes = Talhao::orderby('id_talhoes', 'ASC')->paginate(6);
         return view('talhoes.index')->with(compact('talhoes'));
     }
 
@@ -27,6 +26,7 @@ class TalhoesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
         return view('talhoes.create');
@@ -41,8 +41,11 @@ class TalhoesController extends Controller
     public function store(TalhoesRequest $request)
     {
         $talhao = new Talhao();
+        $talhao->identificador = $request->identificador;
+        $talhao ->tipo = $request->tipo;
         $talhao->area = $request->area;
         $talhao->descricao = $request->descricao;
+
 
         if($talhao->save()){
             Session::flash('alert-success', 'Novo talhao cadastrado com sucesso!');

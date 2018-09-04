@@ -24,10 +24,22 @@ class TalhoesRequest extends FormRequest
     public function rules()
     {
         return [
-            'identificador' => 'required',
+            'identificador' => 'required|unique',
             'area' => 'required',
             'descricao' => 'required|string|max:400',
             'tipo'=>'required|string|max:15'
+        ];
+    }
+
+
+    public function messages()
+    {
+        return [
+            'identificador.required' => 'O campo :attribute é obrigatório',
+            'identificador.unique' => 'O campo :attribute deve ser único',
+            'area.required' => 'O campo :attribute é obrigatório',
+            'email.email' => 'O campo :attribute tem que ser um email',
+            'mensagem.required' => 'O campo :attribute é obrigatório',
         ];
     }
 }

@@ -22,7 +22,6 @@ Route::get('/inicio', 'HomeController@index')->name('home');
 
 //Route::resource('administradores', 'AdministradoresController');
 
-Route::resource('atividades', 'AtividadesController');
 
 Route::resource('funcionarios', 'FuncionariosController');
 
@@ -56,7 +55,26 @@ Route::resource('movimentacoes', 'MovimentacoesController');
 Route::resource('requisicoes', 'RequisicoesController');
 Route::resource('requisicoes/{id}/moderar', 'RequisicoesController@moderarget');
 
+//-------------------- rotas referentes à TalhoesController --------------------- //
+//ressource
 Route::resource('talhoes', 'TalhoesController');
+//------------------------------------------------------------------------------//
+
+
+//-------------------- rotas referentes à AtividadesController --------------------- //
+// data tables
+Route::get('tipos_atividades/getdata', 'TipoAtividadesController@data_tables')->name('data_table_tipos_atividades');
+//ressource
+Route::resource('tipos_atividades', 'TipoAtividadesController');
+//------------------------------------------------------------------------------//
+
+
+//-------------------- rotas referentes à AtividadesController --------------------- //
+// data tables
+Route::get('atividades/getdata', 'AtividadesController@data_tables')->name('data_table_atividades');
+//ressource
+Route::resource('atividades', 'AtividadesController');
+//------------------------------------------------------------------------------//
 
 Route::resource('usuarios', 'UsuariosController');
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Atividade;
 use App\Http\Requests\TalhoesRequest;
 use Illuminate\Http\Request;
 use App\Talhao;

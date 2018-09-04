@@ -26,4 +26,9 @@ class Requisicao extends Model
     * @var array
     */
    protected $hidden = [ ];
+
+
+    public function talhoes(){
+        return $this->belongsTo('App\Talhao');
+    }
 }

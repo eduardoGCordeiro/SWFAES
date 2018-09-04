@@ -19,6 +19,20 @@ class atividadesController extends Controller
         return view('atividades.index')->with(compact('atividades'));
     }
 
+    public function data_tables()
+    {
+        $atividades = Atividade::select(['*'])->get();
+        return Datatables::of($atividades)
+            ->addColumn('action', function ($atividades) {
+                return '<a href="'.Route('atividades.edit',[$atividades->id_atividades]).'" class="btn btn-primary">Editar</a>'.'<form action="'.Route('atividades.destroy',[$atividades->id_atividades]).'" method="POST"> '.csrf_field().'
+ <input name="_method" type="hidden" value="DELETE"> <button type="submit" class="btn btn-danger">deletar</button>';
+            })
+            ->editColumn('id_atividades_atividades', function ($atividades){
+                return $atividades->tipos_atividades->nome.'('.$atividades->tipos_atividades->nome.')';
+            })
+            ->make(true);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

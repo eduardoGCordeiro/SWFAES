@@ -17,7 +17,7 @@ class AdmTalhao extends Model
     * @var array
     */
    protected $fillable = [
-      "data_inicio","data_fim","id_funcionarios_funcionarios"
+      "data_inicio","data_fim","id_funcionarios_funcionarios","id_talhoes_talhoes"
    ];
 
    /**
@@ -26,4 +26,9 @@ class AdmTalhao extends Model
     * @var array
     */
    protected $hidden = [ ];
+
+   public function talhao()
+    {
+        return $this->hasOne('App\Talhao','id_talhoes');
+    }
 }

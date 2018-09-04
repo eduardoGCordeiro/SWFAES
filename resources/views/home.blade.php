@@ -30,10 +30,7 @@ Movimentacoes<br>
     - cadastro   <br>
     - edição         <br>
     - listagem         <br>
-Requisicoes<br>
-    - cadastro <br>
-    - edição       <br>
-    - listagem         <br>
+
 Requisicoes<br>
     - cadastro <br>
     - edição       <br>

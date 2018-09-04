@@ -20,7 +20,7 @@
 
                 <div class="card-body col-md-8 offset-lg-2" >
 
-                    <form role="form" method="POST" action="{{ Route('unidades.update',[$tipo->id_unidades]) }}">
+                    <form role="form" method="POST" action="{{ Route('tipo_item.update',[$tipo->id_tipos_itens]) }}">
                         {{ method_field('PUT') }}
                         {!! csrf_field() !!}
 
@@ -72,7 +72,7 @@
                         <div class="form-group row">
                             <div class="col-lg-6 offset-lg-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Cadastrar
+                                    Alterar
                                 </button>
                             </div>
                         </div>

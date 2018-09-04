@@ -28,4 +28,11 @@ class TipoItem extends Model
     protected $hidden = [
         //
     ];
+
+    public function movimentacoes()
+    {
+
+        return $this->hasMany('App\Item','id_tipos_itens_tipos_itens');
+
+    }
 }

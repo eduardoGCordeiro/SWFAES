@@ -58,6 +58,12 @@ class TipoItemController extends Controller
 
     public function edit($id)
     {
+        $tipo  =  TipoItem::find($id);
+
+        if(!$tipo){
+            Session::flash('alert-danger','Esse tipo de item não existe');
+            return redirect()->route('tipo_item.index');
+        }
         $itens = Item::where('id_tipos_itens_tipos_itens',$id)->get();
         if(!count($itens)){
             $tipo = TipoItem::find($id);
@@ -71,7 +77,7 @@ class TipoItemController extends Controller
 
     public function update(Request $request,  $id)
     {
-
+        //dd($request);
         $tipo = TipoItem::find($id);
         $tipo->nome = strtoupper($request->nome);
 
@@ -89,6 +95,11 @@ class TipoItemController extends Controller
     public function destroy($id)
     {
         $tipo = TipoItem::find($id);
+        $movimentacoes = $tipo->movimentacoes;
+        if(count($movimentacoes)){
+            Session::flash('alert-danger', 'Erro ao excluir pois já está relacionado com um item!');
+            return redirect()->back();
+        }
         if($tipo->delete()){
 
             Session::flash('alert-success', 'deletado com sucesso!');

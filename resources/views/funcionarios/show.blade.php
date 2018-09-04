@@ -18,31 +18,32 @@
 
                 </div>
 
-                <div class="card-body col-md-8 offset-lg-2" >
+                <div class="card-body col-md-12 offset-lg-0" >
+
                     <legend>{{$funcionario->nome}}</legend>
                     <div class="form-group row">
-                      <label for="staticEmail" class="col-sm-3 col-form-label">Email</label>
+                      <label for="staticEmail" class="col-sm-3 col-form-label"><b>Email: </b></label>
                       <div class="col-sm-9">
                         <input type="text" readonly="" class="form-control-plaintext" id="staticEmail" value="email@example.com">
                       </div>
                     </div>
 
                     <div class="form-group row">
-                      <label for="staticEmail" class="col-sm-3 col-form-label">CPF:</label>
+                      <label for="staticEmail" class="col-sm-3 col-form-label"><b>CPF:</b></label>
                       <div class="col-sm-9">
                         <input type="text" readonly="" class="form-control-plaintext" id="staticEmail" value="{{$funcionario->cpf}}">
                       </div>
                     </div>
 
                     <div class="form-group row">
-                      <label for="staticEmail" class="col-sm-3 col-form-label">Login:</label>
+                      <label for="staticEmail" class="col-sm-3 col-form-label"><b>Login:</b></label>
                       <div class="col-sm-9">
                         <input type="text" readonly="" class="form-control-plaintext" id="staticEmail" value="{{$funcionario->login}}">
                       </div>
                     </div>
 
                     <div class="form-group row">
-                      <label for="staticEmail" class="col-sm-3 col-form-label">Acesso ao sistema:</label>
+                      <label for="staticEmail" class="col-sm-3 col-form-label"><b>Acesso ao sistema:</b></label>
                       <div class="col-sm-9">
                         <input type="text" readonly="" class="form-control-plaintext" id="staticEmail" value="{{$funcionario->acesso_sistema?'Sim':'Não'}}">
                       </div>
@@ -52,31 +53,74 @@
                     <hr>
                     <h4>Ações</h4>
 
-                    <a href="{{Route('funcionarios.edit',[$funcionario->id_funcionarios])}}" class="btn btn-primary">Editar</a>
-
-                    <form  action="{{ Route('funcionarios.destroy',[$funcionario->id_funcionarios]) }}" method="POST">
-                    {{csrf_field()}}
-                        <input  name="_method" type="hidden" value="DELETE">
-                        <button s type="submit" class="btn btn-danger">deletar</button>
-                    </form>
+                    <div class = "col-md-12 " style="padding-bottom: 5%">
+                    <div class="panel-footer row"><!-- panel-footer -->
+                        <div class="col-xs-6 text-left">
+                            <div class="previous">
+                                <a href="{{Route('funcionarios.edit',[$funcionario->id_funcionarios])}}" class="btn btn-primary">Editar</a>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <div class="next offset-1">
+                                <form action="{{Route('funcionarios.destroy',[$funcionario->id_funcionarios])}}" method="POST"> {{csrf_field()}}
+                                    <input name="_method" type="hidden" value="DELETE">
+                                    <button type="submit" class="btn btn-danger">deletar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
 
 
 
  <hr>
                     <h4>Talhões</h4>
 
-                    <table id="data-table-talhoes" class="table  table-striped">
+                    <div class="flash-message">
+                      @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                        @if(Session::has('alert-' . $msg))
+
+                            <div class="alert alert-{{ $msg }} alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <p class="mb-0">{{ Session::get('alert-' . $msg) }}</p>
+                            </div>
+
+
+
+                        @endif
+                      @endforeach
+                    </div>
+
+                    <table id="data-table-unidades" class="table  table-striped">
 
                       <thead>
                         <tr>
 
-                            <th scope="col">Identificação</th>
-
+                            <th scope="col">Talhão</th>
 
                         </tr>
                       </thead>
 
                     </table>
+
+
+                            <form role="form" method="POST" action="{{ Route('adms_talhoes.update',[$funcionario->id_funcionarios]) }}">
+                            {{ method_field('PUT') }}
+                            {!! csrf_field() !!}
+                            <div class="form-group">
+                                  <label for="exampleSelect2">Caso deseje selecione novamente os talhões para esse funcionário</label>
+                                  <select multiple=" " name="talhoes[]" class="form-control" id="exampleSelect2">
+                                    @foreach($talhoes as $talhao)
+                                        <option  value="{{$talhao->id_talhoes}}">{{$talhao->identificador}}</option>
+
+                                    @endforeach
+                                  </select>
+                            </div>
+
+                            <div class="form-group">
+                                <button class="btn btn-primary" type="submit">Alterar</button>
+
+                            </div>
+                        </form>
 
                     </div>
 
@@ -95,10 +139,9 @@
 
 @section('script')
 <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#data-table-talhoes').DataTable({
+    $('#data-table-unidades').DataTable({
         language:{
             "sEmptyTable": "Nenhum registro encontrado",
             "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
@@ -125,10 +168,10 @@ $(document).ready(function() {
 
         processing: true,
         serverSide: true,
-        ajax: '{{ route('data_table_talhoes') }}',
+        ajax: '{{ route('data_table_adms_talhoes',[$funcionario->id_funcionarios]) }}',
         columns: [
 
-            {data: 'identificador', name: 'identificador'},
+            {data: 'id_talhoes_talhoes', name: 'id_talhoes_talhoes'},
 
 
         ],
@@ -141,10 +184,8 @@ $(document).ready(function() {
     });
 });
 </script>
-
-
-
 @endsection
+
 @section('style')
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
 

@@ -25,6 +25,14 @@ Route::get('/inicio', 'HomeController@index')->name('home');
 Route::resource('atividades', 'AtividadesController');
 
 
+//-------------------- rotas referentes à AdmsTalhoesController ------------------- //
+// data tables
+Route::get('adms_talhoes/{id}/getdata', 'AdmsTalhoesController@data_tables')->name('data_table_adms_talhoes');
+//ressource
+Route::resource('adms_talhoes', 'AdmsTalhoesController');
+//------------------------------------------------------------------------------//
+
+
 //-------------------- rotas referentes à FuncionariosController ------------------- //
 // data tables
 Route::get('funcionarios/getdata', 'FuncionariosController@data_tables')->name('data_table_funcionarios');

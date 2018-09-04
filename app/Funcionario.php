@@ -31,4 +31,9 @@ class Funcionario extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    public function talhoes(){
+        return $this->hasMany('App\Talhoes');
+    }
 }

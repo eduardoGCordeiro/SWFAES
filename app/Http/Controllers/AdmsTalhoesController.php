@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\AdmsTalhoes;
+use App\AdmTalhao;
+use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
+use Session;
 
 class AdmsTalhoesController extends Controller
 {
@@ -12,6 +14,19 @@ class AdmsTalhoesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function data_tables($funcionario)
+    {
+         $adms = AdmTalhao::where([['id_funcionarios_funcionarios','=',$funcionario]])->whereNull('data_fim')->select('id_talhoes_talhoes')->get();
+         //dd($adms);
+        return Datatables::of($adms)
+        ->editColumn('id_talhoes_talhoes', function($adm){
+            //dd($adm->talhao->identificador);
+            return $adm->talhao['identificador'];
+        })
+        ->make(true);
+    }
+
     public function index()
     {
         //
@@ -44,7 +59,7 @@ class AdmsTalhoesController extends Controller
      * @param  \App\AdmsTalhoes  $admsTalhoes
      * @return \Illuminate\Http\Response
      */
-    public function show(AdmsTalhoes $admsTalhoes)
+    public function show(AdmTalhao $admsTalhoes)
     {
         //
     }
@@ -55,7 +70,7 @@ class AdmsTalhoesController extends Controller
      * @param  \App\AdmsTalhoes  $admsTalhoes
      * @return \Illuminate\Http\Response
      */
-    public function edit(AdmsTalhoes $admsTalhoes)
+    public function edit(AdmTalhao $admsTalhoes)
     {
         //
     }
@@ -67,9 +82,32 @@ class AdmsTalhoesController extends Controller
      * @param  \App\AdmsTalhoes  $admsTalhoes
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AdmsTalhoes $admsTalhoes)
+    public function update(Request $request, $funcionario)
     {
-        //
+        //dd($funcionario);
+
+
+        foreach ($request->talhoes as $key => $talhao) {
+            $admsTalhoes = AdmTalhao::where(['id_funcionarios_funcionarios'=>$funcionario,'id_talhoes_talhoes'=>$talhao])->first();
+            if(!$admsTalhoes){
+                $new_adm_talhao = new AdmTalhao();
+                $new_adm_talhao->id_funcionarios_funcionarios = $funcionario;
+                $new_adm_talhao->id_talhoes_talhoes =$talhao;
+                $new_adm_talhao->save();
+            }else{
+                if($admsTalhoes->data_fim != ""){
+                    $new_adm_talhao = new AdmTalhao();
+                    $new_adm_talhao->id_funcionarios_funcionarios = $funcionario;
+                    $new_adm_talhao->id_talhoes_talhoes =$talhao;
+                    $new_adm_talhao->save();
+                }else{
+                    continue;
+                }
+            }
+
+        }
+        Session::flash('alert-success', 'Alterado com sucesso!');
+        return redirect()->back();
     }
 
     /**
@@ -78,7 +116,7 @@ class AdmsTalhoesController extends Controller
      * @param  \App\AdmsTalhoes  $admsTalhoes
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AdmsTalhoes $admsTalhoes)
+    public function destroy(AdmTalhao $admsTalhoes)
     {
         //
     }

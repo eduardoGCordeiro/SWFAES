@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Atividade;
+use App\TipoAtividades;
+use App\Talhao;
 use Illuminate\Http\Request;
+use Yajra\Datatables\Datatables;
 
 class atividadesController extends Controller
 {
@@ -28,7 +31,7 @@ class atividadesController extends Controller
  <input name="_method" type="hidden" value="DELETE"> <button type="submit" class="btn btn-danger">deletar</button>';
             })
             ->editColumn('id_atividades_atividades', function ($atividades){
-                return $atividades->tipos_atividades->nome.'('.$atividades->tipos_atividades->nome.')';
+                return $atividades->tipos_atividades['nome'].'('.$atividades->tipos_atividades['nome'].')';
             })
             ->make(true);
     }

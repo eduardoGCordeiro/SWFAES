@@ -30,4 +30,9 @@ class TipoAtividades extends Model
     public function atividade(){
         return $this->belongsTo('App\Atividade');
     }
+
+    public function atividades()
+    {
+        return $this->hasOne('App\Atividade', 'id_tipos_atividades_tipos_atividades');
+    }
 }

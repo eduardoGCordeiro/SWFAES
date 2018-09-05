@@ -33,12 +33,6 @@ class Atividade extends Model
 
     }
 
-    public function tipos_atividades()
-    {
-        return $this->hasMany('App\TipoAtividades','id_atividades_atividades');
-
-    }
-
     public function talhoes(){
         return $this->belongsTo('App\Talhao');
     }

@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('style')
-    <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
-@endsection
-
 @section('content')
 <div class="container">
     <div class="row mt-5">
@@ -62,6 +58,25 @@
                         </div>
                     </div>
                 </div>
+                <table id="data-table-atividades" class="table  table-striped">
+
+                    <thead>
+                    <tr>
+
+                        <th scope="col">data</th>
+                        <th scope="col">data_registro</th>
+                        <th scope="col">descricao</th>
+                        <th scope="col">adm_geral</th>
+                        <th scope="col">Tipo do item</th>
+                        <th scope="col">Ações</th>
+                        <th scope="col">Ações</th>
+                        <th scope="col">Ações</th>
+                        <th scope="col">Ações</th>
+
+                    </tr>
+                    </thead>
+
+                </table>
             </div>
         </div>
     </div>
@@ -97,9 +112,8 @@
 
                     processing: true,
                     serverSide: true,
-                    ajax: '{{ route('data_table_atividades') }}',
+                    ajax: '{{ route('data_table_atividades', [$talhao->id_talhoes]) }}',
                     columns: [
-
                         {data: 'data', name: 'data'},
                         {data: 'data_registro', name: 'data_registro'},
                         {data: 'descricao', name: 'descricao'},
@@ -112,5 +126,9 @@
                     ]
                 });
             });
+        </script>
+    @endsection
 
-@endsection
+    @section('style')
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
+    @endsection

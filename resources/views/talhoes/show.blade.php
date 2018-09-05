@@ -22,7 +22,7 @@
                     <a href = "{{Route('talhoes.show',[$talhao->id_identificador])}}">
                         <div class="card-header">Talhão {{$talhao->identificador}}
                             <span style="float: center" class="ml-4">Área: {{$talhao->area}}</span>
-                            <span style="float: right" class="badge badge-success">{{count($talhao->requisicoes)}}</span>
+                            <span style="float: center" class="badge badge-success">{{count($talhao->requisicoes)}}</span>
                         </div>
                     </a>
                     <div class="card-body">
@@ -71,7 +71,6 @@
                         <th scope="col">Ações</th>
                         <th scope="col">Ações</th>
                         <th scope="col">Ações</th>
-                        <th scope="col">Ações</th>
 
                     </tr>
                     </thead>
@@ -80,55 +79,55 @@
             </div>
         </div>
     </div>
-    @endsection
-    @section('script')
-        <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('#data-table-atividades').DataTable({
-                    language:{
-                        "sEmptyTable": "Nenhum registro encontrado",
-                        "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-                        "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
-                        "sInfoFiltered": "(Filtrados de _MAX_ registros)",
-                        "sInfoPostFix": "",
-                        "sInfoThousands": ".",
-                        "sLengthMenu": "_MENU_ resultados por página",
-                        "sLoadingRecords": "Carregando...",
-                        "sProcessing": "Processando...",
-                        "sZeroRecords": "Nenhum registro encontrado",
-                        "sSearch": "Pesquisar",
-                        "oPaginate": {
-                            "sNext": "Próximo",
-                            "sPrevious": "Anterior",
-                            "sFirst": "Primeiro",
-                            "sLast": "Último"
-                        },
-                        "oAria": {
-                            "sSortAscending": ": Ordenar colunas de forma ascendente",
-                            "sSortDescending": ": Ordenar colunas de forma descendente"
-                        }
+</div>
+@endsection
+@section('script')
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#data-table-atividades').DataTable({
+                language:{
+                    "sEmptyTable": "Nenhum registro encontrado",
+                    "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                    "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sInfoThousands": ".",
+                    "sLengthMenu": "_MENU_ resultados por página",
+                    "sLoadingRecords": "Carregando...",
+                    "sProcessing": "Processando...",
+                    "sZeroRecords": "Nenhum registro encontrado",
+                    "sSearch": "Pesquisar",
+                    "oPaginate": {
+                        "sNext": "Próximo",
+                        "sPrevious": "Anterior",
+                        "sFirst": "Primeiro",
+                        "sLast": "Último"
                     },
+                    "oAria": {
+                        "sSortAscending": ": Ordenar colunas de forma ascendente",
+                        "sSortDescending": ": Ordenar colunas de forma descendente"
+                    }
+                },
 
-                    processing: true,
-                    serverSide: true,
-                    ajax: '{{ route('data_table_atividades', [$talhao->id_talhoes]) }}',
-                    columns: [
-                        {data: 'data', name: 'data'},
-                        {data: 'data_registro', name: 'data_registro'},
-                        {data: 'descricao', name: 'descricao'},
-                        {data: 'adm_geral', name: 'id_adms_gerais_adms_gerais'},
-                        {data: 'id_tipos_atividades_tipos_atividades', name: 'id_tipos_atividades_tipos_atividades'},
-                        {data: 'id_culturas_culturas', name: 'id_culturas_culturas'},
-                        {data: 'id_requisicoes_requisicoes', name: 'id_requisicoes_requisicoes'},
-                        {data: 'id_talhoes_talhoes', name: 'id_talhoes_talhoes'},
-                        {data: 'action', name: 'action'},
-                    ]
-                });
+                processing: true,
+                serverSide: true,
+                ajax: '{{ route('data_table_atividades', [$talhao->id_talhoes]) }}',
+                columns: [
+                    {data: 'data', name: 'data'},
+                    {data: 'data_registro', name: 'data_registro'},
+                    {data: 'descricao', name: 'descricao'},
+                    {data: 'adm_geral', name: 'id_adms_gerais_adms_gerais'},
+                    {data: 'id_tipos_atividades_tipos_atividades', name: 'id_tipos_atividades_tipos_atividades'},
+                    {data: 'id_culturas_culturas', name: 'id_culturas_culturas'},
+                    {data: 'id_requisicoes_requisicoes', name: 'id_requisicoes_requisicoes'},
+                    {data: 'id_talhoes_talhoes', name: 'id_talhoes_talhoes'},
+                ]
             });
-        </script>
-    @endsection
+        });
+    </script>
+@endsection
 
-    @section('style')
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
-    @endsection
+@section('style')
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
+@endsection

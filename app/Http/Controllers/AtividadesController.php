@@ -24,12 +24,8 @@ class atividadesController extends Controller
 
     public function data_tables()
     {
-        $atividades = Atividade::select(['*'])->get();
+        $atividades = Atividade::select((['id_talhoes_talhoes'])->get();
         return Datatables::of($atividades)
-            ->addColumn('action', function ($atividades) {
-                return '<a href="'.Route('atividades.edit',[$atividades->id_atividades]).'" class="btn btn-primary">Editar</a>'.'<form action="'.Route('atividades.destroy',[$atividades->id_atividades]).'" method="POST"> '.csrf_field().'
- <input name="_method" type="hidden" value="DELETE"> <button type="submit" class="btn btn-danger">deletar</button>';
-            })
             ->editColumn('id_atividades_atividades', function ($atividades){
                 return $atividades->tipos_atividades['nome'].'('.$atividades->tipos_atividades['nome'].')';
             })

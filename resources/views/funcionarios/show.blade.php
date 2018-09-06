@@ -20,34 +20,36 @@
 
                 <div class="card-body col-md-12 offset-lg-0" >
 
-                    <legend>{{$funcionario->nome}}</legend>
-                    <div class="form-group row">
-                      <label for="staticEmail" class="col-sm-3 col-form-label"><b>Email: </b></label>
-                      <div class="col-sm-9">
-                        <input type="text" readonly="" class="form-control-plaintext" id="staticEmail" value="email@example.com">
-                      </div>
-                    </div>
+                    <h2>Informações do funcionário</h2>
 
-                    <div class="form-group row">
-                      <label for="staticEmail" class="col-sm-3 col-form-label"><b>CPF:</b></label>
-                      <div class="col-sm-9">
-                        <input type="text" readonly="" class="form-control-plaintext" id="staticEmail" value="{{$funcionario->cpf}}">
-                      </div>
-                    </div>
 
-                    <div class="form-group row">
-                      <label for="staticEmail" class="col-sm-3 col-form-label"><b>Login:</b></label>
-                      <div class="col-sm-9">
-                        <input type="text" readonly="" class="form-control-plaintext" id="staticEmail" value="{{$funcionario->login}}">
-                      </div>
-                    </div>
+                    <table class="table">
 
-                    <div class="form-group row">
-                      <label for="staticEmail" class="col-sm-3 col-form-label"><b>Acesso ao sistema:</b></label>
-                      <div class="col-sm-9">
-                        <input type="text" readonly="" class="form-control-plaintext" id="staticEmail" value="{{$funcionario->acesso_sistema?'Sim':'Não'}}">
-                      </div>
-                    </div>
+                        <tr>
+                            <th>Nome</th>
+                            <td>{{$funcionario->nome}}</td>
+                        </tr>
+                        <tr>
+                            <th>CPF</th>
+                            <td>{{$funcionario->cpf}}</td>
+                        </tr>
+                        <tr>
+                            <th>login</th>
+                            <td>{{$funcionario->login}}</td>
+                        </tr>
+                        <tr>
+                            <th>E-mail</th>
+                            <td>{{$funcionario->email}}</td>
+                        </tr>
+                        <tr>
+                            <th>Acesso ao sistema?</th>
+                            <td>{{$funcionario->acesso_sistema?'Sim':'Não'}}</td>
+                        </tr>
+
+
+
+                    </table>
+
 
 
                     <hr>
@@ -109,7 +111,8 @@
                             {{ method_field('PUT') }}
                             {!! csrf_field() !!}
                             <div class="form-group">
-                                  <label for="exampleSelect2">Caso deseje selecione novamente os talhões para esse funcionário</label>
+
+</label>
                                   <select multiple=" " name="talhoes[]" class="form-control" id="exampleSelect2">
                                     @foreach($talhoes as $talhao)
                                         <option  value="{{$talhao->id_talhoes}}">{{$talhao->identificador}}</option>

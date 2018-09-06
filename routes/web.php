@@ -32,6 +32,11 @@ Route::resource('culturas', 'CulturasController');
 //Route::resource('funcionarios', 'FuncionariosController');
 //-------------------- rotas referentes à ItensController --------------------- //
 // data tables
+Route::get('adms_talhoes/{id}/getdata', 'AdmsTalhoesController@data_tables')->name('data_table_adms_talhoes');
+//ressource
+Route::resource('adms_talhoes', 'AdmsTalhoesController');
+//------------------------------------------------------------------------------////-------------------- rotas referentes à ItensController --------------------- //
+// data tables
 Route::get('itens/getdata', 'ItensController@data_tables')->name('data_table_itens');
 //ressource
 Route::resource('itens', 'ItensController');

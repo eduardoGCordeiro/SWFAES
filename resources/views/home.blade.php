@@ -49,4 +49,11 @@ unidades<br>
         </div>
     </div>
 </div>
+
+
+
+Acls -----------
+
+
+criar uma verificação para não possibilitar a inclusão de talhoes pra adms gerais<br>
 @endsection

@@ -22,7 +22,7 @@
                     <a href = "{{Route('talhoes.show',[$talhao->id_identificador])}}">
                         <div class="card-header">Talhão {{$talhao->identificador}}
                             <span style="float: center" class="ml-4">Área: {{$talhao->area}}</span>
-                            <span style="float: center" class="badge badge-success">{{count($talhao->requisicoes)}}</span>
+                            <span style="float: right" class="badge badge-success">{{count($talhao->requisicoes)}}</span>
                         </div>
                     </a>
                     <div class="card-body">
@@ -63,14 +63,10 @@
                     <thead>
                     <tr>
 
-                        <th scope="col">data</th>
-                        <th scope="col">data_registro</th>
-                        <th scope="col">descricao</th>
-                        <th scope="col">adm_geral</th>
-                        <th scope="col">Tipo do item</th>
-                        <th scope="col">Ações</th>
-                        <th scope="col">Ações</th>
-                        <th scope="col">Ações</th>
+                        <th scope="col">Data da atividade</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Tipo de atividade</th>
+                        <th scope="col">Requisição</th>
 
                     </tr>
                     </thead>
@@ -115,13 +111,9 @@
                 ajax: '{{ route('data_table_atividades', [$talhao->id_talhoes]) }}',
                 columns: [
                     {data: 'data', name: 'data'},
-                    {data: 'data_registro', name: 'data_registro'},
                     {data: 'descricao', name: 'descricao'},
-                    {data: 'adm_geral', name: 'id_adms_gerais_adms_gerais'},
                     {data: 'id_tipos_atividades_tipos_atividades', name: 'id_tipos_atividades_tipos_atividades'},
-                    {data: 'id_culturas_culturas', name: 'id_culturas_culturas'},
                     {data: 'id_requisicoes_requisicoes', name: 'id_requisicoes_requisicoes'},
-                    {data: 'id_talhoes_talhoes', name: 'id_talhoes_talhoes'},
                 ]
             });
         });

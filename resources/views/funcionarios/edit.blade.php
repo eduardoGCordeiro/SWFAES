@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('content')
@@ -8,22 +7,23 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/inicio">Início</a></li>
                 <li class="breadcrumb-item"><a href="{{Route('funcionarios.index')}}">Funcionários</a></li>
-                <li class="breadcrumb-item active">Novo Funcionário</li>
+                <li class="breadcrumb-item active">Editar Funcionário</li>
             </ol>
             <div class="card">
 
                 <div class="card-header">
 
-                    <h3>Cadastro de Funcionários</h3>
+                    <h3>Edição de funcionário</h3>
 
 
                 </div>
 
-
                 <div class="card-body col-md-8 offset-lg-2" >
 
-                    <form role="form" method="POST" action="{{ Route('funcionarios.store')}}">
+                    <form role="form" method="POST" action="{{ Route('funcionarios.update',[$funcionario->id_funcionarios])}}">
+                        {{ method_field('PUT') }}
                         {!! csrf_field() !!}
+
 
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Nome</label>
@@ -33,7 +33,7 @@
                                         type="text"
                                         class="form-control{{ $errors->has('nome') ? ' is-invalid' : '' }}"
                                         name="nome"
-                                        value="{{ old('nome') }}"
+                                        value="{{ $funcionario->nome }}"
                                         placeholder="João da Silva"
                                         required
                                 >
@@ -53,7 +53,7 @@
                                         type="text"
                                         class="form-control{{ $errors->has('login') ? ' is-invalid' : '' }}"
                                         name="login"
-                                        value="{{ old('login') }}"
+                                        value="{{ $funcionario->login }}"
                                         placeholder="joaodasilva"
                                         required
                                 >
@@ -73,7 +73,7 @@
                                         type="text"
                                         class="form-control{{ $errors->has('cpf') ? ' is-invalid' : '' }}"
                                         name="cpf"
-                                        value="{{ old('cpf') }}"
+                                        value="{{ $funcionario->cpf }}"
                                         placeholder="99999999999"
                                         required
                                 >
@@ -93,7 +93,7 @@
                                         type="email"
                                         class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
                                         name="email"
-                                        value="{{ old('email') }}"
+                                        value="{{ $funcionario->email }}"
                                         placeholder="exemplo@mail.com"
                                         required
                                 >
@@ -106,45 +106,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">Senha</label>
 
-                            <div class="col-lg-3">
-                                <input
-                                        type="password"
-                                        id="password"
-                                        class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
-                                        name="password"
-                                        placeholder="********"
-                                        required
-                                >
-                                @if ($errors->has('password'))
-                                    <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">Confirme a senha</label>
-
-                            <div class="col-lg-3">
-                                <input
-                                        type="password"
-                                        id="password_confirmation"
-                                        class="form-control{{ $errors->has('password_confirmation') ? ' is-invalid' : '' }}"
-                                        name="password_confirmation"
-                                        placeholder="********"
-                                        required
-                                >
-                                @if ($errors->has('password_confirmation'))
-                                    <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
 
 
                         <div class="form-group row">
@@ -152,20 +114,29 @@
 
                             <div class="col-lg-2">
                                 <div class="custom-control custom-checkbox">
-                                    <input onchange="verify_password_input();" type="checkbox" class="custom-control-input" id="acesso_sistema" name="acesso_sistema" checked="">
+                                    <input type="checkbox" class="custom-control-input" id="acesso_sistema" name="acesso_sistema" >
                                 <label class="custom-control-label" for="acesso_sistema">Sim</label>
                             </div>
 
                             </div>
                         </div>
 
+
+
+
+
+
+
                         <div class="form-group row">
                             <div class="col-lg-6 offset-lg-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Cadastrar
+                                    Alterar
                                 </button>
                             </div>
                         </div>
+
+
+
                     </form>
 
                 </div>
@@ -175,20 +146,17 @@
 </div>
 @endsection
 
+@section('styles')
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
+@endsection
+
 @section('script')
-    <script type="text/javascript">
-        function verify_password_input(){
-            if(!document.getElementById('acesso_sistema').checked){
-                document.getElementById("password").setAttribute("disabled","true");
-                document.getElementById("password_confirmation").setAttribute("disabled","true");
-            }else{
-                document.getElementById("password").removeAttribute("disabled","true");
-                document.getElementById("password_confirmation").removeAttribute("disabled","true");
-            }
-        }
+<script type="text/javascript">
+
+    document.getElementById('acesso_sistema').checked={{$funcionario->acesso_sistema}};
 
 
-    </script>
-
+</script>
 
 @endsection

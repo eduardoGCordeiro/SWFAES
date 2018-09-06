@@ -26,4 +26,14 @@ class AdmGeral extends Model
     * @var array
     */
    protected $hidden = [ ];
+
+    public function culturas()
+    {
+        return $this->hasMany('App\Atividade','id_adms_gerais_adms_gerais');
+    }
+
+    public function atividades()
+    {
+        return $this->hasMany('App\Atividade','id_adms_gerais_adms_gerais');
+    }
 }

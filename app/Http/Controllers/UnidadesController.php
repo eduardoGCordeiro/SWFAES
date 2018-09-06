@@ -82,6 +82,11 @@ class UnidadesController extends Controller
      */
     public function edit(Unidade $unidade)
     {
+        $movimentacoes = $unidade->movimentacoes;
+        if(count($movimentacoes)){
+            Session::flash('alert-danger', 'Erro ao editar pois já está relacionado com um item!');
+            return redirect()->back();
+        }
         return view('unidades.edit')->with(compact('unidade'));
     }
 
@@ -98,6 +103,12 @@ class UnidadesController extends Controller
         $unidade = Unidade::find($id);
         $unidade->nome = strtoupper($request->nome);
         $unidade->sigla = $request->sigla;
+
+        $movimentacoes = $unidade->movimentacoes;
+        if(count($movimentacoes)){
+            Session::flash('alert-danger', 'Erro ao editar pois já está relacionado com um item!');
+            return redirect()->back();
+        }
 
         if($unidade->update()){
 
@@ -118,6 +129,11 @@ class UnidadesController extends Controller
     public function destroy($id)
     {
         $unidade = Unidade::find($id);
+        $movimentacoes = $unidade->movimentacoes;
+        if(count($movimentacoes)){
+            Session::flash('alert-danger', 'Erro ao excluir pois já está relacionado com um item!');
+            return redirect()->back();
+        }
         if($unidade->delete()){
 
             Session::flash('alert-success', 'deletado com sucesso!');

@@ -20,6 +20,15 @@
 
                 <div class="card-body col-md-8 offset-lg-2" >
                     <div class="card-body">
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                     
                     <form role="form" method="POST" action="{{ Route('talhoes.store') }}">
                         {!! csrf_field() !!}

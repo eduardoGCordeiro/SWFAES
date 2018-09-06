@@ -43,7 +43,7 @@
 
 
 
-                    <table id="data-table-itens" class="table  table-striped">
+                        <table id="data-table-itens" class="table  table-striped">
 
                       <thead>
                         <tr>

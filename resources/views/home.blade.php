@@ -17,11 +17,11 @@
 Atividades<br>
     - cadastro<br>
     - edição<br>
-    - listagem<br>
+    - listagem +++<br>
 Culturas<br>
-    - cadastro<br>
-    - edição<br>
-    - listagem<br>
+    - cadastro +++<br>
+    - edição +++<br>
+    - listagem +++<br>
 Itens<br>
     - cadastro         +++<br>
     - edição           +++<br>

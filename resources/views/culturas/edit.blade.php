@@ -10,7 +10,7 @@
                 <li class="breadcrumb-item active">Editar cultura</li>
             </ol>
             <div class="card">
-                
+
                 <div class="card-header">
 
                     <h3>Editando cultura</h3>
@@ -19,8 +19,10 @@
                 </div>
 
                 <div class="card-body col-md-8 offset-lg-2" >
-                    
+
                     <form role="form" method="POST" action="{{ Route('culturas.update',[$cultura->id_culturas]) }}">
+
+                         {{ method_field('PUT') }}
                         {!! csrf_field() !!}
 
 
@@ -30,7 +32,7 @@
                             <div class="col-lg-6">
                                 <input
                                         type="date"
-                                        class="form-control{{ $errors->has('data_inicio') ? ' is-invalid' : '' }}"
+                                        class="form-control{{ $errors->has('data') ? ' is-invalid' : '' }}"
                                         name="data_inicio"
                                         value="{{ $cultura->data_inicio }}"
                                         required
@@ -43,15 +45,15 @@
                             </div>
                         </div>
 
-                        
+
 
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Descrição</label>
 
                             <div class="col-lg-6">
-                                <textarea 
-                                    class="form-control" 
-                                    id="exampleTextarea" 
+                                <textarea
+                                    class="form-control"
+                                    id="exampleTextarea"
                                     rows="3"
                                     name="descricao"
 
@@ -69,15 +71,15 @@
                             <label class="col-lg-4 col-form-label text-lg-right">Tipo de safra</label>
 
                             <div class="col-lg-6">
-                                <select name="tipo_atividade" class="form-control" id="exampleSelect1">
-                                    <option>Verão</option>
-                                    <option>Inverno</option>
-                                    
+                                <select name="tipo_safra" class="form-control" id="select_tipo_safra">
+                                    <option value="V">Verão</option>
+                                    <option value="I">Inverno</option>
+
                                 </select>
-                                
-                                @if ($errors->has('tipo_atividade'))
+
+                                @if ($errors->has('tipo_safra'))
                                     <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('tipo_atividade') }}</strong>
+                                        <strong>{{ $errors->first('tipo_safra') }}</strong>
                                     </div>
                                 @endif
                             </div>
@@ -87,12 +89,15 @@
                             <label class="col-lg-4 col-form-label text-lg-right">Talhão</label>
 
                             <div class="col-lg-6">
-                                <select name="talhao" class="form-control" id="exampleSelect1">
-                                    <option>talhão 1</option>
-                                    <option>talhão 2</option>
-                                    
+                                <select name="talhao" class="form-control" id="select_talhao" required="">
+                                    <option value="">Selecione</option>
+
+                                    @foreach($talhoes as $talhao)
+                                        <option value="{{$talhao->id_talhoes}}">{{$talhao->identificador}}</option>
+                                    @endforeach
+
                                 </select>
-                                
+
                                 @if ($errors->has('talhao'))
                                     <div class="invalid-feedback">
                                         <strong>{{ $errors->first('talhao') }}</strong>
@@ -101,25 +106,14 @@
                             </div>
                         </div>
 
-                        
-                        
+
+
 
                         <div class="form-group row">
                             <div class="col-lg-6 offset-lg-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Salvar
+                                    Alterar
                                 </button>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="form-group row">
-                            <div class="col-lg-6 offset-lg-4">
-                                <div class="alert alert-dismissible alert-danger">
-                                  <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                  <strong>Excluir cultura!</strong> Para deletar essa cultura clique no botão abaixo, mas lembre-se que isso é irreversível.
-                                </div>
-                                <p></p>
-                                <button type="button" class="btn btn-danger">Deletar</button>
                             </div>
                         </div>
                     </form>
@@ -129,4 +123,14 @@
         </div>
     </div>
 </div>
+@endsection
+@section('script')
+<script type="text/javascript">
+
+    document.getElementById('select_tipo_safra').value='{{$cultura->tipo_safra}}';
+
+    document.getElementById('select_talhao').value={{$cultura->id_talhoes_talhoes}};
+
+</script>
+
 @endsection

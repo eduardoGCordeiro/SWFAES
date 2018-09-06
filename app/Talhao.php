@@ -32,7 +32,7 @@ class Talhao extends Model
 
     public function culturas()
     {
-        return $this->hasMany('App\Cultura','id_talhoes_talhoes');
+        return $this->hasMany('App\Cultura','id_talhoes_talhoes','id_talhoes');
     }
 
 

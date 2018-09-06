@@ -10,7 +10,7 @@
                 <li class="breadcrumb-item active">Nova cultura</li>
             </ol>
             <div class="card">
-                
+
                 <div class="card-header">
 
                     <h3>Cadastro de cultura</h3>
@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="card-body col-md-8 offset-lg-2" >
-                    
+
                     <form role="form" method="POST" action="{{ Route('culturas.store') }}">
                         {!! csrf_field() !!}
 
@@ -43,15 +43,15 @@
                             </div>
                         </div>
 
-                        
+
 
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Descrição</label>
 
                             <div class="col-lg-6">
-                                <textarea 
-                                    class="form-control" 
-                                    id="exampleTextarea" 
+                                <textarea
+                                    class="form-control"
+                                    id="exampleTextarea"
                                     rows="3"
                                     name="descricao"
 
@@ -69,15 +69,15 @@
                             <label class="col-lg-4 col-form-label text-lg-right">Tipo de safra</label>
 
                             <div class="col-lg-6">
-                                <select name="tipo_atividade" class="form-control" id="exampleSelect1">
-                                    <option>Verão</option>
-                                    <option>Inverno</option>
-                                    
+                                <select name="tipo_safra" class="form-control" id="exampleSelect1">
+                                    <option value="V">Verão</option>
+                                    <option value="I">Inverno</option>
+
                                 </select>
-                                
-                                @if ($errors->has('tipo_atividade'))
+
+                                @if ($errors->has('tipo_safra'))
                                     <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('tipo_atividade') }}</strong>
+                                        <strong>{{ $errors->first('tipo_safra') }}</strong>
                                     </div>
                                 @endif
                             </div>
@@ -87,12 +87,15 @@
                             <label class="col-lg-4 col-form-label text-lg-right">Talhão</label>
 
                             <div class="col-lg-6">
-                                <select name="talhao" class="form-control" id="exampleSelect1">
-                                    <option>talhão 1</option>
-                                    <option>talhão 2</option>
-                                    
+                                <select name="talhao" class="form-control" id="exampleSelect1" required="">
+                                    <option value="">Selecione</option>
+
+                                    @foreach($talhoes as $talhao)
+                                        <option value="{{$talhao->id_talhoes}}">{{$talhao->identificador}}</option>
+                                    @endforeach
+
                                 </select>
-                                
+
                                 @if ($errors->has('talhao'))
                                     <div class="invalid-feedback">
                                         <strong>{{ $errors->first('talhao') }}</strong>
@@ -101,8 +104,8 @@
                             </div>
                         </div>
 
-                        
-                        
+
+
 
                         <div class="form-group row">
                             <div class="col-lg-6 offset-lg-4">

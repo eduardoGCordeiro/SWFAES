@@ -30,7 +30,11 @@ class Cultura extends Model
 	    //
 	];
 
-	public function talhoes(){
-	    return $this->belongsTo('App\Talhao');
+	public function talhao(){
+	    return $this->belongsTo('App\Talhao','id_talhoes_talhoes');
+    }
+
+    public function atividades(){
+	    return $this->hasMany('App\Atividade','id_culturas_culturas');
     }
 }

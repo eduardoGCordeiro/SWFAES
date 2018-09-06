@@ -12,8 +12,8 @@
 
                     Funcionarios<br>
     - cadastro         +++<br>
-    - edição<br>
-    - listagem<br>
+    - edição +++<br>
+    - listagem +++<br>
 Atividades<br>
     - cadastro<br>
     - edição<br>

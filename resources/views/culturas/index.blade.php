@@ -10,65 +10,54 @@
                     </ol>
             <div class="card">
                 <div class="card-header">
+                        <h3>Listando culturas</h3>
+                        <a href="{{Route('culturas.create')}}"><button type="button" class="btn btn-outline-success">Cadastrar nova</button></a>
 
 
-                    <h3>Listando culturas</h3>
 
-                    
 
-                </div>
 
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col form-group">
-                            <label for="exampleSelect2">Selecione um dos talhões</label>
-                            <select multiple="" class="form-control" id="exampleSelect2">
-                                <option>Talhão 1</option>
-                                <option>Talhão 2</option>
-                                <option>Talhão 3</option>
-                                <option>Talhão 4</option>
-                                <option>Talhão 5</option>
-                            </select>
-                        </div>
                     </div>
 
-                    <button type="button" class="btn btn-secondary">Ver Culturas</button>
-                    <br>
-                    <hr>
-
-                    <h4>Listando culturas do talhão</h4>  
 
 
-                    <table class="table  table-hover">
-                      <thead>
-                        <tr>
-                            <th scope="col">Código</th>
-                            <th scope="col">Descrição</th>
-                            <th scope="col">Data início</th>
-                            <th scope="col">Data fim</th>
-                            <th scope="col">tipo safra</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                        
-                            <td scope="col"><a href="#">00001</a></td>
-                            <td scope="col">Descrição</td>
-                            <td scope="col">10/01/2010</td>
-                            <td scope="col">10/06/2010</td>
-                            <td scope="col">inverno</td>
-                        </tr>
-                        <tr>
-                        
-                            <td scope="col"><a href="#">00002<a href="#"></td>
-                            <td scope="col">Descrição</td>
-                            <td scope="col">10/01/2010</td>
-                            <td scope="col">10/06/2010</td>
-                            <td scope="col">inverno</td>
-                        </tr>
-                      </tbody>
-                    </table>                   
-                  
+
+                    <div class="card-body">
+                        <div class="flash-message">
+                          @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                            @if(Session::has('alert-' . $msg))
+
+                                <div class="alert alert-{{ $msg }} alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                    <p class="mb-0">{{ Session::get('alert-' . $msg) }}</p>
+                                </div>
+
+
+
+                            @endif
+                          @endforeach
+                        </div>
+
+
+                        <table id="data-table-culturas" class="table  table-striped">
+
+                          <thead>
+                            <tr>
+
+
+                                <th scope="col">ID</th>
+                                <th scope="col">Talhão</th>
+                                <th scope="col">Data início</th>
+                                <th scope="col">Data fim</th>
+                                <th scope="col">Tipo de safra</th>
+                                <th scope="col">Descrição</th>
+                                <th scope="col">Actions</th>
+
+                            </tr>
+                          </thead>
+
+                        </table>
+
 
 
 
@@ -77,4 +66,62 @@
         </div>
     </div>
 </div>
+@endsection
+@section('script')
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#data-table-culturas').DataTable({
+        language:{
+            "sEmptyTable": "Nenhum registro encontrado",
+            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+            "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sInfoThousands": ".",
+            "sLengthMenu": "_MENU_ resultados por página",
+            "sLoadingRecords": "Carregando...",
+            "sProcessing": "Processando...",
+            "sZeroRecords": "Nenhum registro encontrado",
+            "sSearch": "Pesquisar",
+            "oPaginate": {
+                "sNext": "Próximo",
+                "sPrevious": "Anterior",
+                "sFirst": "Primeiro",
+                "sLast": "Último"
+            },
+            "oAria": {
+                "sSortAscending": ": Ordenar colunas de forma ascendente",
+                "sSortDescending": ": Ordenar colunas de forma descendente"
+            }
+        },
+
+        processing: true,
+        serverSide: true,
+        ajax: '{{ route('data_table_culturas') }}',
+        columns: [
+
+            {data: 'id_culturas', name: 'id_culturas'},
+            {data: 'id_talhoes_talhoes', name: 'id_talhoes_talhoes'},
+            {data: 'data_inicio', name: 'data_inicio'},
+            {data: 'data_fim', name: 'data_fim'},
+            {data: 'tipo_safra', name: 'tipo_safra'},
+            {data: 'descricao', name: 'descricao'},
+            {data: 'action', name: 'action', orderable: false, searchable: false}
+
+        ],
+        fields:[
+            {
+                label: "First name:",
+                name: "first_name"
+            }
+        ]
+    });
+});
+</script>
+@endsection
+
+@section('style')
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
+
 @endsection

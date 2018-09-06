@@ -95,7 +95,9 @@
                       <thead>
                         <tr>
 
-                            <th scope="col">Talhão</th>
+                            <th scope="col">Identificador do talhão</th>
+
+                            <th scope="col">Ações</th>
 
                         </tr>
                       </thead>
@@ -171,7 +173,9 @@ $(document).ready(function() {
         ajax: '{{ route('data_table_adms_talhoes',[$funcionario->id_funcionarios]) }}',
         columns: [
 
-            {data: 'id_talhoes_talhoes', name: 'id_talhoes_talhoes'},
+
+            {data: 'nome_talhoes', name: 'nome_talhoes'},
+            {data: 'action', name: 'action', orderable: false, searchable: false},
 
 
         ],

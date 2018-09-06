@@ -34,6 +34,8 @@ class Funcionario extends Authenticatable
 
 
     public function talhoes(){
-        return $this->hasMany('App\Talhoes');
+        return $this->hasMany('App\Talhoes','','id_funcionarios');
+        return $this->hasManyThrough('App\Talhoes', 'App\AdmsTalhao');
+
     }
 }

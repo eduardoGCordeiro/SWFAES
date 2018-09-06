@@ -29,6 +29,6 @@ class AdmTalhao extends Model
 
    public function talhao()
     {
-        return $this->hasOne('App\Talhao','id_talhoes');
+        return $this->hasOne('App\Talhao','id_talhoes','id_talhoes_talhoes');
     }
 }

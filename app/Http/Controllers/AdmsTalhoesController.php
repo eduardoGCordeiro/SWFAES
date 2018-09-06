@@ -6,6 +6,7 @@ use App\AdmTalhao;
 use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
 use Session;
+use Carbon\Carbon;
 
 class AdmsTalhoesController extends Controller
 {
@@ -17,12 +18,16 @@ class AdmsTalhoesController extends Controller
 
     public function data_tables($funcionario)
     {
-         $adms = AdmTalhao::where([['id_funcionarios_funcionarios','=',$funcionario]])->whereNull('data_fim')->select('id_talhoes_talhoes')->get();
+         $adms = AdmTalhao::where([['id_funcionarios_funcionarios','=',$funcionario]])->whereNull('data_fim')->select('*')->get();
          //dd($adms);
         return Datatables::of($adms)
-        ->editColumn('id_talhoes_talhoes', function($adm){
+        ->addColumn('nome_talhoes', function($adm){
+
             //dd($adm->talhao->identificador);
             return $adm->talhao['identificador'];
+        })
+        ->addColumn('action',function($adms){
+            return '<form action="'.Route('adms_talhoes.destroy',[$adms->id_adms_talhoes]).'" method="POST">'.csrf_field().'<input name="_method" type="hidden" value="DELETE"><button type="submit" class="btn btn-danger">deletar</button> </form>';
         })
         ->make(true);
     }
@@ -116,8 +121,14 @@ class AdmsTalhoesController extends Controller
      * @param  \App\AdmsTalhoes  $admsTalhoes
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AdmTalhao $admsTalhoes)
+    public function destroy($id)
     {
-        //
+        //dd(Carbon::today()toDateString);
+        $admsTalhoes = AdmTalhao::find($id);
+        $admsTalhoes->data_fim =Carbon::today()->toDateString();
+        if($admsTalhoes->delete()){ //////////////////// alterar a data fiz asim pra agilizar
+            Session::flash('alert-success', 'removido com sucesso!');
+            return redirect()->back();
+        }
     }
 }

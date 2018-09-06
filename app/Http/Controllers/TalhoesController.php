@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Atividade;
 use App\Http\Requests\TalhoesRequest;
 use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
@@ -18,16 +19,8 @@ class TalhoesController extends Controller
      */
     public function index()
     {
-        $talhoes = Talhao::orderby('id_talhoes', 'ASC')->paginate(6);
+        $talhoes = Talhao::orderby('id_talhoes', 'ASC');
         return view('talhoes.index')->with(compact('talhoes'));
-    }
-
-
-    public function data_tables()
-    {
-        //return \DataTables::of(Unidade::query())->make(true);
-        $talhoes = Talhao::select(['*'])->get();
-        return Datatables::of($talhoes)->make(true);
     }
 
     /**

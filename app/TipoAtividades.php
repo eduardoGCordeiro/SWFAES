@@ -26,4 +26,9 @@ class TipoAtividades extends Model
     * @var array
     */
    protected $hidden = [ ];
+
+    public function atividades()
+    {
+        return $this->hasOne('App\Atividade', 'id_tipos_atividades_tipos_atividades');
+    }
 }

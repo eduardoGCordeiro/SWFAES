@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Atividade;
+use App\TipoAtividades;
+use App\Talhao;
 use Illuminate\Http\Request;
+use Yajra\Datatables\Datatables;
 
 class atividadesController extends Controller
 {
@@ -17,6 +20,16 @@ class atividadesController extends Controller
         $atividades = Atividade::all();
         
         return view('atividades.index')->with(compact('atividades'));
+    }
+
+    public function data_tables($id)
+    {
+        $atividades = Atividade::where('id_talhoes_talhoes', $id)->get();
+        return Datatables::of($atividades)
+            ->editColumn('id_tipos_atividades_tipos_atividades', function ($atividades){
+                return $atividades->tipos_atividades->nome;
+            })
+            ->make(true);
     }
 
     /**

@@ -14,7 +14,7 @@
 
                     <h3>Lista de Talhões</h3>
 
-                    
+
 
                 </div>
 
@@ -33,9 +33,9 @@
                     @foreach($talhoes as $talhao)
                             <div class="card  border-dark mb-3" style="margin:3%;float:left;height: 15rem;width: 18rem !important ;">
                                 <a href = "{{Route('talhoes.show',[$talhao->id_talhoes])}}">
-                                    <div class="card-header">Talhão {{$talhao->id_identificador}}
+                                    <div class="card-header">Talhão {{$talhao->identificador}}
                                         <span style="float: center" class="ml-4">Área: {{$talhao->area}}</span>
-                                        <span style="float: right" class="badge badge-success">nº de requisições</span>
+                                        <span style="float: right" class="badge badge-success">{{count($talhao->requisicoes)}}</span>
                                     </div>
                                 </a>
                                 <div class="card-body">
@@ -56,9 +56,6 @@
                             </div>
                         </a>
                     @endforeach
-                </div>
-                <a href="{{Route('talhoes.index')}}" class="text-center mb-3"><button type="button" class="btn btn-primary">Mostrar mais</button></a>
-                <div class="card-footer ">
                   <a href="{{Route('talhoes.create')}}"><button type="button" class="btn btn-primary">Criar Novo</button></a>
                 </div>
             </div>

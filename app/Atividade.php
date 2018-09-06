@@ -36,4 +36,14 @@ class Atividade extends Model
     public function talhoes(){
         return $this->belongsTo('App\Talhao');
     }
+
+    public function adms_gerais()
+    {
+        return $this->belongsTo('App\AdmGeral');
+    }
+
+    public function tipos_atividades()
+    {
+        return $this->belongsTo('App\TipoAtividades', 'id_tipos_atividades_tipos_atividades');
+    }
 }

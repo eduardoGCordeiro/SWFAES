@@ -14,7 +14,7 @@
 
                     <h3>Lista de Talhões</h3>
 
-                    
+
 
                 </div>
 
@@ -56,9 +56,6 @@
                             </div>
                         </a>
                     @endforeach
-                </div>
-                <a href="{{Route('talhoes.index')}}" class="text-center mb-3"><button type="button" class="btn btn-primary">Mostrar mais</button></a>
-                <div class="card-footer ">
                   <a href="{{Route('talhoes.create')}}"><button type="button" class="btn btn-primary">Criar Novo</button></a>
                 </div>
             </div>

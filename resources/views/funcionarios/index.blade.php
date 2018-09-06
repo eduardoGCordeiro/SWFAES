@@ -5,25 +5,30 @@
 @endsection
 @section('content')
 <div class="container">
+
     <div class="row mt-5">
         <div class="col-md-12">
             <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/inicio">Início</a></li>
-                        <li class="breadcrumb-item active">Itens</li>
+                        <li class="breadcrumb-item active">Funcionarios</li>
                     </ol>
             <div class="card">
                 <div class="card-header">
 
 
-                    <h3>Listando itens</h3>
-                    <a href="{{Route('itens.create')}}"><button type="button" class="btn btn-outline-success">Cadastrar novo</button></a>
+                    <h3>Listando funcionários</h3>
+                    <a href="{{Route('register')}}"><button type="button" class="btn btn-outline-success">Cadastrar novo</button></a>
+
+
 
 
 
                 </div>
 
-                <div class="card-body">
 
+
+
+                <div class="card-body">
                     <div class="flash-message">
                       @foreach (['danger', 'warning', 'success', 'info'] as $msg)
                         @if(Session::has('alert-' . $msg))
@@ -33,36 +38,27 @@
                                 <p class="mb-0">{{ Session::get('alert-' . $msg) }}</p>
                             </div>
 
+
+
                         @endif
                       @endforeach
                     </div>
 
 
-
-
-
-
-
-                        <table id="data-table-itens" class="table  table-striped">
+                    <table id="data-table-funcionarios" class="table  table-striped">
 
                       <thead>
                         <tr>
 
+                            <th scope="col">ID</th>
                             <th scope="col">Nome</th>
-                            <th scope="col">Custo por Unidade</th>
-                            <th scope="col">Quantidade</th>
-                            <th scope="col">Unidade de Medida</th>
-                            <th scope="col">Tipo do item</th>
+                            <th scope="col">CPF</th>
                             <th scope="col">Ações</th>
 
                         </tr>
                       </thead>
 
                     </table>
-
-
-
-
                 </div>
             </div>
         </div>
@@ -75,7 +71,7 @@
 <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#data-table-itens').DataTable({
+    $('#data-table-funcionarios').DataTable({
         language:{
             "sEmptyTable": "Nenhum registro encontrado",
             "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
@@ -102,18 +98,27 @@ $(document).ready(function() {
 
         processing: true,
         serverSide: true,
-        ajax: '{{ route('data_table_itens') }}',
+        ajax: '{{ route('data_table_funcionarios') }}',
         columns: [
 
+            {data: 'id_funcionarios', name:'id_funcionarios'},
             {data: 'nome', name: 'nome'},
-            {data: 'custo_por_unidades', name: 'custo_por_unidades'},
-            {data: 'quantidade', name: 'quantidade'},
-            {data: 'id_unidades_unidades', name: 'id_unidades_unidades'},
-            {data: 'id_tipos_itens_tipos_itens', name: 'id_tipos_itens_tipos_itens'},
-            {data: 'action', name: 'action'},
+            {data: 'cpf', name: 'cpf'},
+            {data: 'action', name: 'action', orderable: false, searchable: false}
 
+        ],
+        fields:[
+            {
+                label: "First name:",
+                name: "first_name"
+            }
         ]
     });
 });
 </script>
+@endsection
+
+@section('style')
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
+
 @endsection

@@ -22,12 +22,12 @@ class atividadesController extends Controller
         return view('atividades.index')->with(compact('atividades'));
     }
 
-    public function data_tables()
+    public function data_tables($id)
     {
-        $atividades = Atividade::select((['id_talhoes_talhoes'])->get();
+        $atividades = Atividade::where('id_talhoes_talhoes', $id)->get();
         return Datatables::of($atividades)
-            ->editColumn('id_atividades_atividades', function ($atividades){
-                return $atividades->tipos_atividades['nome'].'('.$atividades->tipos_atividades['nome'].')';
+            ->editColumn('id_tipos_atividades_tipos_atividades', function ($atividades){
+                return $atividades->tipos_atividades->nome;
             })
             ->make(true);
     }

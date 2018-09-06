@@ -25,8 +25,6 @@ Route::get('/inicio', 'HomeController@index')->name('home');
 Route::resource('atividades', 'AtividadesController');
 
 
-Route::resource('culturas', 'CulturasController');
-
 //Route::resource('funcionarios', 'FuncionariosController');
 //-------------------- rotas referentes à ItensController --------------------- //
 // data tables
@@ -57,6 +55,13 @@ Route::resource('unidades', 'UnidadesController');
 Route::get('tipo_item/getdata', 'TipoItemController@data_tables')->name('data_table_tipo_item');
 //ressource
 Route::resource('tipo_item', 'TipoItemController');
+//------------------------------------------------------------------------------////-------------------- rotas referentes à CulturasController ------------------ //
+// data tables
+Route::get('culturas/getdata', 'CulturasController@data_tables')->name('data_table_culturas');
+//finalizar
+Route::post('culturas/{id}/finalizar', 'CulturasController@finalizar')->name('finalizar_culturas');
+//ressource
+Route::resource('culturas', 'CulturasController');
 //------------------------------------------------------------------------------//
 
 

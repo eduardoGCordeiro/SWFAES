@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Talhao;
 use Session;
 Use form;
+Use Redirect;
 
 class TalhoesController extends Controller
 {
@@ -19,7 +20,7 @@ class TalhoesController extends Controller
      */
     public function index()
     {
-        $talhoes = Talhao::orderby('id_talhoes', 'ASC');
+        $talhoes = Talhao::orderby('id_talhoes', 'ASC')->get();
         return view('talhoes.index')->with(compact('talhoes'));
     }
 
@@ -42,17 +43,18 @@ class TalhoesController extends Controller
      */
     public function store(TalhoesRequest $request)
     {
+        $this->validate($request, ['identificador' => 'unique:talhoes'], ['identificador.unique' => 'O campo :attribute deve ser único!']);
         $talhao = new Talhao();
         $talhao->identificador = $request->identificador;
-        $talhao ->tipo = $request->tipo;
+        $talhao->tipo = $request->tipo;
         $talhao->area = $request->area;
         $talhao->descricao = $request->descricao;
 
 
-        if($talhao->save()){
+        if ($talhao->save()) {
             Session::flash('alert-success', 'Novo talhao cadastrado com sucesso!');
             return redirect()->route('talhoes.index');
-        }else{
+        } else {
             Session::flash('alert-danger', 'Erro ao cadastrar o talhao!');
             return redirect()->route('talhoes.index');
         }
@@ -93,6 +95,8 @@ class TalhoesController extends Controller
     public function update(TalhoesRequest $request, $id)
     {
         $talhao = Talhao::find($id);
+        $talhao->identificador = $request->identificador;
+        $talhao ->tipo = $request->tipo;
         $talhao->area = $request->area;
         $talhao->descricao = $request->descricao;
 
@@ -114,6 +118,7 @@ class TalhoesController extends Controller
     public function destroy($id)
     {
         $talhao = Talhao::find($id);
+
         if($talhao->delete())
         {
             Session::flash('alert-sucess', 'Talhão deletado com sucesso!');

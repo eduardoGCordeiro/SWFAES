@@ -23,10 +23,18 @@
 
 
                 <div class="card-body col-md-8 offset-lg-2">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form role="form" method="POST" action="{{ Route('talhoes.update', [$talhao->id_talhoes]) }}">
                         {{ method_field('PUT') }}
                         {!! csrf_field() !!}
-
 
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Identificação</label>
@@ -34,14 +42,32 @@
                             <div class="col-lg-6">
                                 <input
                                         type="text"
-                                        class="form-control{{ $errors->has('identificacao') ? ' is-invalid' : '' }}"
-                                        name="nome"
-                                        value="{{ $talhao->id_talhoes}}"
+                                        class="form-control{{ $errors->has('identificador') ? ' is-invalid' : '' }}"
+                                        name="identificador"
+                                        value="{{$talhao->identificador}}"
                                         required
                                 >
-                                @if ($errors->has('identificacao'))
+                                @if ($errors->has('identificador'))
                                     <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('identificacao') }}</strong>
+                                        <strong>{{ $errors->first('identificador') }}</strong>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-lg-4 col-form-label text-lg-right">Administrador do talhão</label>
+
+                            <div class="col-lg-6">
+                                <select name="tipo_atividade" class="form-control" id="exampleSelect1">
+                                    <option>Adiministrador geral</option>
+                                    <option>Administrador talhões</option>
+
+                                </select>
+
+                                @if ($errors->has('tipo_atividade'))
+                                    <div class="invalid-feedback">
+                                        <strong>{{ $errors->first('tipo_atividade') }}</strong>
                                     </div>
                                 @endif
                             </div>
@@ -49,20 +75,12 @@
 
                         <div class="form-group row">
 
-
-
                             <label class="col-lg-4 col-form-label text-lg-right">Área</label>
 
                             <div class="col-lg-6">
 
-                                <div class="input-group mb-3">
-                                    
-                                    <input 
-                                        class="form-control"
-                                        type="text"
-                                        name="area"
-                                        value="{{$talhao->area}}" 
-                                    >
+                                <div class="input-group">
+                                    <input class="form-control" type="text" name="area" value="{{$talhao->area}}">
                                     <div class="input-group-append">
                                         <span class="input-group-text">m²</span>
                                     </div>
@@ -80,11 +98,11 @@
                             <label class="col-lg-4 col-form-label text-lg-right">Descrição</label>
 
                             <div class="col-lg-6">
-                                <textarea 
-                                    class="form-control" 
-                                    id="exampleTextarea" 
-                                    rows="3"
-                                    name="descricao"
+                                <textarea
+                                        class="form-control"
+                                        id="exampleTextarea"
+                                        rows="3"
+                                        name="descricao"
 
                                 >{{$talhao->descricao}}</textarea>
                                 @if ($errors->has('descricao'))
@@ -95,50 +113,28 @@
                             </div>
                         </div>
 
-
                         <div class="form-group row">
-                          <label class="col-lg-4 col-form-label text-lg-right">Tipo</label>
-                          <div class="col-lg-6">
+                            <label class="col-lg-4 col-form-label text-lg-right">Tipo</label>
+                            <div class="col-lg-4">
 
-                            <div class="custom-control custom-radio">
-                              <input id="customRadio1" name="administrador_geral" class="custom-control-input" checked="" type="radio">
-                              <label class="custom-control-label" for="customRadio1">Agricultura</label>
+                                <div class="custom-control custom-radio">
+                                    <input id="customRadio1" name="tipo" class="custom-control-input" checked="" type="radio" value="agricultura">
+                                    <label class="custom-control-label" for="customRadio1">Agricultura</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input id="customRadio2" name="tipo" class="custom-control-input" type="radio" value="pecuaria">
+                                    <label class="custom-control-label" for="customRadio2">Pecuária</label>
+                                </div>
                             </div>
-                            <div class="custom-control custom-radio">
-                              <input id="customRadio2" name="administrador_geral" class="custom-control-input" type="radio">
-                              <label class="custom-control-label" for="customRadio2">Pecuária</label>
-                            </div>
-                          </div>
-                          
+
                         </div>
-
-                        <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">Administrador do talhão</label>
-
-                            <div class="col-lg-6">
-                                <select name="tipo_atividade" class="form-control" id="exampleSelect1">
-                                    <option>Adm 1</option>
-                                    <option>adm 2</option>
-                                    
-                                </select>
-                                
-                                @if ($errors->has('tipo_atividade'))
-                                    <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('tipo_atividade') }}</strong>
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-
-                        
-                        
 
                         <div class="form-group row">
                             <div class="col-lg-6 offset-lg-6">
                                 <button type="submit" class="btn btn-primary">
                                     Salvar
                                 </button>
-                                
+
                             </div>
                         </div>
                         <hr>

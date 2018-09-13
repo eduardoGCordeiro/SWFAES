@@ -36,4 +36,8 @@ class AdmGeral extends Model
     {
         return $this->hasMany('App\Atividade','id_adms_gerais_adms_gerais');
     }
+
+    public function funcionarios(){
+        return $this->belongsTo('App\AdmTalhao');
+    }
 }

@@ -7,13 +7,13 @@
             <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/inicio">Início</a></li>
                         <li class="breadcrumb-item"><a href="{{Route('talhoes.index')}}">Talhões</a></li>
-                        <li class="breadcrumb-item active">Editar - {{$talhao->nome}}</li>
+                        <li class="breadcrumb-item active">Editar - {{$talhoes->identificador}}</li>
                     </ol>
             <div class="card">
                 <div class="card-header">
 
 
-                    <h3>Editando talhão {{$talhao -> id_identificador}}</h3>
+                    <h3>Editando talhão {{$talhoes -> id_identificador}}</h3>
 
 
                     
@@ -32,7 +32,7 @@
                             </ul>
                         </div>
                     @endif
-                    <form role="form" method="POST" action="{{ Route('talhoes.update', [$talhao->id_talhoes]) }}">
+                    <form role="form" method="POST" action="{{ Route('talhoes.update', [$talhoes->id_talhoes]) }}">
                         {{ method_field('PUT') }}
                         {!! csrf_field() !!}
 
@@ -44,7 +44,7 @@
                                         type="text"
                                         class="form-control{{ $errors->has('identificador') ? ' is-invalid' : '' }}"
                                         name="identificador"
-                                        value="{{$talhao->identificador}}"
+                                        value="{{$talhoes->identificador}}"
                                         required
                                 >
                                 @if ($errors->has('identificador'))
@@ -59,17 +59,17 @@
                             <label class="col-lg-4 col-form-label text-lg-right">Administrador do talhão</label>
 
                             <div class="col-lg-6">
-                                <select name="tipo_atividade" class="form-control" id="exampleSelect1">
-                                    <option>Adiministrador geral</option>
-                                    <option>Administrador talhões</option>
+                                    <select class="form-control" id="exampleFormControlSelect1" name="id_adms_talhoes_adms_talhoes">
+                                        @foreach($adms_talhoes as $adm_talhao)
+                                            <option value="{{$adm_talhao->id_adms_talhoes}}">{{$adm_talhao->funcionarios->login}}</option>
+                                        @endforeach
+                                    </select>
 
-                                </select>
-
-                                @if ($errors->has('tipo_atividade'))
-                                    <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('tipo_atividade') }}</strong>
-                                    </div>
-                                @endif
+                                    @if ($errors->has('id_adms_talhoes_adms_talhoes'))
+                                        <div class="invalid-feedback">
+                                            <strong>{{ $errors->first('id_adms_talhoes_adms_talhoes') }}</strong>
+                                        </div>
+                                    @endif
                             </div>
                         </div>
 
@@ -80,7 +80,7 @@
                             <div class="col-lg-6">
 
                                 <div class="input-group">
-                                    <input class="form-control" type="text" name="area" value="{{$talhao->area}}">
+                                    <input class="form-control" type="text" name="area" value="{{$talhoes->area}}">
                                     <div class="input-group-append">
                                         <span class="input-group-text">m²</span>
                                     </div>
@@ -104,7 +104,7 @@
                                         rows="3"
                                         name="descricao"
 
-                                >{{$talhao->descricao}}</textarea>
+                                >{{$talhoes->descricao}}</textarea>
                                 @if ($errors->has('descricao'))
                                     <div class="invalid-feedback">
                                         <strong>{{ $errors->first('descricao') }}</strong>

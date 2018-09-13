@@ -13,7 +13,7 @@
                 <div class="card-header">
 
 
-                    <h3>Editando talhão {{$talhao -> id_talhoes}}</h3>
+                    <h3>Editando talhão {{$talhao -> id_identificador}}</h3>
 
 
                     

@@ -13,18 +13,16 @@
 
                 <div class="card-header">
 
-                    <h3>Talhão {{$talhao->id_talhoes}}</h3>
+                    <h3>Talhão {{$talhao->id_identificador}}</h3>
 
 
                 </div>
 
                 <div class="card  border-dark mb-3" style="margin:3%;float:left;height: 15rem;width: 18rem !important ;">
-                    <a href = "{{Route('talhoes.show',[$talhao->id_identificador])}}">
-                        <div class="card-header">Talhão {{$talhao->identificador}}
+                        <div class="card-header" style="color: #158cba">Talhão {{$talhao->identificador}}
                             <span style="float: center" class="ml-4">Área: {{$talhao->area}}</span>
                             <span style="float: right" class="badge badge-success">{{count($talhao->requisicoes)}}</span>
                         </div>
-                    </a>
                     <div class="card-body">
                         @if($talhao->culturas->first())
                             <h4 class="card-title text-dark">safra de @if($talhao->culturas->first()->tipo_safra = "I") inverno @else verão @endif</h4>

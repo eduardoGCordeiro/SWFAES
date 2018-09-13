@@ -17,7 +17,7 @@ class Talhao extends Model
      * @var array
      */
     protected $fillable = [
-        'identificador','area','descricao','tipo'
+        'identificador','area','descricao','tipo','id_adms_talhoes_adms_talhoes'
     ];
 
     /**
@@ -44,5 +44,10 @@ class Talhao extends Model
     public function atividades()
     {
         return $this->hasMany('App\Atividade','id_talhoes_talhoes');
+    }
+
+    public function adms_talhoes()
+    {
+        return $this->belongsTo('App\AdmTalhao');
     }
 }

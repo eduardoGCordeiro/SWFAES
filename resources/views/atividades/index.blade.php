@@ -13,65 +13,107 @@
 
 
                     <h3>Listando atividades</h3>
+                     <a href="{{Route('atividades.create')}}"><button type="button" class="btn btn-outline-success">Cadastrar nova</button></a>
 
-                    
+
 
                 </div>
 
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col form-group">
-                            <label for="exampleSelect2">Selecione um dos talhões</label>
-                            <select multiple="" class="form-control" id="exampleSelect2">
-                                <option>Talhão 1</option>
-                                <option>Talhão 2</option>
-                                <option>Talhão 3</option>
-                                <option>Talhão 4</option>
-                                <option>Talhão 5</option>
-                            </select>
-                        </div>
+                    <div class="flash-message">
+                      @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                        @if(Session::has('alert-' . $msg))
+
+                            <div class="alert alert-{{ $msg }} alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <p class="mb-0">{{ Session::get('alert-' . $msg) }}</p>
+                            </div>
+
+
+
+                        @endif
+                      @endforeach
                     </div>
 
-                    <button type="button" class="btn btn-secondary">Ver atividades</button>
-                    <br>
-                    <hr>
 
-                    <h4>Listando atividades do talhão</h4>  
+                    <table id="data-table-atividades-all" class="table  table-striped">
 
-
-                    <table class="table  table-hover">
                       <thead>
                         <tr>
-                            <th scope="col">Tipo</th>
-                            <th scope="col">Código</th>
-                            <th scope="col">Descrição</th>
+
+
+
+                            <th scope="col">ID</th>
                             <th scope="col">Data</th>
-                            <th scope="col">Movimentações</th>
+                            <th scope="col">Decrição</th>
+                            <th scope="col">Talhão</th>
+                            <th scope="col">Cultura</th>
+                            <th scope="col">Ações</th>
+
                         </tr>
                       </thead>
-                      <tbody>
-                        @foreach($atividades as $atividade)
-                            <tr>
- 
-                                <tr class="table-active">
-                                    <th scope="row">{{$atividade->id_tipos_atividades_tipos_atividades}}</th>
-                                    <td><a href="#">{{$atividade->id_atividades}}</a></td>
-                                    <td>{{$atividade->descricao}}</td>
-                                    <td>{{$atividade->data}}</td>
-                                    <td>@if($atividade->movimentacao) <a href="#"> sim</a> @else não @endif</td>
-                                </tr>
-                            </tr>
 
-                        @endforeach
-                      </tbody>
-                    </table>                   
-                  
-
-
-
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endsection
+@section('script')
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#data-table-atividades-all').DataTable({
+        language:{
+            "sEmptyTable": "Nenhum registro encontrado",
+            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+            "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sInfoThousands": ".",
+            "sLengthMenu": "_MENU_ resultados por página",
+            "sLoadingRecords": "Carregando...",
+            "sProcessing": "Processando...",
+            "sZeroRecords": "Nenhum registro encontrado",
+            "sSearch": "Pesquisar",
+            "oPaginate": {
+                "sNext": "Próximo",
+                "sPrevious": "Anterior",
+                "sFirst": "Primeiro",
+                "sLast": "Último"
+            },
+            "oAria": {
+                "sSortAscending": ": Ordenar colunas de forma ascendente",
+                "sSortDescending": ": Ordenar colunas de forma descendente"
+            }
+        },
+
+        processing: true,
+        serverSide: true,
+        ajax: '{{ route('data_table_atividades_all') }}',
+        columns: [
+
+            {data: 'id_atividades', name: 'id_atividades'},
+            {data: 'data', name: 'data'},
+            {data: 'descricao', name: 'descricao'},
+            {data: 'id_talhoes_talhoes', name: 'id_talhoes_talhoes'},
+            {data: 'id_culturas_culturas', name: 'id_culturas_culturas'},
+            {data: 'action', name: 'action', orderable: false, searchable: false}
+
+        ],
+        fields:[
+            {
+                label: "First name:",
+                name: "first_name"
+            }
+        ]
+    });
+});
+</script>
+@endsection
+
+@section('style')
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
+
 @endsection

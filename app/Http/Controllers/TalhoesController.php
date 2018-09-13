@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Atividade;
+use App\AdmTalhao;
+use App\Funcionario;
 use App\Http\Requests\TalhoesRequest;
 use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 use App\Talhao;
 use Session;
 Use form;
@@ -32,7 +36,8 @@ class TalhoesController extends Controller
 
     public function create()
     {
-        return view('talhoes.create');
+        $adms_talhoes = AdmTalhao::all();
+        return view('talhoes.create')->with(compact('talhoes','adms_talhoes'));;
     }
 
     /**
@@ -45,10 +50,11 @@ class TalhoesController extends Controller
     {
         $this->validate($request, ['identificador' => 'unique:talhoes'], ['identificador.unique' => 'O campo :attribute deve ser único!']);
         $talhao = new Talhao();
-        $talhao->identificador = $request->identificador;
+        $talhao->identificador = strtoupper($request->identificador);
         $talhao->tipo = $request->tipo;
         $talhao->area = $request->area;
         $talhao->descricao = $request->descricao;
+        $talhao->id_adms_talhoes_adms_talhoes = $request->id_adms_talhoes_adms_talhoes;
 
 
         if ($talhao->save()) {
@@ -95,7 +101,13 @@ class TalhoesController extends Controller
     public function update(TalhoesRequest $request, $id)
     {
         $talhao = Talhao::find($id);
-        $talhao->identificador = $request->identificador;
+
+        Validator::make($request->all() , [
+            'identificador' => ['required',
+                Rule::unique('talhoes')->ignore($talhao->id, 'id_talhoes'),]
+        ], ['O campo :attribute deve ser único!']);
+
+        $talhao->identificador = strtoupper($request->identificador);
         $talhao ->tipo = $request->tipo;
         $talhao->area = $request->area;
         $talhao->descricao = $request->descricao;

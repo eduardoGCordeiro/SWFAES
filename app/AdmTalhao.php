@@ -27,8 +27,15 @@ class AdmTalhao extends Model
     */
    protected $hidden = [ ];
 
-   public function talhao()
+
+
+    public function talhoes()
     {
-        return $this->hasOne('App\Talhao','id_talhoes','id_talhoes_talhoes');
+        return $this->hasMany('App\Talhao', 'id_adms_talhoes_adms_talhoes');
+    }
+
+    public function funcionarios(){
+        return $this->belongsTo('App\Funcionario', 'id_funcionarios_funcionarios');
+
     }
 }

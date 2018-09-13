@@ -10,19 +10,14 @@
                     </ol>
             <div class="card">
                 <div class="card-header">
-
-
-                    <h3>Lista de Talhões</h3>
-
-
-
+                    <h3 class="col-lg-6" style="float:left">Lista de Talhões</h3>
+                    <a href="{{Route('talhoes.create')}}" style="float: right"><button type="button" class="btn btn-success">Criar Novo</button></a>
                 </div>
 
                 <div class="card-body">
-                    <div class="flash-message">
+                    <div class="flash-message col-md-4">
                         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
                             @if(Session::has('alert-' . $msg))
-
                                 <div class="alert alert-{{ $msg }} alert-dismissible">
                                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                                     <p class="mb-0">{{ Session::get('alert-' . $msg) }}</p>
@@ -56,7 +51,8 @@
                             </div>
                         </a>
                     @endforeach
-                  <a href="{{Route('talhoes.create')}}"><button type="button" class="btn btn-primary">Criar Novo</button></a>
+                </div>
+                <div class="card-footer ">
                 </div>
             </div>
         </div>

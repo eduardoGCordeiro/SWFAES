@@ -55,17 +55,16 @@
 
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Administrador do talhão</label>
-
                             <div class="col-lg-6">
-                                <select name="tipo_atividade" class="form-control" id="exampleSelect1">
-                                    <option>Adiministrador geral</option>
-                                    <option>Administrador talhões</option>
-
+                                <select class="form-control" id="exampleFormControlSelect1" name="id_adms_talhoes_adms_talhoes">
+                                    @foreach($adms_talhoes as $adm_talhao)
+                                        <option value="{{$adm_talhao->id_adms_talhoes}}">{{$adm_talhao->funcionarios->login}}</option>
+                                    @endforeach
                                 </select>
 
-                                @if ($errors->has('tipo_atividade'))
+                                @if ($errors->has('id_adms_talhoes_adms_talhoes'))
                                     <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('tipo_atividade') }}</strong>
+                                        <strong>{{ $errors->first('id_adms_talhoes_adms_talhoes') }}</strong>
                                     </div>
                                 @endif
                             </div>
@@ -136,6 +135,7 @@
                         </div>
                     </form>
 
+                    </div>
                 </div>
             </div>
         </div>

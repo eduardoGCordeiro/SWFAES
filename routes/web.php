@@ -83,11 +83,13 @@ Route::resource('requisicoes/{id}/moderar', 'RequisicoesController@moderarget');
 
 //-------------------- rotas referentes à TalhoesController --------------------- //
 //ressource
+Route::resource('talhoes', 'TalhoesController');
+
+
 //-------------------- rotas referentes à FuncionariosController ------------------- //
 // data tables
 Route::get('talhoes/getdata', 'TalhoesController@data_tables')->name('data_table_talhoes');
 //ressource
-Route::resource('talhoes', 'TalhoesController');
 //------------------------------------------------------------------------------//
 
 

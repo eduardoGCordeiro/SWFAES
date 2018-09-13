@@ -48,6 +48,11 @@ class Atividade extends Model
         return $this->hasOne('App\Cultura','id_culturas','id_culturas_culturas');
     }
 
+    public function tipo_atividade()
+    {
+        return $this->hasOne('App\TipoAtividades','id_tipos_atividades','id_culturas_culturas');
+    }
+
     public function adms_gerais()
     {
         return $this->belongsTo('App\AdmGeral');

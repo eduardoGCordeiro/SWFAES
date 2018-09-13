@@ -86,10 +86,10 @@ class atividadesController extends Controller
 
         $atividade->id_adms_geral_adms_geral = AdmGeral::where('id_funcionarios_funcionarios',Auth::user()->id_funcionarios)->first();
 
-        if(!$atividade->id_adms_geral_adms_geral){
-            Session::flash('alert-danger', 'Você não é administrador geral, portanto não pode realizar essa ação!');
-            return redirect()->route('atividades.index');
-        }
+        // if(!$atividade->id_adms_geral_adms_geral){
+        //     Session::flash('alert-danger', 'Você não é administrador geral, portanto não pode realizar essa ação!');
+        //     return redirect()->route('atividades.index');
+        // }
         $atividade->id_adms_geral_adms_geral =  $atividade->id_adms_geral_adms_geral->id_adms_geral;
 
         if($atividade->save()){
@@ -124,7 +124,11 @@ class atividadesController extends Controller
     public function edit($id)
     {
         $atividade = Atividade::find($id);
-        return view('atividades.edit')->with(compact('atividade'));
+        $tipos_atividades = TipoAtividades::all();
+        $talhoes = Talhao::all();
+
+        $culturas = Cultura::all();
+        return view('atividades.edit')->with(compact('atividade','tipos_atividades','talhoes','culturas'));
     }
 
     /**
@@ -134,9 +138,26 @@ class atividadesController extends Controller
      * @param  \App\Atividade  $atividade
      * @return \Illuminate\Http\Response
      */
-    public function update()
+    public function update(Request $request,$id)
     {
-        dd('testando');
+        $atividade = Atividade::find($id);
+
+        $atividade->data = $request->data;
+        $atividade->descricao = $request->descricao;
+        $atividade->id_tipos_atividades_tipos_atividades = $request->tipo_atividade;
+        $atividade->id_talhoes_talhoes = $request->talhao;
+        $atividade->id_culturas_culturas = $request->cultura;
+
+
+
+        if($atividade->update()){
+
+            Session::flash('alert-success', 'Editado com sucesso!');
+            return redirect()->route('atividades.index');
+        }else{
+            Session::flash('alert-danger', 'Erro ao editar!');
+            return redirect()->route('atividades.index');
+        }
 
     }
 
@@ -146,8 +167,21 @@ class atividadesController extends Controller
      * @param  \App\Atividade  $atividade
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Atividade $atividade)
+    public function destroy($id)
     {
-        //
+        $atividade = Atividade::find($id);
+        $movimentacoes = $atividade->movimentacao;
+        if(count($movimentacoes)){
+            Session::flash('alert-danger', 'Erro ao excluir pois já está relacionado com um item!');
+            return redirect()->back();
+        }
+        if($atividade->delete()){
+
+            Session::flash('alert-success', 'deletado com sucesso!');
+            return redirect()->route('atividades.index');
+        }else{
+            Session::flash('alert-danger', 'Erro ao editar!');
+            return redirect()->route('atividades.index');
+        }
     }
 }

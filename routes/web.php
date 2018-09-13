@@ -22,16 +22,27 @@ Route::get('/inicio', 'HomeController@index')->name('home');
 
 //Route::resource('administradores', 'AdministradoresController');
 
-Route::resource('atividades', 'AtividadesController');
 
 
 //Route::resource('funcionarios', 'FuncionariosController');
+
 //-------------------- rotas referentes à ItensController --------------------- //
 // data tables
 Route::get('adms_talhoes/{id}/getdata', 'AdmsTalhoesController@data_tables')->name('data_table_adms_talhoes');
 //ressource
 Route::resource('adms_talhoes', 'AdmsTalhoesController');
-//------------------------------------------------------------------------------////-------------------- rotas referentes à ItensController --------------------- //
+//------------------------------------------------------------------------------//
+
+
+//-------------------- rotas referentes à AtividadesController --------------------- //
+// data tables
+Route::get('atividades/{id}/getdata', 'AtividadesController@data_tables')->name('data_table_atividades');
+Route::get('atividades/getdata', 'AtividadesController@data_tables_all')->name('data_table_atividades_all');
+//ressource
+Route::resource('atividades', 'AtividadesController');
+//------------------------------------------------------------------------------//
+
+//-------------------- rotas referentes à ItensController --------------------- //
 // data tables
 Route::get('itens/getdata', 'ItensController@data_tables')->name('data_table_itens');
 //ressource
@@ -88,12 +99,7 @@ Route::resource('tipos_atividades', 'TiposAtividadesController');
 //------------------------------------------------------------------------------//
 
 
-//-------------------- rotas referentes à AtividadesController --------------------- //
-// data tables
-Route::get('atividades/{id}/getdata', 'AtividadesController@data_tables')->name('data_table_atividades');
-//ressource
-Route::resource('atividades', 'AtividadesController');
-//------------------------------------------------------------------------------//
+
 //------------------------------------------------------------------------------//
 
 Route::resource('usuarios', 'UsuariosController');

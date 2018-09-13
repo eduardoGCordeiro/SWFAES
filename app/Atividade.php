@@ -17,7 +17,7 @@ class Atividade extends Model
     * @var array
     */
    protected $fillable = [
-      "data","data_registro","descricao","id_adms_gerais_adms_gerais","id_tipos_atividades_tipos_atividades","id_culturas_culturas","id_requisicoes_requisicoes","id_talhoes_talhoes"
+      "data","data_registro","descricao","id_adms_geral_adms_geral","id_tipos_atividades_tipos_atividades","id_culturas_culturas","id_requisicoes_requisicoes","id_talhoes_talhoes"
    ];
 
    /**
@@ -33,8 +33,19 @@ class Atividade extends Model
 
     }
 
-    public function talhoes(){
-        return $this->belongsTo('App\Talhao');
+    // public function talhoes(){
+    //     return $this->belongsTo('App\Talhao');
+    // }
+
+
+    public function talhao()
+    {
+        return $this->hasOne('App\Talhao','id_talhoes','id_talhoes_talhoes');
+    }
+
+    public function cultura()
+    {
+        return $this->hasOne('App\Cultura','id_culturas','id_culturas_culturas');
     }
 
     public function adms_gerais()

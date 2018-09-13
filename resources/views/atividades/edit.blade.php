@@ -10,7 +10,7 @@
                 <li class="breadcrumb-item active">Editando atividade</li>
             </ol>
             <div class="card">
-                
+
                 <div class="card-header">
 
                     <h3>Editando Atividade</h3>
@@ -18,9 +18,10 @@
 
                 </div>
                 <div class="card-body col-md-8 offset-lg-2" >
-                    
-                    <form role="form" method="put" action="{{ Route('atividades.update',[$atividade->id_atividades]) }}">
+
+                    <form role="form" method="post" action="{{ Route('atividades.update',[$atividade->id_atividades]) }}">
                         {!! csrf_field() !!}
+                        {{ method_field('PUT') }}
 
 
                         <div class="form-group row">
@@ -42,15 +43,15 @@
                             </div>
                         </div>
 
-                        
+
 
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Descrição</label>
 
                             <div class="col-lg-6">
-                                <textarea 
-                                    class="form-control" 
-                                    id="exampleTextarea" 
+                                <textarea
+                                    class="form-control"
+                                    id="exampleTextarea"
                                     rows="3"
                                     name="descricao"
 
@@ -68,12 +69,16 @@
                             <label class="col-lg-4 col-form-label text-lg-right">Tipo de Atividade</label>
 
                             <div class="col-lg-6">
-                                <select name="tipo_atividade" class="form-control" id="exampleSelect1">
-                                    <option>tipo1</option>
-                                    <option>tipo2</option>
-                                    
+                                <select required="" name="tipo_atividade" class="form-control" id="select_tipos">
+                                    <option value="">Selecione</option>
+                                    @foreach($tipos_atividades as $tipo)
+                                        <option value="{{$tipo->id_tipos_atividades}}">{{$tipo->nome}}</option>
+
+
+                                    @endforeach
+
                                 </select>
-                                
+
                                 @if ($errors->has('tipo_atividade'))
                                     <div class="invalid-feedback">
                                         <strong>{{ $errors->first('tipo_atividade') }}</strong>
@@ -86,12 +91,16 @@
                             <label class="col-lg-4 col-form-label text-lg-right">Talhão</label>
 
                             <div class="col-lg-6">
-                                <select name="talhao" class="form-control" id="exampleSelect1">
-                                    <option>talhão 1</option>
-                                    <option>talhão 2</option>
-                                    
+                                <select name="talhao" class="form-control" id="select_talhoes">
+                                    <option value="">Selecione</option>
+                                    @foreach($talhoes as $talhao)
+                                    <option value="{{$talhao->id_talhoes}}">{{$talhao->identificador}}</option>
+
+
+                                    @endforeach
+
                                 </select>
-                                
+
                                 @if ($errors->has('talhao'))
                                     <div class="invalid-feedback">
                                         <strong>{{ $errors->first('talhao') }}</strong>
@@ -100,27 +109,36 @@
                             </div>
                         </div>
 
-                        
-                        
-
                         <div class="form-group row">
-                            <div class="col-lg-6 offset-lg-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Salvar
-                                </button>
+                            <label class="col-lg-4 col-form-label text-lg-right">Cultura</label>
+
+                            <div class="col-lg-6">
+                                <select name="cultura" class="form-control" id="select_culturas">
+                                    <option value="">Selecione</option>
+                                    @foreach($culturas as $cultura)
+                                    <option value="{{$cultura->id_culturas}}">{{$cultura->id_culturas}}</option>
+
+
+                                    @endforeach
+
+                                </select>
+
+                                @if ($errors->has('cultura'))
+                                    <div class="invalid-feedback">
+                                        <strong>{{ $errors->first('cultura') }}</strong>
+                                    </div>
+                                @endif
                             </div>
                         </div>
 
 
-                        <hr>
+
+
                         <div class="form-group row">
                             <div class="col-lg-6 offset-lg-4">
-                                <div class="alert alert-dismissible alert-danger">
-                                  <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                  <strong>Excluir Atividade!</strong> Para deletar essa atividade clique no botão abaixo, mas lembre-se que isso é irreversível.
-                                </div>
-                                <p></p>
-                                <button type="button" class="btn btn-danger">Deletar</button>
+                                <button type="submit" class="btn btn-primary">
+                                    Alterar
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -130,4 +148,15 @@
         </div>
     </div>
 </div>
+
+@endsection
+@section('script')
+<script type="text/javascript">
+
+    document.getElementById('select_talhoes').value={{$atividade->talhao->id_talhoes}};
+    document.getElementById('select_culturas').value={{$atividade->cultura->id_culturas}};
+    document.getElementById('select_tipos').value={{$atividade->tipo_atividade->id_tipos_atividades}};
+
+</script>
+
 @endsection

@@ -37,7 +37,7 @@ class TalhoesController extends Controller
     public function create()
     {
         $adms_talhoes = AdmTalhao::all();
-        return view('talhoes.create')->with(compact('talhoes','adms_talhoes'));;
+        return view('talhoes.create')->with(compact('talhoes','adms_talhoes'));
     }
 
     /**
@@ -87,8 +87,9 @@ class TalhoesController extends Controller
      */
     public function edit($id)
     {
-        $talhao = Talhao::find($id);
-        return view('talhoes.edit')->with(compact('talhao'));
+        $talhoes = Talhao::find($id);
+        $adms_talhoes = AdmTalhao::all();
+        return view('talhoes.edit')->with(compact('talhoes','adms_talhoes'));;
     }
 
     /**

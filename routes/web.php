@@ -42,6 +42,27 @@ Route::get('atividades/getdata', 'AtividadesController@data_tables_all')->name('
 Route::resource('atividades', 'AtividadesController');
 //------------------------------------------------------------------------------//
 
+
+
+
+
+
+//-------------------- rotas referentes à RequisicoesController --------------------- //
+// data tables
+Route::get('requisicoes/getdata', 'RequisicoesController@data_tables')->name('data_table_requisicoes');
+//ressource
+Route::get('requisicoes/{id}/moderar', 'RequisicoesController@moderar_get')->name('moderar_get');
+Route::post('requisicoes/{id}/moderar', 'RequisicoesController@moderar')->name('moderar_post');
+Route::resource('requisicoes', 'RequisicoesController');
+//------------------------------------------------------------------------------//
+
+
+
+
+
+
+
+
 //-------------------- rotas referentes à ItensController --------------------- //
 // data tables
 Route::get('itens/getdata', 'ItensController@data_tables')->name('data_table_itens');
@@ -78,8 +99,7 @@ Route::resource('culturas', 'CulturasController');
 
 Route::resource('movimentacoes', 'MovimentacoesController');
 
-Route::resource('requisicoes', 'RequisicoesController');
-Route::resource('requisicoes/{id}/moderar', 'RequisicoesController@moderarget');
+
 
 //-------------------- rotas referentes à TalhoesController --------------------- //
 //ressource

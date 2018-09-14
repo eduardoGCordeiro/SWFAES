@@ -17,7 +17,7 @@ class Requisicao extends Model
     * @var array
     */
    protected $fillable = [
-       'data','descricao','descricao_adms_gerais', 'id_adms_talhoes_adms_talhoes', 'id_requisicoes_status_requisicoes'
+       'data','descricao','descricao_adms_gerais', 'id_adms_talhoes_adms_talhoes', 'id_requisicoes_status_requisicoes','id_talhoes_talhoes'
    ];
 
    /**
@@ -30,5 +30,8 @@ class Requisicao extends Model
 
     public function talhoes(){
         return $this->belongsTo('App\Talhao');
+    }
+    public function talhao(){
+        return $this->hasOne('App\Talhao','id_talhoes','id_talhoes_talhoes');
     }
 }

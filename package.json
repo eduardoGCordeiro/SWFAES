@@ -25,6 +25,7 @@
         "@fortawesome/vue-fontawesome": "^0.0.23",
         "bootswatch": "^4.1.1",
         "bootswatch-sass": "^3.2.0",
-        "font-awesome": "^4.7.0"
+        "font-awesome": "^4.7.0",
+        "startbootstrap-simple-sidebar": "^4.1.1"
     }
 }

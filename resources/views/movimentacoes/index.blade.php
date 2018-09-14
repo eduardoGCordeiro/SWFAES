@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div class="row mt-5">
+    <div class="row mt-3">
         <div class="col-md-12">
             <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/inicio">Início</a></li>
@@ -12,7 +12,7 @@
                 <div class="card-header">
 
 
-                    <h4>Listando movimentações</h4>  
+                    <h4>Listando movimentações</h4>
 
 
                                         <table class="table  table-hover">
@@ -29,7 +29,7 @@
                                           </thead>
                                           <tbody>
                                             <tr class="table-success">
-                                            
+
                                                 <td scope="col"><a href="#">00001</a></td>
                                                 <td scope="col">Descrição da movimentação de saída</td>
                                                 <td scope="col">1000.00</td>
@@ -39,7 +39,7 @@
                                                 <td scope="col"><a href="#">00001</a></td>
                                             </tr>
                                             <tr class="table-danger">
-                                            
+
                                                 <td scope="col"><a href="#">00002<a href="#"></td>
                                                 <td scope="col">Descrição da movimentação de entrada</td>
                                                 <td scope="col">300.00</td>
@@ -49,16 +49,16 @@
                                                 <td scope="col"><a href="#">00001</a></td>
                                             </tr>
                                           </tbody>
-                                        </table>       
+                                        </table>
 
-                    
+
 
                 </div>
 
                 <div class="card-body">
 
-                    
-                  
+
+
 
 
 

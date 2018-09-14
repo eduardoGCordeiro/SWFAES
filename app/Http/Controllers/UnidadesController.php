@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use Session;
 use Form;
+use Illuminate\Support\Facades\Gate;
 
 class UnidadesController extends Controller
 {
@@ -39,6 +40,9 @@ class UnidadesController extends Controller
      */
     public function create()
     {
+        if (Gate::denies('gerenciar')) {
+            return abort(403);
+        }
         return view('unidades.create');
     }
 
@@ -50,6 +54,9 @@ class UnidadesController extends Controller
      */
     public function store(Request $request)
     {
+        if (Gate::denies('gerenciar')) {
+            return abort(403);
+        }
         $unidade = new Unidade();
         $unidade->nome = strtoupper($request->nome);
         $unidade->sigla = $request->sigla;
@@ -82,6 +89,9 @@ class UnidadesController extends Controller
      */
     public function edit(Unidade $unidade)
     {
+        if (Gate::denies('gerenciar')) {
+            return abort(403);
+        }
         $movimentacoes = $unidade->movimentacoes;
         if(count($movimentacoes)){
             Session::flash('alert-danger', 'Erro ao editar pois já está relacionado com um item!');
@@ -99,6 +109,9 @@ class UnidadesController extends Controller
      */
     public function update(Request $request,  $id)
     {
+        if (Gate::denies('gerenciar')) {
+            return abort(403);
+        }
 
         $unidade = Unidade::find($id);
         $unidade->nome = strtoupper($request->nome);
@@ -128,6 +141,10 @@ class UnidadesController extends Controller
      */
     public function destroy($id)
     {
+        if (Gate::denies('gerenciar')) {
+            return abort(403);
+        }
+
         $unidade = Unidade::find($id);
         $movimentacoes = $unidade->movimentacoes;
         if(count($movimentacoes)){

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\TiposAtividades;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class TiposAtividadesController extends Controller
 {
@@ -24,7 +25,9 @@ class TiposAtividadesController extends Controller
      */
     public function create()
     {
-        //
+        if (Gate::denies('gerenciar')) {
+            return abort(403);
+        }
     }
 
     /**
@@ -35,7 +38,9 @@ class TiposAtividadesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (Gate::denies('gerenciar')) {
+            return abort(403);
+        }
     }
 
     /**
@@ -46,7 +51,7 @@ class TiposAtividadesController extends Controller
      */
     public function show(TiposAtividades $tiposAtividades)
     {
-        //
+
     }
 
     /**
@@ -57,7 +62,9 @@ class TiposAtividadesController extends Controller
      */
     public function edit(TiposAtividades $tiposAtividades)
     {
-        //
+        if (Gate::denies('gerenciar')) {
+            return abort(403);
+        }
     }
 
     /**
@@ -69,7 +76,9 @@ class TiposAtividadesController extends Controller
      */
     public function update(Request $request, TiposAtividades $tiposAtividades)
     {
-        //
+        if (Gate::denies('gerenciar')) {
+            return abort(403);
+        }
     }
 
     /**
@@ -80,6 +89,8 @@ class TiposAtividadesController extends Controller
      */
     public function destroy(TiposAtividades $tiposAtividades)
     {
-        //
+        if (Gate::denies('gerenciar')) {
+            return abort(403);
+        }
     }
 }

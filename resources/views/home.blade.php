@@ -44,6 +44,12 @@ unidades<br>
     - edição           +++<br>
     - listagem         +++<br>
 
+
+
+
+    @if (Auth::user()->can('gerenciar'))
+    pode
+    @endif
                 </div>
             </div>
         </div>
@@ -52,8 +58,4 @@ unidades<br>
 
 
 
-Acls -----------
-
-
-criar uma verificação para não possibilitar a inclusão de talhoes pra adms gerais<br>
 @endsection

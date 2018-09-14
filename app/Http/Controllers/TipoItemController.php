@@ -8,6 +8,7 @@ use App\Item;
 use Yajra\Datatables\Datatables;
 use Session;
 use Form;
+use Illuminate\Support\Facades\Gate;
 
 class TipoItemController extends Controller
 {
@@ -30,12 +31,18 @@ class TipoItemController extends Controller
 
     public function create()
     {
+        if (Gate::denies('gerenciar')) {
+            return abort(403);
+        }
         return view('tipo_itens.create');
     }
 
 
     public function store(Request $request)
     {
+        if (Gate::denies('gerenciar')) {
+            return abort(403);
+        }
         $tipo = new TipoItem();
         $tipo->nome = strtoupper($request->nome);
 
@@ -58,6 +65,9 @@ class TipoItemController extends Controller
 
     public function edit($id)
     {
+        if (Gate::denies('gerenciar')) {
+            return abort(403);
+        }
         $tipo  =  TipoItem::find($id);
 
         if(!$tipo){
@@ -77,6 +87,9 @@ class TipoItemController extends Controller
 
     public function update(Request $request,  $id)
     {
+        if (Gate::denies('gerenciar')) {
+            return abort(403);
+        }
         //dd($request);
         $tipo = TipoItem::find($id);
         $tipo->nome = strtoupper($request->nome);
@@ -94,6 +107,9 @@ class TipoItemController extends Controller
 
     public function destroy($id)
     {
+        if (Gate::denies('gerenciar')) {
+            return abort(403);
+        }
         $tipo = TipoItem::find($id);
         $movimentacoes = $tipo->movimentacoes;
         if(count($movimentacoes)){

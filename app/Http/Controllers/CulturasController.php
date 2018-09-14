@@ -9,6 +9,8 @@ use App\Talhao;
 use Yajra\Datatables\Datatables;
 use Session;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Gate;
+use Auth;
 
 class CulturasController extends Controller
 {
@@ -23,24 +25,40 @@ class CulturasController extends Controller
 
 
          $culturas = Cultura::select(['*'])->get();
-
-        return Datatables::of($culturas)
-            ->editColumn('id_talhoes_talhoes', function($cultura){
-                return $cultura->talhao['identificador'];
-            })
-            ->editColumn('tipo_safra', function($cultura){
-                return $cultura->tipo_safra=='V'?"verão":"inverno";
-            })
-            ->editColumn('data_inicio', function($cultura){
-                return date( 'd/m/Y' , strtotime($cultura->data_inicio));
-            })
-            ->editColumn('data_fim', function($cultura){
-                return $cultura->data_fim!=null?date( 'd/m/Y' , strtotime($cultura->data_fim)):"Ativo";
-            })
-            ->addColumn('action', function ($cultura) {
-                return '<a href="'.Route('culturas.edit',[$cultura->id_culturas]).'" class="btn btn-primary">Editar</a>'.'<form action="'.Route('culturas.destroy',[$cultura->id_culturas]).'" method="POST"> '.csrf_field().'
- <input name="_method" type="hidden" value="DELETE"> <button type="submit" class="btn btn-danger">deletar</button>';
-            })->make(true);
+        if(Auth::user()->can('gerenciar-culturas')){
+            return Datatables::of($culturas)
+                ->editColumn('id_talhoes_talhoes', function($cultura){
+                    return $cultura->talhao['identificador'];
+                })
+                ->editColumn('tipo_safra', function($cultura){
+                    return $cultura->tipo_safra=='V'?"verão":"inverno";
+                })
+                ->editColumn('data_inicio', function($cultura){
+                    return date( 'd/m/Y' , strtotime($cultura->data_inicio));
+                })
+                ->editColumn('data_fim', function($cultura){
+                    return $cultura->data_fim!=null?date( 'd/m/Y' , strtotime($cultura->data_fim)):"Ativo";
+                })
+                ->addColumn('action', function ($cultura) {
+                    return '<a href="'.Route('culturas.edit',[$cultura->id_culturas]).'" class="btn btn-primary">Editar</a>'.'<form action="'.Route('culturas.destroy',[$cultura->id_culturas]).'" method="POST"> '.csrf_field().'
+     <input name="_method" type="hidden" value="DELETE"> <button type="submit" class="btn btn-danger">deletar</button>';
+                })->make(true);
+        }else{
+            return Datatables::of($culturas)
+                ->editColumn('id_talhoes_talhoes', function($cultura){
+                    return $cultura->talhao['identificador'];
+                })
+                ->editColumn('tipo_safra', function($cultura){
+                    return $cultura->tipo_safra=='V'?"verão":"inverno";
+                })
+                ->editColumn('data_inicio', function($cultura){
+                    return date( 'd/m/Y' , strtotime($cultura->data_inicio));
+                })
+                ->editColumn('data_fim', function($cultura){
+                    return $cultura->data_fim!=null?date( 'd/m/Y' , strtotime($cultura->data_fim)):"Ativo";
+                })
+                ->make(true);
+        }
     }
 
 
@@ -58,6 +76,9 @@ class CulturasController extends Controller
      */
     public function create()
     {
+        if (Gate::denies('gerenciar-culturas')) {
+            return abort(403);
+        }
         $culturas = Cultura::all();
         $talhoes = Talhao::all();
         return view('culturas.create')->with(compact('culturas','talhoes'));
@@ -71,6 +92,9 @@ class CulturasController extends Controller
      */
     public function store(Request $request)
     {
+        if (Gate::denies('gerenciar-culturas')) {
+            return abort(403);
+        }
         $cultura = new Cultura();
         $cultura->data_inicio = $request->data_inicio;
         $cultura->descricao = $request->descricao;
@@ -94,6 +118,7 @@ class CulturasController extends Controller
      */
     public function show($id)
     {
+
         $cultura = Cultura::find($id);
         if(!$cultura){
             Session::flash('alert-danger', 'Cultura não existente!');
@@ -111,6 +136,9 @@ class CulturasController extends Controller
      */
     public function edit($id)
     {
+        if (Gate::denies('gerenciar-culturas')) {
+            return abort(403);
+        }
         $cultura = Cultura::find($id);
         $talhoes = Talhao::all();
         return view('culturas.edit')->with(compact('cultura','talhoes'));
@@ -125,6 +153,9 @@ class CulturasController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (Gate::denies('gerenciar-culturas')) {
+            return abort(403);
+        }
         $cultura = Cultura::find($id);
         $cultura->data_inicio = $request->data_inicio;
         $cultura->descricao = $request->descricao;
@@ -148,6 +179,10 @@ class CulturasController extends Controller
      */
     public function destroy($id)
     {
+        if (Gate::denies('gerenciar-culturas')) {
+            return abort(403);
+        }
+
         $cultura = Cultura::find($id);
         //dd(count($cultura->atividades));
         if(!count($cultura->atividades)){

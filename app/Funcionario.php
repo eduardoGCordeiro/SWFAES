@@ -41,4 +41,8 @@ class Funcionario extends Authenticatable
     //     return $this->hasMany('App\AdmTalhao','id_funcionarios_funcionarios');
 
     }
+
+    public function AdmGeral(){
+        return $this->hasOne('App\AdmGeral','id_funcionarios_funcionarios','id_funcionarios');
+    }
 }

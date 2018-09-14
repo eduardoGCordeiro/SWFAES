@@ -7,6 +7,7 @@ use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
 use Session;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Gate;
 
 class AdmsTalhoesController extends Controller
 {
@@ -91,8 +92,11 @@ class AdmsTalhoesController extends Controller
     {
         //dd($funcionario);
 
-
+        if (Gate::denies('gerenciar')) {
+            return abort(403);
+        }
         foreach ($request->talhoes as $key => $talhao) {
+
             $admsTalhoes = AdmTalhao::where(['id_funcionarios_funcionarios'=>$funcionario,'id_talhoes_talhoes'=>$talhao])->first();
             if(!$admsTalhoes){
                 $new_adm_talhao = new AdmTalhao();
@@ -123,6 +127,9 @@ class AdmsTalhoesController extends Controller
      */
     public function destroy($id)
     {
+        if (Gate::denies('gerenciar')) {
+            return abort(403);
+        }
         //dd(Carbon::today()toDateString);
         $admsTalhoes = AdmTalhao::find($id);
         $admsTalhoes->data_fim =Carbon::today()->toDateString();

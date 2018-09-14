@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Auth;
 use Session;
+use Illuminate\Support\Facades\Gate;
 
 class atividadesController extends Controller
 {
@@ -23,20 +24,34 @@ class atividadesController extends Controller
     public function data_tables_all()
     {
         //return \DataTables::of(Unidade::query())->make(true);
-         $atividades = Atividade::select(['*'])->get();
+        $atividades = Atividade::select(['*'])->get();
+        if(Auth::user()->can('gerenciar-atividades')){
+            return Datatables::of($atividades)
+                ->editColumn('id_talhoes_talhoes', function($atividade){
+                    return $atividade->talhao['identificador'];
+                })
 
-        return Datatables::of($atividades)
-            ->editColumn('id_talhoes_talhoes', function($atividade){
-                return $atividade->talhao['identificador'];
-            })
+                ->editColumn('data', function($atividade){
+                    return date( 'd/m/Y' , strtotime($atividade->data));
+                })
+                ->addColumn('action', function ($atividade) {
+                    return '<a href="'.Route('atividades.edit',[$atividade->id_atividades]).'" class="btn btn-primary">Editar</a>'.'<form action="'.Route('atividades.destroy',[$atividade->id_atividades]).'" method="POST"> '.csrf_field().'
+         <input name="_method" type="hidden" value="DELETE"> <button type="submit" class="btn btn-danger">deletar</button><a href="'.Route('atividades',[$atvidiade->id_atividades]).'">Ver</a>';
+                    })
+            ->make(true);
+        }else{
+            return Datatables::of($atividades)
+                ->editColumn('id_talhoes_talhoes', function($atividade){
+                    return $atividade->talhao['identificador'];
+                })
 
-            ->editColumn('data', function($atividade){
-                return date( 'd/m/Y' , strtotime($atividade->data));
-            })
-            ->addColumn('action', function ($atividade) {
-                return '<a href="'.Route('atividades.edit',[$atividade->id_atividades]).'" class="btn btn-primary">Editar</a>'.'<form action="'.Route('atividades.destroy',[$atividade->id_atividades]).'" method="POST"> '.csrf_field().'
- <input name="_method" type="hidden" value="DELETE"> <button type="submit" class="btn btn-danger">deletar</button>';
-            })->make(true);
+                ->editColumn('data', function($atividade){
+                    return date( 'd/m/Y' , strtotime($atividade->data));
+                })
+
+                ->make(true);
+        }
+
     }
 
     public function index()
@@ -61,6 +76,9 @@ class atividadesController extends Controller
      */
     public function create()
     {
+        if (Gate::denies('gerenciar-atividades')) {
+            return abort(403);
+        }
         $tipos_atividades = TipoAtividades::all();
         $talhoes = Talhao::all();
         $culturas = Cultura::all();
@@ -75,6 +93,9 @@ class atividadesController extends Controller
      */
     public function store(Request $request)
     {
+        if (Gate::denies('gerenciar-atividades')) {
+            return abort(403);
+        }
         //dd(Auth::user());
         $atividade = new Atividade();
         $atividade->data = $request->data;
@@ -123,6 +144,9 @@ class atividadesController extends Controller
      */
     public function edit($id)
     {
+        if (Gate::denies('gerenciar-atividades')) {
+            return abort(403);
+        }
         $atividade = Atividade::find($id);
         $tipos_atividades = TipoAtividades::all();
         $talhoes = Talhao::all();
@@ -140,6 +164,9 @@ class atividadesController extends Controller
      */
     public function update(Request $request,$id)
     {
+        if (Gate::denies('gerenciar-atividades')) {
+            return abort(403);
+        }
         $atividade = Atividade::find($id);
 
         $atividade->data = $request->data;
@@ -169,6 +196,9 @@ class atividadesController extends Controller
      */
     public function destroy($id)
     {
+        if (Gate::denies('gerenciar-atividades')) {
+            return abort(403);
+        }
         $atividade = Atividade::find($id);
         $movimentacoes = $atividade->movimentacao;
         if(count($movimentacoes)){

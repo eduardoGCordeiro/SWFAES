@@ -11,7 +11,9 @@
             <div class="card">
                 <div class="card-header">
                         <h3>Listando culturas</h3>
+                        @if (Auth::user()->can('gerenciar-culturas'))
                         <a href="{{Route('culturas.create')}}"><button type="button" class="btn btn-outline-success">Cadastrar nova</button></a>
+                        @endif
 
 
 
@@ -51,7 +53,9 @@
                                 <th scope="col">Data fim</th>
                                 <th scope="col">Tipo de safra</th>
                                 <th scope="col">Descrição</th>
-                                <th scope="col">Actions</th>
+                                @if (Auth::user()->can('gerenciar-culturas'))
+                                    <th scope="col">Actions</th>
+                                @endif
 
                             </tr>
                           </thead>
@@ -107,7 +111,9 @@ $(document).ready(function() {
             {data: 'data_fim', name: 'data_fim'},
             {data: 'tipo_safra', name: 'tipo_safra'},
             {data: 'descricao', name: 'descricao'},
+            @if (Auth::user()->can('gerenciar-culturas'))
             {data: 'action', name: 'action', orderable: false, searchable: false}
+            @endif
 
         ],
         fields:[

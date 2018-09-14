@@ -12,6 +12,7 @@ use DB;
 use DataTables;
 use Redirect;
 use Session;
+use Illuminate\Support\Facades\Gate;
 
 class ItensController extends Controller
 {
@@ -54,6 +55,9 @@ class ItensController extends Controller
      */
     public function create()
     {
+        if (Gate::denies('gerenciar-itens')) {
+            return abort(403);
+        }
         $unidades = Unidade::all();
         $tipos_itens = TipoItem::all();
         return view('itens.create')->with(compact('unidades','tipos_itens'));
@@ -67,7 +71,9 @@ class ItensController extends Controller
      */
     public function store(ItensRequest $request)
     {
-
+        if (Gate::denies('gerenciar-itens')) {
+            return abort(403);
+        }
         $item = new Item();
         $item->nome = strtoupper($request->nome);
         $item->custo_por_unidades = $request->custo_por_unidades;
@@ -92,7 +98,9 @@ class ItensController extends Controller
      */
     public function show(Item $item)
     {
-        //
+
+
+
     }
 
     /**
@@ -103,6 +111,9 @@ class ItensController extends Controller
      */
     public function edit($id)
     {
+        if (Gate::denies('gerenciar-itens')) {
+            return abort(403);
+        }
         $movimentacoes = Movimentacao::where('id_itens_itens',$id)->get();
         if(!count($movimentacoes)){
             $item = Item::find($id);
@@ -125,6 +136,9 @@ class ItensController extends Controller
      */
     public function update(ItensRequest $request,$id)
     {
+        if (Gate::denies('gerenciar-itens')) {
+            return abort(403);
+        }
         $item = Item::find($id);
         $item->nome = strtoupper($request->nome);
         $item->custo_por_unidades = $request->custo_por_unidades;
@@ -149,7 +163,9 @@ class ItensController extends Controller
      */
     public function destroy($id)
     {
-
+        if (Gate::denies('gerenciar-itens')) {
+            return abort(403);
+        }
         $movimentacoes = Movimentacao::where('id_itens_itens',$id)->get();
         if(!count($movimentacoes)){
             $item = Item::find($id);

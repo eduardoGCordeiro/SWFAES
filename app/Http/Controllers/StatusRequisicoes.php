@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\StatusRequisicoes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class StatusRequisicoes extends Controller
 {

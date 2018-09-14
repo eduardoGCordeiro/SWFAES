@@ -41,7 +41,10 @@
                                 <th scope="col">Resposta</th>
                                 <th scope="col">Adm Talhão</th>
                                 <th scope="col">Talhão</th>
+                                @if (Auth::user()->can('gerenciar-requisicoes'))
                                 <th scope="col">Ações</th>
+                                @endif
+
 
                             </tr>
                           </thead>
@@ -98,7 +101,9 @@ $(document).ready(function() {
             {data: 'resposta', name: 'resposta'},
             {data: 'id_adms_talhoes_adms_talhoes', name: 'id_adms_talhoes_adms_talhoes'},
             {data: 'id_talhoes_talhoes', name: 'id_talhoes'},
+            @if (Auth::user()->can('gerenciar-culturas'))
             {data: 'action', name: 'action', orderable: false, searchable: false}
+            @endif
 
         ],
         fields:[

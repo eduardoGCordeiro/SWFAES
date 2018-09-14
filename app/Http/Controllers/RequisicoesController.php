@@ -6,6 +6,8 @@ use App\Requisicao;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use Session;
+use Illuminate\Support\Facades\Gate;
+use Auth;
 
 class RequisicoesController extends Controller
 {
@@ -50,11 +52,17 @@ class RequisicoesController extends Controller
 
 
     public function moderar_get($id){
+        if (Gate::denies('gerenciar-requisicoes')) {
+            return abort(403);
+        }
         $requisicao = Requisicao::find($id);
         return view('requisicoes.moderar')->with(compact('requisicao'));
     }
 
     public function moderar(Request $request,$id){
+        if (Gate::denies('gerenciar-requisicoes')) {
+            return abort(403);
+        }
         $requisicao = Requisicao::find($id);
         $requisicao->resposta = $request->resposta;
         if($request->option == 1){

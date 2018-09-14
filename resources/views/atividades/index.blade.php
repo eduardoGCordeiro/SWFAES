@@ -13,7 +13,9 @@
 
 
                     <h3>Listando atividades</h3>
-                     <a href="{{Route('atividades.create')}}"><button type="button" class="btn btn-outline-success">Cadastrar nova</button></a>
+                    @if (Auth::user()->can('gerenciar'))
+                        <a href="{{Route('atividades.create')}}"><button type="button" class="btn btn-outline-success">Cadastrar nova</button></a>
+                    @endif
 
 
 
@@ -48,7 +50,9 @@
                             <th scope="col">Decrição</th>
                             <th scope="col">Talhão</th>
                             <th scope="col">Cultura</th>
+                            @if (Auth::user()->can('gerenciar-atividades'))
                             <th scope="col">Ações</th>
+                            @endif
 
                         </tr>
                       </thead>
@@ -99,7 +103,9 @@ $(document).ready(function() {
             {data: 'descricao', name: 'descricao'},
             {data: 'id_talhoes_talhoes', name: 'id_talhoes_talhoes'},
             {data: 'id_culturas_culturas', name: 'id_culturas_culturas'},
+            @if (Auth::user()->can('gerenciar-atividades'))
             {data: 'action', name: 'action', orderable: false, searchable: false}
+            @endif
 
         ],
         fields:[

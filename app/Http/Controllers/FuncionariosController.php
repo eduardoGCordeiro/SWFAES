@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use App\Http\Requests\FuncionariosRequest;
 use Session;
+use Illuminate\Support\Facades\Gate;
 
 class FuncionariosController extends Controller
 {
@@ -18,11 +19,18 @@ class FuncionariosController extends Controller
      */
     public function index()
     {
+        if (Gate::denies('gerenciar-funcionarios')) {
+            return abort(403);
+        }
         return view('funcionarios.index');
     }
 
     public function data_tables()
     {
+        if (Gate::denies('gerenciar-funcionarios')) {
+            return abort(403);
+        }
+
          $funcionarios = Funcionario::select(['id_funcionarios', 'nome','cpf'])->get();
 
         return Datatables::of($funcionarios)
@@ -41,6 +49,9 @@ class FuncionariosController extends Controller
      */
     public function create()
     {
+        if (Gate::denies('gerenciar-funcionarios')) {
+            return abort(403);
+        }
         return view('auth.register');
     }
 
@@ -52,6 +63,9 @@ class FuncionariosController extends Controller
      */
     public function store(FuncionariosRequest $request)
     {
+        if (Gate::denies('gerenciar-funcionarios')) {
+            return abort(403);
+        }
         $funcionario = new Funcionario();
         $funcionario->nome = strtoupper($request->nome);
         $funcionario->cpf = $request->cpf;
@@ -81,6 +95,9 @@ class FuncionariosController extends Controller
      */
     public function show(Funcionario $funcionario)
     {
+        if (Gate::denies('gerenciar-funcionarios')) {
+            return abort(403);
+        }
         $talhoes = Talhao::all();
         return view('funcionarios.show')->with(compact('funcionario','talhoes'));
     }
@@ -93,6 +110,10 @@ class FuncionariosController extends Controller
      */
     public function edit(Funcionario $funcionario)
     {
+        if (Gate::denies('gerenciar-funcionarios')) {
+            return abort(403);
+        }
+
         if(!$funcionario){
             Session::flash('alert-danger', 'Funcionário não existe!');
             return redirect()->route('funcionarios.index');
@@ -111,6 +132,9 @@ class FuncionariosController extends Controller
      */
     public function update(Request $request, Funcionario $funcionario)
     {
+        if (Gate::denies('gerenciar-funcionarios')) {
+            return abort(403);
+        }
         $funcionario->nome= strtoupper($request->nome);
         $funcionario->login= ($request->login);
         $funcionario->cpf= ($request->cpf);
@@ -134,6 +158,8 @@ class FuncionariosController extends Controller
      */
     public function destroy(Funcionario $funcionario)
     {
-        //
+        if (Gate::denies('gerenciar-funcionarios')) {
+            return abort(403);
+        }
     }
 }

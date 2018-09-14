@@ -125,24 +125,30 @@
                       Culturas
                     </a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{{Route('funcionarios.index')}}">
+                  @if (Auth::user()->can('gerenciar'))
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{Route('funcionarios.index')}}">
 
-                      Funcionários
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{{Route('itens.index')}}">
+                        Funcionários
+                      </a>
+                    </li>
+                  @endif
+                  @if (Auth::user()->can('gerenciar'))
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{Route('funcionarios.index')}}">
 
-                      Itens
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{{Route('movimentacoes.index')}}">
+                        Itens
+                      </a>
+                    </li>
+                  @endif
+                  @if (Auth::user()->can('gerenciar'))
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{Route('funcionarios.index')}}">
 
-                      Movimentações
-                    </a>
-                  </li>
+                        Movimentações
+                      </a>
+                    </li>
+                  @endif
                   <li class="nav-item">
                     <a class="nav-link" href="{{Route('requisicoes.index')}}">
 
@@ -157,32 +163,36 @@
                   </li>
 
                 </ul>
+                @if (Auth::user()->can('gerenciar'))
 
-                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                  <span>Sistema</span>
 
-                </h6>
-                <ul class="nav flex-column mb-2">
+                  <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span>Sistema</span>
+
+                  </h6>
+                  <ul class="nav flex-column mb-2">
+                      <li class="nav-item">
+                        <a class="nav-link" href="{{Route('tipos_atividades.index')}}">
+
+                          Tipos de Atividades
+                        </a>
+                      </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="{{Route('tipos_atividades.index')}}">
+                      <a class="nav-link" href="{{Route('tipo_item.index')}}">
 
-                        Tipos de Atividades
+                        Tipos de Itens
                       </a>
                     </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{{Route('tipo_item.index')}}">
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{Route('unidades.index')}}">
 
-                      Tipos de Itens
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{{Route('unidades.index')}}">
+                        Unidades de medida
+                      </a>
+                    </li>
 
-                      Unidades de medida
-                    </a>
-                  </li>
+                  </ul>
 
-                </ul>
+                @endif
             </div>
         </nav>
 

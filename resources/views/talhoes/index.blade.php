@@ -11,7 +11,10 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="col-lg-6" style="float:left">Lista de Talhões</h3>
-                    <a href="{{Route('talhoes.create')}}" style="float: right"><button type="button" class="btn btn-success">Criar Novo</button></a>
+                    <a href="{{Route('talhoes.create')}}" style="float: right">
+                        @if (Auth::user()->can('gerenciar-culturas'))
+                        <button type="button" class="btn btn-success">Criar Novo</button></a>
+                        @endif
                 </div>
 
                 <div class="card-body">

@@ -14,6 +14,8 @@ use App\Talhao;
 use Session;
 Use form;
 Use Redirect;
+use Illuminate\Support\Facades\Gate;
+use Auth;
 
 class TalhoesController extends Controller
 {
@@ -36,6 +38,9 @@ class TalhoesController extends Controller
 
     public function create()
     {
+        if (Gate::denies('gerenciar-talhoes')) {
+            return abort(403);
+        }
         $adms_talhoes = AdmTalhao::all();
         return view('talhoes.create')->with(compact('talhoes','adms_talhoes'));
     }
@@ -48,6 +53,9 @@ class TalhoesController extends Controller
      */
     public function store(TalhoesRequest $request)
     {
+        if (Gate::denies('gerenciar-talhoes')) {
+            return abort(403);
+        }
         $this->validate($request, ['identificador' => 'unique:talhoes'], ['identificador.unique' => 'O campo :attribute deve ser único!']);
         $talhao = new Talhao();
         $talhao->identificador = strtoupper($request->identificador);
@@ -87,6 +95,9 @@ class TalhoesController extends Controller
      */
     public function edit($id)
     {
+        if (Gate::denies('gerenciar-talhoes')) {
+            return abort(403);
+        }
         $talhoes = Talhao::find($id);
         $adms_talhoes = AdmTalhao::all();
         return view('talhoes.edit')->with(compact('talhoes','adms_talhoes'));;
@@ -101,6 +112,10 @@ class TalhoesController extends Controller
      */
     public function update(TalhoesRequest $request, $id)
     {
+        if (Gate::denies('gerenciar-talhoes')) {
+            return abort(403);
+        }
+
         $talhao = Talhao::find($id);
 
         Validator::make($request->all() , [
@@ -130,6 +145,9 @@ class TalhoesController extends Controller
      */
     public function destroy($id)
     {
+        if (Gate::denies('gerenciar-talhoes')) {
+            return abort(403);
+        }
         $talhao = Talhao::find($id);
 
         if($talhao->delete())

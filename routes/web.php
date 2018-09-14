@@ -97,18 +97,24 @@ Route::resource('culturas', 'CulturasController');
 //------------------------------------------------------------------------------//
 
 
-Route::resource('movimentacoes', 'MovimentacoesController');
 
+//-------------------- rotas referentes à MovimentacoesController --------------------- //
+//ressource
+Route::resource('movimentacoes', 'MovimentacoesController');
+// data tables
+Route::get('movimentacoes/getdata', 'MovimentacoesController@data_tables')->name('data_table_movimentacoes');
+//------------------------------------------------------------------------------//
 
 
 //-------------------- rotas referentes à TalhoesController --------------------- //
 //ressource
 Route::resource('talhoes', 'TalhoesController');
-
-
-//-------------------- rotas referentes à FuncionariosController ------------------- //
 // data tables
 Route::get('talhoes/getdata', 'TalhoesController@data_tables')->name('data_table_talhoes');
+//------------------------------------------------------------------------------//
+
+//-------------------- rotas referentes à FuncionariosController ------------------- //
+
 //ressource
 //------------------------------------------------------------------------------//
 

@@ -4,6 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Movimentacao;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
+use DataTables;
+use Session;
+Use form;
+Use Redirect;
+
 
 class MovimentacoesController extends Controller
 {
@@ -12,10 +19,21 @@ class MovimentacoesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function data_tables()
+    {
+        $movimentacoes = Movimentacao::select(['*'])->get();
+        return Datatables::of($movimentacoes)
+            ->addColumn('action', function ($movimentacoes) {
+                return '<a href="'.Route('movimentacoes.edit',[$movimentacoes->id_movimentacoes]).'" class="btn btn-primary">Editar</a>'.'<form action="'.Route('movimentacoes.destroy',[$movimentacoes->id_movimentacoes]).'" method="POST"> '.csrf_field().'
+                        <input name="_method" type="hidden" value="DELETE"> <button type="submit" class="btn btn-danger">deletar</button>';
+            })
+            ->make(true);
+    }
+
     public function index()
     {
         $movimentacao = Movimentacao::all();
-        
         return view('movimentacoes.index')->with(compact('movimentacao'));
     }
 

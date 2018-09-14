@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div class="row mt-5">
+    <div class="row mt-3">
         <div class="col-md-12 ">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/inicio">Início</a></li>
@@ -10,7 +10,7 @@
                 <li class="breadcrumb-item active">Novo Talhão</li>
             </ol>
             <div class="card">
-                
+
                 <div class="card-header">
 
                     <h3>Cadastro de talhão</h3>
@@ -29,7 +29,7 @@
                                 </ul>
                             </div>
                         @endif
-                    
+
                     <form role="form" method="POST" action="{{ Route('talhoes.store') }}">
                         {!! csrf_field() !!}
 
@@ -95,9 +95,9 @@
                             <label class="col-lg-4 col-form-label text-lg-right">Descrição</label>
 
                             <div class="col-lg-6">
-                                <textarea 
-                                    class="form-control" 
-                                    id="exampleTextarea" 
+                                <textarea
+                                    class="form-control"
+                                    id="exampleTextarea"
                                     rows="3"
                                     name="descricao"
 
@@ -123,7 +123,7 @@
                                     <label class="custom-control-label" for="customRadio2">Pecuária</label>
                                 </div>
                             </div>
-                          
+
                         </div>
 
                         <div class="form-group row">

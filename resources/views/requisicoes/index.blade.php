@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div class="row mt-5">
+    <div class="row mt-3">
         <div class="col-md-12">
             <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/inicio">Início</a></li>
@@ -14,72 +14,41 @@
 
                     <h3>Listando requisições</h3>
 
-                    
+
 
                 </div>
 
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col form-group">
-                            <label for="exampleSelect2">Selecione um dos talhões</label>
-                            <select multiple="" class="form-control" id="exampleSelect2">
-                                <option>Talhão 1</option>
-                                <option>Talhão 2</option>
-                                <option>Talhão 3</option>
-                                <option>Talhão 4</option>
-                                <option>Talhão 5</option>
-                            </select>
+                        <div class="flash-message col-md-4">
+                            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                                @if(Session::has('alert-' . $msg))
+                                    <div class="alert alert-{{ $msg }} alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        <p class="mb-0">{{ Session::get('alert-' . $msg) }}</p>
+                                    </div>
+                                @endif
+                            @endforeach
                         </div>
-                    </div>
 
-                    <button type="button" class="btn btn-secondary">Ver requisições</button>
-                    <br>
-                    <hr>
+                        <table id="data-table-unidades" class="table  table-striped">
 
-                    <h4>Listando requisições do talhão</h4>  
+                          <thead>
+                            <tr>
 
+                                <th scope="col">ID</th>
+                                <th scope="col">Data</th>
+                                <th scope="col">Descricao</th>
+                                <th scope="col">Resposta</th>
+                                <th scope="col">Adm Talhão</th>
+                                <th scope="col">Talhão</th>
+                                <th scope="col">Ações</th>
 
-                    <table class="table  table-hover">
-                      <thead>
-                        <tr>
-                            <th>identificação</th>
-                            <th scope="col">descrição</th>
-                            <th scope="col">data</th>
-                            <th scope="col">status</th>
-                            <th scope="col">resposta</th>
-                            
-                        </tr>
-                      </thead>
-                      <tbody>
-                        
-                            
- 
-                            <tr class="table-success">
-                                <td><a href="#">0001</a></td>
-                                <th scope="row">passar o arado no talhão</th>
-                                <td><a href="#">07/06/2018</a></td>
-                                <td>aceito</td>
-                                <td>ok</td>
                             </tr>
-                            <tr class="table-default">
-                                <td><a href="#">0002</a></td>
-                                <th scope="row">plantio</th>
-                                <td><a href="#">07/06/2018</a></td>
-                                <td>aguardando</td>
-                                <td>-</td>
-                            </tr>
-                            <tr class="table-danger">
-                                <td><a href="#">0003</a></td>
-                                <th scope="row">colheita</th>
-                                <td><a href="#">07/06/2018</a></td>
-                                <td>rejeitado</td>
-                                <td>Ainda não possui cultura!</td>
-                            </tr>
-                            
+                          </thead>
 
-                      </tbody>
-                    </table>                   
-                  
+                        </table>
+
+
 
 
 
@@ -88,4 +57,62 @@
         </div>
     </div>
 </div>
+@endsection
+@section('script')
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#data-table-unidades').DataTable({
+        language:{
+            "sEmptyTable": "Nenhum registro encontrado",
+            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+            "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sInfoThousands": ".",
+            "sLengthMenu": "_MENU_ resultados por página",
+            "sLoadingRecords": "Carregando...",
+            "sProcessing": "Processando...",
+            "sZeroRecords": "Nenhum registro encontrado",
+            "sSearch": "Pesquisar",
+            "oPaginate": {
+                "sNext": "Próximo",
+                "sPrevious": "Anterior",
+                "sFirst": "Primeiro",
+                "sLast": "Último"
+            },
+            "oAria": {
+                "sSortAscending": ": Ordenar colunas de forma ascendente",
+                "sSortDescending": ": Ordenar colunas de forma descendente"
+            }
+        },
+
+        processing: true,
+        serverSide: true,
+        ajax: '{{ route('data_table_requisicoes') }}',
+        columns: [
+
+            {data: 'id_requisicoes', name: 'id_requisicoes'},
+            {data: 'data', name: 'data'},
+            {data: 'descricao', name: 'descricao'},
+            {data: 'resposta', name: 'resposta'},
+            {data: 'id_adms_talhoes_adms_talhoes', name: 'id_adms_talhoes_adms_talhoes'},
+            {data: 'id_talhoes_talhoes', name: 'id_talhoes'},
+            {data: 'action', name: 'action', orderable: false, searchable: false}
+
+        ],
+        fields:[
+            {
+                label: "First name:",
+                name: "first_name"
+            }
+        ]
+    });
+});
+</script>
+@endsection
+
+@section('style')
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
+
 @endsection

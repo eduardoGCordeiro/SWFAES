@@ -5,7 +5,7 @@
 @endsection
 @section('content')
 <div class="container">
-    <div class="row mt-5">
+    <div class="row mt-3">
         <div class="col-md-12">
             <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/inicio">Início</a></li>

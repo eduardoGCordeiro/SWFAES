@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div class="row mt-5">
+    <div class="row mt-3">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">Painel principal</div>
@@ -15,8 +15,8 @@
     - edição +++<br>
     - listagem +++<br>
 Atividades<br>
-    - cadastro<br>
-    - edição<br>
+    - cadastro +++<br>
+    - edição +++<br>
     - listagem +++<br>
 Culturas<br>
     - cadastro +++<br>

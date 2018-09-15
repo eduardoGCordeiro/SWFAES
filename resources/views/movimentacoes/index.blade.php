@@ -87,7 +87,7 @@
                     {data: 'descricao', name: 'descricao', width: '6%', tragets:0, className:'dt-body-rigth dt-head-center'},
                     {data: 'quantidade', name: 'quantidade', width: '1%', tragets:0},
                     {data: 'custo', name: 'custo', render: $.fn.dataTable.render.number( '.', ',', 2, 'R$ ' ), width: '2%', tragets:0},
-                    {data: 'action', name: 'action', width: '1%', tragets:0, className:'dt-body-center'},
+                    {data: 'action', name: 'action', width: '1%', tragets:0, className:'dt-body-center', orderable: false, searchable: false},
                 ]
             });
         });

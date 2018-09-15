@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('content')
@@ -13,14 +14,15 @@
 
 
                     <h3>Listando requisições</h3>
-                    @if (!Auth::user()->can('gerenciar-culturas'))
-                    <a href="{{Route('requisicoes.create')}}" style="float: right"><button type="button" class="btn btn-success">Fazer nova requisição</button></a>
+
+                    @if (!Auth::user()->can('gerenciar-requisicoes'))
+                        <a href="{{Route('requisicoes.create')}}"><button type="button" class="btn btn-outline-success"><i class="fas fa-plus"> </i>  Cadastrar nova</button></a>
                     @endif
 
                 </div>
 
                 <div class="card-body">
-                        <div class="flash-message col-md-4">
+                        <div class="flash-message col-md-12">
                             @foreach (['danger', 'warning', 'success', 'info'] as $msg)
                                 @if(Session::has('alert-' . $msg))
                                     <div class="alert alert-{{ $msg }} alert-dismissible">
@@ -42,11 +44,9 @@
                                 <th scope="col">Resposta</th>
                                 <th scope="col">Adm Talhão</th>
                                 <th scope="col">Talhão</th>
-                                @if (Auth::user()->can('gerenciar-requisicoes'))
+                                 @if (Auth::user()->can('gerenciar-culturas'))
                                 <th scope="col">Ações</th>
                                 @endif
-
-
                             </tr>
                           </thead>
 
@@ -102,10 +102,9 @@ $(document).ready(function() {
             {data: 'resposta', name: 'resposta'},
             {data: 'id_adms_talhoes_adms_talhoes', name: 'id_adms_talhoes_adms_talhoes'},
             {data: 'id_talhoes_talhoes', name: 'id_talhoes'},
-            @if (Auth::user()->can('gerenciar-culturas'))
+             @if (Auth::user()->can('gerenciar-culturas'))
             {data: 'action', name: 'action', orderable: false, searchable: false}
             @endif
-
         ],
         fields:[
             {

@@ -12,7 +12,7 @@
 
                 <div class="card-header">
                     <h4>Listando movimentações
-                        <a href="{{Route('movimentacoes.create')}}" style="float: right"><button type="button" class="btn btn-success">Cadastrar Movimentação</button></a></h4>
+                        <a href="{{Route('movimentacoes.create')}}" style="float: right"><button type="button" class="btn btn-success"><i class="fas fa-plus"></i> Cadastrar Movimentação</button></a></h4>
                 </div>
 
                 <div class="card-body">

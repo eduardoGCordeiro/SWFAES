@@ -41,10 +41,10 @@ class ItensController extends Controller
  <input name="_method" type="hidden" value="DELETE"> <button type="submit" class="btn btn-danger">deletar</button>';
             })
             ->editColumn('id_unidades_unidades', function ($item){
-                return $item->unidade->nome.'('.$item->unidade->sigla.')';
+                return $item->unidades['nome'].'('.$item->unidades['sigla'].')';
             })
             ->editColumn('id_tipos_itens_tipos_itens', function ($item){
-                return $item->tipo_item->nome;
+                return $item->tipo_item['nome'];
             })
             ->make(true);
     }

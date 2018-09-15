@@ -42,6 +42,10 @@ class AuthServiceProvider extends ServiceProvider
             return isset($funcionario->admGeral);
         });
 
+        Gate::define('gerenciar-requisicoes', function ($funcionario) {
+            return isset($funcionario->admGeral);
+        });
+
         Gate::define('gerenciar-talhoes', function ($funcionario) {
             return isset($funcionario->admGeral);
         });

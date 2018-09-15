@@ -99,10 +99,10 @@ Route::resource('culturas', 'CulturasController');
 
 
 //-------------------- rotas referentes à MovimentacoesController --------------------- //
-//ressource
-Route::resource('movimentacoes', 'MovimentacoesController');
 // data tables
 Route::get('movimentacoes/getdata', 'MovimentacoesController@data_tables')->name('data_table_movimentacoes');
+//ressource
+Route::resource('movimentacoes', 'MovimentacoesController');
 //------------------------------------------------------------------------------//
 
 

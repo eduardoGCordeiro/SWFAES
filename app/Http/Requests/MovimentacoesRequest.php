@@ -13,7 +13,7 @@ class MovimentacoesRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,23 @@ class MovimentacoesRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'custo' => 'required',
+            'quantidade' => 'required',
+            'tipo_movimentacoes' => 'required|string|max:1',
+            'id_itens_itens'=>'',
+            'id_atividades_atividades' => '',
+            'descricao' => 'string|max:200'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'custo.required' => 'O campo :attribute é obrigatório!',
+            'quantidade.required' => 'O campo :attribute é obrigatório!',
+            'tipo_movimentacoes.required' => 'O campo :attribute é obrigatório!',
+            'descricao.max' => 'O campo :attribute deve conter no máximo 200 caracteres!',
+            'descricao.string' => 'O campo :attribute deve ser texto!',
         ];
     }
 }

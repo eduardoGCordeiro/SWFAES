@@ -11,7 +11,8 @@
             <div class="card">
 
                 <div class="card-header">
-                    <h4>Listando movimentações</h4>
+                    <h4>Listando movimentações
+                        <a href="{{Route('movimentacoes.create')}}" style="float: right"><button type="button" class="btn btn-success">Cadastrar Movimentação</button></a></h4>
                 </div>
 
                 <div class="card-body">
@@ -34,9 +35,9 @@
                         <tr>
                             <th scope="col">Movimentação</th>
                             <th scope="col">Tipo de movimentação</th>
+                            <th scope="col">Descricao</th>
                             <th scope="col">Quantidade</th>
                             <th scope="col">Custo</th>
-                            <th scope="col">Descricao</th>
                             <th scope="col">Ações</th>
                         </tr>
                         </thead>
@@ -74,19 +75,19 @@
                     "oAria": {
                         "sSortAscending": ": Ordenar colunas de forma ascendente",
                         "sSortDescending": ": Ordenar colunas de forma descendente"
-                    }
+                    },
                 },
 
                 processing: true,
                 serverSide: true,
                 ajax: '{{route('data_table_movimentacoes')}}',
                 columns: [
-                    {data: 'id_movimentacoes', name: 'id_movimentacoes'},
-                    {data: 'tipo_movimentacoes', name: 'tipo_movimentacoes'},
-                    {data: 'quantidade', name: 'quantidade'},
-                    {data: 'custo', name: 'custo'},
-                    {data: 'descricao', name: 'descricao'},
-                    {data: 'action', name: 'action'},
+                    {data: 'id_movimentacoes', name: 'id_movimentacoes', width: '0.1%', tragets:0, className:'dt-body-center dt-head-center'},
+                    {data: 'tipo_movimentacoes', name: 'tipo_movimentacoes', width: '1%', tragets:0, className:'dt-body-center dt-head-center'},
+                    {data: 'descricao', name: 'descricao', width: '6%', tragets:0, className:'dt-body-rigth dt-head-center'},
+                    {data: 'quantidade', name: 'quantidade', width: '1%', tragets:0},
+                    {data: 'custo', name: 'custo', render: $.fn.dataTable.render.number( '.', ',', 2, 'R$ ' ), width: '2%', tragets:0},
+                    {data: 'action', name: 'action', width: '1%', tragets:0, className:'dt-body-center'},
                 ]
             });
         });

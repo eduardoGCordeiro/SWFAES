@@ -35,4 +35,5 @@ class Unidade extends Model
         return $this->hasMany('App\Item','id_tipos_itens_tipos_itens');
 
     }
+
 }

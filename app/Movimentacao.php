@@ -27,4 +27,9 @@ class Movimentacao extends Model
     * @var array
     */
    protected $hidden = [ ];
+
+    public function item()
+    {
+        return $this->belongsTo('App\Item');
+    }
 }

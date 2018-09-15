@@ -13,8 +13,9 @@
 
 
                     <h3>Listando requisições</h3>
-
-
+                    @if (!Auth::user()->can('gerenciar-culturas'))
+                    <a href="{{Route('requisicoes.create')}}" style="float: right"><button type="button" class="btn btn-success">Fazer nova requisição</button></a>
+                    @endif
 
                 </div>
 

@@ -27,7 +27,7 @@ class Item extends Model
     */
    protected $hidden = [ ];
 
-  public function unidade()
+  public function unidades()
   {
         return $this->belongsTo('App\Unidade','id_unidades_unidades');
   }
@@ -35,5 +35,10 @@ class Item extends Model
   public function tipo_item()
   {
         return $this->belongsTo('App\TipoItem','id_tipos_itens_tipos_itens');
+  }
+
+  public function movimentacao()
+  {
+        return $this->hasMany('App\Movimentacao');
   }
 }

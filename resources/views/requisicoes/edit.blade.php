@@ -6,7 +6,7 @@
         <div class="col-md-12 ">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/inicio">Início</a></li>
-                <li class="breadcrumb-item"><a href="{{Route('requisicoes.index')}}">Talhões</a></li>
+                <li class="breadcrumb-item"><a href="{{Route('requisicoes.index')}}">Requisições</a></li>
                 <li class="breadcrumb-item active">Editando Requisição - Identificação do Talhão</li>
             </ol>
             <div class="card">

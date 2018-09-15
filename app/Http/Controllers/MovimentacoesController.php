@@ -23,7 +23,7 @@ class MovimentacoesController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function data_tables()
+    public function getdata()
     {
         $movimentacoes = Movimentacao::select(['*'])->get();
         return Datatables::of($movimentacoes)

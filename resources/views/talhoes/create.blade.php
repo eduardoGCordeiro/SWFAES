@@ -123,7 +123,6 @@
                                     <label class="custom-control-label" for="customRadio2">Pecuária</label>
                                 </div>
                             </div>
-
                         </div>
 
                         <div class="form-group row">

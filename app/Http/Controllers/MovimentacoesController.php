@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Atividade;
+use App\Item;
 use App\Movimentacao;
+use App\Http\Requests\MovimentacoesRequest;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
@@ -24,9 +27,12 @@ class MovimentacoesController extends Controller
     {
         $movimentacoes = Movimentacao::select(['*'])->get();
         return Datatables::of($movimentacoes)
-            ->addColumn('action', function ($movimentacoes) {
-                return '<a href="'.Route('movimentacoes.edit',[$movimentacoes->id_movimentacoes]).'" class="btn btn-primary">Editar</a>'.'<form action="'.Route('movimentacoes.destroy',[$movimentacoes->id_movimentacoes]).'" method="POST"> '.csrf_field().'
-                        <input name="_method" type="hidden" value="DELETE"> <button type="submit" class="btn btn-danger">deletar</button>';
+            ->addColumn('action', function ($movimentacao) {
+                return  '<div class="col-xs-6 text-left">'.
+                            '<div class="previous">'.
+                                '<a href="'.Route('movimentacoes.edit',[$movimentacao->id_movimentacoes]).'" class="btn btn-primary">Editar</a>'
+                            .'</div>'
+                        .'</div>';
             })
             ->make(true);
     }
@@ -34,7 +40,8 @@ class MovimentacoesController extends Controller
     public function index()
     {
         $movimentacao = Movimentacao::all();
-        return view('movimentacoes.index')->with(compact('movimentacao'));
+        $item = Item::all();
+        return view('movimentacoes.index')->with(compact('movimentacao','item'));
     }
 
     /**
@@ -44,7 +51,10 @@ class MovimentacoesController extends Controller
      */
     public function create()
     {
-        return view('movimentacoes.create');
+        $item = Item::all();
+        $atividade = Atividade::all();
+        return view('movimentacoes.create')->with(compact('movimentacao','item', 'atividade'));
+
     }
 
     /**
@@ -53,9 +63,34 @@ class MovimentacoesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MovimentacoesRequest $request)
     {
-        //
+        $movimentacao = new Movimentacao();
+        $item = Item::find($request->id_itens_itens);
+
+        $movimentacao->custo = str_replace(',', '.',str_replace('.','',$request->custo));
+        $movimentacao->quantidade = $request->quantidade;
+        $movimentacao->tipo_movimentacoes = $request->tipo_movimentacoes;
+        $movimentacao->descricao = $request->descricao;
+        $movimentacao->id_itens_itens = $request->id_itens_itens;
+        $movimentacao->id_atividades_atividades = $request->id_atividades_atividades;
+
+
+        if($movimentacao->tipo_movimentacoes == "E")
+        {
+            $item->quantidade += $movimentacao->quantidade;
+        } else{
+            $item->quantidade -= $movimentacao->quantidade;
+        }
+
+        if($movimentacao->save()){
+            Session::flash('alert-success', 'Movimentação cadastrada com sucesso!');
+            return redirect()->route('movimentacoes.index');
+        }else{
+            Session::flash('alert-danger', 'Não foi possível cadastrar essa movimentação!');
+            return redirect()->route('movimentacoes.index');
+        }
+
     }
 
     /**
@@ -78,7 +113,9 @@ class MovimentacoesController extends Controller
     public function edit($id)
     {
         $movimentacao = Movimentacao::find($id);
-        return view('movimentacoes.edit')->with(compact('movimentacao'));
+        $item = Item::all();
+        $atividade = Atividade::all();
+        return view('movimentacoes.edit')->with(compact('movimentacao', 'item', 'atividade'));
     }
 
     /**
@@ -88,9 +125,39 @@ class MovimentacoesController extends Controller
      * @param  \App\Movimentacao  $movimentacao
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Movimentacao $movimentacao)
+    public function update(MovimentacoesRequest $request, $id)
     {
-        //
+        $movimentacao= Movimentacao::find($id);
+        $item= Item::find($movimentacao->id_itens_itens);
+
+        if($movimentacao->tipo_movimentacoes == 'E')
+        {
+            $item->quantidade -= $movimentacao->quantidade;
+        } else{
+            $item->quantidade += $movimentacao->quantidade;
+        }
+
+        $movimentacao->custo = str_replace(',', '.',str_replace('.','',$request->custo));
+        $movimentacao->quantidade = $request->quantidade;
+        $movimentacao->tipo_movimentacoes = $request->tipo_movimentacoes;
+        $movimentacao->descricao = $request->descricao;
+        $movimentacao->id_itens_itens = $request->id_itens_itens;
+        $movimentacao->id_atividades_atividades = $request->id_atividades_atividades;
+
+        if($movimentacao->tipo_movimentacoes == "E")
+        {
+            $item->quantidade += $movimentacao->quantidade;
+        } else{
+            $item->quantidade -= $movimentacao->quantidade;
+        }
+
+        if($movimentacao->save() && $item->save()){
+            Session::flash('alert-success', 'Movimentação atualizada com sucesso!');
+            return redirect()->route('movimentacoes.index');
+        }else{
+            Session::flash('alert-danger', 'Não foi possível atualizar essa movimentação!');
+            return redirect()->route('movimentacoes.index');
+        }
     }
 
     /**
@@ -99,8 +166,18 @@ class MovimentacoesController extends Controller
      * @param  \App\Movimentacao  $movimentacao
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Movimentacao $movimentacao)
+    public function destroy($id)
     {
-        //
+        $movimentacao = Movimentacao::find($id);
+
+        if($movimentacao->delete())
+        {
+            Session::flash('alert-sucess', 'Movimentação deletada com sucesso!');
+            return redirect()->route('movimentacoes.index');
+        }else
+        {
+            Session::flash('alert-danger', 'Movimentação não pode ser deletada!');
+            return redirect()->route('movimentacoes.index');
+        }
     }
 }

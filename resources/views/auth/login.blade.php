@@ -1,4 +1,4 @@
-@extends('<layouts class="noauth"></layouts>')
+@extends('layouts.noauth')
 
 @section('content')
 <div class="container">

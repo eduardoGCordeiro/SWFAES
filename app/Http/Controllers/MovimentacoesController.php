@@ -34,6 +34,16 @@ class MovimentacoesController extends Controller
                             .'</div>'
                         .'</div>';
             })
+            ->editColumn('tipo_movimentacoes', function($movimentacao){
+                return $movimentacao->tipo_movimentacoes==="S"?'Saída':'Entrada';
+            })
+            ->setRowClass(function ($movimentacoes) {
+                if($movimentacoes->tipo_movimentacoes === "E"){
+                    return 'table-success';
+                }else if($movimentacoes->tipo_movimentacoes === "S"){
+                    return 'table-danger';
+                }
+            })
             ->make(true);
     }
 

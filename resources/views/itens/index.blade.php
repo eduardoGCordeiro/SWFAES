@@ -16,7 +16,7 @@
 
 
                     <h3>Listando itens</h3>
-                    <a href="{{Route('itens.create')}}"><button type="button" class="btn btn-outline-success">Cadastrar novo</button></a>
+                    <a href="{{Route('itens.create')}}"><button type="button" class="btn btn-outline-success"><i class="fas fa-plus"></i> Cadastrar novo</button></a>
 
 
 

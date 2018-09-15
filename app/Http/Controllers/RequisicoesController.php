@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Requisicao;
+use App\Talhao;
+use App\Cultura;
+use App\AdmTalhao;
+use App\AdmGeral;
+use App\Funcionario;
+
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use Session;
@@ -19,7 +25,17 @@ class RequisicoesController extends Controller
 
        public function data_tables()
        {
-            $requisicoes = Requisicao::all();
+            $admTalhao = AdmTalhao::where('id_funcionarios_funcionarios',Auth::user()->id_funcionarios)->first();
+            $admGeral = AdmGeral::where('id_funcionarios_funcionarios',Auth::user()->id_funcionarios)->get();
+
+            if(isset($admTalhao) && !count($admGeral)){
+                //dd($admTalhao);
+                $requisicoes = Requisicao::where('id_adms_talhoes_adms_talhoes',$admTalhao->id_adms_talhoes)->get();
+            }else{
+                $requisicoes = Requisicao::all();
+
+            }
+
             //dd($requisicoes[0]->talhao);
            return Datatables::of($requisicoes)
                 ->editColumn('id_talhoes_talhoes', function($requisicao){
@@ -30,6 +46,11 @@ class RequisicoesController extends Controller
                 })
                 ->editColumn('data', function($requisicao){
                     return date( 'd/m/Y' , strtotime($requisicao->data));
+                })
+                 ->editColumn('id_adms_talhoes_adms_talhoes', function($requisicao){
+                    $funcionario = $funcionario = Funcionario::find(AdmTalhao::find($requisicao->id_adms_talhoes_adms_talhoes)->id_funcionarios_funcionarios);
+
+                    return $funcionario->nome;
                 })
                ->addColumn('action', function ($requisicao) {
                    return '<a href="'.Route('moderar_get',[$requisicao->id_requisicoes]).'" class="btn btn-primary">Moderar</a>';
@@ -52,17 +73,15 @@ class RequisicoesController extends Controller
 
 
     public function moderar_get($id){
-        if (Gate::denies('gerenciar-requisicoes')) {
-            return abort(403);
-        }
+
         $requisicao = Requisicao::find($id);
         return view('requisicoes.moderar')->with(compact('requisicao'));
     }
 
     public function moderar(Request $request,$id){
-        if (Gate::denies('gerenciar-requisicoes')) {
-            return abort(403);
-        }
+        // if (Gate::denies('gerenciar-requisicoes')) {
+        //     return abort(403);
+        // }
         $requisicao = Requisicao::find($id);
         $requisicao->resposta = $request->resposta;
         if($request->option == 1){
@@ -87,7 +106,16 @@ class RequisicoesController extends Controller
      */
     public function create()
     {
-        return view('requisicoes.create');
+        $adm = AdmTalhao::where('id_funcionarios_funcionarios',Auth::user()->id_funcionarios)->first();
+
+        $talhoes = Talhao::where('id_adms_talhoes_adms_talhoes',$adm->id_adms_talhoes)->get();
+
+        if(!$adm || !count($talhoes)){
+            Session::flash('alert-danger', 'Você não pode cadastrar requisicao pois não é administrador de talhões!');
+            return redirect()->route('requisicoes.index');
+        }
+
+        return view('requisicoes.create')->with(compact('talhoes','culturas'));
     }
 
     /**
@@ -98,7 +126,22 @@ class RequisicoesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $talhao = $request->talhao;
+
+        $adm_talhao = AdmTalhao::where([['id_funcionarios_funcionarios', Auth::user()->id_funcionarios]])->first();
+        //dd($adm_talhao);
+        //if($adm_talhao && )
+        $requisicao = new Requisicao();
+        $requisicao->id_adms_talhoes_adms_talhoes = $adm_talhao->id_adms_talhoes;
+        $requisicao->descricao = $request->descricao;
+
+        if($requisicao->save()){
+            Session::flash('alert-success', 'Nova requisicao cadastrada com sucesso, aguarde a moderação de um administrador geral!');
+            return redirect()->route('requisicoes.index');
+        }else{
+            Session::flash('alert-danger', 'Erro ao cadastrar requisicao!');
+            return redirect()->route('requisicoes.index');
+        }
     }
 
     /**

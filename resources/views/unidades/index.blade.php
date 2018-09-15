@@ -17,7 +17,7 @@
 
 
                     <h3>Listando unidades</h3>
-                    <a href="{{Route('unidades.create')}}"><button type="button" class="btn btn-outline-success">Cadastrar nova</button></a>
+                    <a href="{{Route('unidades.create')}}"><button type="button" class="btn btn-outline-success"> <i class="fas fa-plus"></i> Cadastrar nova</button></a>
 
 
 

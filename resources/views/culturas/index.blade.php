@@ -12,7 +12,7 @@
                 <div class="card-header">
                         <h3>Listando culturas</h3>
                         @if (Auth::user()->can('gerenciar-culturas'))
-                        <a href="{{Route('culturas.create')}}"><button type="button" class="btn btn-outline-success">Cadastrar nova</button></a>
+                        <a href="{{Route('culturas.create')}}"><button type="button" class="btn btn-outline-success"><i class="fas fa-plus"></i> Cadastrar nova</button></a>
                         @endif
 
 

@@ -11,13 +11,10 @@
             <div class="card">
                 <div class="card-header">
 
-
                     <h3>Listando atividades</h3>
                     @if (Auth::user()->can('gerenciar'))
-                        <a href="{{Route('atividades.create')}}"><button type="button" class="btn btn-outline-success">Cadastrar nova</button></a>
+                        <a href="{{Route('atividades.create')}}"><button type="button" class="btn btn-outline-success"><i class="fas fa-plus"> </i>  Cadastrar nova</button></a>
                     @endif
-
-
 
                 </div>
 
@@ -31,8 +28,6 @@
                                 <p class="mb-0">{{ Session::get('alert-' . $msg) }}</p>
                             </div>
 
-
-
                         @endif
                       @endforeach
                     </div>
@@ -42,9 +37,6 @@
 
                       <thead>
                         <tr>
-
-
-
                             <th scope="col">ID</th>
                             <th scope="col">Data</th>
                             <th scope="col">Decrição</th>

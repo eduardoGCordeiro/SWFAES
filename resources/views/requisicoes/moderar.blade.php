@@ -58,7 +58,7 @@
                                     rows="3"
                                     name="resposta"
 
-                                ></textarea>
+                                >{{$requisicao->resposta}} </textarea>
                                 @if ($errors->has('resposta'))
                                     <div class="invalid-feedback">
                                         <strong>{{ $errors->first('resposta') }}</strong>

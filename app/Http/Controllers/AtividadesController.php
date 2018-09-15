@@ -25,8 +25,9 @@ class atividadesController extends Controller
     {
         //return \DataTables::of(Unidade::query())->make(true);
         $atividades = Atividade::select(['*'])->get();
-        if(Auth::user()->can('gerenciar-atividades')){
+
             return Datatables::of($atividades)
+
                 ->editColumn('id_talhoes_talhoes', function($atividade){
                     return $atividade->talhao['identificador'];
                 })
@@ -35,22 +36,12 @@ class atividadesController extends Controller
                     return date( 'd/m/Y' , strtotime($atividade->data));
                 })
                 ->addColumn('action', function ($atividade) {
-                    return '<a href="'.Route('atividades.edit',[$atividade->id_atividades]).'" class="btn btn-primary">Editar</a>'.'<form action="'.Route('atividades.destroy',[$atividade->id_atividades]).'" method="POST"> '.csrf_field().'
-         <input name="_method" type="hidden" value="DELETE"> <button type="submit" class="btn btn-danger">deletar</button><a href="'.Route('atividades',[$atvidiade->id_atividades]).'">Ver</a>';
+                    return '<a href="'.Route('atividades.edit',[$atividade->id_atividades]).'" class="btn btn-primary"><i class="fas fa-edit"></i>Editar</a>'.'<form action="'.Route('atividades.destroy',[$atividade->id_atividades]).'" method="POST"> '.csrf_field().'
+ <input name="_method" type="hidden" value="DELETE"> <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>deletar</button></form>';
                     })
             ->make(true);
-        }else{
-            return Datatables::of($atividades)
-                ->editColumn('id_talhoes_talhoes', function($atividade){
-                    return $atividade->talhao['identificador'];
-                })
 
-                ->editColumn('data', function($atividade){
-                    return date( 'd/m/Y' , strtotime($atividade->data));
-                })
 
-                ->make(true);
-        }
 
     }
 

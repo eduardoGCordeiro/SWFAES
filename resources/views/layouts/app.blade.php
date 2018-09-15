@@ -12,6 +12,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
 
     <style type="text/css">
             body{
@@ -109,55 +111,56 @@
 
                   <li class="nav-item">
                     <a class="nav-link active" href="{{url('/inicio')}}">
-
+                      <i class="fas fa-home fa-lg"></i>
                       Início <span class="sr-only">(current)</span>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{{Route('atividades.index')}}">
 
+                    <a class="nav-link" href="{{Route('atividades.index')}}">
+                      <i class="fas fa-calendar-alt fa-lg" ></i>
                       Atividades
                     </a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="{{Route('culturas.index')}}">
-
+                      <i class="fas fa-seedling fa-lg"></i>
                       Culturas
                     </a>
                   </li>
                   @if (Auth::user()->can('gerenciar'))
                     <li class="nav-item">
                       <a class="nav-link" href="{{Route('funcionarios.index')}}">
-
+                        <i class="fas fa-users fa-lg"></i>
                         Funcionários
                       </a>
                     </li>
                   @endif
                   @if (Auth::user()->can('gerenciar'))
                     <li class="nav-item">
-                      <a class="nav-link" href="{{Route('funcionarios.index')}}">
-
+                      <a class="nav-link" href="{{Route('itens.index')}}">
+                        <i class="fas fa-warehouse fa-lg"></i>
                         Itens
                       </a>
                     </li>
                   @endif
                   @if (Auth::user()->can('gerenciar'))
                     <li class="nav-item">
-                      <a class="nav-link" href="{{Route('funcionarios.index')}}">
-
+                      <a class="nav-link" href="{{Route('movimentacoes.index')}}">
+                        <i class="fas fa-exchange-alt fa-lg"></i>
                         Movimentações
                       </a>
                     </li>
                   @endif
                   <li class="nav-item">
                     <a class="nav-link" href="{{Route('requisicoes.index')}}">
-
+                      <i class="fas fa-comment"></i>
                       Requisições
                     </a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="{{Route('talhoes.index')}}">
-
+                      <i class="fas fa-th fa-lg"></i>
                       Talhões
                     </a>
                   </li>
@@ -167,7 +170,7 @@
 
 
                   <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                    <span>Sistema</span>
+                    <span>Sistema </span>
 
                   </h6>
                   <ul class="nav flex-column mb-2">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AdmGeral;
 use App\Atividade;
 use App\AdmTalhao;
 use App\Funcionario;
@@ -26,8 +27,24 @@ class TalhoesController extends Controller
      */
     public function index()
     {
-        $talhoes = Talhao::orderby('id_talhoes', 'ASC')->get();
-        return view('talhoes.index')->with(compact('talhoes'));
+        $adm_talhao = AdmTalhao::where('id_funcionarios_funcionarios',Auth::user()->id_funcionarios)->first();
+        $adm_geral = AdmGeral::where('id_funcionarios_funcionarios',Auth::user()->id_funcionarios)->first();
+
+        if($adm_geral){
+            $talhoes = Talhao::orderby('id_talhoes', 'ASC')->get();
+            return view('talhoes.index')->with(compact('talhoes'));
+        }else if($adm_talhao){
+            $talhoes = Talhao::where('id_adms_talhoes_adms_talhoes', $adm_talhao->id_adms_talhoes)->orderby('id_talhoes', 'ASC')->get();
+            if(count($talhoes)) {
+                return view('talhoes.index')->with(compact('talhoes'));
+            }else{
+                Session::flash('alert-info', 'Você ainda não possui talhões!');
+                return redirect()->route('talhoes.index');
+            }
+        }else {
+            Session::flash('alert-danger', 'Você ainda não é um administrador!');
+            return redirect()->route('talhoes.index');
+        }
     }
 
     /**

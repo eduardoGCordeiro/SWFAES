@@ -64,10 +64,10 @@
                         </div>
                         <div class="col-xs-6 text-right">
                             <div class="next offset-1">
-                                <form action="{{Route('funcionarios.destroy',[$funcionario->id_funcionarios])}}" method="POST"> {{csrf_field()}}
+                                <!-- <form action="{{Route('funcionarios.destroy',[$funcionario->id_funcionarios])}}" method="POST"> {{csrf_field()}}
                                     <input name="_method" type="hidden" value="DELETE">
                                     <button type="submit" class="btn btn-danger">deletar</button>
-                                </form>
+                                </form> -->
                             </div>
                         </div>
                     </div>
@@ -107,7 +107,7 @@
                     </table>
 
 
-                            <form role="form" method="POST" action="{{ Route('adms_talhoes.update',[$funcionario->id_funcionarios]) }}">
+                            <!-- <form role="form" method="POST" action="{{ Route('adms_talhoes.update',[$funcionario->id_funcionarios]) }}">
                             {{ method_field('PUT') }}
                             {!! csrf_field() !!}
                             <div class="form-group">
@@ -125,7 +125,7 @@
                                 <button class="btn btn-primary" type="submit">Alterar</button>
 
                             </div>
-                        </form>
+                        </form> -->
 
                     </div>
 
@@ -173,11 +173,11 @@ $(document).ready(function() {
 
         processing: true,
         serverSide: true,
-        ajax: '{{ route('data_table_adms_talhoes',[$funcionario->id_funcionarios]) }}',
+        ajax: '{{ route('data_table_funcionarios_talhoes',[$funcionario->id_funcionarios]) }}',
         columns: [
 
 
-            {data: 'nome_talhoes', name: 'nome_talhoes'},
+            {data: 'identificador', name: 'identificador'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
 
 

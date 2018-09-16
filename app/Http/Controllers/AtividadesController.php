@@ -84,6 +84,7 @@ class atividadesController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request);
         if (Gate::denies('gerenciar-atividades')) {
             return abort(403);
         }
@@ -93,7 +94,7 @@ class atividadesController extends Controller
         $atividade->descricao = $request->descricao;
         $atividade->id_culturas_culturas = $request->cultura;
         $atividade->id_talhoes_talhoes = $request->talhao;
-        $atividade->tipos_atividades = $request->tipos_atividades;
+        $atividade->id_tipos_atividades_tipos_atividades = $request->tipo_atividade;
 
 
         $atividade->id_adms_geral_adms_geral = AdmGeral::where('id_funcionarios_funcionarios',Auth::user()->id_funcionarios)->first();

@@ -134,6 +134,7 @@ class RequisicoesController extends Controller
         $requisicao = new Requisicao();
         $requisicao->id_adms_talhoes_adms_talhoes = $adm_talhao->id_adms_talhoes;
         $requisicao->descricao = $request->descricao;
+        $requisicao->id_talhoes_talhoes = $request->talhao;
 
         if($requisicao->save()){
             Session::flash('alert-success', 'Nova requisicao cadastrada com sucesso, aguarde a moderação de um administrador geral!');

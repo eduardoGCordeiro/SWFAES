@@ -28,7 +28,7 @@ Route::get('/inicio', 'HomeController@index')->name('home');
 
 //-------------------- rotas referentes à ItensController --------------------- //
 // data tables
-Route::get('adms_talhoes/{id}/getdata', 'AdmsTalhoesController@data_tables')->name('data_table_adms_talhoes');
+//Route::get('adms_talhoes/{id}/getdata', 'AdmsTalhoesController@data_tables')->name('data_table_adms_talhoes');
 //ressource
 Route::resource('adms_talhoes', 'AdmsTalhoesController');
 //------------------------------------------------------------------------------//
@@ -70,7 +70,8 @@ Route::get('itens/getdata', 'ItensController@data_tables')->name('data_table_ite
 Route::resource('itens', 'ItensController');
 //------------------------------------------------------------------------------//----------------- rotas referentes à FuncionariosController --------------------- //
 // data tables
-Route::get('data_table_funcionarios/getdata', 'FuncionariosController@data_tables')->name('data_table_funcionarios');
+Route::get('funcionarios/getdata', 'FuncionariosController@data_tables')->name('data_table_funcionarios');
+Route::get('funcionarios/{id}/getdata_talhoes', 'FuncionariosController@data_tables_talhoes')->name('data_table_funcionarios_talhoes');
 //ressource
 Route::resource('funcionarios', 'FuncionariosController');
 //------------------------------------------------------------------------------//

@@ -36,10 +36,23 @@ class FuncionariosController extends Controller
         return Datatables::of($funcionarios)
 
             ->addColumn('action', function ($funcionario) {
-                return '<a href="'.Route('funcionarios.edit',[$funcionario->id_funcionarios]).'" class="btn btn-primary">Editar</a>'.'<form action="'.Route('funcionarios.destroy',[$funcionario->id_funcionarios]).'" method="POST"> '.csrf_field().'
- <input name="_method" type="hidden" value="DELETE"> <button type="submit" class="btn btn-danger">deletar</button></form>'.'<a href="'.Route('funcionarios.show',[$funcionario->id_funcionarios]).'"><button type="button" class="btn btn-link">Ver</button></a>';
+                return '<a href="'.Route('funcionarios.edit',[$funcionario->id_funcionarios]).'" class="btn btn-primary">Editar</a>'.'<a href="'.Route('funcionarios.show',[$funcionario->id_funcionarios]).'"><button type="button" class="btn btn-link">Ver</button></a>';
             }
         )->make(true);
+    }
+
+    //
+
+    public function data_tables_talhoes($id)
+    {
+        $funcionario = Funcionario::find($id);
+        $talhoes = Talhao::where([['id_adms_talhoes_adms_talhoes','=',$funcionario->id_funcionarios]])->select('*')->get();
+         //dd($adms);
+        return Datatables::of($talhoes)
+        ->addColumn('action',function($talhao){
+            return '<a href="'.Route('talhoes.show',[$talhao->id_talhoes]).'" >Ver</a>';
+        })
+        ->make(true);
     }
 
     /**

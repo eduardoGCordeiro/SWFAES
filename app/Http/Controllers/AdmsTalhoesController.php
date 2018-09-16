@@ -17,21 +17,21 @@ class AdmsTalhoesController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function data_tables($funcionario)
-    {
-         $adms = AdmTalhao::where([['id_funcionarios_funcionarios','=',$funcionario]])->whereNull('data_fim')->select('*')->get();
-         //dd($adms);
-        return Datatables::of($adms)
-        ->addColumn('nome_talhoes', function($adm){
+    // public function data_tables($funcionario)
+    // {
+    //      $adms = AdmTalhao::where([['id_funcionarios_funcionarios','=',$funcionario]])->whereNull('data_fim')->select('*')->get();
+    //      //dd($adms);
+    //     return Datatables::of($adms)
+    //     ->addColumn('nome_talhoes', function($adm){
 
-            //dd($adm->talhao->identificador);
-            return $adm->talhao['identificador'];
-        })
-        ->addColumn('action',function($adms){
-            return '<form action="'.Route('adms_talhoes.destroy',[$adms->id_adms_talhoes]).'" method="POST">'.csrf_field().'<input name="_method" type="hidden" value="DELETE"><button type="submit" class="btn btn-danger">deletar</button> </form>';
-        })
-        ->make(true);
-    }
+    //         //dd($adm->talhao->identificador);
+    //         return $adm->talhao['identificador'];
+    //     })
+    //     ->addColumn('action',function($adms){
+    //         return '<form action="'.Route('adms_talhoes.destroy',[$adms->id_adms_talhoes]).'" method="POST">'.csrf_field().'<input name="_method" type="hidden" value="DELETE"><button type="submit" class="btn btn-danger">deletar</button> </form>';
+    //     })
+    //     ->make(true);
+    // }
 
     public function index()
     {

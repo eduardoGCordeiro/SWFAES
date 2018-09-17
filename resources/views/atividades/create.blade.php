@@ -109,7 +109,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <!-- <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Cultura</label>
 
                             <div class="col-lg-6">
@@ -129,7 +129,7 @@
                                     </div>
                                 @endif
                             </div>
-                        </div>
+                        </div> -->
 
 
 

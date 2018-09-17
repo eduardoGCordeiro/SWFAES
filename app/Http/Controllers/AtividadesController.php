@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Atividade;
 use App\TipoAtividades;
 use App\Talhao;
+use App\Movimentacao;
 use App\Cultura;
 use App\AdmGeral;
 use Illuminate\Http\Request;
@@ -89,10 +90,18 @@ class atividadesController extends Controller
             return abort(403);
         }
         //dd(Auth::user());
+        $cultura = Cultura::where([['id_talhoes_talhoes',$request->talhao],['data_fim',NULL]])->first();
         $atividade = new Atividade();
+
+        if(!$cultura){
+            $atividade->id_culturas_culturas =null;
+        }else{
+            $atividade->id_culturas_culturas =  $cultura->id_culturas;
+        }
+
         $atividade->data = $request->data;
         $atividade->descricao = $request->descricao;
-        $atividade->id_culturas_culturas = $request->cultura;
+
         $atividade->id_talhoes_talhoes = $request->talhao;
         $atividade->id_tipos_atividades_tipos_atividades = $request->tipo_atividade;
 
@@ -106,7 +115,8 @@ class atividadesController extends Controller
         $atividade->id_adms_geral_adms_geral =  $atividade->id_adms_geral_adms_geral->id_adms_geral;
 
         if($atividade->save()){
-            Session::flash('alert-success', 'Atividade salva com sucesso!');
+
+            Session::flash('alert-success', 'Atividade salva com sucesso! Essa atividade possui alguma movimentação? <a href="'.Route('transaction_by_activity',[$atividade->id_atividades]).'" >Clique aqui para cadastrá-las</a>');
             return redirect()->route('atividades.index');
         }else{
             Session::flash('alert-danger', 'Não foi possível salvar essa atividade');
@@ -117,6 +127,20 @@ class atividadesController extends Controller
         dd($atividade);
     }
 
+
+    public function atividades_list_transactions($id){
+        $movimentacoes = movimentacao::where('id_atividades_atividades',$id)->get();
+
+        return Datatables::of($movimentacoes)
+
+                ->addColumn('action', function ($movimentacao) {
+                    return '<a href="'.Route('movimentacoes.edit',[$movimentacao->id_movimentacoes]).'" class="btn btn-primary"><i class="fas fa-edit"></i>Editar</a>'.'<form action="'.Route('movimentacoes.destroy',[$movimentacao->id_movimentacoes]).'" method="POST"> '.csrf_field().'
+ <input name="_method" type="hidden" value="DELETE"> <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>deletar</button></form>';
+                    })
+            ->make(true);
+
+    }
+
     /**
      * Display the specified resource.
      *
@@ -125,7 +149,7 @@ class atividadesController extends Controller
      */
     public function show(Atividade $atividade)
     {
-        //
+        return view('atividades.show')->with(compact('atividade'));
     }
 
     /**

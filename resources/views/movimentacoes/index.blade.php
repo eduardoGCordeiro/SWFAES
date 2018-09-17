@@ -23,7 +23,7 @@
 
                                 <div class="alert alert-{{ $msg }} alert-dismissible">
                                     <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                    <p class="mb-0">{{ Session::get('alert-' . $msg) }}</p>
+                                    <p class="mb-0">{!! Session::get('alert-' . $msg) !!}</p>
                                 </div>
 
                             @endif
@@ -35,6 +35,7 @@
                         <tr>
                             <th scope="col">Movimentação</th>
                             <th scope="col">Tipo de movimentação</th>
+                            <th scope="col">Item</th>
                             <th scope="col">Descricao</th>
                             <th scope="col">Quantidade</th>
                             <th scope="col">Custo</th>
@@ -83,6 +84,7 @@
                 ajax: '{{route('data_table_movimentacoes')}}',
                 columns: [
                     {data: 'id_movimentacoes', name: 'id_movimentacoes', width: '0.1%', tragets:0, className:'dt-body-center dt-head-center'},
+                    {data: 'id_itens_itens', name: 'itens', width: '0.1%', tragets:0, className:'dt-body-center dt-head-center'},
                     {data: 'tipo_movimentacoes', name: 'tipo_movimentacoes', width: '1%', tragets:0, className:'dt-body-center dt-head-center'},
                     {data: 'descricao', name: 'descricao', width: '6%', tragets:0, className:'dt-body-rigth dt-head-center'},
                     {data: 'quantidade', name: 'quantidade', width: '1%', tragets:0},
@@ -96,4 +98,10 @@
 
 @section('style')
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
+    <style type="text/css">
+        .mb-0 a{
+            color: white;
+            font-weight: bolder;
+        }
+    </style>
 @endsection

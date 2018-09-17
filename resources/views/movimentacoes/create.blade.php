@@ -13,7 +13,7 @@
 
                 <div class="card-header">
 
-                    <h3>Cadastro de movimentação</h3>
+                    <h3>Cadastro de movimentação @if(isset($atividade)) para atividade {{$atividade}} @endif</h3>
 
 
                 </div>
@@ -52,8 +52,8 @@
 
 
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">Custo</label>
-                            <div class="col-lg-6">
+                            <label class="col-lg-4 col-form-label text-lg-right">Valor total</label>
+                            <div class="col-lg-3">
                                 <div class="input-group mb-3">
                                     <input onKeyPress="return(moeda(this,'.',',',event))"
                                             class="form-control"
@@ -72,17 +72,14 @@
 
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Quantidade</label>
-                            <div class="col-lg-6">
+                            <div class="col-lg-2">
                                 <div class="input-group mb-3">
                                     <input
                                         class="form-control"
                                         type="text"
                                         name="quantidade"
                                     >
-                                    <span class="input-group-text">
-                                        @foreach($item as $itens)
-                                           {{$itens->unidades->sigla}}
-                                        @endforeach</span>
+
                                 </div>
 
                                 @if ($errors->has('quantidade'))
@@ -93,13 +90,15 @@
                             </div>
                         </div>
 
-
+                        @if(!isset($atividade))
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Atividade</label>
                             <div class="col-lg-6">
+
                                 <select name="id_atividades_atividades" class="form-control" id="exampleSelect1">
-                                    @foreach($atividade as $atividades)
-                                        <option value="{{$atividades->id_atividades}}">{{$atividades->id_atividades}}</option>
+                                    <option value="">Selecione</option>
+                                    @foreach($atividades as $atividade)
+                                        <option value="{{$atividade->id_atividades}}">{{$atividade->id_atividades}}</option>
                                     @endforeach
                                 </select>
 
@@ -110,6 +109,24 @@
                                 @endif
                             </div>
                         </div>
+                        @else
+                        <div class="form-group row">
+                            <label class="col-lg-4 col-form-label text-lg-right">Atividade</label>
+                            <div class="col-lg-2">
+
+
+                                    <input name="id_atividades_atividades" class="form-control" value="{{$atividade}}" id="readOnlyInput" type="text" placeholder="Readonly input here…" readonly="">
+
+
+                                @if ($errors->has('id_atividades_atividades'))
+                                    <div class="invalid-feedback">
+                                        <strong>{{ $errors->first('id_atividades_atividades') }}</strong>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                        @endif
+
 
 
                         <div class="form-group row">
@@ -203,4 +220,5 @@
             return !1
         }
     </script>
+
 @endsection

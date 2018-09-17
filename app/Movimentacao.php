@@ -30,6 +30,8 @@ class Movimentacao extends Model
 
     public function item()
     {
-        return $this->belongsTo('App\Item');
+        return $this->hasOne('App\Item','id_itens','id_itens_itens');
     }
+
+
 }

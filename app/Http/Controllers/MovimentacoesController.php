@@ -37,6 +37,9 @@ class MovimentacoesController extends Controller
             ->editColumn('tipo_movimentacoes', function($movimentacao){
                 return $movimentacao->tipo_movimentacoes==="S"?'Saída':'Entrada';
             })
+            ->editColumn('id_itens_itens', function($movimentacao){
+                return $movimentacao->item['nome'];
+            })
             ->setRowClass(function ($movimentacoes) {
                 if($movimentacoes->tipo_movimentacoes === "E"){
                     return 'table-success';
@@ -54,6 +57,19 @@ class MovimentacoesController extends Controller
         return view('movimentacoes.index')->with(compact('movimentacao','item'));
     }
 
+    public function create_by_activity($id){
+
+        $item = Item::all();
+        $atividade = $id;
+        return view('movimentacoes.create')->with(compact('movimentacao','item', 'atividade'));
+    }
+
+    public function create_by_activity_post(){
+
+    }
+
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -62,8 +78,8 @@ class MovimentacoesController extends Controller
     public function create()
     {
         $item = Item::all();
-        $atividade = Atividade::all();
-        return view('movimentacoes.create')->with(compact('movimentacao','item', 'atividade'));
+        $atividades = Atividade::all();
+        return view('movimentacoes.create')->with(compact('movimentacao','item', 'atividades'));
 
     }
 
@@ -75,10 +91,16 @@ class MovimentacoesController extends Controller
      */
     public function store(MovimentacoesRequest $request)
     {
+
+
         $movimentacao = new Movimentacao();
         $item = Item::find($request->id_itens_itens);
 
-        $movimentacao->custo = str_replace(',', '.',str_replace('.','',$request->custo));
+        $movimentacao->custo = str_replace('.','',$request->custo);
+        $movimentacao->custo =str_replace(',', '.',$movimentacao->custo);
+
+
+
         $movimentacao->quantidade = $request->quantidade;
         $movimentacao->tipo_movimentacoes = $request->tipo_movimentacoes;
         $movimentacao->descricao = $request->descricao;
@@ -86,15 +108,15 @@ class MovimentacoesController extends Controller
         $movimentacao->id_atividades_atividades = $request->id_atividades_atividades;
 
 
-        if($movimentacao->tipo_movimentacoes == "E")
-        {
-            $item->quantidade += $movimentacao->quantidade;
-        } else{
-            $item->quantidade -= $movimentacao->quantidade;
-        }
 
-        if($movimentacao->save()){
-            Session::flash('alert-success', 'Movimentação cadastrada com sucesso!');
+        //dd($movimentacao->save()->toSql());
+        if($movimentacao->save() ){
+            if(isset($movimentacao->id_atividades_atividades)){
+                Session::flash('alert-success', 'Movimentação cadastrada com sucesso! Para cadastrar outra para a mesma atividade <a href="'. Route('transaction_by_activity',[$movimentacao->id_atividades_atividades]).'">clique aqui</a>!');
+
+            }else{
+                Session::flash('alert-success', 'Movimentação cadastrada com sucesso!');
+            }
             return redirect()->route('movimentacoes.index');
         }else{
             Session::flash('alert-danger', 'Não foi possível cadastrar essa movimentação!');
@@ -140,28 +162,25 @@ class MovimentacoesController extends Controller
         $movimentacao= Movimentacao::find($id);
         $item= Item::find($movimentacao->id_itens_itens);
 
-        if($movimentacao->tipo_movimentacoes == 'E')
-        {
-            $item->quantidade -= $movimentacao->quantidade;
-        } else{
-            $item->quantidade += $movimentacao->quantidade;
-        }
 
-        $movimentacao->custo = str_replace(',', '.',str_replace('.','',$request->custo));
+
+        $movimentacao->custo = str_replace('.','',$request->custo);
+        $movimentacao->custo =str_replace(',', '.',$movimentacao->custo);
         $movimentacao->quantidade = $request->quantidade;
         $movimentacao->tipo_movimentacoes = $request->tipo_movimentacoes;
         $movimentacao->descricao = $request->descricao;
         $movimentacao->id_itens_itens = $request->id_itens_itens;
         $movimentacao->id_atividades_atividades = $request->id_atividades_atividades;
 
-        if($movimentacao->tipo_movimentacoes == "E")
-        {
-            $item->quantidade += $movimentacao->quantidade;
-        } else{
-            $item->quantidade -= $movimentacao->quantidade;
-        }
+        //dd($movimentacao);
+        // if($movimentacao->tipo_movimentacoes == "E")
+        // {
+        //     $item->quantidade += $movimentacao->quantidade;
+        // } else{
+        //     $item->quantidade -= $movimentacao->quantidade;
+        // }
 
-        if($movimentacao->save() && $item->save()){
+        if($movimentacao->update()){
             Session::flash('alert-success', 'Movimentação atualizada com sucesso!');
             return redirect()->route('movimentacoes.index');
         }else{
@@ -180,7 +199,8 @@ class MovimentacoesController extends Controller
     {
         $movimentacao = Movimentacao::find($id);
 
-        if($movimentacao->delete())
+
+        if($movimentacao->delete() )
         {
             Session::flash('alert-sucess', 'Movimentação deletada com sucesso!');
             return redirect()->route('movimentacoes.index');

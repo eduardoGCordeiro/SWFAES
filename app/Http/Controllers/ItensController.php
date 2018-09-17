@@ -46,6 +46,14 @@ class ItensController extends Controller
             ->editColumn('id_tipos_itens_tipos_itens', function ($item){
                 return $item->tipo_item['nome'];
             })
+            ->editColumn('quantidade', function ($item){
+                $pos = DB::table('movimentacoes')->select(DB::raw('coalesce(sum(quantidade),0)'))->where([['tipo_movimentacoes','=','E'],['id_itens_itens',$item->id_itens]])->first();
+                $neg = DB::table('movimentacoes')->select(DB::raw('coalesce(sum(quantidade),0)'))->where([['tipo_movimentacoes','=','S'],['id_itens_itens',$item->id_itens]])->first();
+                //dd($neg->coalesce);
+
+                return $pos->coalesce-$neg->coalesce;
+            })
+
             ->make(true);
     }
     /**
@@ -77,11 +85,28 @@ class ItensController extends Controller
         $item = new Item();
         $item->nome = strtoupper($request->nome);
         $item->custo_por_unidades = $request->custo_por_unidades;
-        $item->quantidade = $request->quantidade;
         $item->id_unidades_unidades = $request->id_unidades_unidades;
         $item->id_tipos_itens_tipos_itens = $request->id_tipos_itens_tipos_itens;
 
+
         if($item->save()){
+            if($request->quantidade > 0){
+                $movimentacao = new Movimentacao();
+                $movimentacao->custo = $item->custo_por_unidades * $request->quantidade;
+                $movimentacao->quantidade = abs($request->quantidade);
+                $movimentacao->tipo_movimentacoes = 'E';
+                $movimentacao->id_itens_itens = $item->id_itens;
+                $movimentacao->descricao = "Movimentacao automatica, cadastro de item.";
+                $movimentacao->save();
+            }else if($request->quantidade<0){
+                $movimentacao = new Movimentacao();
+                $movimentacao->custo = $item->custo_por_unidades * $request->quantidade;
+                $movimentacao->quantidade = abs($request->quantidade);
+                $movimentacao->tipo_movimentacoes = 'S';
+                $movimentacao->id_itens_itens = $item->id_itens;
+                $movimentacao->descricao = "Movimentacao automatica, cadastro de item.";
+                $movimentacao->save();
+            }
             Session::flash('alert-success', 'Novo item cadastrado com sucesso!');
             return redirect()->route('itens.index');
         }else{

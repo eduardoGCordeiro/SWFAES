@@ -38,7 +38,10 @@ Route::resource('adms_talhoes', 'AdmsTalhoesController');
 // data tables
 Route::get('atividades/{id}/getdata', 'AtividadesController@data_tables')->name('data_table_atividades');
 Route::get('atividades/getdata', 'AtividadesController@data_tables_all')->name('data_table_atividades_all');
+Route::get('atividades/{atividade}/atividades_list_transactions', 'AtividadesController@atividades_list_transactions')->name('atividades_list_transactions');
+
 //ressource
+
 Route::resource('atividades', 'AtividadesController');
 //------------------------------------------------------------------------------//
 
@@ -103,6 +106,8 @@ Route::resource('culturas', 'CulturasController');
 // data tables
 Route::get('movimentacoes/getdata', 'MovimentacoesController@data_tables')->name('data_table_movimentacoes');
 //ressource
+Route::get('movimentacoes/{atividade}/create', 'MovimentacoesController@create_by_activity')->name('transaction_by_activity');
+Route::post('movimentacoes/{atividade}/create', 'MovimentacoesController@create_by_activity_post')->name('transaction_by_activity_post');
 Route::resource('movimentacoes', 'MovimentacoesController');
 //------------------------------------------------------------------------------//
 

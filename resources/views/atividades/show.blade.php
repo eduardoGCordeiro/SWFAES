@@ -11,10 +11,8 @@
             <div class="card">
                 <div class="card-header">
 
-                    <h3>Listando atividades</h3>
-                    @if (Auth::user()->can('gerenciar'))
-                        <a href="{{Route('atividades.create')}}"><button type="button" class="btn btn-outline-success"><i class="fas fa-plus"> </i>  Cadastrar nova</button></a>
-                    @endif
+                    <h3>Listando movimentações dessa atividade</h3>
+
 
                 </div>
 
@@ -33,22 +31,17 @@
                     </div>
 
 
-                    <table id="data-table-atividades-all" class="table  table-striped">
-
-                      <thead>
+                    <table id="data-table-movimentacoes" class="table  table-striped">
+                        <thead>
                         <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Data</th>
-                            <th scope="col">Decrição</th>
-                            <th scope="col">Talhão</th>
-                            <th scope="col">Cultura</th>
-                            @if (Auth::user()->can('gerenciar-atividades'))
+                            <th scope="col">Movimentação</th>
+                            <th scope="col">Tipo de movimentação</th>
+                            <th scope="col">Descricao</th>
+                            <th scope="col">Quantidade</th>
+                            <th scope="col">Custo</th>
                             <th scope="col">Ações</th>
-                            @endif
-
                         </tr>
-                      </thead>
-
+                        </thead>
                     </table>
                 </div>
             </div>
@@ -60,7 +53,7 @@
 <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#data-table-atividades-all').DataTable({
+    $('#data-table-movimentacoes').DataTable({
         language:{
             "sEmptyTable": "Nenhum registro encontrado",
             "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
@@ -87,25 +80,15 @@ $(document).ready(function() {
 
         processing: true,
         serverSide: true,
-        ajax: '{{ route('data_table_atividades_all') }}',
+        ajax: '{{ route('atividades_list_transactions',[$atividade->id_atividades]) }}',
         columns: [
-
-            {data: 'id_atividades', name: 'id_atividades'},
-            {data: 'data', name: 'data'},
-            {data: 'descricao', name: 'descricao'},
-            {data: 'id_talhoes_talhoes', name: 'id_talhoes_talhoes'},
-            {data: 'id_culturas_culturas', name: 'id_culturas_culturas'},
-            @if (Auth::user()->can('gerenciar-atividades'))
-            {data: 'action', name: 'action', orderable: false, searchable: false}
-            @endif
-
-        ],
-        fields:[
-            {
-                label: "First name:",
-                name: "first_name"
-            }
-        ]
+                 {data: 'id_movimentacoes', name: 'id_movimentacoes', width: '0.1%', tragets:0, className:'dt-body-center dt-head-center'},
+                    {data: 'tipo_movimentacoes', name: 'tipo_movimentacoes', width: '1%', tragets:0, className:'dt-body-center dt-head-center'},
+                    {data: 'descricao', name: 'descricao', width: '6%', tragets:0, className:'dt-body-rigth dt-head-center'},
+                    {data: 'quantidade', name: 'quantidade', width: '1%', tragets:0},
+                    {data: 'custo', name: 'custo', render: $.fn.dataTable.render.number( '.', ',', 2, 'R$ ' ), width: '2%', tragets:0},
+                    {data: 'action', name: 'action', width: '1%', tragets:0, className:'dt-body-center', orderable: false, searchable: false},
+                ]
     });
 });
 </script>

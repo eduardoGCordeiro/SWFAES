@@ -6,8 +6,8 @@
         <div class="col-md-12 ">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/inicio">Início</a></li>
-                <li class="breadcrumb-item"><a href="{{Route('movimentacoes.index')}}">Talhões</a></li>
-                <li class="breadcrumb-item active">Editar movimentação - Número da movimentação</li>
+                <li class="breadcrumb-item"><a href="{{Route('movimentacoes.index')}}">Movimentações</a></li>
+                <li class="breadcrumb-item active">Editar movimentação</li>
             </ol>
             <div class="card">
 
@@ -26,7 +26,7 @@
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Item</label>
                             <div class="col-lg-6">
-                                <select name="id_itens_itens" class="form-control" id="exampleSelect1">
+                                <select name="id_itens_itens" class="form-control" id="item_select">
                                     @foreach($item as $itens)
                                         <option value="{{$itens->id_itens}}">{{$itens->nome}}</option>
                                     @endforeach
@@ -87,7 +87,7 @@
                             <div class="col-lg-6">
                                 <select name="id_atividades_atividades" class="form-control" id="exampleSelect1">
                                     @foreach($atividade as $atividades)
-                                        <option value="{{$atividades->id_atividades}}">{{$atividades->id_atividades}}</option>
+                                        <option value="">Selecione</option>
                                     @endforeach
                                 </select>
 
@@ -111,7 +111,7 @@
                                         name="descricao"
                                         value="{{$movimentacao->descricao}}"
 
-                                ></textarea>
+                                >{{$movimentacao->descricao}}</textarea>
                                 @if ($errors->has('descricao'))
                                     <div class="invalid-feedback">
                                         <strong>{{ $errors->first('descricao') }}</strong>
@@ -126,12 +126,12 @@
                             <div class="col-lg-4">
 
                                 <div class="custom-control custom-radio">
-                                    <input id="customRadio1" name="tipo_movimentacoes" class="custom-control-input" checked="" type="radio" value="E">
+                                    <input id="tme" name="tipo_movimentacoes" class="custom-control-input" type="radio" value="E">
                                     <label class="custom-control-label" for="customRadio1">Entrada</label>
                                 </div>
 
                                 <div class="custom-control custom-radio">
-                                    <input id="customRadio2" name="tipo_movimentacoes" class="custom-control-input" type="radio" value="S">
+                                    <input id="tms" name="tipo_movimentacoes" class="custom-control-input" type="radio" value="S">
                                     <label class="custom-control-label" for="customRadio2">Saída</label>
                                 </div>
                             </div>
@@ -171,6 +171,8 @@
 @endsection
 @section('script')
     <script language="javascript">
+        document.getElementById('item_select').value='{{$movimentacao->id_itens_itens}}';
+
         function moeda(a, e, r, t) {
             let n = ""
                 , h = j = 0

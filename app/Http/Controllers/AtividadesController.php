@@ -72,7 +72,7 @@ class atividadesController extends Controller
         }
         $tipos_atividades = TipoAtividades::all();
         $talhoes = Talhao::all();
-        $culturas = Cultura::all();
+        $culturas = Cultura::whereNull('data_fim')->get();
         return view('atividades.create')->with(compact('tipos_atividades','talhoes','culturas'));
     }
 

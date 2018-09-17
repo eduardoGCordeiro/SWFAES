@@ -114,9 +114,25 @@
                                 <button type="submit" class="btn btn-primary">
                                     Alterar
                                 </button>
+
                             </div>
                         </div>
+
                     </form>
+                    <form method="POST" action="{{Route('finalizar_culturas',$cultura->id_culturas)}}">
+                        {!! csrf_field() !!}
+
+                        <div class="form-group row">
+                            <div class="col-lg-6 offset-lg-4">
+                                <button class="btn btn-warning" type="submit">
+                                    Finalizar
+                                </button>
+
+                            </div>
+
+                    </form>
+
+
 
                 </div>
             </div>

@@ -79,7 +79,7 @@ class CulturasController extends Controller
         if (Gate::denies('gerenciar-culturas')) {
             return abort(403);
         }
-        $culturas = Cultura::all();
+        //$culturas = Cultura::whereIsNull('data_fim');
         $talhoes = Talhao::all();
         return view('culturas.create')->with(compact('culturas','talhoes'));
     }
@@ -191,6 +191,25 @@ class CulturasController extends Controller
             return redirect()->route('culturas.index');
         }else{
             Session::flash('alert-danger', 'Erro ao deletar cultura pois já existem atividades relacionadas!');
+            return redirect()->route('culturas.index');
+        }
+    }
+
+    public function finalizar($id)
+    {
+        if (Gate::denies('gerenciar-culturas')) {
+            return abort(403);
+        }
+
+        $cultura = Cultura::find($id);
+        //dd(Carbon::now()->toDateString());
+        $cultura->data_fim = Carbon::now()->toDateString();
+        //dd(count($cultura->atividades));
+        if($cultura->update()){
+            Session::flash('alert-success', 'Cultura finalizada com sucesso');
+            return redirect()->route('culturas.index');
+        }else{
+            Session::flash('alert-danger', 'Erro ao finalizar cultura!');
             return redirect()->route('culturas.index');
         }
     }

@@ -63,11 +63,11 @@
                                     </div>
                                     <div class="timeline-panel">
                                       <div class="timeline-heading">
-                                        <p class="text-muted">{{$atividade->descricao}}</p>
+                                        <p class="text-muted">atividade</p>
 
                                       </div>
                                       <div class="timeline-body">
-                                          <a href="{{Route('atividades.show',[$atividade->id_atividades])}}"><button type="button" class="btn btn-link">abrir</button></a>
+                                          {{$atividade->descricao}}
                                       </div>
                                     </div>
                                   </li>

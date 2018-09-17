@@ -92,10 +92,10 @@ class FuncionariosController extends Controller
 
         if($funcionario->save()){
             Session::flash('alert-success', 'Funcionário adicionado com sucesso!');
-            return redirect()->back();
+            return redirect()->route('funcionarios.index');
         }else{
             Session::flash('alert-danger', 'Erro ao adicionar funcionário');
-            return redirect()->back();
+            return redirect()->route('funcionarios.index');
         }
 
     }
@@ -154,7 +154,7 @@ class FuncionariosController extends Controller
         $funcionario->email= strtolower($request->email);
         $funcionario->acesso_sistema = $request->acesso_sistema=="on"?TRUE:FALSE;
 
-        if($funcionario->save()){
+        if($funcionario->update()){
             Session::flash('alert-success', 'Funcionário editado com sucesso!');
             return redirect()->route('funcionarios.index');
         }else{

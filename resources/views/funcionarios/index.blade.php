@@ -17,7 +17,7 @@
 
 
                     <h3>Listando funcionários</h3>
-                    <a href="{{Route('register')}}"><button type="button" class="btn btn-outline-success"><i class="fas fa-plus"></i> Cadastrar novo</button></a>
+                    <a href="{{Route('funcionarios.create')}}"><button type="button" class="btn btn-outline-success"><i class="fas fa-plus"></i> Cadastrar novo</button></a>
 
 
 

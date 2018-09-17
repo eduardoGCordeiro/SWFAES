@@ -133,19 +133,20 @@ class TalhoesController extends Controller
             return abort(403);
         }
 
+
         $talhao = Talhao::find($id);
 
-        Validator::make($request->all() , [
-            'identificador' => ['required',
-                Rule::unique('talhoes')->ignore($talhao->id, 'id_talhoes'),]
-        ], ['O campo :attribute deve ser único!']);
+        // Validator::make($request->all() , [
+        //     'identificador' => ['required',
+        //         Rule::unique('talhoes')->ignore($talhao->id, 'id_talhoes'),]
+        // ], ['O campo :attribute deve ser único!']);
 
         $talhao->identificador = strtoupper($request->identificador);
         $talhao ->tipo = $request->tipo;
         $talhao->area = $request->area;
         $talhao->descricao = $request->descricao;
 
-        if($talhao->save()){
+        if($talhao->update()){
             Session::flash('alert-success', 'Talhão editado com sucesso!');
             return redirect()->route('talhoes.index');
         }else{

@@ -12,7 +12,20 @@
             <div class="card">
 
                 <div class="card-header">
+                    <div class="flash-message">
+                      @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                        @if(Session::has('alert-' . $msg))
 
+                            <div class="alert alert-{{ $msg }} alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <p class="mb-0">{{ Session::get('alert-' . $msg) }}</p>
+                            </div>
+
+
+
+                        @endif
+                      @endforeach
+                    </div>
                     <h3>Cadastro de cultura</h3>
 
 

@@ -19,7 +19,20 @@
                 </div>
 
                 <div class="card-body col-md-8 offset-lg-2" >
+                    <div class="flash-message">
+                      @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                        @if(Session::has('alert-' . $msg))
 
+                            <div class="alert alert-{{ $msg }} alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <p class="mb-0">{{ Session::get('alert-' . $msg) }}</p>
+                            </div>
+
+
+
+                        @endif
+                      @endforeach
+                    </div>
                     <form role="form" method="POST" action="{{ Route('culturas.update',[$cultura->id_culturas]) }}">
 
                          {{ method_field('PUT') }}

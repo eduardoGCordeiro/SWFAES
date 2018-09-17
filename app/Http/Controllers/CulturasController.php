@@ -40,7 +40,7 @@ class CulturasController extends Controller
                     return $cultura->data_fim!=null?date( 'd/m/Y' , strtotime($cultura->data_fim)):"Ativo";
                 })
                 ->addColumn('action', function ($cultura) {
-                    return '<a href="'.Route('culturas.edit',[$cultura->id_culturas]).'" class="btn btn-primary">Editar</a>'.'<form action="'.Route('culturas.destroy',[$cultura->id_culturas]).'" method="POST"> '.csrf_field().'
+                    return '<a href="'.Route('culturas.show',[$cultura->id_culturas]).'" class="">ver</a><br><a href="'.Route('culturas.edit',[$cultura->id_culturas]).'" class="btn btn-primary">Editar</a>'.'<form action="'.Route('culturas.destroy',[$cultura->id_culturas]).'" method="POST"> '.csrf_field().'
      <input name="_method" type="hidden" value="DELETE"> <button type="submit" class="btn btn-danger">deletar</button>';
                 })->make(true);
         }else{
@@ -95,6 +95,13 @@ class CulturasController extends Controller
         if (Gate::denies('gerenciar-culturas')) {
             return abort(403);
         }
+
+        $verifica = Cultura::where('id_talhoes_talhoes',$request->talhao)->first();
+        if($verifica && $verifica->data_fim == null ){
+            Session::flash('alert-danger', 'Erro ao cadastrar cultura, esse talhão já possui uma!');
+            return redirect()->back();
+        }
+
         $cultura = new Cultura();
         $cultura->data_inicio = $request->data_inicio;
         $cultura->descricao = $request->descricao;

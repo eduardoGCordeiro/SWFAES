@@ -24,7 +24,7 @@ class TalhoesRequest extends FormRequest
     public function rules()
     {
         return [
-            'identificador' => 'required|regex: /^[a-zA-Z0-9]*$/|unique:talhoes',
+            'identificador' => 'required|regex: /^[a-zA-Z0-9]*$/',
             'area' => 'required',
             'descricao' => 'required|string|max:400',
             'tipo'=>'required|string|max:15',

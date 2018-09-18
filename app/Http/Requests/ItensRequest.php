@@ -25,7 +25,8 @@ class ItensRequest extends FormRequest
     {
         return [
             'nome' => 'required|string|max:46|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/',
-            'custo_por_unidades' => 'required|regex:/^[0-9]+$/',
+            //'custo_por_unidades' => 'required|regex:/^[0-9]+$/',
+            'custo_por_unidades' => 'required',
             'quantidade' => 'required|regex:/^[0-9]+$/ ',
         ];
     }

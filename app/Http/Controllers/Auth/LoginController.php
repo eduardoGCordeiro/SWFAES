@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\Funcionario;
+use Session;
 
 class LoginController extends Controller
 {
@@ -48,6 +49,12 @@ class LoginController extends Controller
 
     protected function credentials(Request $request)
     {
+        //dd($request);
+        // $funcionario = Funcionario::where('email',$request->email)->orWhere('cpf',$request->email)->first();
+        // if(!$funcionario->acesso_sistema){
+        //     Session::flash('alert-danger', 'Sem acesso ao sistema!');
+        //     return redirect()->route('login');
+        // }
 
         $field = filter_var($request->get($this->username()), FILTER_VALIDATE_EMAIL)
             ? $this->username()

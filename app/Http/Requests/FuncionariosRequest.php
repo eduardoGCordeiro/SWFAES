@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class FuncionariosRequest extends FormRequest
 {
@@ -25,10 +26,10 @@ class FuncionariosRequest extends FormRequest
     {
 
         return [
-            'login'=>'required|unique:funcionarios|max:13|regex:/^[a-z0-9A-Z_]+$/|string',
+            'login'=>'required|max:13|regex:/^[a-z0-9A-Z_]+$/|string|'. Rule::unique('funcionarios')->ignore($this->login,'login'),
             'nome' => 'required|string|max:45|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/',
-            'email' => 'required|string|email|max:45|unique:funcionarios',
-            'cpf' => 'required|max:11|min:11|unique:funcionarios',
+            'email' => 'required|string|email|max:45|'.Rule::unique('funcionarios')->ignore($this->email,'email'),
+            'cpf' => 'required|max:11|min:11|'.Rule::unique('funcionarios')->ignore($this->cpf,'cpf'),
             'password' => 'string|min:6|confirmed',
             'acesso_sistema' =>''
         ];

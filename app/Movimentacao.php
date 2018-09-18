@@ -33,5 +33,9 @@ class Movimentacao extends Model
         return $this->hasOne('App\Item','id_itens','id_itens_itens');
     }
 
+    public function atividade(){
+        return $this->hasOne('App\Atividade','id_atividades','id_atividades_atividades');
+    }
+
 
 }

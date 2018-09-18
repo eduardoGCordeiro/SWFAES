@@ -114,7 +114,7 @@
 
                             <div class="col-lg-2">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="acesso_sistema" name="acesso_sistema" >
+                                    <input  type="checkbox" class="custom-control-input" id="acesso_sistema" name="acesso_sistema" >
                                 <label class="custom-control-label" for="acesso_sistema">Sim</label>
                             </div>
 

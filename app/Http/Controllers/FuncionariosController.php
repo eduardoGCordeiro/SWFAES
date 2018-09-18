@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Funcionario;
 use App\Talhao;
+use App\AdmTalhao;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use App\Http\Requests\FuncionariosRequest;
@@ -46,7 +47,8 @@ class FuncionariosController extends Controller
     public function data_tables_talhoes($id)
     {
         $funcionario = Funcionario::find($id);
-        $talhoes = Talhao::where([['id_adms_talhoes_adms_talhoes','=',$funcionario->id_funcionarios]])->select('*')->get();
+        $adm = AdmTalhao::where('id_funcionarios_funcionarios',$funcionario->id_funcionarios)->first();
+        $talhoes = Talhao::where([['id_adms_talhoes_adms_talhoes','=',$adm->id_adms_talhoes]])->select('*')->get();
          //dd($adms);
         return Datatables::of($talhoes)
         ->addColumn('action',function($talhao){
@@ -91,6 +93,13 @@ class FuncionariosController extends Controller
 
 
         if($funcionario->save()){
+            if( $funcionario->acesso_sistema && !(AdmTalhao::where('id_funcionarios_funcionarios',$funcionario->id_funcionarios)->first())){
+               $admTalhao = new AdmTalhao();
+               $admTalhao->id_funcionarios_funcionarios = $funcionario->id_funcionarios;
+               $admTalhao->save();
+            }
+
+
             Session::flash('alert-success', 'Funcionário adicionado com sucesso!');
             return redirect()->route('funcionarios.index');
         }else{

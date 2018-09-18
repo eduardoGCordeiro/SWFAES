@@ -13,7 +13,7 @@ class RequisicoesRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,22 @@ class RequisicoesRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
-            //
+            'data' => '',
+            'descricao_adms_gerais' => 'max:100|string',
+            'descricao'=>'required|max:100|string',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'descricao.required' => 'O campo :attribute é obrigatório',
+            'descricao.max' => 'O campo :attribute deve ter no máximo 100 caracteres!',
+            'descricao.string' => 'O campo :attribute deve ser uma palavra!',
+            'data.required' => 'O campo :attribute é obrigatório',
+            'descricao_adms_gerais.max' => 'O campo :attribute deve ter no máximo 100 caracteres!',
+            'descricao_adms_gerais.string' => 'O campo :attribute deve ser uma palavra!',
         ];
     }
 }

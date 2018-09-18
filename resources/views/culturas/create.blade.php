@@ -32,6 +32,15 @@
                 </div>
 
                 <div class="card-body col-md-8 offset-lg-2" >
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
 
                     <form role="form" method="POST" action="{{ Route('culturas.store') }}">
                         {!! csrf_field() !!}

@@ -21,7 +21,6 @@
 
 
                 <div class="card-body col-md-8 offset-lg-2" >
-
                     <form role="form" method="POST" action="{{ Route('funcionarios.store')}}">
                         {!! csrf_field() !!}
 

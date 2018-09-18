@@ -84,6 +84,10 @@ class FuncionariosController extends Controller
         if (Gate::denies('gerenciar-funcionarios')) {
             return abort(403);
         }
+        $this->validate($request, ['cpf' => 'unique:funcionarios'], ['cpf.unique' => 'O campo :attribute deve ser único!']);
+        $this->validate($request, ['login' => 'unique:funcionarios'], ['login.unique' => 'O campo :attribute deve ser único!']);
+        $this->validate($request, ['email' => 'unique:funcionarios'], ['email.unique' => 'O campo :attribute deve ser único!']);
+        
         $funcionario = new Funcionario();
         $funcionario->nome = strtoupper($request->nome);
         $funcionario->cpf = $request->cpf;

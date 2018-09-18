@@ -134,11 +134,6 @@ class TalhoesController extends Controller
 
         $talhao = Talhao::find($id);
 
-        // Validator::make($request->all() , [
-        //     'identificador' => ['required',
-        //         Rule::unique('talhoes')->ignore($talhao->id, 'id_talhoes'),]
-        // ], ['O campo :attribute deve ser único!']);
-
         $talhao->identificador = strtoupper($request->identificador);
         $talhao ->tipo = $request->tipo;
         $talhao->area = $request->area;

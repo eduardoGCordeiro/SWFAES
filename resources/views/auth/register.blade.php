@@ -21,7 +21,6 @@
 
 
                 <div class="card-body col-md-8 offset-lg-2" >
-
                     <form role="form" method="POST" action="{{ Route('funcionarios.store')}}">
                         {!! csrf_field() !!}
 
@@ -148,7 +147,7 @@
 
 
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">Permitir acesso ao sistema? (Adminitrar talhões)</label>
+                            <label class="col-lg-4 col-form-label text-lg-right">Permitir acesso ao sistema? (Administrar talhões)</label>
 
                             <div class="col-lg-2">
                                 <div class="custom-control custom-checkbox">

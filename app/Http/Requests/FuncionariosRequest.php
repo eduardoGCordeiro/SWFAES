@@ -24,7 +24,6 @@ class FuncionariosRequest extends FormRequest
      */
     public function rules()
     {
-
         return [
             'login'=>'required|max:13|regex:/^[a-z0-9A-Z_]+$/|string|'. Rule::unique('funcionarios')->ignore($this->login,'login'),
             'nome' => 'required|string|max:45|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/',

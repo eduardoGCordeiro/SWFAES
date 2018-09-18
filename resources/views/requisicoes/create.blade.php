@@ -20,12 +20,17 @@
 
                 <div class="card-body col-md-8 offset-lg-2" >
 
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form role="form" method="POST" action="{{ Route('requisicoes.store') }}">
                         {!! csrf_field() !!}
-
-
-
-
 
 
                         <div class="form-group row">
@@ -37,6 +42,7 @@
                                     id="exampleTextarea"
                                     rows="3"
                                     name="descricao"
+                                    required
 
                                 ></textarea>
                                 @if ($errors->has('descricao'))
@@ -52,7 +58,7 @@
                             <label class="col-lg-4 col-form-label text-lg-right">Talhão</label>
 
                             <div class="col-lg-6">
-                                <select name="talhao" class="form-control" id="exampleSelect1">
+                                <select name="talhao" class="form-control" id="exampleSelect1" required="">
                                     <option value="">Selecione</option>
                                     @foreach($talhoes as $talhao)
                                     <option value="{{$talhao->id_talhoes}}">{{$talhao->identificador}}</option>

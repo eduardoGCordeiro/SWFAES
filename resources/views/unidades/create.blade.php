@@ -19,7 +19,15 @@
                 </div>
 
                 <div class="card-body col-md-8 offset-lg-2" >
-
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form role="form" method="POST" action="{{ Route('unidades.store') }}">
                         {!! csrf_field() !!}
 
@@ -27,7 +35,7 @@
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Nome</label>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <input
                                         type="text"
                                         class="form-control{{ $errors->has('nome') ? ' is-invalid' : '' }}"

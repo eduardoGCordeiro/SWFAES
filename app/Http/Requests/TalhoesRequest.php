@@ -24,8 +24,8 @@ class TalhoesRequest extends FormRequest
     public function rules()
     {
         return [
-            'identificador' => 'required|regex: /^[a-zA-Z0-9]*$/',
-            'area' => 'required',
+            'identificador' => 'required|regex: /^[a-zA-Z0-9]*$/|unique:talhoes',
+            'area' => 'required|regex:/^\d+(\.\d{1,2})?$/',
             'descricao' => 'required|string|max:400',
             'tipo'=>'required|string|max:15',
             'id_adms_talhoes_adms_talhoes' => '',
@@ -40,7 +40,11 @@ class TalhoesRequest extends FormRequest
             'identificador.unique' => 'O campo :attribute deve ser único!',
             'identificador.regex' => 'O campo :attribute deve conter apenas letras e números, sem caracteres especiais!',
             'area.required' => 'O campo :attribute é obrigatório',
+            'area.regex' => 'O campo :attribute deve ser do tipo 00.00',
             'descricao.required' => 'O campo :attribute é obrigatório',
+            'tipo.required' => 'O campo :attribute é obrigatório',
+            'tipo.max' => 'O campo :attribute deve ter no máximo 15 caracteres!',
+            'descricao.max' => 'O campo :attribute deve ter no máximo 45 caracteres!'
         ];
     }
 }

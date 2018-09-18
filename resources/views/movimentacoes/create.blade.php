@@ -36,7 +36,7 @@
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Item</label>
                             <div class="col-lg-6">
-                                <select name="id_itens_itens" class="form-control" id="exampleSelect1">
+                                <select name="id_itens_itens" class="form-control" id="exampleSelect1" required="">
                                     @foreach($item as $itens)
                                         <option value="{{$itens->id_itens}}">{{$itens->nome}}</option>
                                     @endforeach
@@ -59,6 +59,7 @@
                                             class="form-control"
                                             type="text"
                                             name="custo"
+                                            required
                                     >
                                 </div>
 
@@ -95,7 +96,7 @@
                             <label class="col-lg-4 col-form-label text-lg-right">Atividade</label>
                             <div class="col-lg-6">
 
-                                <select name="id_atividades_atividades" class="form-control" id="exampleSelect1">
+                                <select name="id_atividades_atividades" class="form-control" id="exampleSelect1" required="">
                                     <option value="">Selecione</option>
                                     @foreach($atividades as $atividade)
                                         <option value="{{$atividade->id_atividades}}">{{$atividade->id_atividades}}</option>
@@ -138,6 +139,7 @@
                                         id="exampleTextarea"
                                         rows="3"
                                         name="descricao"
+                                        required
 
                                 ></textarea>
                                 @if ($errors->has('descricao'))

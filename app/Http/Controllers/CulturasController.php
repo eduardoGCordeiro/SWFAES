@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CulturasRequest;
 use App\Cultura;
 use App\Atividade;
 use App\Talhao;
@@ -90,7 +91,7 @@ class CulturasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CulturasRequest $request)
     {
         if (Gate::denies('gerenciar-culturas')) {
             return abort(403);
@@ -158,7 +159,7 @@ class CulturasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CulturasRequest $request, $id)
     {
         if (Gate::denies('gerenciar-culturas')) {
             return abort(403);

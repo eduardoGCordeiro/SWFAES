@@ -25,13 +25,38 @@ class FuncionariosRequest extends FormRequest
     {
 
         return [
-            'cpf'=>'required',
-            'login'=>'required|unique:funcionarios',
-            'nome' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:funcionarios',
-            'cpf' => 'required|string|max:255|unique:funcionarios',
+            'login'=>'required|unique:funcionarios|max:13|regex:/^[a-z0-9A-Z_]+$/|string',
+            'nome' => 'required|string|max:45|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/',
+            'email' => 'required|string|email|max:45|unique:funcionarios',
+            'cpf' => 'required|max:11|min:11|unique:funcionarios',
             'password' => 'string|min:6|confirmed',
-            'acesso_sistema'
+            'acesso_sistema' =>''
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'cpf.required' => 'O campo :attribute é obrigatório',
+            'cpf.unique' => 'O campo :attribute deve ser único!',
+            'cpf.max' => 'O campo :attribute conter 11 caracteres!',
+            'cpf.min' => 'O campo :attribute conter 11 caracteres!',
+            'nome.string' => 'O campo :attribute deve ser uma palavra!',
+            'nome.max' => 'O campo :attribute deve ter no máximo 45 letras!',
+            'nome.regex' => 'O campo :attribute deve ter apenas letras!',
+            'nome.required' => 'O campo :attribute é obrigatório',
+            'login.string' => 'O campo :attribute deve ser uma palavra!',
+            'login.max' => 'O campo :attribute deve ter no máximo 13 letras!',
+            'login.regex' => 'O campo :attribute deve ter apenas letras!',
+            'login.required' => 'O campo :attribute é obrigatório',
+            'login.unique' => 'O campo :attribute deve ser único!',
+            'email.string' => 'O campo :attribute deve ser uma palavra!',
+            'email.max' => 'O campo :attribute deve ter no máximo 45 letras!',
+            'email.unique' => 'O campo :attribute deve ser único!',
+            'email.required' => 'O campo :attribute é obrigatório',
+            'email.email' => 'O campo :attribute deve ser um e-mail da seguinte forma: example@teste.com',
+            'password.confirmed' => 'O campo :attribute é obrigatório',
+            'password.string' => 'O campo :attribute deve ser uma palavra!',
+            'password.max' => 'O campo :attribute conter 11 caracteres!',
         ];
     }
 }

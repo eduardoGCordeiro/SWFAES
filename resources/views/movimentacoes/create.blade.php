@@ -55,7 +55,7 @@
                             <label class="col-lg-4 col-form-label text-lg-right">Valor total</label>
                             <div class="col-lg-3">
                                 <div class="input-group mb-3">
-                                    <input onKeyPress="return(moeda(this,'.',',',event))"
+                                    <input  onkeyup="mascara_num(this);"
                                             class="form-control"
                                             type="text"
                                             name="custo"
@@ -183,42 +183,45 @@
 @endsection
 @section('script')
     <script language="javascript">
-        function moeda(a, e, r, t) {
-            let n = ""
-                , h = j = 0
-                , u = tamanho2 = 0
-                , l = ajd2 = ""
-                , o = window.Event ? t.which : t.keyCode;
-            if (13 == o || 8 == o)
-                return !0;
-            if (n = String.fromCharCode(o),
-            -1 == "0123456789".indexOf(n))
-                return !1;
-            for (u = a.value.length,
-                     h = 0; h < u && ("0" == a.value.charAt(h) || a.value.charAt(h) == r); h++)
-                ;
-            for (l = ""; h < u; h++)
-                -1 != "0123456789".indexOf(a.value.charAt(h)) && (l += a.value.charAt(h));
-            if (l += n,
-            0 == (u = l.length) && (a.value = ""),
-            1 == u && (a.value = "0" + r + "0" + l),
-            2 == u && (a.value = "0" + r + l),
-            u > 2) {
-                for (ajd2 = "",
-                         j = 0,
-                         h = u - 3; h >= 0; h--)
-                    3 == j && (ajd2 += e,
-                        j = 0),
-                        ajd2 += l.charAt(h),
-                        j++;
-                for (a.value = "",
-                         tamanho2 = ajd2.length,
-                         h = tamanho2 - 1; h >= 0; h--)
-                    a.value += ajd2.charAt(h);
-                a.value += r + l.substr(u - 2, u)
-            }
-            return !1
-        }
+        function mascara_num(obj){
+  valida_num(obj)
+  if (obj.value.match("-")){
+    mod = "-";
+  }else{
+    mod = "";
+  }
+  valor = obj.value.replace("-","");
+  valor = valor.replace(",","");
+  if (valor.length >= 3){
+    valor = poe_ponto_num(valor.substring(0,valor.length-2))+","+valor.substring(valor.length-2, valor.length);
+  }
+  obj.value = mod+valor;
+}
+function poe_ponto_num(valor){
+  valor = valor.replace(/\./g,"");
+  if (valor.length > 3){
+    valores = "";
+    while (valor.length > 3){
+      valores = "."+valor.substring(valor.length-3,valor.length)+""+valores;
+      valor = valor.substring(0,valor.length-3);
+    }
+    return valor+""+valores;
+  }else{
+    return valor;
+  }
+}
+function valida_num(obj){
+  numeros = new RegExp("[0-9]");
+  while (!obj.value.charAt(obj.value.length-1).match(numeros)){
+    if(obj.value.length == 1 && obj.value == "-"){
+      return true;
+    }
+    if(obj.value.length >= 1){
+      obj.value = obj.value.substring(0,obj.value.length-1)
+    }else{
+      return false;
+    }
+  }
+}
     </script>
-
 @endsection

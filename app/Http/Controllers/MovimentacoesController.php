@@ -103,7 +103,7 @@ class MovimentacoesController extends Controller
 
         $movimentacao->quantidade = $request->quantidade;
         $movimentacao->tipo_movimentacoes = $request->tipo_movimentacoes;
-        $movimentacao->descricao = $request->descricao;
+        $movimentacao->descricao =strtoupper($request->descricao);
         $movimentacao->id_itens_itens = $request->id_itens_itens;
         $movimentacao->id_atividades_atividades = $request->id_atividades_atividades;
 
@@ -146,8 +146,8 @@ class MovimentacoesController extends Controller
     {
         $movimentacao = Movimentacao::find($id);
         $item = Item::all();
-        $atividade = Atividade::all();
-        return view('movimentacoes.edit')->with(compact('movimentacao', 'item', 'atividade'));
+        $atividades = Atividade::all();
+        return view('movimentacoes.edit')->with(compact('movimentacao', 'item', 'atividades'));
     }
 
     /**
@@ -157,7 +157,7 @@ class MovimentacoesController extends Controller
      * @param  \App\Movimentacao  $movimentacao
      * @return \Illuminate\Http\Response
      */
-    public function update(MovimentacoesRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $movimentacao= Movimentacao::find($id);
         $item= Item::find($movimentacao->id_itens_itens);

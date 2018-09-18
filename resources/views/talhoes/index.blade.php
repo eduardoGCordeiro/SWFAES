@@ -18,7 +18,7 @@
                 </div>
 
                 <div class="card-body">
-                    <div class="flash-message col-md-4">
+                    <div class="flash-message col-md-12">
                         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
                             @if(Session::has('alert-' . $msg))
                                 <div class="alert alert-{{ $msg }} alert-dismissible">

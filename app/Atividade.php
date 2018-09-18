@@ -62,4 +62,5 @@ class Atividade extends Model
     {
         return $this->belongsTo('App\TipoAtividades', 'id_tipos_atividades_tipos_atividades');
     }
+
 }

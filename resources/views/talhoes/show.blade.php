@@ -56,20 +56,25 @@
                         </div>
                     </div>
                 </div>
-                <table id="data-table-atividades" class="table  table-striped">
+                <div class="card-body">
 
-                    <thead>
-                    <tr>
 
-                        <th scope="col">Data da atividade</th>
-                        <th scope="col">Descrição</th>
-                        <th scope="col">Tipo de atividade</th>
-                        <th scope="col">Requisição</th>
+                    <table id="data-table-atividades" class="table  table-striped">
 
-                    </tr>
-                    </thead>
+                        <thead>
+                        <tr>
 
-                </table>
+                            <th scope="col">Data da atividade</th>
+                            <th scope="col">Descrição</th>
+                            <th scope="col">Tipo de atividade</th>
+                            <th scope="col">Requisição</th>
+
+                        </tr>
+                        </thead>
+
+                    </table>
+
+                </div>
             </div>
         </div>
     </div>

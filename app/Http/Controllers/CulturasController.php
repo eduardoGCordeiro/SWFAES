@@ -104,7 +104,7 @@ class CulturasController extends Controller
 
         $cultura = new Cultura();
         $cultura->data_inicio = $request->data_inicio;
-        $cultura->descricao = $request->descricao;
+        $cultura->descricao = strtoupper($request->descricao);
         $cultura->tipo_safra= $request->tipo_safra;
         $cultura->id_talhoes_talhoes = $request->talhao;
         //dd($cultura);
@@ -165,7 +165,7 @@ class CulturasController extends Controller
         }
         $cultura = Cultura::find($id);
         $cultura->data_inicio = $request->data_inicio;
-        $cultura->descricao = $request->descricao;
+        $cultura->descricao = strtoupper($request->descricao);
         $cultura->tipo_safra= $request->tipo_safra;
         $cultura->id_talhoes_talhoes = $request->talhao;
         //dd($cultura);

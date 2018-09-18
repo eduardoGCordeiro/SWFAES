@@ -82,7 +82,9 @@ class TalhoesController extends Controller
         $talhao->id_adms_talhoes_adms_talhoes = $request->id_adms_talhoes_adms_talhoes;
 
 
+
         if ($talhao->save()) {
+
             Session::flash('alert-success', 'Novo talhao cadastrado com sucesso!');
             return redirect()->route('talhoes.index');
         } else {
@@ -132,6 +134,7 @@ class TalhoesController extends Controller
         if (Gate::denies('gerenciar-talhoes')) {
             return abort(403);
         }
+
 
 
         $talhao = Talhao::find($id);

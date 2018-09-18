@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'pt-br',
 
     /*
     |--------------------------------------------------------------------------
@@ -179,9 +179,14 @@ return [
 
 
 
+
         // data tables
 
         Yajra\DataTables\DataTablesServiceProvider::class,
+
+        // dom pdf
+
+        Barryvdh\DomPDF\ServiceProvider::class,
 
 
 
@@ -236,8 +241,12 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
 
+
         //data tables
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+        //dom pdf
+        'PDF' => Barryvdh\DomPDF\Facade::class,
+
 
     ],
 

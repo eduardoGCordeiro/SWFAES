@@ -11,6 +11,8 @@ use App\Http\Requests\FuncionariosRequest;
 use Yajra\Datatables\Datatables;
 use Session;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Validator;
+
 
 class FuncionariosController extends Controller
 {
@@ -159,7 +161,7 @@ class FuncionariosController extends Controller
             return abort(403);
         }
 
-        dd($funcionario);
+
         Validator::make($request->all() , [
             'cpf' => ['required',
                 Rule::unique('funcionarios')->ignore($funcionario->id, 'id_funcionarios'),]

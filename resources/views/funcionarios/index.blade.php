@@ -9,9 +9,9 @@
     <div class="row mt-3">
         <div class="col-md-12">
             <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/inicio">Início</a></li>
-                        <li class="breadcrumb-item active">Funcionarios</li>
-                    </ol>
+                <li class="breadcrumb-item"><a href="/inicio">Início</a></li>
+                <li class="breadcrumb-item active">Funcionarios</li>
+            </ol>
             <div class="card">
                 <div class="card-header">
 

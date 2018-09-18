@@ -100,7 +100,7 @@ class atividadesController extends Controller
         }
 
         $atividade->data = $request->data;
-        $atividade->descricao = $request->descricao;
+        $atividade->descricao = strtoupper($request->descricao);
 
         $atividade->id_talhoes_talhoes = $request->talhao;
         $atividade->id_tipos_atividades_tipos_atividades = $request->tipo_atividade;
@@ -186,7 +186,7 @@ class atividadesController extends Controller
         $atividade = Atividade::find($id);
 
         $atividade->data = $request->data;
-        $atividade->descricao = $request->descricao;
+        $atividade->descricao = strtoupper($request->descricao);
         $atividade->id_tipos_atividades_tipos_atividades = $request->tipo_atividade;
         $atividade->id_talhoes_talhoes = $request->talhao;
         $atividade->id_culturas_culturas = $request->cultura;

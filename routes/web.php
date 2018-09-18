@@ -133,8 +133,8 @@ Route::resource('tipos_atividades', 'TiposAtividadesController');
 //------------------------------------------------------------------------------//
 
 
-
-//------------------------------------------------------------------------------//
-
-Route::resource('usuarios', 'UsuariosController');
-
+//--------------referente à RelatoriosController ---------------------------//
+Route::get('relatorios/estoque', 'RelatoriosController@estoque')->name('estoque-rel');
+Route::get('relatorios/atividades', 'RelatoriosController@atividades')->name('atividades-rel');
+Route::get('relatorios/movimentacoes', 'RelatoriosController@movimentacoes')->name('movimentacoes-rel');
+Route::resource('relatorios', 'RelatoriosController');

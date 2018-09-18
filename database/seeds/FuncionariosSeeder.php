@@ -13,7 +13,7 @@ class FuncionariosSeeder extends Seeder
     {
         DB::table('funcionarios')->insert([
             [
-                'cpf' => '77914381608',
+                'cpf' => 46368373040,
                 'nome' => 'USUÁRIO ADM GERAL',
                 'email' => 'admgeral@teste.com',
                 'acesso_sistema' => 'true',
@@ -21,7 +21,7 @@ class FuncionariosSeeder extends Seeder
                 'password'=>bcrypt("fazendaescola")
             ],
             [
-                'cpf' => '77914381608',
+                'cpf' => 28598758167,
                 'nome' => 'USUÁRIO ADM TALHÃO',
                 'email' => 'admtalhao@teste.com',
                 'acesso_sistema' => 'true',

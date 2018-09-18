@@ -174,12 +174,12 @@
 
                   </h6>
                   <ul class="nav flex-column mb-2">
-                      <li class="nav-item">
+                      <!-- <li class="nav-item">
                         <a class="nav-link" href="{{Route('tipos_atividades.index')}}">
 
                           Tipos de Atividades
                         </a>
-                      </li>
+                      </li> -->
                     <li class="nav-item">
                       <a class="nav-link" href="{{Route('tipo_item.index')}}">
 

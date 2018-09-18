@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\TipoItemRequest;
 use App\TipoItem;
 use App\Item;
 use Yajra\Datatables\Datatables;
@@ -38,7 +39,7 @@ class TipoItemController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(TipoItemRequest $request)
     {
         if (Gate::denies('gerenciar')) {
             return abort(403);
@@ -85,7 +86,7 @@ class TipoItemController extends Controller
     }
 
 
-    public function update(Request $request,  $id)
+    public function update(TipoItemRequest $request,  $id)
     {
         if (Gate::denies('gerenciar')) {
             return abort(403);

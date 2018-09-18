@@ -9,6 +9,7 @@ use App\Movimentacao;
 use App\Cultura;
 use App\AdmGeral;
 use Illuminate\Http\Request;
+use App\Http\Requests\AtividadesRequest;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Auth;
 use Session;
@@ -83,7 +84,7 @@ class atividadesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AtividadesRequest $request)
     {
         //dd($request);
         if (Gate::denies('gerenciar-atividades')) {
@@ -178,7 +179,7 @@ class atividadesController extends Controller
      * @param  \App\Atividade  $atividade
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(AtividadesRequest $request,$id)
     {
         if (Gate::denies('gerenciar-atividades')) {
             return abort(403);

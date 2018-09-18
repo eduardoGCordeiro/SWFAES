@@ -56,7 +56,7 @@
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Administrador do talhão</label>
                             <div class="col-lg-6">
-                                <select class="form-control" id="exampleFormControlSelect1" name="id_adms_talhoes_adms_talhoes">
+                                <select class="form-control" id="exampleFormControlSelect1" name="id_adms_talhoes_adms_talhoes" required="">
                                     @foreach($adms_talhoes as $adm_talhao)
                                         <option value="{{$adm_talhao->id_adms_talhoes}}">{{$adm_talhao->funcionarios->login}}</option>
                                     @endforeach
@@ -77,7 +77,7 @@
                             <div class="col-lg-6">
 
                                 <div class="input-group">
-                                    <input class="form-control" type="text" name="area">
+                                    <input class="form-control{{ $errors->has('area') ? ' is-invalid' : '' }}" type="text" name="area" required>
                                     <div class="input-group-append">
                                         <span class="input-group-text">m²</span>
                                     </div>
@@ -100,6 +100,7 @@
                                     id="exampleTextarea"
                                     rows="3"
                                     name="descricao"
+                                    required
 
                                 ></textarea>
                                 @if ($errors->has('descricao'))

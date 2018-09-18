@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Unidade;
 use Illuminate\Http\Request;
+use App\Http\Requests\UnidadesRequest;
 use Yajra\Datatables\Datatables;
 use Session;
 use Form;
@@ -52,7 +53,7 @@ class UnidadesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UnidadesRequest $request)
     {
         if (Gate::denies('gerenciar')) {
             return abort(403);
@@ -107,7 +108,7 @@ class UnidadesController extends Controller
      * @param  \App\Unidade  $unidade
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,  $id)
+    public function update(UnidadesRequest $request,  $id)
     {
         if (Gate::denies('gerenciar')) {
             return abort(403);

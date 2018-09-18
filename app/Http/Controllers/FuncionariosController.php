@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Funcionario;
 use App\Talhao;
 use Illuminate\Http\Request;
-use Yajra\Datatables\Datatables;
+use Illuminate\Validation\Rule;
 use App\Http\Requests\FuncionariosRequest;
+use Yajra\Datatables\Datatables;
 use Session;
 use Illuminate\Support\Facades\Gate;
 
@@ -143,11 +144,28 @@ class FuncionariosController extends Controller
      * @param  \App\Funcionarios  $funcionarios
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Funcionario $funcionario)
+    public function update(FuncionariosRequest $request, Funcionario $funcionario)
     {
         if (Gate::denies('gerenciar-funcionarios')) {
             return abort(403);
         }
+
+        dd($funcionario);
+        Validator::make($request->all() , [
+            'cpf' => ['required',
+                Rule::unique('funcionarios')->ignore($funcionario->id, 'id_funcionarios'),]
+        ], ['O campo :attribute deve ser único!']);
+
+        Validator::make($request->all() , [
+            'cpf' => ['required',
+                Rule::unique('funcionarios')->ignore($funcionario->id, 'id_funcionarios'),]
+        ], ['O campo :attribute deve ser único!']);
+
+        Validator::make($request->all() , [
+            'cpf' => ['required',
+                Rule::unique('funcionarios')->ignore($funcionario->id, 'id_funcionarios'),]
+        ], ['O campo :attribute deve ser único!']);
+
         $funcionario->nome= strtoupper($request->nome);
         $funcionario->login= ($request->login);
         $funcionario->cpf= ($request->cpf);

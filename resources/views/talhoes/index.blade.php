@@ -10,10 +10,9 @@
                     </ol>
             <div class="card">
                 <div class="card-header">
-                    <h3 class="col-lg-6" style="float:left">Lista de Talhões</h3>
-                    <a href="{{Route('talhoes.create')}}" style="float: right">
+                    <h3>Lista de Talhões</h3>
                         @if (Auth::user()->can('gerenciar-culturas'))
-                        <button type="button" class="btn btn-success"> <i class="fas fa-plus"></i> Criar Novo</button></a>
+                            <a href="{{Route('talhoes.create')}}"><button type="button" class="btn btn-outline-success"><i class="fas fa-plus"> </i>  Cadastrar novo</button></a>
                         @endif
                 </div>
 

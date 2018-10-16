@@ -32,7 +32,7 @@
                                 <a href = "{{Route('talhoes.show',[$talhao->id_talhoes])}}">
                                     <div class="card-header">Talhão {{$talhao->identificador}}
                                         <span style="float: center" class="ml-4">Área: {{$talhao->area}}</span>
-                                        <span style="float: right" class="badge badge-success">{{count($talhao->requisicoes)}}</span>
+                                        <span style="float: right" class="badge badge-success">{{count($talhao->requisicoes = "aberta")}}</span>
                                     </div>
                                 </a>
                                 <div class="card-body">

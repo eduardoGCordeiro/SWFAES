@@ -26,4 +26,15 @@ class ModerarRequisicoes extends Model
     * @var array
     */
    protected $hidden = [ ];
+
+    public function statusrequisicoes(){
+        return $this->hasone('App\StatusRequisicoes', 'id_requisicoes_requisicoes', 'id_requisicoes');
+    }
+
+    public function moderarequisicoes(){
+        return $this->hasone('App\StatusRequisicoes', 'id_requisicoes_requisicoes', 'id_requisicoes');
+    }
+    public function requisicoes(){
+        return $this->hasOne('App\ModerarRequisicoes','id_requisicoes_requisicoes','id_requisicoes');
+    }
 }

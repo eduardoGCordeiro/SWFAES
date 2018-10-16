@@ -26,4 +26,8 @@ class StatusRequisicoes extends Model
     * @var array
     */
    protected $hidden = [ ];
+
+    public function moderarequisicoes(){
+        return $this->hasmay('App\ModerarRequisicoes', 'id_requisicoes_status_requisicoes', 'id_status_requisicoes');
+    }
 }

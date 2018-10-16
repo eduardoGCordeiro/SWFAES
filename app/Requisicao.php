@@ -35,6 +35,6 @@ class Requisicao extends Model
         return $this->hasOne('App\Talhao','id_talhoes','id_talhoes_talhoes');
     }
     public function requisicoes(){
-        return $this->hasOne('App\ModerarRequisicoes','id_requisicoes_requisicoes','id_requisicoes');
+        return $this->belongsto('App\ModerarRequisicoes');
     }
 }

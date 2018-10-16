@@ -37,4 +37,8 @@ class ModerarRequisicoes extends Model
     public function requisicoes(){
         return $this->hasOne('App\ModerarRequisicoes','id_requisicoes_requisicoes','id_requisicoes');
     }
+
+    public function requisicoes(){
+        return $this->hasMany('App\Requisic','id_requisicoes_requisicoes','id_requisicoes');
+    }
 }

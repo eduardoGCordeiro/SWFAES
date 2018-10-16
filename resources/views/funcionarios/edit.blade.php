@@ -118,7 +118,7 @@
 
 
 
-
+                        @if(Auth::user()->cpf != $funcionario->cpf)
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Permitir acesso ao sistema?</label>
 
@@ -130,7 +130,7 @@
 
                             </div>
                         </div>
-
+                        @endif
 
 
 

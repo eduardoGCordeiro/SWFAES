@@ -36,11 +36,11 @@ class TalhoesController extends Controller
                 return view('talhoes.index')->with(compact('talhoes'));
             }else{
                 Session::flash('alert-info', 'Você ainda não possui talhões!');
-                return redirect()->route('talhoes.index');
+                return view('talhoes.index')->with(compact('talhoes'));
             }
         }else {
             Session::flash('alert-danger', 'Você ainda não é um administrador!');
-            return redirect()->route('talhoes.index');
+            return view('talhoes.index')->with(compact('talhoes'));
         }
     }
 

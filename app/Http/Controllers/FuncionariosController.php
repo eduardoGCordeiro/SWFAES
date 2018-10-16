@@ -12,6 +12,7 @@ use Yajra\Datatables\Datatables;
 use Session;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 
 class FuncionariosController extends Controller
@@ -164,13 +165,13 @@ class FuncionariosController extends Controller
         if (Gate::denies('gerenciar-funcionarios')) {
             return abort(403);
         }
-
         $funcionario->nome= strtoupper($request->nome);
         $funcionario->login= ($request->login);
         $funcionario->cpf= ($request->cpf);
         $funcionario->email= strtolower($request->email);
-        $funcionario->acesso_sistema = $request->acesso_sistema=="on"?TRUE:FALSE;
-
+        if(Auth::user()->cpf != $request->cpf) {
+            $funcionario->acesso_sistema = $request->acesso_sistema == "on" ? TRUE : FALSE;
+        }
         if($funcionario->update()){
             Session::flash('alert-success', 'Funcionário editado com sucesso!');
             return redirect()->route('funcionarios.index');

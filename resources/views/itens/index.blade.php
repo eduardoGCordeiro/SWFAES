@@ -53,7 +53,7 @@
                             <th scope="col">Quantidade</th>
                             <th scope="col">Unidade de Medida</th>
                             <th scope="col">Tipo do item</th>
-                            <th scope="col">Ações</th>
+                            <th scope="col" class="text-center">Ações</th>
 
                         </tr>
                       </thead>
@@ -110,7 +110,7 @@ $(document).ready(function() {
             {data: 'quantidade', name: 'quantidade'},
             {data: 'id_unidades_unidades', name: 'id_unidades_unidades'},
             {data: 'id_tipos_itens_tipos_itens', name: 'id_tipos_itens_tipos_itens'},
-            {data: 'action', name: 'action'},
+            {data: 'action', name: 'action', orderable:false, searchable:false},
 
         ]
     });

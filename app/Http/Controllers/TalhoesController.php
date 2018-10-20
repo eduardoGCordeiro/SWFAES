@@ -6,7 +6,11 @@ use App\AdmGeral;
 use App\Atividade;
 use App\AdmTalhao;
 use App\Funcionario;
+use App\Requisicao;
+use App\StatusRequisicoes;
+use App\ModerarRequisicoes;
 use App\Http\Requests\TalhoesRequest;
+use FontLib\Table\Type\maxp;
 use Yajra\Datatables\Datatables;
 use App\Talhao;
 use Session;
@@ -27,8 +31,11 @@ class TalhoesController extends Controller
         $adm_talhao = AdmTalhao::where('id_funcionarios_funcionarios',Auth::user()->id_funcionarios)->first();
         $adm_geral = AdmGeral::where('id_funcionarios_funcionarios',Auth::user()->id_funcionarios)->first();
 
+        //$statusrequisicoes = StatusRequisicoes::where('nome', 'PENDENTE')->get();
+        //$moderarrequisicoes = ModerarRequisicoes::where('id_requisicoes_status_requisicoes', $statusrequisicoes->id_status_requisicoes);
+
         if($adm_geral){
-            $talhoes = Talhao::orderby('id_talhoes', 'ASC')->get();
+            $talhoes = Talhao::all();
             return view('talhoes.index')->with(compact('talhoes'));
         }else if($adm_talhao){
             $talhoes = Talhao::where('id_adms_talhoes_adms_talhoes', $adm_talhao->id_adms_talhoes)->orderby('id_talhoes', 'ASC')->get();

@@ -120,8 +120,6 @@
                         </div>
 
 
-
-
                         <div class="form-group row">
                             <div class="col-lg-6 offset-lg-4">
                                 <button type="submit" class="btn btn-primary">
@@ -134,15 +132,16 @@
                     </form>
                     <form method="POST" action="{{Route('finalizar_culturas',$cultura->id_culturas)}}">
                         {!! csrf_field() !!}
+                        @if($cultura->data_fim == null)
+                             <div class="form-group row">
+                                 <div class="col-lg-6 offset-lg-4">
+                                     <button class="btn btn-warning" type="submit">
+                                         Finalizar
+                                     </button>
 
-                        <div class="form-group row">
-                            <div class="col-lg-6 offset-lg-4">
-                                <button class="btn btn-warning" type="submit">
-                                    Finalizar
-                                </button>
-
-                            </div>
-
+                                 </div>
+                             </div>
+                        @endif
                     </form>
 
 

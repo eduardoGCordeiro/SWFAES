@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Funcionario;
+use App\Talhao;
+use App\TipoAtividades;
 use Auth;
 use Session;
 
@@ -35,6 +37,10 @@ class HomeController extends Controller
             Session::flash('alert-danger', 'Sem acesso ao sistema!');
             return redirect()->route('login');
         }
-        return view('relatorios');
+
+        $talhoes = Talhao::all();
+        $tipos_atividades = TipoAtividades::all();
+
+        return view('relatorios')->with(compact('tipos_atividades','talhoes'));
     }
 }

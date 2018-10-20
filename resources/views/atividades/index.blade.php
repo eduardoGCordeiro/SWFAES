@@ -39,11 +39,11 @@
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Data</th>
-                            <th scope="col">Decrição</th>
                             <th scope="col">Talhão</th>
                             <th scope="col">Cultura</th>
+                            <th scope="col">Tipo</th>
                             @if (Auth::user()->can('gerenciar-atividades'))
-                            <th scope="col">Ações</th>
+                            <th scope="col" class="text-center">Ações</th>
                             @endif
 
                         </tr>
@@ -92,9 +92,9 @@ $(document).ready(function() {
 
             {data: 'id_atividades', name: 'id_atividades'},
             {data: 'data', name: 'data'},
-            {data: 'descricao', name: 'descricao'},
             {data: 'id_talhoes_talhoes', name: 'id_talhoes_talhoes'},
             {data: 'id_culturas_culturas', name: 'id_culturas_culturas'},
+            {data: 'tipo', name: 'tipo'},
             @if (Auth::user()->can('gerenciar-atividades'))
             {data: 'action', name: 'action', orderable: false, searchable: false}
             @endif

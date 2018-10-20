@@ -40,7 +40,7 @@
                                     <select name="id_atividades_atividades" class="form-control" id="exampleSelect1" required="">
                                         <option value="">Selecione</option>
                                         @foreach($atividades as $atividade)
-                                            <option value="{{$atividade->descricao}}">{{$atividade->descricao}}</option>
+                                            <option value="{{$atividade->id_atividades}}">{{$atividade->descricao}}</option>
                                         @endforeach
                                     </select>
 

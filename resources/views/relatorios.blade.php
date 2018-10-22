@@ -48,7 +48,7 @@
 
                                             <div class="form-group row">
                                                 <label for="exampleSelect1" class="col-2 col-form-label"><b>Tipo</b> </label>
-                                                <div class="col-2">
+                                                <div class="col-3">
                                                     <select  name="tipo" class="form-control" id="exampleSelect1">
                                                         <option value="">Selecione</option>
                                                         @foreach($tipos_atividades as $tipo)
@@ -61,7 +61,7 @@
 
                                              <div class="form-group row">
                                                 <label for="exampleSelect1" class="col-2 col-form-label"><b>Talhão</b> </label>
-                                                <div class="col-2">
+                                                <div class="col-3   ">
                                                     <select name="talhao" class="form-control" id="exampleSelect1">
                                                         <option value="">Selecione</option>
                                                         @foreach($talhoes as $talhao)
@@ -117,7 +117,57 @@
                                 </div>
                                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                                     <div class="card-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+
+                                        <form action="{{action('RelatoriosController@estoque')}}" method="get">
+                                            {!! csrf_field() !!}
+
+                                            <h5>Filtro</h5>
+
+                                            <div class="form-group row">
+                                                <label for="exampleSelect1" class="col-2 col-form-label"><b>Tipo</b> </label>
+                                                <div class="col-3">
+                                                    <select  name="tipo" class="form-control" id="exampleSelect1">
+                                                        <option value="">Selecione</option>
+                                                        @foreach($tipos_itens as $tipo)
+                                                            <option value="{{$tipo->id_tipos_itens}}">{{$tipo->nome}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+
+
+
+
+                                           <!--  <div class="form-group row">
+                                                <label for="exampleSelect1" class="col-2 col-form-label">Cultura </label>
+                                                <div class="col-2">
+                                                    <select class="form-control" id="exampleSelect1">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                    </select>
+                                                </div>
+                                            </div> -->
+
+
+
+
+
+                                            <div class="form-group row">
+                                                <label for="exampleSelect1" class="col-2 col-form-label"> </label>
+                                                <div class="col-2 ">
+                                                    <button type="submit" class=" btn btn-primary">Gerar Relatório</button>
+                                                </div>
+                                            </div>
+
+
+
+                                        </form>
+
                                     </div>
                                 </div>
                             </div>
@@ -131,7 +181,81 @@
                                 </div>
                                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                                     <div class="card-body">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                        <form action="{{action('RelatoriosController@movimentacoes')}}" method="get">
+                                            {!! csrf_field() !!}
+
+                                            <h5>Filtro</h5>
+                                            <div class="form-group row">
+                                                <label for="example-date-input" class="col-2 col-form-label"><b>Data de início</b> </label>
+                                                <div class="col-3">
+                                                    <input name="data_inicio" class="form-control" type="date" value="2018-01-01" id="example-date-input">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="example-date-input" class="col-2 col-form-label"><b>Até</b> </label>
+                                                <div class="col-3">
+                                                    <input name="data_fim" class="form-control" type="date" value="@php $dt = Carbon\Carbon::now();
+    echo $dt->toDateString();  @endphp" id="example-date-input">
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="form-group row">
+                                                <label for="exampleSelect1" class="col-2 col-form-label"><b>Tipo</b> </label>
+                                                <div class="col-3">
+                                                    <select  name="tipo" class="form-control" id="exampleSelect1">
+                                                        <option value="">Selecione</option>
+                                                        <option value="E">Entrada</option>
+                                                        <option value="S">Saída</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+                                             <div class="form-group row">
+                                                <label for="exampleSelect1" class="col-2 col-form-label"><b>Item específico</b> </label>
+                                                <div class="col-3   ">
+                                                    <select name="item" class="form-control" id="exampleSelect1">
+                                                        <option value="">Selecione</option>
+                                                        @foreach($itens as $item)
+                                                            <option value="{{$item->id_itens}}">{{$item->nome}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+
+                                           <!--  <div class="form-group row">
+                                                <label for="exampleSelect1" class="col-2 col-form-label">Cultura </label>
+                                                <div class="col-2">
+                                                    <select class="form-control" id="exampleSelect1">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                    </select>
+                                                </div>
+                                            </div> -->
+
+
+
+
+
+                                            <div class="form-group row">
+                                                <label for="exampleSelect1" class="col-2 col-form-label"> </label>
+                                                <div class="col-2 ">
+                                                    <button type="submit" class=" btn btn-primary">Gerar Relatório</button>
+                                                </div>
+                                            </div>
+
+
+
+                                        </form>
                                     </div>
                                 </div>
                         </div>

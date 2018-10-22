@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Funcionario;
 use App\Talhao;
 use App\TipoAtividades;
+use App\TipoItem;
+use App\Item;
 use Auth;
 use Session;
 
@@ -40,7 +42,9 @@ class HomeController extends Controller
 
         $talhoes = Talhao::all();
         $tipos_atividades = TipoAtividades::all();
+        $tipos_itens = TipoItem::all();
+        $itens = Item::all();
 
-        return view('relatorios')->with(compact('tipos_atividades','talhoes'));
+        return view('relatorios')->with(compact('tipos_atividades','tipos_itens','talhoes','itens'));
     }
 }

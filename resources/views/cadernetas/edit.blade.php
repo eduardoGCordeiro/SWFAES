@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container col-md-10 col-lg-10 ">
     <div class="row mt-5">
         <div class="col-md-12">
             <ol class="breadcrumb">
@@ -16,7 +16,7 @@
                     <h3>Editando caderneta</h3>
 
 
-                    
+
 
                 </div>
 
@@ -27,10 +27,10 @@
                         {!! csrf_field() !!}
 
 
-                        
+
                     </form>
 
-                    
+
                 </div>
             </div>
         </div>

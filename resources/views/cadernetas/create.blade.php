@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container col-md-10 col-lg-10 ">
     <div class="row mt-5">
         <div class="col-md-12 ">
             <ol class="breadcrumb">
@@ -10,7 +10,7 @@
                 <li class="breadcrumb-item active">Novo Requisições</li>
             </ol>
             <div class="card">
-                
+
                 <div class="card-header">
 
 
@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="card-body col-md-8 offset-lg-2" >
-                    
+
                     <form role="form" method="POST" action="{{ Route('talhoes.store') }}">
                         {!! csrf_field() !!}
 
@@ -52,11 +52,11 @@
                             <div class="col-lg-6">
 
                                 <div class="input-group mb-3">
-                                    
-                                    <input 
+
+                                    <input
                                         class="form-control"
                                         type="text"
-                                        name="area" 
+                                        name="area"
                                     >
                                     <div class="input-group-append">
                                         <span class="input-group-text">m²</span>
@@ -75,9 +75,9 @@
                             <label class="col-lg-4 col-form-label text-lg-right">Descrição</label>
 
                             <div class="col-lg-6">
-                                <textarea 
-                                    class="form-control" 
-                                    id="exampleTextarea" 
+                                <textarea
+                                    class="form-control"
+                                    id="exampleTextarea"
                                     rows="3"
                                     name="descricao"
 
@@ -104,11 +104,11 @@
                               <label class="custom-control-label" for="customRadio2">Pecuária</label>
                             </div>
                           </div>
-                          
+
                         </div>
 
-                        
-                        
+
+
 
                         <div class="form-group row">
                             <div class="col-lg-6 offset-lg-4">

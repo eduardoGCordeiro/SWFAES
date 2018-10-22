@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container col-md-10 col-lg-10 ">
     <div class="row mt-5">
         <div class="col-md-12">
             <ol class="breadcrumb">
@@ -14,14 +14,14 @@
 
                     <h3>Listando cadernetas</h3>
 
-                    
+
 
                 </div>
 
                 <div class="card-body">
 
-                    
-                  
+
+
 
 
 

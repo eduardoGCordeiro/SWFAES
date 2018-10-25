@@ -86,6 +86,7 @@ class ItensController extends Controller
         $item = new Item();
         $item->nome = strtoupper($request->nome);
         $item->custo_por_unidades = str_replace(',', '.', $request->custo_por_unidades);
+        $item->quantidade = $request->quantidade;
         $item->id_unidades_unidades = $request->id_unidades_unidades;
         $item->id_tipos_itens_tipos_itens = $request->id_tipos_itens_tipos_itens;
 

@@ -63,6 +63,15 @@
                             </div>
                             </a>
                         @endforeach
+
+                        <div id="popup" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    teste
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="card-footer ">
                     </div>
@@ -73,10 +82,12 @@
 @endsection
 @section('script')
     <script>
-        function mascaraData(val){
-            val = str.replace(val);
-            val = str.split("/", val);
-            return val;
-        }
+        $(document).unbind("keyup").keyup(function(e){
+            var code = e.which; // recommended to use e.which, it's normalized across browsers
+            if(code==112)
+            {
+                $("#popup").modal('show');
+            }
+        });
     </script>
 @endsection

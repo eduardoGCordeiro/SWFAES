@@ -38,6 +38,7 @@
                       <thead>
                         <tr>
                             <th scope="col">ID</th>
+                            <th scope="col">Atividade</th>
                             <th scope="col">Data</th>
                             <th scope="col">Talhão</th>
                             <th scope="col">Cultura</th>
@@ -91,6 +92,7 @@ $(document).ready(function() {
         columns: [
 
             {data: 'id_atividades', name: 'id_atividades'},
+            {data: 'descricao', name: 'descricao'},
             {data: 'data', name: 'data'},
             {data: 'id_talhoes_talhoes', name: 'id_talhoes_talhoes'},
             {data: 'id_culturas_culturas', name: 'id_culturas_culturas'},

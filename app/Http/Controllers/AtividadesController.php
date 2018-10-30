@@ -34,6 +34,10 @@ class atividadesController extends Controller
                     return $atividade->talhao['identificador'];
                 })
 
+                ->editColumn('descricao', function($atividade){
+                    return $atividade->descricao;
+                })
+
                 ->editColumn('data', function($atividade){
                     return date( 'd/m/Y' , strtotime($atividade->data));
                 })

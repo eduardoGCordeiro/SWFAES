@@ -34,12 +34,36 @@ class atividadesController extends Controller
                     return $atividade->talhao['identificador'];
                 })
 
+<<<<<<< HEAD
                 ->editColumn('data', function($atividade){
                     return date( 'd/m/Y' , strtotime($atividade->data));
                 })
                 ->addColumn('action', function ($atividade) {
                     return '<a href="'.Route('atividades.edit',[$atividade->id_atividades]).'" class="btn btn-primary"><i class="fas fa-edit"></i>Editar</a>'.'<form action="'.Route('atividades.destroy',[$atividade->id_atividades]).'" method="POST"> '.csrf_field().'
  <input name="_method" type="hidden" value="DELETE"> <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>deletar</button></form>';
+=======
+                ->editColumn('descricao', function($atividade){
+                    return $atividade->descricao;
+                })
+
+                ->editColumn('data', function($atividade){
+                    return date( 'd/m/Y' , strtotime($atividade->data));
+                })
+                ->editColumn('id_culturas_culturas', function($atividade){
+                    if($atividade->cultura){
+                        return $atividade->cultura['descricao'];
+                    }else {
+                        return "SEM CULTURA";
+                    }
+                })
+                ->editColumn('tipo', function($atividade){
+                    return $atividade->talhao['tipo'];
+                })
+                ->addColumn('action', function ($atividade) {
+                    return '<div class = "col-md-10 offset-1">'. '<div class="panel-footer row" style="margin-left: 18%"><!-- panel-footer -->'.'<div class="col-xs-6 text-center">'.'<div class="previous">'.'<a href="'.Route('atividades.edit',[$atividade->id_atividades]).'" class="btn btn-primary"><i class="fas fa-edit"></i>Editar</a>'.'</div>
+                        '.'</div>'.'<div class="col-xs-6 text-right">'.'<div class="next offset-1">'.'<form action="'.Route('atividades.destroy',[$atividade->id_atividades]).'" method="POST"> '.csrf_field().'
+ <input name="_method" type="hidden" value="DELETE"> <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>deletar</button></form>'.'</div>'.'</div>'.'</div>'.'</div>';
+>>>>>>> eduardo
                     })
             ->make(true);
 

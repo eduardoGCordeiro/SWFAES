@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+<<<<<<< HEAD
 <div class="container">
+=======
+<div class="container col-md-10 col-lg-10 ">
+>>>>>>> eduardo
     <div class="row mt-3">
         <div class="col-md-12">
             <ol class="breadcrumb">
@@ -11,6 +15,7 @@
                     </ol>
             <div class="card">
                 <div class="card-header">
+<<<<<<< HEAD
 
 
                     <h3>Editando talhão {{$talhoes -> id_identificador}}</h3>
@@ -22,6 +27,10 @@
 
 
 
+=======
+                    <h3>Editando talhão {{$talhoes -> id_identificador}}</h3>
+                </div>
+>>>>>>> eduardo
                 <div class="card-body col-md-8 offset-lg-2">
                     @if ($errors->any())
                         <div class="alert alert-danger">

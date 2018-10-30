@@ -8,7 +8,11 @@ use App\Cultura;
 use App\AdmTalhao;
 use App\AdmGeral;
 use App\Funcionario;
+<<<<<<< HEAD
 
+=======
+use App\Http\Requests\RequisicoesRequest;
+>>>>>>> eduardo
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use Session;
@@ -124,7 +128,11 @@ class RequisicoesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+<<<<<<< HEAD
     public function store(Request $request)
+=======
+    public function store(RequisicoesRequest $request)
+>>>>>>> eduardo
     {
         $talhao = $request->talhao;
 
@@ -151,7 +159,11 @@ class RequisicoesController extends Controller
      * @param  \App\Requisicao  $requisicao
      * @return \Illuminate\Http\Response
      */
+<<<<<<< HEAD
     public function show(Requisicao $requisicao)
+=======
+    public function show(RequisicoesRequest $requisicao)
+>>>>>>> eduardo
     {
         //
     }
@@ -177,7 +189,11 @@ class RequisicoesController extends Controller
      * @param  \App\Requisicao  $requisicao
      * @return \Illuminate\Http\Response
      */
+<<<<<<< HEAD
     public function update(Request $request, Requisicao $requisicao)
+=======
+    public function update(RequisicoesRequest $request, Requisicao $requisicao)
+>>>>>>> eduardo
     {
         dd('testando');
     }

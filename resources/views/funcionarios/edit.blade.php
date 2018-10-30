@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+<<<<<<< HEAD
 <div class="container">
+=======
+<div class="container col-md-10 col-lg-10 ">
+>>>>>>> eduardo
     <div class="row mt-3">
         <div class="col-md-12 ">
             <ol class="breadcrumb">
@@ -118,7 +122,11 @@
 
 
 
+<<<<<<< HEAD
 
+=======
+                        @if(Auth::user()->cpf != $funcionario->cpf)
+>>>>>>> eduardo
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Permitir acesso ao sistema?</label>
 
@@ -130,7 +138,11 @@
 
                             </div>
                         </div>
+<<<<<<< HEAD
 
+=======
+                        @endif
+>>>>>>> eduardo
 
 
 

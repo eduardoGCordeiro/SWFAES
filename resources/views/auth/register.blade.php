@@ -2,7 +2,11 @@
 @extends('layouts.app')
 
 @section('content')
+<<<<<<< HEAD
 <div class="container">
+=======
+<div class="container col-md-10 col-lg-10 ">
+>>>>>>> eduardo
     <div class="row mt-3">
         <div class="col-md-12 ">
             <ol class="breadcrumb">
@@ -21,7 +25,10 @@
 
 
                 <div class="card-body col-md-8 offset-lg-2" >
+<<<<<<< HEAD
 
+=======
+>>>>>>> eduardo
                     <form role="form" method="POST" action="{{ Route('funcionarios.store')}}">
                         {!! csrf_field() !!}
 

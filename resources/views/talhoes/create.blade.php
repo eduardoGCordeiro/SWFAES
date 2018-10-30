@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+<<<<<<< HEAD
 <div class="container">
+=======
+<div class="container col-md-10 col-lg-10 ">
+>>>>>>> eduardo
     <div class="row mt-3">
         <div class="col-md-12 ">
             <ol class="breadcrumb">
@@ -79,7 +83,11 @@
                                 <div class="input-group">
                                     <input class="form-control{{ $errors->has('area') ? ' is-invalid' : '' }}" type="text" name="area" required>
                                     <div class="input-group-append">
+<<<<<<< HEAD
                                         <span class="input-group-text">m²</span>
+=======
+                                        <span class="input-group-text">ha</span>
+>>>>>>> eduardo
                                     </div>
                                 </div>
 
@@ -116,11 +124,19 @@
                             <div class="col-lg-4">
 
                                 <div class="custom-control custom-radio">
+<<<<<<< HEAD
                                     <input id="customRadio1" name="tipo" class="custom-control-input" checked="" type="radio" value="agricultura">
                                     <label class="custom-control-label" for="customRadio1">Agricultura</label>
                                 </div>
                                 <div class="custom-control custom-radio">
                                     <input id="customRadio2" name="tipo" class="custom-control-input" type="radio" value="pecuaria">
+=======
+                                    <input id="customRadio1" name="tipo" class="custom-control-input" checked="" type="radio" value="AGRICULTURA">
+                                    <label class="custom-control-label" for="customRadio1">Agricultura</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input id="customRadio2" name="tipo" class="custom-control-input" type="radio" value="PECUARIA">
+>>>>>>> eduardo
                                     <label class="custom-control-label" for="customRadio2">Pecuária</label>
                                 </div>
                             </div>

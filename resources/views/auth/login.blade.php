@@ -1,7 +1,11 @@
 @extends('layouts.noauth')
 
 @section('content')
+<<<<<<< HEAD
 <div class="container">
+=======
+<div class="container col-md-10 col-lg-10 ">
+>>>>>>> eduardo
     <div class="row justify-content-md-center mt-5">
         <div class="col-md-8">
             <div class="card">

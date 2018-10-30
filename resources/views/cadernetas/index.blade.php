@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+<<<<<<< HEAD
 <div class="container">
+=======
+<div class="container col-md-10 col-lg-10 ">
+>>>>>>> eduardo
     <div class="row mt-5">
         <div class="col-md-12">
             <ol class="breadcrumb">
@@ -14,14 +18,23 @@
 
                     <h3>Listando cadernetas</h3>
 
+<<<<<<< HEAD
                     
+=======
+
+>>>>>>> eduardo
 
                 </div>
 
                 <div class="card-body">
 
+<<<<<<< HEAD
                     
                   
+=======
+
+
+>>>>>>> eduardo
 
 
 

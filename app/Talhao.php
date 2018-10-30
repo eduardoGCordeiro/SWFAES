@@ -41,6 +41,14 @@ class Talhao extends Model
         return $this->hasMany('App\Requisicao','id_talhoes_talhoes');
     }
 
+<<<<<<< HEAD
+=======
+    /*public function requisicoes()
+    {
+        return $this->hasMany('App\Requisicao','id_talhoes_talhoes');
+    }*/
+
+>>>>>>> eduardo
     public function atividades()
     {
         return $this->hasMany('App\Atividade','id_talhoes_talhoes');

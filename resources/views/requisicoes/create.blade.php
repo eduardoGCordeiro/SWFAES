@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+<<<<<<< HEAD
 <div class="container">
+=======
+<div class="container col-md-10 col-lg-10 ">
+>>>>>>> eduardo
     <div class="row mt-3">
         <div class="col-md-12 ">
             <ol class="breadcrumb">
@@ -20,14 +24,29 @@
 
                 <div class="card-body col-md-8 offset-lg-2" >
 
+<<<<<<< HEAD
+=======
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+>>>>>>> eduardo
                     <form role="form" method="POST" action="{{ Route('requisicoes.store') }}">
                         {!! csrf_field() !!}
 
 
+<<<<<<< HEAD
 
 
 
 
+=======
+>>>>>>> eduardo
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Descrição</label>
 
@@ -37,6 +56,10 @@
                                     id="exampleTextarea"
                                     rows="3"
                                     name="descricao"
+<<<<<<< HEAD
+=======
+                                    required
+>>>>>>> eduardo
 
                                 ></textarea>
                                 @if ($errors->has('descricao'))
@@ -52,7 +75,11 @@
                             <label class="col-lg-4 col-form-label text-lg-right">Talhão</label>
 
                             <div class="col-lg-6">
+<<<<<<< HEAD
                                 <select name="talhao" class="form-control" id="exampleSelect1">
+=======
+                                <select name="talhao" class="form-control" id="exampleSelect1" required="">
+>>>>>>> eduardo
                                     <option value="">Selecione</option>
                                     @foreach($talhoes as $talhao)
                                     <option value="{{$talhao->id_talhoes}}">{{$talhao->identificador}}</option>

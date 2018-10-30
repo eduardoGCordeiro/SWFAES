@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+<<<<<<< HEAD
 <div class="container">
+=======
+<div class="container col-md-10 col-lg-10 ">
+>>>>>>> eduardo
     <div class="row mt-3">
         <div class="col-md-12 ">
             <ol class="breadcrumb">
@@ -120,8 +124,11 @@
                         </div>
 
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> eduardo
                         <div class="form-group row">
                             <div class="col-lg-6 offset-lg-4">
                                 <button type="submit" class="btn btn-primary">
@@ -134,6 +141,7 @@
                     </form>
                     <form method="POST" action="{{Route('finalizar_culturas',$cultura->id_culturas)}}">
                         {!! csrf_field() !!}
+<<<<<<< HEAD
 
                         <div class="form-group row">
                             <div class="col-lg-6 offset-lg-4">
@@ -143,6 +151,18 @@
 
                             </div>
 
+=======
+                        @if($cultura->data_fim == null)
+                             <div class="form-group row">
+                                 <div class="col-lg-6 offset-lg-4">
+                                     <button class="btn btn-warning" type="submit">
+                                         Finalizar
+                                     </button>
+
+                                 </div>
+                             </div>
+                        @endif
+>>>>>>> eduardo
                     </form>
 
 

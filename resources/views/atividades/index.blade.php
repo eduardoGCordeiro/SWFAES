@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+<<<<<<< HEAD
 <div class="container">
+=======
+<div class="container col-md-10 col-lg-10 ">
+>>>>>>> eduardo
     <div class="row mt-3">
         <div class="col-md-12">
             <ol class="breadcrumb">
@@ -38,12 +42,22 @@
                       <thead>
                         <tr>
                             <th scope="col">ID</th>
+<<<<<<< HEAD
                             <th scope="col">Data</th>
                             <th scope="col">Decrição</th>
                             <th scope="col">Talhão</th>
                             <th scope="col">Cultura</th>
                             @if (Auth::user()->can('gerenciar-atividades'))
                             <th scope="col">Ações</th>
+=======
+                            <th scope="col">Atividade</th>
+                            <th scope="col">Data</th>
+                            <th scope="col">Talhão</th>
+                            <th scope="col">Cultura</th>
+                            <th scope="col">Tipo</th>
+                            @if (Auth::user()->can('gerenciar-atividades'))
+                            <th scope="col" class="text-center">Ações</th>
+>>>>>>> eduardo
                             @endif
 
                         </tr>
@@ -91,10 +105,18 @@ $(document).ready(function() {
         columns: [
 
             {data: 'id_atividades', name: 'id_atividades'},
+<<<<<<< HEAD
             {data: 'data', name: 'data'},
             {data: 'descricao', name: 'descricao'},
             {data: 'id_talhoes_talhoes', name: 'id_talhoes_talhoes'},
             {data: 'id_culturas_culturas', name: 'id_culturas_culturas'},
+=======
+            {data: 'descricao', name: 'descricao'},
+            {data: 'data', name: 'data'},
+            {data: 'id_talhoes_talhoes', name: 'id_talhoes_talhoes'},
+            {data: 'id_culturas_culturas', name: 'id_culturas_culturas'},
+            {data: 'tipo', name: 'tipo'},
+>>>>>>> eduardo
             @if (Auth::user()->can('gerenciar-atividades'))
             {data: 'action', name: 'action', orderable: false, searchable: false}
             @endif

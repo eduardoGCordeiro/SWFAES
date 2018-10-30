@@ -3,8 +3,12 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+<<<<<<< HEAD
 use Auth;
 use App\Funcionario;
+=======
+use Illuminate\Validation\Rule;
+>>>>>>> eduardo
 
 class FuncionariosRequest extends FormRequest
 {
@@ -25,12 +29,22 @@ class FuncionariosRequest extends FormRequest
      */
     public function rules()
     {
+<<<<<<< HEAD
 
         return [
             'login'=>'required|max:13|regex:/^[a-z0-9A-Z_]+$/|string|unique:funcionarios,login,'.Auth::user()->id_funcionarios.',id_funcionarios',
             'nome' => 'required|string|max:45|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/',
             'email' => 'required|string|email|max:45|unique:funcionarios,email,'.Auth::user()->id_funcionarios.',id_funcionarios',
             'cpf' => 'required|max:11|min:11|unique:funcionarios,cpf,'.Auth::user()->id_funcionarios.',id_funcionarios',
+=======
+        return [
+
+            'login'=>'required|max:13|regex:/^[a-z0-9A-Z_]+$/|string|'. Rule::unique('funcionarios')->ignore($this->login,'login'),
+            'nome' => 'required|string|max:45|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/',
+            'email' => 'required|string|email|max:45|'.Rule::unique('funcionarios')->ignore($this->email,'email'),
+            'cpf' => 'required|max:11|min:11|'.Rule::unique('funcionarios')->ignore($this->cpf,'cpf'),
+
+>>>>>>> eduardo
             'password' => 'string|min:6|confirmed',
             'acesso_sistema' =>''
         ];

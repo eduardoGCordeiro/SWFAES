@@ -16,6 +16,12 @@
 
 
     <style type="text/css">
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> eduardo
             body{
                 background-image: url("/bg.png") ;
                 background-repeat: no-repeat;
@@ -24,6 +30,10 @@
                 margin: 0px !important;
                 padding:0px !important;
                 overflow-x: hidden;
+<<<<<<< HEAD
+=======
+                min-height: 100vh;
+>>>>>>> eduardo
             }
 
             #bg{
@@ -44,7 +54,11 @@
             }
 
             #left-bar{
+<<<<<<< HEAD
                 min-height: 750px;
+=======
+                min-height: 100vh;
+>>>>>>> eduardo
             }
 
 
@@ -89,12 +103,109 @@
                                                 Sair
                                             </a>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> eduardo
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                   style="display: none;">
                                                 {{ csrf_field() }}
                                             </form>
                                         </div>
                                     </li>
+<<<<<<< HEAD
+=======
+
+
+
+                                      <li class="nav-item d-block d-sm-none">
+                                        <a class="nav-link active" href="{{url('/inicio')}}">
+                                          <i class="fas fa-home fa-lg"></i>
+                                          Início <span class="sr-only">(current)</span>
+                                        </a>
+                                      </li>
+                                      <li class="nav-item d-block d-sm-none">
+
+                                        <a class="nav-link" href="{{Route('atividades.index')}}">
+                                          <i class="fas fa-calendar-alt fa-lg" ></i>
+                                          Atividades
+                                        </a>
+                                      </li>
+                                      <li class="nav-item d-block d-sm-none">
+                                        <a class="nav-link" href="{{Route('culturas.index')}}">
+                                          <i class="fas fa-seedling fa-lg"></i>
+                                          Culturas
+                                        </a>
+                                      </li>
+                                      @if (Auth::user()->can('gerenciar'))
+                                        <li class="nav-item d-block d-sm-none">
+                                          <a class="nav-link" href="{{Route('funcionarios.index')}}">
+                                            <i class="fas fa-users fa-lg"></i>
+                                            Funcionários
+                                          </a>
+                                        </li>
+                                      @endif
+                                      @if (Auth::user()->can('gerenciar'))
+                                        <li class="nav-item d-block d-sm-none">
+                                          <a class="nav-link" href="{{Route('itens.index')}}">
+                                            <i class="fas fa-warehouse fa-lg"></i>
+                                            Itens
+                                          </a>
+                                        </li>
+                                      @endif
+                                      @if (Auth::user()->can('gerenciar'))
+                                        <li class="nav-item d-block d-sm-none">
+                                          <a class="nav-link" href="{{Route('movimentacoes.index')}}">
+                                            <i class="fas fa-exchange-alt fa-lg"></i>
+                                            Movimentações
+                                          </a>
+                                        </li>
+                                      @endif
+                                      <li class="nav-item d-block d-sm-none">
+                                        <a class="nav-link" href="{{Route('requisicoes.index')}}">
+                                          <i class="fas fa-comment"></i>
+                                          Requisições
+                                        </a>
+                                      </li>
+                                      <li class="nav-item d-block d-sm-none">
+                                        <a class="nav-link" href="{{Route('talhoes.index')}}">
+                                          <i class="fas fa-th fa-lg"></i>
+                                          Talhões
+                                        </a>
+                                      </li>
+
+                                    </ul>
+                                    @if (Auth::user()->can('gerenciar'))
+
+
+                                      <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                                        <span class="d-block d-sm-none">Sistema </span>
+
+                                      </h6>
+                                      <ul class="nav flex-column mb-2 d-block d-sm-none">
+                                          <!-- <li class="nav-item">
+                                            <a class="nav-link" href="{{Route('tipos_atividades.index')}}">
+
+                                              Tipos de Atividades
+                                            </a>
+                                          </li> -->
+                                        <li class="nav-item">
+                                          <a class="nav-link" href="{{Route('tipo_item.index')}}">
+
+                                            Tipos de Itens
+                                          </a>
+                                        </li>
+                                        <li class="nav-item">
+                                          <a class="nav-link" href="{{Route('unidades.index')}}">
+
+                                            Unidades de medida
+                                          </a>
+                                        </li>
+                                      </ul>
+                                    @endif
+
+
+>>>>>>> eduardo
                                 @endif
                             </ul>
                         </div>

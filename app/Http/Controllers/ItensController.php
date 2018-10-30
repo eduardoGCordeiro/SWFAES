@@ -37,8 +37,14 @@ class ItensController extends Controller
         // dd($itens[0]->unidade->nome);
         return Datatables::of($itens)
             ->addColumn('action', function ($item) {
+<<<<<<< HEAD
                 return '<a href="'.Route('itens.edit',[$item->id_itens]).'" class="btn btn-primary">Editar</a>'.'<form action="'.Route('itens.destroy',[$item->id_itens]).'" method="POST"> '.csrf_field().'
  <input name="_method" type="hidden" value="DELETE"> <button type="submit" class="btn btn-danger">deletar</button>';
+=======
+                return '<div class = "col-md-10 offset-1" style="margin-left: 14%">'. '<div class="panel-footer row"><!-- panel-footer -->'.'<div class="col-xs-6 text-center">'.'<div class="previous">'.'<a href="'.Route('itens.edit',[$item->id_itens]).'" class="btn btn-primary"><i class="fas fa-edit"></i>Editar</a>'.'</div>
+                        '.'</div>'.'<div class="col-xs-6 text-right">'.'<div style="margin-left:6%">'.'<form action="'.Route('itens.destroy',[$item->id_itens]).'" method="POST"> '.csrf_field().'
+ <input name="_method" type="hidden" value="DELETE"> <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>deletar</button></form>'.'</div>'.'</div>'.'</div>'.'</div>';
+>>>>>>> eduardo
             })
             ->editColumn('id_unidades_unidades', function ($item){
                 return $item->unidades['nome'].'('.$item->unidades['sigla'].')';
@@ -85,6 +91,10 @@ class ItensController extends Controller
         $item = new Item();
         $item->nome = strtoupper($request->nome);
         $item->custo_por_unidades = str_replace(',', '.', $request->custo_por_unidades);
+<<<<<<< HEAD
+=======
+        $item->quantidade = $request->quantidade;
+>>>>>>> eduardo
         $item->id_unidades_unidades = $request->id_unidades_unidades;
         $item->id_tipos_itens_tipos_itens = $request->id_tipos_itens_tipos_itens;
 

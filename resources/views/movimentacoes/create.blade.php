@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+<<<<<<< HEAD
 <div class="container">
+=======
+<div class="container col-md-10 col-lg-10 ">
+>>>>>>> eduardo
     <div class="row mt-3">
         <div class="col-md-12 ">
             <ol class="breadcrumb">
@@ -32,6 +36,45 @@
                     <form role="form" method="POST" action="{{ Route('movimentacoes.store') }}">
                         {!! csrf_field() !!}
 
+<<<<<<< HEAD
+=======
+                        @if(!isset($atividade))
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label text-lg-right">Atividade</label>
+                                <div class="col-lg-6">
+
+                                    <select name="id_atividades_atividades" class="form-control" id="exampleSelect1" required="">
+                                        <option value="">Selecione</option>
+                                        @foreach($atividades as $atividade)
+                                            <option value="{{$atividade->id_atividades}}">{{$atividade->descricao}}</option>
+                                        @endforeach
+                                    </select>
+
+                                    @if ($errors->has('id_atividades_atividades'))
+                                        <div class="invalid-feedback">
+                                            <strong>{{ $errors->first('id_atividades_atividades') }}</strong>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                        @else
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label text-lg-right">Atividade</label>
+                                <div class="col-lg-2">
+
+
+                                    <input name="id_atividades_atividades" class="form-control" value="{{$atividade}}" id="readOnlyInput" type="text" placeholder="Readonly input here…" readonly="">
+
+
+                                    @if ($errors->has('id_atividades_atividades'))
+                                        <div class="invalid-feedback">
+                                            <strong>{{ $errors->first('id_atividades_atividades') }}</strong>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                        @endif
+>>>>>>> eduardo
 
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Item</label>
@@ -50,6 +93,7 @@
                             </div>
                         </div>
 
+<<<<<<< HEAD
 
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Valor total</label>
@@ -71,14 +115,22 @@
                             </div>
                         </div>
 
+=======
+>>>>>>> eduardo
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Quantidade</label>
                             <div class="col-lg-2">
                                 <div class="input-group mb-3">
                                     <input
+<<<<<<< HEAD
                                         class="form-control"
                                         type="text"
                                         name="quantidade"
+=======
+                                            class="form-control"
+                                            type="text"
+                                            name="quantidade"
+>>>>>>> eduardo
                                     >
 
                                 </div>
@@ -91,6 +143,7 @@
                             </div>
                         </div>
 
+<<<<<<< HEAD
                         @if(!isset($atividade))
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Atividade</label>
@@ -122,13 +175,33 @@
                                 @if ($errors->has('id_atividades_atividades'))
                                     <div class="invalid-feedback">
                                         <strong>{{ $errors->first('id_atividades_atividades') }}</strong>
+=======
+                        <div class="form-group row">
+                            <label class="col-lg-4 col-form-label text-lg-right">Valor total</label>
+                            <div class="col-lg-3">
+                                <div class="input-group mb-3">
+                                    <input  onkeyup="mascara_num(this);"
+                                            class="form-control"
+                                            type="text"
+                                            name="custo"
+                                            required
+                                    >
+                                </div>
+
+                                @if ($errors->has('custo'))
+                                    <div class="invalid-feedback">
+                                        <strong>{{ $errors->first('custo') }}</strong>
+>>>>>>> eduardo
                                     </div>
                                 @endif
                             </div>
                         </div>
+<<<<<<< HEAD
                         @endif
 
 
+=======
+>>>>>>> eduardo
 
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Descrição</label>

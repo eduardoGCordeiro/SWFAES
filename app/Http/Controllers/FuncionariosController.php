@@ -12,6 +12,10 @@ use Yajra\Datatables\Datatables;
 use Session;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
+<<<<<<< HEAD
+=======
+use Illuminate\Support\Facades\Auth;
+>>>>>>> eduardo
 
 
 class FuncionariosController extends Controller
@@ -84,6 +88,13 @@ class FuncionariosController extends Controller
         if (Gate::denies('gerenciar-funcionarios')) {
             return abort(403);
         }
+<<<<<<< HEAD
+=======
+        $this->validate($request, ['cpf' => 'unique:funcionarios'], ['cpf.unique' => 'O campo :attribute deve ser único!']);
+        $this->validate($request, ['login' => 'unique:funcionarios'], ['login.unique' => 'O campo :attribute deve ser único!']);
+        $this->validate($request, ['email' => 'unique:funcionarios'], ['email.unique' => 'O campo :attribute deve ser único!']);
+        
+>>>>>>> eduardo
         $funcionario = new Funcionario();
         $funcionario->nome = strtoupper($request->nome);
         $funcionario->cpf = $request->cpf;
@@ -160,6 +171,7 @@ class FuncionariosController extends Controller
         if (Gate::denies('gerenciar-funcionarios')) {
             return abort(403);
         }
+<<<<<<< HEAD
 
 
         Validator::make($request->all() , [
@@ -177,12 +189,20 @@ class FuncionariosController extends Controller
                 Rule::unique('funcionarios')->ignore($funcionario->id, 'id_funcionarios'),]
         ], ['O campo :attribute deve ser único!']);
 
+=======
+>>>>>>> eduardo
         $funcionario->nome= strtoupper($request->nome);
         $funcionario->login= ($request->login);
         $funcionario->cpf= ($request->cpf);
         $funcionario->email= strtolower($request->email);
+<<<<<<< HEAD
         $funcionario->acesso_sistema = $request->acesso_sistema=="on"?TRUE:FALSE;
 
+=======
+        if(Auth::user()->cpf != $request->cpf) {
+            $funcionario->acesso_sistema = $request->acesso_sistema == "on" ? TRUE : FALSE;
+        }
+>>>>>>> eduardo
         if($funcionario->update()){
             Session::flash('alert-success', 'Funcionário editado com sucesso!');
             return redirect()->route('funcionarios.index');

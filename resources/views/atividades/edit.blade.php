@@ -36,9 +36,10 @@
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Data</label>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
                                 <input
                                         type="date"
+                                        style="padding-left: 15%"
                                         class="form-control{{ $errors->has('data') ? ' is-invalid' : '' }}"
                                         name="data"
                                         value="{{ $atividade->data }}"
@@ -53,31 +54,10 @@
                         </div>
 
 
-
-                        <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">Descrição</label>
-
-                            <div class="col-lg-6">
-                                <textarea
-                                    class="form-control"
-                                    id="exampleTextarea"
-                                    rows="3"
-                                    name="descricao"
-
-                                >{{$atividade->descricao}}</textarea>
-                                @if ($errors->has('descricao'))
-                                    <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('descricao') }}</strong>
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-
-
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Tipo de Atividade</label>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
                                 <select required="" name="tipo_atividade" class="form-control" id="select_tipos">
                                     <option value="">Selecione</option>
                                     @foreach($tipos_atividades as $tipo)
@@ -99,13 +79,11 @@
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Talhão</label>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
                                 <select name="talhao" class="form-control" id="select_talhoes">
                                     <option value="">Selecione</option>
                                     @foreach($talhoes as $talhao)
                                     <option value="{{$talhao->id_talhoes}}">{{$talhao->identificador}}</option>
-
-
                                     @endforeach
 
                                 </select>
@@ -120,17 +98,22 @@
 
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Cultura</label>
-
-                            <div class="col-lg-6">
-                                <select name="cultura" class="form-control" id="select_culturas">
-                                    <option value="">Selecione</option>
-                                    @foreach($culturas as $cultura)
-                                    <option value="{{$cultura->id_culturas}}">{{$cultura->id_culturas}}</option>
-
-
-                                    @endforeach
-
-                                </select>
+                            <div class="col-lg-5">
+                                @if($atividade->id_culturas_culturas == null)
+                                    <select name="cultura" class="form-control">
+                                        <option value="">Selecione</option>
+                                        @foreach($culturas as $cultura)
+                                            <option value="{{$cultura->id_culturas}}">{{$cultura->descricao}}</option>
+                                        @endforeach
+                                    </select>
+                                @else
+                                    <select name="cultura" class="form-control" id="select_culturas">
+                                        <option value="">Selecione</option>
+                                        @foreach($culturas as $cultura)
+                                            <option value="{{$cultura->id_culturas}}">{{$cultura->descricao}}</option>
+                                        @endforeach
+                                    </select>
+                                @endif
 
                                 @if ($errors->has('cultura'))
                                     <div class="invalid-feedback">
@@ -141,6 +124,24 @@
                         </div>
 
 
+                        <div class="form-group row">
+                            <label class="col-lg-4 col-form-label text-lg-right">Descrição</label>
+
+                            <div class="col-lg-6">
+                                <textarea
+                                        class="form-control"
+                                        id="exampleTextarea"
+                                        rows="3"
+                                        name="descricao"
+
+                                >{{$atividade->descricao}}</textarea>
+                                @if ($errors->has('descricao'))
+                                    <div class="invalid-feedback">
+                                        <strong>{{ $errors->first('descricao') }}</strong>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
 
 
                         <div class="form-group row">

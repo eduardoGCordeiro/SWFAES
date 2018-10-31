@@ -45,11 +45,8 @@ class atividadesController extends Controller
                     if($atividade->cultura){
                         return $atividade->cultura['descricao'];
                     }else {
-                        return "SEM CULTURA";
+                        return "Sem Cultura";
                     }
-                })
-                ->editColumn('tipo', function($atividade){
-                    return $atividade->talhao['tipo'];
                 })
                 ->addColumn('action', function ($atividade) {
                     return '<div class = "col-md-10 offset-1">'. '<div class="panel-footer row" style="margin-left: 18%"><!-- panel-footer -->'.'<div class="col-xs-6 text-center">'.'<div class="previous">'.'<a href="'.Route('atividades.edit',[$atividade->id_atividades]).'" class="btn btn-primary"><i class="fas fa-edit"></i>Editar</a>'.'</div>
@@ -112,7 +109,7 @@ class atividadesController extends Controller
         if(!$cultura){
             $atividade->id_culturas_culturas =null;
         }else{
-            $atividade->id_culturas_culturas =  $cultura->id_culturas;
+            $atividade->id_culturas_culturas = $cultura->id_culturas;
         }
 
         $atividade->data = $request->data;

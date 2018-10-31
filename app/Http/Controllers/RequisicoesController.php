@@ -110,7 +110,11 @@ class RequisicoesController extends Controller
 
         $talhoes = Talhao::where('id_adms_talhoes_adms_talhoes',$adm->id_adms_talhoes)->get();
 
-        if(!$adm || !count($talhoes)){
+        if(!$adm){
+            if(count($talhoes) == 0){
+                Session::flash('alert-danger', 'Você não pode cadastrar requisicao pois não possui talhões!');
+                return redirect()->route('requisicoes.index');
+            }
             Session::flash('alert-danger', 'Você não pode cadastrar requisicao pois não é administrador de talhões!');
             return redirect()->route('requisicoes.index');
         }

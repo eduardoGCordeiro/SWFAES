@@ -30,7 +30,7 @@
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Identificação</label>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
                                 <input
                                         type="text"
                                         class="form-control{{ $errors->has('identificador') ? ' is-invalid' : '' }}"
@@ -49,7 +49,7 @@
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Administrador do talhão</label>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-5">
                                     <select class="form-control" id="exampleFormControlSelect1" name="id_adms_talhoes_adms_talhoes">
                                         @foreach($adms_talhoes as $adm_talhao)
                                             <option value="{{$adm_talhao->id_adms_talhoes}}">{{$adm_talhao->funcionarios->login}}</option>
@@ -68,7 +68,7 @@
 
                             <label class="col-lg-4 col-form-label text-lg-right">Área</label>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
 
                                 <div class="input-group">
                                     <input class="form-control" type="text" name="area" value="{{$talhoes->area}}">

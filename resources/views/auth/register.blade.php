@@ -21,7 +21,7 @@
 
 
                 <div class="card-body col-md-8 offset-lg-2" >
-                    <form role="form" method="POST" action="{{ Route('funcionarios.store')}}">
+                    <form role="form" method="POST" action="{{ Route('funcionarios.store')}}" name="form_funcionarios">
                         {!! csrf_field() !!}
 
                         <div class="form-group row">
@@ -33,7 +33,7 @@
                                         class="form-control{{ $errors->has('nome') ? ' is-invalid' : '' }}"
                                         name="nome"
                                         value="{{ old('nome') }}"
-                                        placeholder="João da Silva"
+                                        placeholder="Insira seu nome"
                                         required
                                 >
                                 @if ($errors->has('nome'))
@@ -53,7 +53,7 @@
                                         class="form-control{{ $errors->has('login') ? ' is-invalid' : '' }}"
                                         name="login"
                                         value="{{ old('login') }}"
-                                        placeholder="joaodasilva"
+                                        placeholder="Insira seu login"
                                         required
                                 >
                                 @if ($errors->has('login'))
@@ -72,8 +72,9 @@
                                         type="text"
                                         class="form-control{{ $errors->has('cpf') ? ' is-invalid' : '' }}"
                                         name="cpf"
+                                        maxlength="11"
                                         value="{{ old('cpf') }}"
-                                        placeholder="99999999999"
+                                        placeholder="999.999.999-99"
                                         required
                                 >
                                 @if ($errors->has('cpf'))
@@ -185,9 +186,6 @@
                 document.getElementById("password_confirmation").removeAttribute("disabled","true");
             }
         }
-
-
     </script>
-
 
 @endsection

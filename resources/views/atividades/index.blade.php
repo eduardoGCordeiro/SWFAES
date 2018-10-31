@@ -42,7 +42,6 @@
                             <th scope="col">Data</th>
                             <th scope="col">Talhão</th>
                             <th scope="col">Cultura</th>
-                            <th scope="col">Tipo</th>
                             @if (Auth::user()->can('gerenciar-atividades'))
                             <th scope="col" class="text-center">Ações</th>
                             @endif
@@ -92,11 +91,10 @@ $(document).ready(function() {
         columns: [
 
             {data: 'id_atividades', name: 'id_atividades'},
-            {data: 'descricao', name: 'descricao'},
+            {data: 'descricao', name: 'descricao', render: $.fn.dataTable.render.ellipsis()},
             {data: 'data', name: 'data'},
             {data: 'id_talhoes_talhoes', name: 'id_talhoes_talhoes'},
             {data: 'id_culturas_culturas', name: 'id_culturas_culturas'},
-            {data: 'tipo', name: 'tipo'},
             @if (Auth::user()->can('gerenciar-atividades'))
             {data: 'action', name: 'action', orderable: false, searchable: false}
             @endif
@@ -110,6 +108,13 @@ $(document).ready(function() {
         ]
     });
 });
+$.fn.dataTable.render.ellipsis = function () {
+    return function ( data, type, row ) {
+        return type === 'display' && data.length > 10 ?
+            data.substr( 0, 33) +'…' :
+            data;
+    }
+};
 </script>
 @endsection
 

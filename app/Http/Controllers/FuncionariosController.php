@@ -88,6 +88,9 @@ class FuncionariosController extends Controller
         $this->validate($request, ['cpf' => 'unique:funcionarios'], ['cpf.unique' => 'O campo :attribute deve ser único!']);
         $this->validate($request, ['login' => 'unique:funcionarios'], ['login.unique' => 'O campo :attribute deve ser único!']);
         $this->validate($request, ['email' => 'unique:funcionarios'], ['email.unique' => 'O campo :attribute deve ser único!']);
+
+        $request->cpf = str_replace(".","-", $request->cpf);
+        $request->cpf = str_replace("-","", $request->cpf);
         
         $funcionario = new Funcionario();
         $funcionario->nome = strtoupper($request->nome);

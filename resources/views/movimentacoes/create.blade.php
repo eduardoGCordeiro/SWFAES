@@ -71,7 +71,7 @@
 
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Item</label>
-                            <div class="col-lg-6">
+                            <div class="col-lg-5">
                                 <select name="id_itens_itens" class="form-control" id="exampleSelect1" required="">
                                     @foreach($item as $itens)
                                         <option value="{{$itens->id_itens}}">{{$itens->nome}}</option>
@@ -88,7 +88,7 @@
 
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Quantidade</label>
-                            <div class="col-lg-2">
+                            <div class="col-lg-3">
                                 <div class="input-group mb-3">
                                     <input
                                             class="form-control"
@@ -101,6 +101,26 @@
                                 @if ($errors->has('quantidade'))
                                     <div class="invalid-feedback">
                                         <strong>{{ $errors->first('quantidade') }}</strong>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-lg-4 col-form-label text-lg-right">Custo</label>
+                            <div class="col-lg-3">
+                                <div class="input-group mb-3">
+                                    <input onkeyup="mascara_num(this);"
+                                           class="form-control"
+                                           type="text"
+                                           name="custo"
+                                           value=""
+                                    >
+                                </div>
+
+                                @if ($errors->has('custo'))
+                                    <div class="invalid-feedback">
+                                        <strong>{{ $errors->first('custo') }}</strong>
                                     </div>
                                 @endif
                             </div>

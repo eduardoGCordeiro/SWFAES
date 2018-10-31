@@ -23,9 +23,28 @@
                         {{ method_field('PUT') }}
                         {!! csrf_field() !!}
 
+
+                        <div class="form-group row">
+                            <label class="col-lg-4 col-form-label text-lg-right">Atividade</label>
+                            <div class="col-lg-5">
+                                <select name="id_atividades_atividades" class="form-control" id="exampleSelect1">
+                                        <option value="">Selecione</option>
+                                    @foreach($atividades as $atividade)
+                                        <option value="{{$atividade->id_atividades}}">{{$atividade->descricao}}</option>
+                                    @endforeach
+                                </select>
+
+                                @if ($errors->has('id_atividades_atividades'))
+                                    <div class="invalid-feedback">
+                                        <strong>{{ $errors->first('id_atividades_atividades') }}</strong>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Item</label>
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
                                 <select name="id_itens_itens" class="form-control" id="item_select">
                                     @foreach($item as $itens)
                                         <option value="{{$itens->id_itens}}">{{$itens->nome}}</option>
@@ -40,30 +59,9 @@
                             </div>
                         </div>
 
-
-                        <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">Custo</label>
-                            <div class="col-lg-6">
-                                <div class="input-group mb-3">
-                                    <input onkeyup="mascara_num(this);"
-                                           class="form-control"
-                                           type="text"
-                                           name="custo"
-                                           value=""
-                                    >
-                                </div>
-
-                                @if ($errors->has('custo'))
-                                    <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('custo') }}</strong>
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Quantidade</label>
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
                                 <div class="input-group mb-3">
                                     <input
                                             class="form-control"
@@ -81,25 +79,25 @@
                             </div>
                         </div>
 
-
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">Atividade</label>
-                            <div class="col-lg-6">
-                                <select name="id_atividades_atividades" class="form-control" id="exampleSelect1">
-                                        <option value="">Selecione</option>
-                                    @foreach($atividades as $atividade)
-                                        <option value="{{$atividade->id_atividades}}">{{$atividade->id_atividades}}</option>
-                                    @endforeach
-                                </select>
+                            <label class="col-lg-4 col-form-label text-lg-right">Custo</label>
+                            <div class="col-lg-3">
+                                <div class="input-group mb-3">
+                                    <input onkeyup="mascara_num(this);"
+                                           class="form-control"
+                                           type="text"
+                                           name="custo"
+                                           value=""
+                                    >
+                                </div>
 
-                                @if ($errors->has('id_atividades_atividades'))
+                                @if ($errors->has('custo'))
                                     <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('id_atividades_atividades') }}</strong>
+                                        <strong>{{ $errors->first('custo') }}</strong>
                                     </div>
                                 @endif
                             </div>
                         </div>
-
 
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Descrição</label>
@@ -121,13 +119,13 @@
                             </div>
                         </div>
 
-
+                        @if($movimentacao->tipo_movimentacoes == "E")
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Tipo de movimentação</label>
                             <div class="col-lg-4">
 
                                 <div class="custom-control custom-radio">
-                                    <input id="customRadio1"  name="tipo_movimentacoes" class="custom-control-input" type="radio" value="E">
+                                    <input id="customRadio1" checked="" name="tipo_movimentacoes" class="custom-control-input" type="radio" value="E">
                                     <label class="custom-control-label" for="customRadio1">Entrada</label>
                                 </div>
 
@@ -137,6 +135,23 @@
                                 </div>
                             </div>
                         </div>
+                        @else
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label text-lg-right">Tipo de movimentação</label>
+                                <div class="col-lg-4">
+
+                                    <div class="custom-control custom-radio">
+                                        <input id="customRadio1" name="tipo_movimentacoes" class="custom-control-input" type="radio" value="E">
+                                        <label class="custom-control-label" for="customRadio1">Entrada</label>
+                                    </div>
+
+                                    <div class="custom-control custom-radio">
+                                        <input id="customRadio2" checked="" name="tipo_movimentacoes" class="custom-control-input" type="radio" value="S">
+                                        <label class="custom-control-label" for="customRadio2">Saída</label>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
 
 
                         <div class="form-group row">

@@ -43,7 +43,7 @@
                     <div class="panel-footer row"><!-- panel-footer -->
                         <div class="col-xs-6 text-left">
                             <div class="previous">
-                                <a href="{{Route('talhoes.edit',[$talhao->id_talhoes])}}" class="btn btn-primary">Editar</a>
+                                <a href="{{Route('talhoes.edit',[$talhao->id_talhoes])}}" class="btn btn-primary">Alterar</a>
                             </div>
                         </div>
                         <div class="col-xs-6 text-right">

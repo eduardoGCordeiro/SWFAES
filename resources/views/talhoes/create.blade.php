@@ -37,7 +37,7 @@
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Identificação</label>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
                                 <input
                                         type="text"
                                         class="form-control{{ $errors->has('identificador') ? ' is-invalid' : '' }}"
@@ -55,7 +55,7 @@
 
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Administrador do talhão</label>
-                            <div class="col-lg-6">
+                            <div class="col-lg-5">
                                 <select class="form-control" id="exampleFormControlSelect1" name="id_adms_talhoes_adms_talhoes" required="">
                                     @foreach($adms_talhoes as $adm_talhao)
                                         <option value="{{$adm_talhao->id_adms_talhoes}}">{{$adm_talhao->funcionarios->login}}</option>
@@ -74,7 +74,7 @@
 
                             <label class="col-lg-4 col-form-label text-lg-right">Área</label>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
 
                                 <div class="input-group">
                                     <input class="form-control{{ $errors->has('area') ? ' is-invalid' : '' }}" type="text" name="area" required>
@@ -127,7 +127,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-lg-6 offset-lg-6">
+                            <div class="col-lg-6 offset-4">
                                 <button type="submit" class="btn btn-primary">
                                     Cadastrar
                                 </button>

@@ -136,6 +136,9 @@ class RequisicoesController extends Controller
         //dd($adm_talhao);
         //if($adm_talhao && )
         $requisicao = new Requisicao();
+
+        $requisicao -> descricao_adms_gerais = $request->descricao_adms_gerais;
+        $requisicao -> resposta = $request->resposta;
         $requisicao->id_adms_talhoes_adms_talhoes = $adm_talhao->id_adms_talhoes;
         $requisicao->descricao = strtoupper($request->descricao);
         $requisicao->id_talhoes_talhoes = $request->talhao;

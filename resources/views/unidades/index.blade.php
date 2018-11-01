@@ -52,7 +52,7 @@
 
                             <th scope="col">Nome</th>
                             <th scope="col">Sigla</th>
-                            <th scope="col">Ações</th>
+                            <th scope="col" style="margin-left: 50%">Ações</th>
 
                         </tr>
                       </thead>

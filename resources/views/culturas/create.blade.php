@@ -112,6 +112,7 @@
 
                             <div class="col-lg-6">
                                 <textarea
+                                        placeholder="Insira a descrição da atividade..."
                                         class="form-control"
                                         id="exampleTextarea"
                                         rows="3"

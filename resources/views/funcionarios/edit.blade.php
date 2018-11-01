@@ -43,8 +43,9 @@
                                         type="text"
                                         class="form-control{{ $errors->has('nome') ? ' is-invalid' : '' }}"
                                         name="nome"
+                                        maxlength="45"
                                         value="{{ $funcionario->nome }}"
-                                        placeholder="João da Silva"
+                                        placeholder="Insira seu nome"
                                         required
                                 >
                                 @if ($errors->has('nome'))
@@ -63,8 +64,9 @@
                                         type="text"
                                         class="form-control{{ $errors->has('login') ? ' is-invalid' : '' }}"
                                         name="login"
+                                        maxlength="45"
                                         value="{{ $funcionario->login }}"
-                                        placeholder="joaodasilva"
+                                        placeholder="Insira seu login"
                                         required
                                 >
                                 @if ($errors->has('login'))
@@ -83,8 +85,11 @@
                                         type="text"
                                         class="form-control{{ $errors->has('cpf') ? ' is-invalid' : '' }}"
                                         name="cpf"
+                                        maxlength="11"
+                                        pattern = "^[0-9]+$"
+                                        onkeyup="numeros(this)"
                                         value="{{ $funcionario->cpf }}"
-                                        placeholder="99999999999"
+                                        placeholder="Insira seu cpf"
                                         required
                                 >
                                 @if ($errors->has('cpf'))
@@ -104,6 +109,7 @@
                                         class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
                                         name="email"
                                         value="{{ $funcionario->email }}"
+                                        maxlength="45"
                                         placeholder="exemplo@mail.com"
                                         required
                                 >
@@ -166,6 +172,11 @@
 
     document.getElementById('acesso_sistema').checked={{$funcionario->acesso_sistema}};
 
+    function numeros( campo )
+    {
+        if ( isNaN( campo.value ) )
+            campo.value = campo.value.substr( 0 , campo.value.length - 1 );
+    }
 
 </script>
 

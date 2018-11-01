@@ -81,7 +81,8 @@ class TalhoesController extends Controller
         $talhao = new Talhao();
         $talhao->identificador = strtoupper($request->identificador);
         $talhao->tipo = $request->tipo;
-        $talhao->area = $request->area;
+        $talhao->area= str_replace('.','',$request->area);
+        $talhao->area =str_replace(',', '.',$talhao->area);
         $talhao->descricao = $request->descricao;
         $talhao->id_adms_talhoes_adms_talhoes = $request->id_adms_talhoes_adms_talhoes;
 
@@ -123,7 +124,8 @@ class TalhoesController extends Controller
         }
         $talhoes = Talhao::find($id);
         $adms_talhoes = AdmTalhao::all();
-        return view('talhoes.edit')->with(compact('talhoes','adms_talhoes'));;
+        $adms_talhoes_nome = AdmTalhao::where('id_adms_talhoes',$talhoes->id_adms_talhoes_adms_talhoes)->first();
+        return view('talhoes.edit')->with(compact('talhoes','adms_talhoes', 'adms_talhoes_nome'));
     }
 
     /**

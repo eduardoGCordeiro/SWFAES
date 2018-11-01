@@ -32,6 +32,7 @@
                                         type="text"
                                         class="form-control{{ $errors->has('nome') ? ' is-invalid' : '' }}"
                                         name="nome"
+                                        maxlength="45"
                                         value="{{ old('nome') }}"
                                         placeholder="Insira seu nome"
                                         required
@@ -45,6 +46,28 @@
                         </div>
 
                         <div class="form-group row">
+                            <label class="col-lg-4 col-form-label text-lg-right">E-Mail</label>
+
+                            <div class="col-lg-6">
+                                <input
+                                        type="email"
+                                        class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
+                                        name="email"
+                                        maxlength="45"
+                                        value="{{ old('email') }}"
+                                        placeholder="exemplo@mail.com"
+                                        required
+                                >
+
+                                @if ($errors->has('email'))
+                                    <div class="invalid-feedback">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Login</label>
 
                             <div class="col-lg-3">
@@ -52,6 +75,7 @@
                                         type="text"
                                         class="form-control{{ $errors->has('login') ? ' is-invalid' : '' }}"
                                         name="login"
+                                        maxlength="45"
                                         value="{{ old('login') }}"
                                         placeholder="Insira seu login"
                                         required
@@ -73,34 +97,15 @@
                                         class="form-control{{ $errors->has('cpf') ? ' is-invalid' : '' }}"
                                         name="cpf"
                                         maxlength="11"
+                                        pattern = "^[0-9]+$"
+                                        onkeyup="numeros(this)"
                                         value="{{ old('cpf') }}"
-                                        placeholder="999.999.999-99"
+                                        placeholder="Insira seu CPF"
                                         required
                                 >
                                 @if ($errors->has('cpf'))
                                     <div class="invalid-feedback">
                                         <strong>{{ $errors->first('cpf') }}</strong>
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">E-Mail</label>
-
-                            <div class="col-lg-6">
-                                <input
-                                        type="email"
-                                        class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
-                                        name="email"
-                                        value="{{ old('email') }}"
-                                        placeholder="exemplo@mail.com"
-                                        required
-                                >
-
-                                @if ($errors->has('email'))
-                                    <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('email') }}</strong>
                                     </div>
                                 @endif
                             </div>
@@ -115,6 +120,7 @@
                                         id="password"
                                         class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
                                         name="password"
+                                        maxlength="60"
                                         placeholder="********"
                                         required
                                 >
@@ -135,6 +141,7 @@
                                         id="password_confirmation"
                                         class="form-control{{ $errors->has('password_confirmation') ? ' is-invalid' : '' }}"
                                         name="password_confirmation"
+                                        maxlength="60"
                                         placeholder="********"
                                         required
                                 >
@@ -185,6 +192,12 @@
                 document.getElementById("password").removeAttribute("disabled","true");
                 document.getElementById("password_confirmation").removeAttribute("disabled","true");
             }
+        }
+
+        function numeros( campo )
+        {
+            if ( isNaN( campo.value ) )
+                campo.value = campo.value.substr( 0 , campo.value.length - 1 );
         }
     </script>
 

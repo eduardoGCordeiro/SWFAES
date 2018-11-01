@@ -64,6 +64,8 @@
                             <div class="col-lg-3">
                                 <div class="input-group mb-3">
                                     <input
+                                            placeholder="00.00"
+                                            onkeyup="mascara_num(this);"
                                             class="form-control"
                                             type="text"
                                             name="quantidade"
@@ -83,11 +85,16 @@
                             <label class="col-lg-4 col-form-label text-lg-right">Custo</label>
                             <div class="col-lg-3">
                                 <div class="input-group mb-3">
-                                    <input onkeyup="mascara_num(this);"
-                                           class="form-control"
-                                           type="text"
-                                           name="custo"
-                                           value=""
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">R$</span>
+                                    </div>
+                                    <input
+                                            placeholder="00.00"
+                                            onkeyup="mascara_num(this);"
+                                            class="form-control"
+                                            type="text"
+                                            name="custo"
+                                            value="{{$movimentacao->custo}}"
                                     >
                                 </div>
 
@@ -104,6 +111,7 @@
 
                             <div class="col-lg-6">
                                 <textarea
+                                        placeholder="Insira a descrição da movimentação aqui..."
                                         class="form-control"
                                         id="exampleTextarea"
                                         rows="3"

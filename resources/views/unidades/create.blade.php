@@ -37,6 +37,7 @@
 
                             <div class="col-lg-4">
                                 <input
+                                        placeholder="Insira o nome da unidade"
                                         type="text"
                                         class="form-control{{ $errors->has('nome') ? ' is-invalid' : '' }}"
                                         name="nome"
@@ -56,6 +57,7 @@
 
                             <div class="col-lg-2">
                                 <input
+                                        placeholder="Sigla"
                                         type="text"
                                         class="form-control{{ $errors->has('sigla') ? ' is-invalid' : '' }}"
                                         name="sigla"

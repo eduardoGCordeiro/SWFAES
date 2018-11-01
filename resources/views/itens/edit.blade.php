@@ -30,6 +30,7 @@
 
                             <div class="col-lg-5">
                                 <input
+                                        placeholder="Insira o nome do item aqui"
                                         type="text"
                                         class="form-control{{ $errors->has('nome') ? ' is-invalid' : '' }}"
                                         name="nome"

@@ -37,7 +37,7 @@
                                 <label class="col-lg-4 col-form-label text-lg-right">Atividade</label>
                                 <div class="col-lg-6">
 
-                                    <select name="id_atividades_atividades" class="form-control" id="exampleSelect1" required="">
+                                    <select name="id_atividades_atividades" class="form-control" id="exampleSelect1">
                                         <option value="">Selecione</option>
                                         @foreach($atividades as $atividade)
                                             <option value="{{$atividade->id_atividades}}">{{$atividade->descricao}}</option>
@@ -91,8 +91,10 @@
                             <div class="col-lg-3">
                                 <div class="input-group mb-3">
                                     <input
+                                            placeholder="00.00"
                                             class="form-control"
                                             type="text"
+                                            onkeyup="mascara_num(this);"
                                             name="quantidade"
                                     >
 
@@ -110,31 +112,16 @@
                             <label class="col-lg-4 col-form-label text-lg-right">Custo</label>
                             <div class="col-lg-3">
                                 <div class="input-group mb-3">
-                                    <input onkeyup="mascara_num(this);"
-                                           class="form-control"
-                                           type="text"
-                                           name="custo"
-                                           value=""
-                                    >
-                                </div>
-
-                                @if ($errors->has('custo'))
-                                    <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('custo') }}</strong>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">R$</span>
                                     </div>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">Valor total</label>
-                            <div class="col-lg-3">
-                                <div class="input-group mb-3">
-                                    <input  onkeyup="mascara_num(this);"
+                                    <input
+                                            placeholder="00.00"
+                                            onkeyup="mascara_num(this);"
                                             class="form-control"
                                             type="text"
                                             name="custo"
-                                            required
+                                            value=""
                                     >
                                 </div>
 
@@ -151,6 +138,7 @@
 
                             <div class="col-lg-6">
                                 <textarea
+                                        placeholder="Insira a descrição da movimentação aqui..."
                                         class="form-control"
                                         id="exampleTextarea"
                                         rows="3"
@@ -202,44 +190,44 @@
 @section('script')
     <script language="javascript">
         function mascara_num(obj){
-  valida_num(obj)
-  if (obj.value.match("-")){
-    mod = "-";
-  }else{
-    mod = "";
-  }
-  valor = obj.value.replace("-","");
-  valor = valor.replace(",","");
-  if (valor.length >= 3){
-    valor = poe_ponto_num(valor.substring(0,valor.length-2))+","+valor.substring(valor.length-2, valor.length);
-  }
-  obj.value = mod+valor;
-}
-function poe_ponto_num(valor){
-  valor = valor.replace(/\./g,"");
-  if (valor.length > 3){
-    valores = "";
-    while (valor.length > 3){
-      valores = "."+valor.substring(valor.length-3,valor.length)+""+valores;
-      valor = valor.substring(0,valor.length-3);
-    }
-    return valor+""+valores;
-  }else{
-    return valor;
-  }
-}
-function valida_num(obj){
-  numeros = new RegExp("[0-9]");
-  while (!obj.value.charAt(obj.value.length-1).match(numeros)){
-    if(obj.value.length == 1 && obj.value == "-"){
-      return true;
-    }
-    if(obj.value.length >= 1){
-      obj.value = obj.value.substring(0,obj.value.length-1)
-    }else{
-      return false;
-    }
-  }
-}
+            valida_num(obj)
+            if (obj.value.match("-")){
+                mod = "-";
+            }else{
+                mod = "";
+            }
+            valor = obj.value.replace("-","");
+            valor = valor.replace(",","");
+            if (valor.length >= 3){
+                valor = poe_ponto_num(valor.substring(0,valor.length-2))+","+valor.substring(valor.length-2, valor.length);
+            }
+            obj.value = mod+valor;
+        }
+        function poe_ponto_num(valor){
+            valor = valor.replace(/\./g,"");
+            if (valor.length > 3){
+                valores = "";
+                while (valor.length > 3){
+                    valores = "."+valor.substring(valor.length-3,valor.length)+""+valores;
+                    valor = valor.substring(0,valor.length-3);
+                }
+                return valor+""+valores;
+            }else{
+                return valor;
+            }
+        }
+        function valida_num(obj){
+            numeros = new RegExp("[0-9]");
+            while (!obj.value.charAt(obj.value.length-1).match(numeros)){
+                if(obj.value.length == 1 && obj.value == "-"){
+                    return true;
+                }
+                if(obj.value.length >= 1){
+                    obj.value = obj.value.substring(0,obj.value.length-1)
+                }else{
+                    return false;
+                }
+            }
+        }
     </script>
 @endsection

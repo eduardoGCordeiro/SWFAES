@@ -107,6 +107,7 @@
 
                             <div class="col-lg-6">
                                 <textarea
+                                        placeholder="Insira a descrição da atividade..."
                                         class="form-control"
                                         id="exampleTextarea"
                                         rows="3"
@@ -120,21 +121,21 @@
                                 @endif
                             </div>
                         </div>
-                    </form>
 
+                        <div class = "col-md-10 offset-3" style="padding-bottom: 5%; padding-left:7%;">
+                            <div class="panel-footer row"><!-- panel-footer -->
+                                <div class="col-xs-6 text-left">
+                                    <div class="form-group row">
+                                        <div class="col-lg-6 offset-lg-4">
+                                            <button type="submit" class="btn btn-primary">
+                                                Alterar
+                                            </button>
 
-                    <div class = "col-md-10 offset-3" style="padding-bottom: 5%; padding-left:7%;">
-                        <div class="panel-footer row"><!-- panel-footer -->
-                            <div class="col-xs-6 text-left">
-                                <div class="form-group row">
-                                    <div class="col-lg-6 offset-lg-4">
-                                        <button type="submit" class="btn btn-primary">
-                                            Alterar
-                                        </button>
-
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                    </form>
+
                             <div class="col-xs-6 text-right">
                                 <div class="next offset-1">
                                     <form method="POST" action="{{Route('finalizar_culturas',$cultura->id_culturas)}}">

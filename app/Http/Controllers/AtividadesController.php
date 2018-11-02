@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Atividade;
+use App\Http\Requests\CulturasRequest;
+use App\Http\Requests\TalhoesRequest;
 use App\TipoAtividades;
 use App\Talhao;
 use App\Movimentacao;
@@ -44,8 +46,6 @@ class atividadesController extends Controller
                 ->editColumn('id_culturas_culturas', function($atividade){
                     if($atividade->cultura){
                         return $atividade->cultura['descricao'];
-                    }else {
-                        return "Sem Cultura";
                     }
                 })
                 ->addColumn('action', function ($atividade) {
@@ -179,9 +179,10 @@ class atividadesController extends Controller
         $atividade = Atividade::find($id);
         $tipos_atividades = TipoAtividades::all();
         $talhoes = Talhao::all();
-
         $culturas = Cultura::all();
-        return view('atividades.edit')->with(compact('atividade','tipos_atividades','talhoes','culturas'));
+        $talhao_atividade = Talhao::where('id_talhoes',$atividade->id_talhoes_talhoes)->first();
+
+        return view('atividades.edit')->with(compact('atividade','tipos_atividades','talhoes','culturas', 'talhao_atividade'));
     }
 
     /**
@@ -197,14 +198,18 @@ class atividadesController extends Controller
             return abort(403);
         }
         $atividade = Atividade::find($id);
+        $cultura = Cultura::where([['id_talhoes_talhoes',$request->talhao],['data_fim',NULL]])->first();
+
+        if(!$cultura){
+            $atividade->id_culturas_culturas =null;
+        }else{
+            $atividade->id_culturas_culturas = $cultura->id_culturas;
+        }
 
         $atividade->data = $request->data;
         $atividade->descricao = strtoupper($request->descricao);
         $atividade->id_tipos_atividades_tipos_atividades = $request->tipo_atividade;
         $atividade->id_talhoes_talhoes = $request->talhao;
-        $atividade->id_culturas_culturas = $request->cultura;
-
-
 
         if($atividade->update()){
 

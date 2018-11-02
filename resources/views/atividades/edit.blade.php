@@ -62,8 +62,6 @@
                                     <option value="">Selecione</option>
                                     @foreach($tipos_atividades as $tipo)
                                         <option value="{{$tipo->id_tipos_atividades}}">{{$tipo->nome}}</option>
-
-
                                     @endforeach
 
                                 </select>
@@ -81,10 +79,17 @@
 
                             <div class="col-lg-3">
                                 <select name="talhao" class="form-control" id="select_talhoes">
-                                    <option value="">Selecione</option>
-                                    @foreach($talhoes as $talhao)
-                                    <option value="{{$talhao->id_talhoes}}">{{$talhao->identificador}}</option>
-                                    @endforeach
+                                    @if( $talhao_atividade != null)
+                                        <option value="{{$talhao_atividade->id_talhoes}}">{{$talhao_atividade->identificador}}</option>
+                                        @foreach($talhoes as $talhao)
+                                            <option value="{{$talhao->id_talhoes}}">{{$talhao->identificador}}</option>
+                                        @endforeach
+                                    @else
+                                        <option value="">Selecione</option>
+                                        @foreach($talhoes as $talhao)
+                                            <option value="{{$talhao->id_talhoes}}">{{$talhao->identificador}}</option>
+                                        @endforeach
+                                    @endif
 
                                 </select>
 
@@ -95,34 +100,6 @@
                                 @endif
                             </div>
                         </div>
-
-                        <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">Cultura</label>
-                            <div class="col-lg-5">
-                                @if($atividade->id_culturas_culturas == null)
-                                    <select name="cultura" class="form-control">
-                                        <option value="">Selecione</option>
-                                        @foreach($culturas as $cultura)
-                                            <option value="{{$cultura->id_culturas}}">{{$cultura->descricao}}</option>
-                                        @endforeach
-                                    </select>
-                                @else
-                                    <select name="cultura" class="form-control" id="select_culturas">
-                                        <option value="">Selecione</option>
-                                        @foreach($culturas as $cultura)
-                                            <option value="{{$cultura->id_culturas}}">{{$cultura->descricao}}</option>
-                                        @endforeach
-                                    </select>
-                                @endif
-
-                                @if ($errors->has('cultura'))
-                                    <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('cultura') }}</strong>
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-
 
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Descrição</label>
@@ -164,9 +141,7 @@
 @section('script')
 <script type="text/javascript">
 
-    document.getElementById('select_talhoes').value={{$atividade->talhao->id_talhoes}};
-    document.getElementById('select_culturas').value={{$atividade->cultura->id_culturas}};
-    document.getElementById('select_tipos').value={{$atividade->tipo_atividade->id_tipos_atividades}};
+    document.getElementById('select_tipos').value={{$atividade->tipos_atividades->id_tipos_atividades}};
 
 </script>
 

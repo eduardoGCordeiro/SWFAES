@@ -3,10 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-<<<<<<< HEAD
-=======
+
 use Illuminate\Validation\Rule;
->>>>>>> eduardo
 
 class TalhoesRequest extends FormRequest
 {
@@ -28,12 +26,7 @@ class TalhoesRequest extends FormRequest
     public function rules()
     {
         return [
-<<<<<<< HEAD
-            'identificador' => 'required|regex: /^[a-zA-Z0-9]*$/|,
-=======
-
             'identificador' => 'required|regex: /^[a-zA-Z0-9]*$/|'. Rule::unique('talhoes')->ignore($this->identificador,'identificador'),
->>>>>>> eduardo
             'area' => 'required|regex:/^\d+(\.\d{1,2})?$/',
             'descricao' => 'required|string|max:400',
             'tipo'=>'required|string|max:15',

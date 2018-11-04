@@ -4,13 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Funcionario;
-<<<<<<< HEAD
-=======
 use App\Talhao;
 use App\TipoAtividades;
 use App\TipoItem;
 use App\Item;
->>>>>>> eduardo
 use Auth;
 use Session;
 
@@ -42,9 +39,7 @@ class HomeController extends Controller
             Session::flash('alert-danger', 'Sem acesso ao sistema!');
             return redirect()->route('login');
         }
-<<<<<<< HEAD
-        return view('relatorios');
-=======
+
 
         $talhoes = Talhao::all();
         $tipos_atividades = TipoAtividades::all();
@@ -52,6 +47,5 @@ class HomeController extends Controller
         $itens = Item::all();
 
         return view('relatorios')->with(compact('tipos_atividades','tipos_itens','talhoes','itens'));
->>>>>>> eduardo
     }
 }

@@ -39,10 +39,10 @@ class FuncionariosRequest extends FormRequest
 =======
         return [
 
-            'login'=>'required|max:13|regex:/^[a-z0-9A-Z_]+$/|string|'. Rule::unique('funcionarios')->ignore($this->login,'login'),
-            'nome' => 'required|string|max:45|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/',
+            'login'=>'required|max:45|regex:/^[a-z0-9A-Z_]+$/|string|'. Rule::unique('funcionarios')->ignore($this->login,'login'),
+            'nome' => 'required|string|max:45|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|',
             'email' => 'required|string|email|max:45|'.Rule::unique('funcionarios')->ignore($this->email,'email'),
-            'cpf' => 'required|max:11|min:11|'.Rule::unique('funcionarios')->ignore($this->cpf,'cpf'),
+            'cpf' => 'required|max:11|min:11|regex:/^[0-9]+$/|'.Rule::unique('funcionarios')->ignore($this->cpf,'cpf'),
 
 >>>>>>> eduardo
             'password' => 'string|min:6|confirmed',
@@ -56,12 +56,13 @@ class FuncionariosRequest extends FormRequest
             'cpf.unique' => 'O campo :attribute deve ser único!',
             'cpf.max' => 'O campo :attribute conter 11 caracteres!',
             'cpf.min' => 'O campo :attribute conter 11 caracteres!',
+            'cpf.regex' => 'O campo :attribute conter apenas números!',
             'nome.string' => 'O campo :attribute deve ser uma palavra!',
             'nome.max' => 'O campo :attribute deve ter no máximo 45 letras!',
             'nome.regex' => 'O campo :attribute deve ter apenas letras!',
             'nome.required' => 'O campo :attribute é obrigatório',
             'login.string' => 'O campo :attribute deve ser uma palavra!',
-            'login.max' => 'O campo :attribute deve ter no máximo 13 letras!',
+            'login.max' => 'O campo :attribute deve ter no máximo 45 letras!',
             'login.regex' => 'O campo :attribute deve ter apenas letras!',
             'login.required' => 'O campo :attribute é obrigatório',
             'login.unique' => 'O campo :attribute deve ser único!',

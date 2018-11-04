@@ -8,11 +8,8 @@ use App\Cultura;
 use App\AdmTalhao;
 use App\AdmGeral;
 use App\Funcionario;
-<<<<<<< HEAD
 
-=======
 use App\Http\Requests\RequisicoesRequest;
->>>>>>> eduardo
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use Session;
@@ -114,7 +111,11 @@ class RequisicoesController extends Controller
 
         $talhoes = Talhao::where('id_adms_talhoes_adms_talhoes',$adm->id_adms_talhoes)->get();
 
-        if(!$adm || !count($talhoes)){
+        if(!$adm){
+            if(count($talhoes) == 0){
+                Session::flash('alert-danger', 'Você não pode cadastrar requisicao pois não possui talhões!');
+                return redirect()->route('requisicoes.index');
+            }
             Session::flash('alert-danger', 'Você não pode cadastrar requisicao pois não é administrador de talhões!');
             return redirect()->route('requisicoes.index');
         }
@@ -128,11 +129,8 @@ class RequisicoesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-<<<<<<< HEAD
-    public function store(Request $request)
-=======
+
     public function store(RequisicoesRequest $request)
->>>>>>> eduardo
     {
         $talhao = $request->talhao;
 
@@ -140,6 +138,9 @@ class RequisicoesController extends Controller
         //dd($adm_talhao);
         //if($adm_talhao && )
         $requisicao = new Requisicao();
+
+        $requisicao -> descricao_adms_gerais = $request->descricao_adms_gerais;
+        $requisicao -> resposta = $request->resposta;
         $requisicao->id_adms_talhoes_adms_talhoes = $adm_talhao->id_adms_talhoes;
         $requisicao->descricao = strtoupper($request->descricao);
         $requisicao->id_talhoes_talhoes = $request->talhao;
@@ -159,11 +160,8 @@ class RequisicoesController extends Controller
      * @param  \App\Requisicao  $requisicao
      * @return \Illuminate\Http\Response
      */
-<<<<<<< HEAD
-    public function show(Requisicao $requisicao)
-=======
+
     public function show(RequisicoesRequest $requisicao)
->>>>>>> eduardo
     {
         //
     }
@@ -189,11 +187,8 @@ class RequisicoesController extends Controller
      * @param  \App\Requisicao  $requisicao
      * @return \Illuminate\Http\Response
      */
-<<<<<<< HEAD
-    public function update(Request $request, Requisicao $requisicao)
-=======
+
     public function update(RequisicoesRequest $request, Requisicao $requisicao)
->>>>>>> eduardo
     {
         dd('testando');
     }

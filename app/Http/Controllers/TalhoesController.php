@@ -6,20 +6,12 @@ use App\AdmGeral;
 use App\Atividade;
 use App\AdmTalhao;
 use App\Funcionario;
-<<<<<<< HEAD
-use App\Http\Requests\TalhoesRequest;
-use Yajra\Datatables\Datatables;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Validator;
-=======
 use App\Requisicao;
 use App\StatusRequisicoes;
 use App\ModerarRequisicoes;
 use App\Http\Requests\TalhoesRequest;
 use FontLib\Table\Type\maxp;
 use Yajra\Datatables\Datatables;
->>>>>>> eduardo
 use App\Talhao;
 use Session;
 Use form;
@@ -39,16 +31,12 @@ class TalhoesController extends Controller
         $adm_talhao = AdmTalhao::where('id_funcionarios_funcionarios',Auth::user()->id_funcionarios)->first();
         $adm_geral = AdmGeral::where('id_funcionarios_funcionarios',Auth::user()->id_funcionarios)->first();
 
-<<<<<<< HEAD
-        if($adm_geral){
-            $talhoes = Talhao::orderby('id_talhoes', 'ASC')->get();
-=======
+
         //$statusrequisicoes = StatusRequisicoes::where('nome', 'PENDENTE')->get();
         //$moderarrequisicoes = ModerarRequisicoes::where('id_requisicoes_status_requisicoes', $statusrequisicoes->id_status_requisicoes);
 
         if($adm_geral){
             $talhoes = Talhao::all();
->>>>>>> eduardo
             return view('talhoes.index')->with(compact('talhoes'));
         }else if($adm_talhao){
             $talhoes = Talhao::where('id_adms_talhoes_adms_talhoes', $adm_talhao->id_adms_talhoes)->orderby('id_talhoes', 'ASC')->get();
@@ -56,19 +44,12 @@ class TalhoesController extends Controller
                 return view('talhoes.index')->with(compact('talhoes'));
             }else{
                 Session::flash('alert-info', 'Você ainda não possui talhões!');
-<<<<<<< HEAD
-                return redirect()->route('talhoes.index');
-            }
-        }else {
-            Session::flash('alert-danger', 'Você ainda não é um administrador!');
-            return redirect()->route('talhoes.index');
-=======
+
                 return view('talhoes.index')->with(compact('talhoes'));
             }
         }else {
             Session::flash('alert-danger', 'Você ainda não é um administrador!');
             return view('talhoes.index')->with(compact('talhoes'));
->>>>>>> eduardo
         }
     }
 
@@ -102,7 +83,8 @@ class TalhoesController extends Controller
         $talhao = new Talhao();
         $talhao->identificador = strtoupper($request->identificador);
         $talhao->tipo = $request->tipo;
-        $talhao->area = $request->area;
+        $talhao->area= str_replace('.','',$request->area);
+        $talhao->area =str_replace(',', '.',$talhao->area);
         $talhao->descricao = $request->descricao;
         $talhao->id_adms_talhoes_adms_talhoes = $request->id_adms_talhoes_adms_talhoes;
 
@@ -144,7 +126,8 @@ class TalhoesController extends Controller
         }
         $talhoes = Talhao::find($id);
         $adms_talhoes = AdmTalhao::all();
-        return view('talhoes.edit')->with(compact('talhoes','adms_talhoes'));;
+        $adms_talhoes_nome = AdmTalhao::where('id_adms_talhoes',$talhoes->id_adms_talhoes_adms_talhoes)->first();
+        return view('talhoes.edit')->with(compact('talhoes','adms_talhoes', 'adms_talhoes_nome'));
     }
 
     /**
@@ -162,14 +145,7 @@ class TalhoesController extends Controller
 
         $talhao = Talhao::find($id);
 
-<<<<<<< HEAD
-        // Validator::make($request->all() , [
-        //     'identificador' => ['required',
-        //         Rule::unique('talhoes')->ignore($talhao->id, 'id_talhoes'),]
-        // ], ['O campo :attribute deve ser único!']);
 
-=======
->>>>>>> eduardo
         $talhao->identificador = strtoupper($request->identificador);
         $talhao ->tipo = $request->tipo;
         $talhao->area = $request->area;

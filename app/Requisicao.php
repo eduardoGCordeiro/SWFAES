@@ -17,11 +17,8 @@ class Requisicao extends Model
     * @var array
     */
    protected $fillable = [
-<<<<<<< HEAD
-       'data','descricao','descricao_adms_gerais', 'id_adms_talhoes_adms_talhoes', 'id_requisicoes_status_requisicoes','id_talhoes_talhoes'
-=======
+
        'data','descricao','descricao_adms_gerais', 'id_adms_talhoes_adms_talhoes','id_talhoes_talhoes'
->>>>>>> eduardo
    ];
 
    /**
@@ -38,10 +35,8 @@ class Requisicao extends Model
     public function talhao(){
         return $this->hasOne('App\Talhao','id_talhoes','id_talhoes_talhoes');
     }
-<<<<<<< HEAD
-=======
+
     public function moderar_requisicao(){
         return $this->hasMany('App\ModerarRequisicoes','id_requisicoes_requisicoes','id_requisicoes');
     }
->>>>>>> eduardo
 }

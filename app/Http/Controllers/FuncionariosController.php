@@ -12,10 +12,8 @@ use Yajra\Datatables\Datatables;
 use Session;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
-<<<<<<< HEAD
-=======
 use Illuminate\Support\Facades\Auth;
->>>>>>> eduardo
+
 
 
 class FuncionariosController extends Controller
@@ -88,16 +86,42 @@ class FuncionariosController extends Controller
         if (Gate::denies('gerenciar-funcionarios')) {
             return abort(403);
         }
-<<<<<<< HEAD
-=======
         $this->validate($request, ['cpf' => 'unique:funcionarios'], ['cpf.unique' => 'O campo :attribute deve ser único!']);
         $this->validate($request, ['login' => 'unique:funcionarios'], ['login.unique' => 'O campo :attribute deve ser único!']);
         $this->validate($request, ['email' => 'unique:funcionarios'], ['email.unique' => 'O campo :attribute deve ser único!']);
-        
->>>>>>> eduardo
+
+
+
+
+            // Extrai somente os números
+            $request->cpf = preg_replace( '/[^0-9]/is', '', $request->cpf );
+
+            // Verifica se foi informado todos os digitos corretamente
+            if (strlen($request->cpf) != 11) {
+                Session::flash('alert-danger', 'CPF inválido!');
+                return redirect()->route('funcionarios.create');
+            }
+            // Verifica se foi informada uma sequência de digitos repetidos. Ex: 111.111.111-11
+            if (preg_match('/(\d)\1{10}/', $request->cpf)) {
+                Session::flash('alert-danger', 'CPF inválido!');
+                return redirect()->route('funcionarios.create');
+            }
+            // Faz o calculo para validar o CPF
+            for ($t = 9; $t < 11; $t++) {
+                for ($d = 0, $c = 0; $c < $t; $c++) {
+                    $d += $cpf{$c} * (($t + 1) - $c);
+                }
+                $d = ((10 * $d) % 11) % 10;
+                if ($cpf{$c} != $d) {
+                    Session::flash('alert-danger', 'CPF inválido!');
+                    return redirect()->route('funcionarios.create');
+                }
+            }
+            $cpf = $request->cpf;
+
         $funcionario = new Funcionario();
-        $funcionario->nome = strtoupper($request->nome);
         $funcionario->cpf = $request->cpf;
+        $funcionario->nome = strtoupper($request->nome);
         $funcionario->login = $request->login;
         $funcionario->email = strtolower($request->email);
         $funcionario->password = $request->acesso_sistema==""?bcrypt("fazendaescola"):bcrypt($request->password);
@@ -171,7 +195,6 @@ class FuncionariosController extends Controller
         if (Gate::denies('gerenciar-funcionarios')) {
             return abort(403);
         }
-<<<<<<< HEAD
 
 
         Validator::make($request->all() , [
@@ -189,20 +212,19 @@ class FuncionariosController extends Controller
                 Rule::unique('funcionarios')->ignore($funcionario->id, 'id_funcionarios'),]
         ], ['O campo :attribute deve ser único!']);
 
-=======
->>>>>>> eduardo
+
         $funcionario->nome= strtoupper($request->nome);
         $funcionario->login= ($request->login);
         $funcionario->cpf= ($request->cpf);
         $funcionario->email= strtolower($request->email);
-<<<<<<< HEAD
+
         $funcionario->acesso_sistema = $request->acesso_sistema=="on"?TRUE:FALSE;
 
-=======
+
         if(Auth::user()->cpf != $request->cpf) {
             $funcionario->acesso_sistema = $request->acesso_sistema == "on" ? TRUE : FALSE;
         }
->>>>>>> eduardo
+
         if($funcionario->update()){
             Session::flash('alert-success', 'Funcionário editado com sucesso!');
             return redirect()->route('funcionarios.index');

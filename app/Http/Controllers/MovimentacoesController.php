@@ -98,10 +98,8 @@ class MovimentacoesController extends Controller
 
         $movimentacao->custo = str_replace('.','',$request->custo);
         $movimentacao->custo =str_replace(',', '.',$movimentacao->custo);
-
-
-
-        $movimentacao->quantidade = $request->quantidade;
+        $movimentacao->quantidade = str_replace('.','',$request->quantidade);
+        $movimentacao->quantidade =str_replace(',', '.',$movimentacao->quantidade);
         $movimentacao->tipo_movimentacoes = $request->tipo_movimentacoes;
         $movimentacao->descricao =strtoupper($request->descricao);
         $movimentacao->id_itens_itens = $request->id_itens_itens;
@@ -166,7 +164,8 @@ class MovimentacoesController extends Controller
 
         $movimentacao->custo = str_replace('.','',$request->custo);
         $movimentacao->custo =str_replace(',', '.',$movimentacao->custo);
-        $movimentacao->quantidade = $request->quantidade;
+        $movimentacao->quantidade = str_replace('.','',$request->quantidade);
+        $movimentacao->quantidade =str_replace(',', '.',$movimentacao->quantidade);
         $movimentacao->tipo_movimentacoes = $request->tipo_movimentacoes;
         $movimentacao->descricao = $request->descricao;
         $movimentacao->id_itens_itens = $request->id_itens_itens;

@@ -1,11 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<<<<<<< HEAD
-<div class="container">
-=======
+
 <div class="container col-md-10 col-lg-10 ">
->>>>>>> eduardo
     <div class="row mt-3">
         <div class="col-md-12 ">
             <ol class="breadcrumb">
@@ -40,9 +37,10 @@
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Data</label>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
                                 <input
                                         type="date"
+                                        style="padding-left: 15%"
                                         class="form-control{{ $errors->has('data') ? ' is-invalid' : '' }}"
                                         name="data"
                                         value="{{ $atividade->data }}"
@@ -57,37 +55,14 @@
                         </div>
 
 
-
-                        <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">Descrição</label>
-
-                            <div class="col-lg-6">
-                                <textarea
-                                    class="form-control"
-                                    id="exampleTextarea"
-                                    rows="3"
-                                    name="descricao"
-
-                                >{{$atividade->descricao}}</textarea>
-                                @if ($errors->has('descricao'))
-                                    <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('descricao') }}</strong>
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-
-
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Tipo de Atividade</label>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
                                 <select required="" name="tipo_atividade" class="form-control" id="select_tipos">
                                     <option value="">Selecione</option>
                                     @foreach($tipos_atividades as $tipo)
                                         <option value="{{$tipo->id_tipos_atividades}}">{{$tipo->nome}}</option>
-
-
                                     @endforeach
 
                                 </select>
@@ -103,14 +78,19 @@
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Talhão</label>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
                                 <select name="talhao" class="form-control" id="select_talhoes">
-                                    <option value="">Selecione</option>
-                                    @foreach($talhoes as $talhao)
-                                    <option value="{{$talhao->id_talhoes}}">{{$talhao->identificador}}</option>
-
-
-                                    @endforeach
+                                    @if( $talhao_atividade != null)
+                                        <option value="{{$talhao_atividade->id_talhoes}}">{{$talhao_atividade->identificador}}</option>
+                                        @foreach($talhoes as $talhao)
+                                            <option value="{{$talhao->id_talhoes}}">{{$talhao->identificador}}</option>
+                                        @endforeach
+                                    @else
+                                        <option value="">Selecione</option>
+                                        @foreach($talhoes as $talhao)
+                                            <option value="{{$talhao->id_talhoes}}">{{$talhao->identificador}}</option>
+                                        @endforeach
+                                    @endif
 
                                 </select>
 
@@ -123,28 +103,24 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">Cultura</label>
+                            <label class="col-lg-4 col-form-label text-lg-right">Descrição</label>
 
                             <div class="col-lg-6">
-                                <select name="cultura" class="form-control" id="select_culturas">
-                                    <option value="">Selecione</option>
-                                    @foreach($culturas as $cultura)
-                                    <option value="{{$cultura->id_culturas}}">{{$cultura->id_culturas}}</option>
+                                <textarea
+                                        placeholder="Insira a descrição da atividade..."
+                                        class="form-control"
+                                        id="exampleTextarea"
+                                        rows="3"
+                                        name="descricao"
 
-
-                                    @endforeach
-
-                                </select>
-
-                                @if ($errors->has('cultura'))
+                                >{{$atividade->descricao}}</textarea>
+                                @if ($errors->has('descricao'))
                                     <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('cultura') }}</strong>
+                                        <strong>{{ $errors->first('descricao') }}</strong>
                                     </div>
                                 @endif
                             </div>
                         </div>
-
-
 
 
                         <div class="form-group row">
@@ -166,9 +142,7 @@
 @section('script')
 <script type="text/javascript">
 
-    document.getElementById('select_talhoes').value={{$atividade->talhao->id_talhoes}};
-    document.getElementById('select_culturas').value={{$atividade->cultura->id_culturas}};
-    document.getElementById('select_tipos').value={{$atividade->tipo_atividade->id_tipos_atividades}};
+    document.getElementById('select_tipos').value={{$atividade->tipos_atividades->id_tipos_atividades}};
 
 </script>
 

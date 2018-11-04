@@ -1,11 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<<<<<<< HEAD
-<div class="container">
-=======
+
 <div class="container col-md-10 col-lg-10 ">
->>>>>>> eduardo
     <div class="row mt-3">
         <div class="col-md-12 ">
             <ol class="breadcrumb">
@@ -41,8 +38,9 @@
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Identificação</label>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <input
+                                        placeholder="Identificação do talhão"
                                         type="text"
                                         class="form-control{{ $errors->has('identificador') ? ' is-invalid' : '' }}"
                                         name="identificador"
@@ -59,8 +57,9 @@
 
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Administrador do talhão</label>
-                            <div class="col-lg-6">
-                                <select class="form-control" id="exampleFormControlSelect1" name="id_adms_talhoes_adms_talhoes" required="">
+                            <div class="col-lg-5">
+                                <select class="form-control" id="exampleFormControlSelect1" name="id_adms_talhoes_adms_talhoes">
+                                    <option value="">Selecione</option>
                                     @foreach($adms_talhoes as $adm_talhao)
                                         <option value="{{$adm_talhao->id_adms_talhoes}}">{{$adm_talhao->funcionarios->login}}</option>
                                     @endforeach
@@ -78,16 +77,18 @@
 
                             <label class="col-lg-4 col-form-label text-lg-right">Área</label>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
 
                                 <div class="input-group">
-                                    <input class="form-control{{ $errors->has('area') ? ' is-invalid' : '' }}" type="text" name="area" required>
+                                    <input class="form-control{{ $errors->has('area') ? ' is-invalid' : '' }}"
+                                           type="text"
+                                           name="area"
+                                           required
+                                           placeholder="00.00"
+                                           onkeyup="mascara_num(this);">
                                     <div class="input-group-append">
-<<<<<<< HEAD
-                                        <span class="input-group-text">m²</span>
-=======
+
                                         <span class="input-group-text">ha</span>
->>>>>>> eduardo
                                     </div>
                                 </div>
 
@@ -104,11 +105,12 @@
 
                             <div class="col-lg-6">
                                 <textarea
-                                    class="form-control"
-                                    id="exampleTextarea"
-                                    rows="3"
-                                    name="descricao"
-                                    required
+                                        placeholder="Insira a descrição do talhão aqui..."
+                                        class="form-control"
+                                        id="exampleTextarea"
+                                        rows="3"
+                                        name="descricao"
+                                        required
 
                                 ></textarea>
                                 @if ($errors->has('descricao'))
@@ -124,26 +126,20 @@
                             <div class="col-lg-4">
 
                                 <div class="custom-control custom-radio">
-<<<<<<< HEAD
-                                    <input id="customRadio1" name="tipo" class="custom-control-input" checked="" type="radio" value="agricultura">
-                                    <label class="custom-control-label" for="customRadio1">Agricultura</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input id="customRadio2" name="tipo" class="custom-control-input" type="radio" value="pecuaria">
-=======
+
                                     <input id="customRadio1" name="tipo" class="custom-control-input" checked="" type="radio" value="AGRICULTURA">
                                     <label class="custom-control-label" for="customRadio1">Agricultura</label>
                                 </div>
                                 <div class="custom-control custom-radio">
                                     <input id="customRadio2" name="tipo" class="custom-control-input" type="radio" value="PECUARIA">
->>>>>>> eduardo
+
                                     <label class="custom-control-label" for="customRadio2">Pecuária</label>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-lg-6 offset-lg-6">
+                            <div class="col-lg-6 offset-4">
                                 <button type="submit" class="btn btn-primary">
                                     Cadastrar
                                 </button>
@@ -157,4 +153,48 @@
         </div>
     </div>
 </div>
+@endsection
+@section('script')
+    <script>
+        function mascara_num(obj){
+            valida_num(obj)
+            if (obj.value.match("-")){
+                mod = "-";
+            }else{
+                mod = "";
+            }
+            valor = obj.value.replace("-","");
+            valor = valor.replace(",","");
+            if (valor.length >= 3){
+                valor = poe_ponto_num(valor.substring(0,valor.length-2))+","+valor.substring(valor.length-2, valor.length);
+            }
+            obj.value = mod+valor;
+        }
+        function poe_ponto_num(valor){
+            valor = valor.replace(/\./g,"");
+            if (valor.length > 3){
+                valores = "";
+                while (valor.length > 3){
+                    valores = "."+valor.substring(valor.length-3,valor.length)+""+valores;
+                    valor = valor.substring(0,valor.length-3);
+                }
+                return valor+""+valores;
+            }else{
+                return valor;
+            }
+        }
+        function valida_num(obj){
+            numeros = new RegExp("[0-9]");
+            while (!obj.value.charAt(obj.value.length-1).match(numeros)){
+                if(obj.value.length == 1 && obj.value == "-"){
+                    return true;
+                }
+                if(obj.value.length >= 1){
+                    obj.value = obj.value.substring(0,obj.value.length-1)
+                }else{
+                    return false;
+                }
+            }
+        }
+    </script>
 @endsection

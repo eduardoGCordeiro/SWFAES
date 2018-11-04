@@ -1,11 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<<<<<<< HEAD
-<div class="container">
-=======
+
 <div class="container col-md-10 col-lg-10 ">
->>>>>>> eduardo
     <div class="row mt-3">
         <div class="col-md-12 ">
             <ol class="breadcrumb">
@@ -40,8 +37,9 @@
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Nome</label>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <input
+                                        placeholder="Insira o nome da unidade"
                                         type="text"
                                         class="form-control{{ $errors->has('nome') ? ' is-invalid' : '' }}"
                                         name="nome"
@@ -61,6 +59,7 @@
 
                             <div class="col-lg-2">
                                 <input
+                                        placeholder="Sigla"
                                         type="text"
                                         class="form-control{{ $errors->has('sigla') ? ' is-invalid' : '' }}"
                                         name="sigla"

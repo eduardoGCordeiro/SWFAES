@@ -29,8 +29,9 @@ class UnidadesController extends Controller
 
         return Datatables::of($unidades)
             ->addColumn('action', function ($unidade) {
-                return '<a href="'.Route('unidades.edit',[$unidade->id_unidades]).'" class="btn btn-primary">Editar</a>'.'<form action="'.Route('unidades.destroy',[$unidade->id_unidades]).'" method="POST"> '.csrf_field().'
- <input name="_method" type="hidden" value="DELETE"> <button type="submit" class="btn btn-danger">deletar</button>';
+                return '<div class = "col-md-10" style="margin-rigth: 14%">'. '<div class="panel-footer row" style="margin-rigth:80%"><!-- panel-footer -->'.'<div class="col-xs-6 text-center">'.'<div class="previous">'.'<a href="'.Route('unidades.edit',[$unidade->id_unidades]).'" class="btn btn-primary"><i class="fas fa-edit"></i>Editar</a>'.'</div>
+                        '.'</div>'.'<div class="col-xs-6 text-right">'.'<div style="margin-left:6%">'.'<form action="'.Route('unidades.destroy',[$unidade->id_unidades]).'" method="POST"> '.csrf_field().'
+ <input name="_method" type="hidden" value="DELETE"> <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>deletar</button></form>'.'</div>'.'</div>'.'</div>'.'</div>';
             })->make(true);
     }
 

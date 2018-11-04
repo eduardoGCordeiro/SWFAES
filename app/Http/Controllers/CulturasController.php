@@ -149,11 +149,8 @@ class CulturasController extends Controller
         }
         $cultura = Cultura::find($id);
         $talhoes = Talhao::all();
-<<<<<<< HEAD
-        return view('culturas.edit')->with(compact('cultura','talhoes'));
-=======
+
             return view('culturas.edit')->with(compact('cultura','talhoes'));
->>>>>>> eduardo
     }
 
     /**
@@ -168,20 +165,7 @@ class CulturasController extends Controller
         if (Gate::denies('gerenciar-culturas')) {
             return abort(403);
         }
-<<<<<<< HEAD
-        $cultura = Cultura::find($id);
-        $cultura->data_inicio = $request->data_inicio;
-        $cultura->descricao = strtoupper($request->descricao);
-        $cultura->tipo_safra= $request->tipo_safra;
-        $cultura->id_talhoes_talhoes = $request->talhao;
-        //dd($cultura);
-        if($cultura->save()){
-            Session::flash('alert-success', 'cultura atualizada com sucesso!');
-            return redirect()->route('culturas.index');
-        }else{
-            Session::flash('alert-danger', 'Erro ao atualizar cultura!');
-            return redirect()->route('culturas.index');
-=======
+
         if($request->data_fim == false)
         {
             $cultura = Cultura::find($id);
@@ -201,7 +185,6 @@ class CulturasController extends Controller
                 Session::flash('alert-danger', 'Erro ao atualizar cultura!');
                 return redirect()->route('culturas.index');
             }
->>>>>>> eduardo
         }
     }
 

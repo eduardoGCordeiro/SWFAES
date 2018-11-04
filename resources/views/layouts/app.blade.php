@@ -16,12 +16,10 @@
 
 
     <style type="text/css">
-<<<<<<< HEAD
-=======
 
 
 
->>>>>>> eduardo
+
             body{
                 background-image: url("/bg.png") ;
                 background-repeat: no-repeat;
@@ -30,10 +28,7 @@
                 margin: 0px !important;
                 padding:0px !important;
                 overflow-x: hidden;
-<<<<<<< HEAD
-=======
                 min-height: 100vh;
->>>>>>> eduardo
             }
 
             #bg{
@@ -54,11 +49,9 @@
             }
 
             #left-bar{
-<<<<<<< HEAD
+
                 min-height: 750px;
-=======
                 min-height: 100vh;
->>>>>>> eduardo
             }
 
 
@@ -103,18 +96,13 @@
                                                 Sair
                                             </a>
 
-<<<<<<< HEAD
-=======
-
->>>>>>> eduardo
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                   style="display: none;">
                                                 {{ csrf_field() }}
                                             </form>
                                         </div>
                                     </li>
-<<<<<<< HEAD
-=======
+
 
 
 
@@ -205,7 +193,7 @@
                                     @endif
 
 
->>>>>>> eduardo
+
                                 @endif
                             </ul>
                         </div>

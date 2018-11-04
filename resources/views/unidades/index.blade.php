@@ -4,11 +4,8 @@
 
 @endsection
 @section('content')
-<<<<<<< HEAD
-<div class="container">
-=======
+
 <div class="container col-md-10 col-lg-10 ">
->>>>>>> eduardo
 
     <div class="row mt-3">
         <div class="col-md-12">
@@ -56,7 +53,7 @@
 
                             <th scope="col">Nome</th>
                             <th scope="col">Sigla</th>
-                            <th scope="col">Ações</th>
+                            <th scope="col" style="margin-left: 50%">Ações</th>
 
                         </tr>
                       </thead>

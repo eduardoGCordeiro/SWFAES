@@ -1,11 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<<<<<<< HEAD
-<div class="container">
-=======
 <div class="container col-md-10 col-lg-10 ">
->>>>>>> eduardo
     <div class="row mt-3">
         <div class="col-md-12 ">
             <ol class="breadcrumb">
@@ -36,14 +32,12 @@
                     <form role="form" method="POST" action="{{ Route('movimentacoes.store') }}">
                         {!! csrf_field() !!}
 
-<<<<<<< HEAD
-=======
                         @if(!isset($atividade))
                             <div class="form-group row">
                                 <label class="col-lg-4 col-form-label text-lg-right">Atividade</label>
                                 <div class="col-lg-6">
 
-                                    <select name="id_atividades_atividades" class="form-control" id="exampleSelect1" required="">
+                                    <select name="id_atividades_atividades" class="form-control" id="exampleSelect1">
                                         <option value="">Selecione</option>
                                         @foreach($atividades as $atividade)
                                             <option value="{{$atividade->id_atividades}}">{{$atividade->descricao}}</option>
@@ -74,11 +68,11 @@
                                 </div>
                             </div>
                         @endif
->>>>>>> eduardo
+
 
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Item</label>
-                            <div class="col-lg-6">
+                            <div class="col-lg-5">
                                 <select name="id_itens_itens" class="form-control" id="exampleSelect1" required="">
                                     @foreach($item as $itens)
                                         <option value="{{$itens->id_itens}}">{{$itens->nome}}</option>
@@ -93,7 +87,7 @@
                             </div>
                         </div>
 
-<<<<<<< HEAD
+
 
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Valor total</label>
@@ -115,22 +109,22 @@
                             </div>
                         </div>
 
-=======
->>>>>>> eduardo
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Quantidade</label>
-                            <div class="col-lg-2">
+                            <div class="col-lg-3">
                                 <div class="input-group mb-3">
                                     <input
-<<<<<<< HEAD
+
                                         class="form-control"
                                         type="text"
                                         name="quantidade"
-=======
+
+                                            placeholder="00.00"
+
                                             class="form-control"
                                             type="text"
+                                            onkeyup="mascara_num(this);"
                                             name="quantidade"
->>>>>>> eduardo
                                     >
 
                                 </div>
@@ -143,7 +137,6 @@
                             </div>
                         </div>
 
-<<<<<<< HEAD
                         @if(!isset($atividade))
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Atividade</label>
@@ -175,39 +168,42 @@
                                 @if ($errors->has('id_atividades_atividades'))
                                     <div class="invalid-feedback">
                                         <strong>{{ $errors->first('id_atividades_atividades') }}</strong>
-=======
+
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">Valor total</label>
+                            <label class="col-lg-4 col-form-label text-lg-right">Custo</label>
                             <div class="col-lg-3">
                                 <div class="input-group mb-3">
-                                    <input  onkeyup="mascara_num(this);"
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">R$</span>
+                                    </div>
+                                    <input
+                                            placeholder="00.00"
+                                            onkeyup="mascara_num(this);"
                                             class="form-control"
                                             type="text"
                                             name="custo"
-                                            required
+                                            value=""
                                     >
                                 </div>
 
                                 @if ($errors->has('custo'))
                                     <div class="invalid-feedback">
                                         <strong>{{ $errors->first('custo') }}</strong>
->>>>>>> eduardo
+
                                     </div>
                                 @endif
                             </div>
                         </div>
-<<<<<<< HEAD
+
                         @endif
 
-
-=======
->>>>>>> eduardo
 
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Descrição</label>
 
                             <div class="col-lg-6">
                                 <textarea
+                                        placeholder="Insira a descrição da movimentação aqui..."
                                         class="form-control"
                                         id="exampleTextarea"
                                         rows="3"
@@ -259,44 +255,44 @@
 @section('script')
     <script language="javascript">
         function mascara_num(obj){
-  valida_num(obj)
-  if (obj.value.match("-")){
-    mod = "-";
-  }else{
-    mod = "";
-  }
-  valor = obj.value.replace("-","");
-  valor = valor.replace(",","");
-  if (valor.length >= 3){
-    valor = poe_ponto_num(valor.substring(0,valor.length-2))+","+valor.substring(valor.length-2, valor.length);
-  }
-  obj.value = mod+valor;
-}
-function poe_ponto_num(valor){
-  valor = valor.replace(/\./g,"");
-  if (valor.length > 3){
-    valores = "";
-    while (valor.length > 3){
-      valores = "."+valor.substring(valor.length-3,valor.length)+""+valores;
-      valor = valor.substring(0,valor.length-3);
-    }
-    return valor+""+valores;
-  }else{
-    return valor;
-  }
-}
-function valida_num(obj){
-  numeros = new RegExp("[0-9]");
-  while (!obj.value.charAt(obj.value.length-1).match(numeros)){
-    if(obj.value.length == 1 && obj.value == "-"){
-      return true;
-    }
-    if(obj.value.length >= 1){
-      obj.value = obj.value.substring(0,obj.value.length-1)
-    }else{
-      return false;
-    }
-  }
-}
+            valida_num(obj)
+            if (obj.value.match("-")){
+                mod = "-";
+            }else{
+                mod = "";
+            }
+            valor = obj.value.replace("-","");
+            valor = valor.replace(",","");
+            if (valor.length >= 3){
+                valor = poe_ponto_num(valor.substring(0,valor.length-2))+","+valor.substring(valor.length-2, valor.length);
+            }
+            obj.value = mod+valor;
+        }
+        function poe_ponto_num(valor){
+            valor = valor.replace(/\./g,"");
+            if (valor.length > 3){
+                valores = "";
+                while (valor.length > 3){
+                    valores = "."+valor.substring(valor.length-3,valor.length)+""+valores;
+                    valor = valor.substring(0,valor.length-3);
+                }
+                return valor+""+valores;
+            }else{
+                return valor;
+            }
+        }
+        function valida_num(obj){
+            numeros = new RegExp("[0-9]");
+            while (!obj.value.charAt(obj.value.length-1).match(numeros)){
+                if(obj.value.length == 1 && obj.value == "-"){
+                    return true;
+                }
+                if(obj.value.length >= 1){
+                    obj.value = obj.value.substring(0,obj.value.length-1)
+                }else{
+                    return false;
+                }
+            }
+        }
     </script>
 @endsection

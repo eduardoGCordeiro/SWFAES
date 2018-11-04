@@ -1,11 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<<<<<<< HEAD
-<div class="container">
-=======
 <div class="container col-md-10 col-lg-10 ">
->>>>>>> eduardo
     <div class="row mt-3">
         <div class="col-md-12 ">
             <ol class="breadcrumb">
@@ -57,15 +53,16 @@
 
                             <div class="col-lg-6">
                                 <textarea
-                                    class="form-control"
-                                    id="exampleTextarea"
-                                    rows="3"
-                                    name="resposta"
+                                        placeholder="Insira a sua resposta aqui..."
+                                        class="form-control"
+                                        id="exampleTextarea"
+                                        rows="3"
+                                        name="descricao_adms_gerais"
 
-                                >{{$requisicao->resposta}} </textarea>
-                                @if ($errors->has('resposta'))
+                                >{{$requisicao->descricao_adms_gerais}} </textarea>
+                                @if ($errors->has('descricao_adms_gerais'))
                                     <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('resposta') }}</strong>
+                                        <strong>{{ $errors->first('descricao_adms_gerais') }}</strong>
                                     </div>
                                 @endif
                             </div>

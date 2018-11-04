@@ -1,11 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<<<<<<< HEAD
-<div class="container">
-=======
+
 <div class="container col-md-10 col-lg-10 ">
->>>>>>> eduardo
     <div class="row mt-3">
         <div class="col-md-12 ">
             <ol class="breadcrumb">
@@ -53,9 +50,10 @@
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Data de ínicio</label>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
                                 <input
                                         type="date"
+                                        style="paddin-left: 15%"
                                         class="form-control{{ $errors->has('data') ? ' is-invalid' : '' }}"
                                         name="data_inicio"
                                         value="{{ old('data_inicio') }}"
@@ -70,31 +68,10 @@
                         </div>
 
 
-
-                        <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">Descrição</label>
-
-                            <div class="col-lg-6">
-                                <textarea
-                                    class="form-control"
-                                    id="exampleTextarea"
-                                    rows="3"
-                                    name="descricao"
-
-                                ></textarea>
-                                @if ($errors->has('descricao'))
-                                    <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('descricao') }}</strong>
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-
-
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Tipo de safra</label>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
                                 <select name="tipo_safra" class="form-control" id="exampleSelect1">
                                     <option value="V">Verão</option>
                                     <option value="I">Inverno</option>
@@ -112,7 +89,7 @@
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Talhão</label>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
                                 <select name="talhao" class="form-control" id="exampleSelect1" required="">
                                     <option value="">Selecione</option>
 
@@ -131,6 +108,25 @@
                         </div>
 
 
+                        <div class="form-group row">
+                            <label class="col-lg-4 col-form-label text-lg-right">Descrição</label>
+
+                            <div class="col-lg-6">
+                                <textarea
+                                        placeholder="Insira a descrição da atividade..."
+                                        class="form-control"
+                                        id="exampleTextarea"
+                                        rows="3"
+                                        name="descricao"
+
+                                ></textarea>
+                                @if ($errors->has('descricao'))
+                                    <div class="invalid-feedback">
+                                        <strong>{{ $errors->first('descricao') }}</strong>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
 
 
                         <div class="form-group row">

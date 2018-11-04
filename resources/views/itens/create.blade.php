@@ -1,11 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<<<<<<< HEAD
-<div class="container">
-=======
+
 <div class="container col-md-10 col-lg-10 ">
->>>>>>> eduardo
     <div class="row mt-3">
         <div class="col-md-12 ">
             <ol class="breadcrumb">
@@ -39,8 +36,9 @@
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Nome</label>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-5">
                                 <input
+                                        placeholder="Insira o nome do item aqui"
                                         type="text"
                                         class="form-control{{ $errors->has('nome') ? ' is-invalid' : '' }}"
                                         name="nome"
@@ -59,7 +57,7 @@
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Unidade de medida</label>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
                                 <select  name="id_unidades_unidades" class="form-control" id="select_unidades">
                                     <option value="">Selecione</option>
                                     @foreach($unidades as $unidade)
@@ -82,7 +80,7 @@
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Tipo de item</label>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
                                 <select  name="id_tipos_itens_tipos_itens" class="form-control" id="select_unidades">
                                     <option value="">Selecione</option>
                                     @foreach($tipos_itens as $tipo_item)
@@ -108,7 +106,7 @@
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Custo por unidade</label>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
 
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -155,7 +153,7 @@
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Qauntidade inicial</label>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
                                 <input
                                         type="text"
                                         class="form-control{{ $errors->has('quantidade') ? ' is-invalid' : '' }}"

@@ -27,7 +27,7 @@ class AtividadesRequest extends FormRequest
 
             'data_registro' => '',
             'data' => 'required',
-            'descricao'=>'required|max:45|string',
+            'descricao'=>'required|max:500|string',
         ];
     }
 
@@ -37,7 +37,7 @@ class AtividadesRequest extends FormRequest
         return [
             'descricao.required' => 'O campo :attribute é obrigatório',
             'data_data.required' => 'O campo :attribute é obrigatório!',
-            'descricao.max' => 'O campo :attribute deve ter no máximo 45 caracteres!',
+            'descricao.max' => 'O campo :attribute deve ter no máximo 500 caracteres!',
             'descricao.string' => 'O campo :attribute deve ser uma palavra!',
         ];
     }

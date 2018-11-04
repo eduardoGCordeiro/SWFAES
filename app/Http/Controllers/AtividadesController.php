@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Atividade;
+use App\Http\Requests\CulturasRequest;
+use App\Http\Requests\TalhoesRequest;
 use App\TipoAtividades;
 use App\Talhao;
 use App\Movimentacao;
@@ -34,14 +36,7 @@ class atividadesController extends Controller
                     return $atividade->talhao['identificador'];
                 })
 
-<<<<<<< HEAD
-                ->editColumn('data', function($atividade){
-                    return date( 'd/m/Y' , strtotime($atividade->data));
-                })
-                ->addColumn('action', function ($atividade) {
-                    return '<a href="'.Route('atividades.edit',[$atividade->id_atividades]).'" class="btn btn-primary"><i class="fas fa-edit"></i>Editar</a>'.'<form action="'.Route('atividades.destroy',[$atividade->id_atividades]).'" method="POST"> '.csrf_field().'
- <input name="_method" type="hidden" value="DELETE"> <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>deletar</button></form>';
-=======
+
                 ->editColumn('descricao', function($atividade){
                     return $atividade->descricao;
                 })
@@ -52,18 +47,12 @@ class atividadesController extends Controller
                 ->editColumn('id_culturas_culturas', function($atividade){
                     if($atividade->cultura){
                         return $atividade->cultura['descricao'];
-                    }else {
-                        return "SEM CULTURA";
                     }
-                })
-                ->editColumn('tipo', function($atividade){
-                    return $atividade->talhao['tipo'];
                 })
                 ->addColumn('action', function ($atividade) {
                     return '<div class = "col-md-10 offset-1">'. '<div class="panel-footer row" style="margin-left: 18%"><!-- panel-footer -->'.'<div class="col-xs-6 text-center">'.'<div class="previous">'.'<a href="'.Route('atividades.edit',[$atividade->id_atividades]).'" class="btn btn-primary"><i class="fas fa-edit"></i>Editar</a>'.'</div>
                         '.'</div>'.'<div class="col-xs-6 text-right">'.'<div class="next offset-1">'.'<form action="'.Route('atividades.destroy',[$atividade->id_atividades]).'" method="POST"> '.csrf_field().'
  <input name="_method" type="hidden" value="DELETE"> <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>deletar</button></form>'.'</div>'.'</div>'.'</div>'.'</div>';
->>>>>>> eduardo
                     })
             ->make(true);
 
@@ -121,7 +110,7 @@ class atividadesController extends Controller
         if(!$cultura){
             $atividade->id_culturas_culturas =null;
         }else{
-            $atividade->id_culturas_culturas =  $cultura->id_culturas;
+            $atividade->id_culturas_culturas = $cultura->id_culturas;
         }
 
         $atividade->data = $request->data;
@@ -191,9 +180,10 @@ class atividadesController extends Controller
         $atividade = Atividade::find($id);
         $tipos_atividades = TipoAtividades::all();
         $talhoes = Talhao::all();
-
         $culturas = Cultura::all();
-        return view('atividades.edit')->with(compact('atividade','tipos_atividades','talhoes','culturas'));
+        $talhao_atividade = Talhao::where('id_talhoes',$atividade->id_talhoes_talhoes)->first();
+
+        return view('atividades.edit')->with(compact('atividade','tipos_atividades','talhoes','culturas', 'talhao_atividade'));
     }
 
     /**
@@ -209,14 +199,18 @@ class atividadesController extends Controller
             return abort(403);
         }
         $atividade = Atividade::find($id);
+        $cultura = Cultura::where([['id_talhoes_talhoes',$request->talhao],['data_fim',NULL]])->first();
+
+        if(!$cultura){
+            $atividade->id_culturas_culturas =null;
+        }else{
+            $atividade->id_culturas_culturas = $cultura->id_culturas;
+        }
 
         $atividade->data = $request->data;
         $atividade->descricao = strtoupper($request->descricao);
         $atividade->id_tipos_atividades_tipos_atividades = $request->tipo_atividade;
         $atividade->id_talhoes_talhoes = $request->talhao;
-        $atividade->id_culturas_culturas = $request->cultura;
-
-
 
         if($atividade->update()){
 

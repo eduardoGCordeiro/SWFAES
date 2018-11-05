@@ -51,8 +51,9 @@ class atividadesController extends Controller
                 })
                 ->addColumn('action', function ($atividade) {
                     return '<div class = "col-md-10 offset-1">'. '<div class="panel-footer row" style="margin-left: 18%"><!-- panel-footer -->'.'<div class="col-xs-6 text-center">'.'<div class="previous">'.'<a href="'.Route('atividades.edit',[$atividade->id_atividades]).'" class="btn btn-primary"><i class="fas fa-edit"></i>Editar</a>'.'</div>
-                        '.'</div>'.'<div class="col-xs-6 text-right">'.'<div class="next offset-1">'.'<form action="'.Route('atividades.destroy',[$atividade->id_atividades]).'" method="POST"> '.csrf_field().'
- <input name="_method" type="hidden" value="DELETE"> <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>deletar</button></form>'.'</div>'.'</div>'.'</div>'.'</div>';
+                        '.'</div>'.'<div class="col-xs-6 text-right">'.'<div class="next offset-1"> <meta name="csrf-token" content="'.csrf_token().'">
+ <button type="button" class="confirm-btn btn btn-danger" value="'.$atividade->id_atividades.'" onclick="(delete_btn(this))"><i class="fas fa-trash-alt"></i>deletar</button>
+</div>'.'</div>'.'</div>'.'</div>';
                     })
             ->make(true);
 
@@ -238,15 +239,16 @@ class atividadesController extends Controller
         $movimentacoes = $atividade->movimentacao;
         if(count($movimentacoes)){
             Session::flash('alert-danger', 'Erro ao excluir pois já está relacionado com um item!');
-            return redirect()->back();
+            return response('Erro ao excluir pois já está relacionado com um item!', 405);
+            
         }
         if($atividade->delete()){
 
             Session::flash('alert-success', 'deletado com sucesso!');
-            return redirect()->route('atividades.index');
+            return response('sucesso ao deletar atividade!', 200);
         }else{
             Session::flash('alert-danger', 'Erro ao editar!');
-            return redirect()->route('atividades.index');
+            return response('Erro ao deletar atividade!', 405);
         }
     }
 }

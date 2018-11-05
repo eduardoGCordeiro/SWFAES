@@ -43,7 +43,7 @@ class CulturasController extends Controller
                 })
                 ->addColumn('action', function ($cultura) {
                     return '<a href="'.Route('culturas.show',[$cultura->id_culturas]).'" class="">ver</a><br><a href="'.Route('culturas.edit',[$cultura->id_culturas]).'" class="btn btn-primary">Editar</a>     <meta name="csrf-token" content="'.csrf_token().'">
- <button type="button" class="confirm-btn" value="'.$cultura->id_culturas.'" onclick="(delete_btn(this))">Confirm</button>
+ <button type="button" class="confirm-btn btn btn-danger" value="'.$cultura->id_culturas.'" onclick="(delete_btn(this))"><i class="fas fa-trash-alt"></i>deletar</button>
 ';
                 })->make(true);
         }else{

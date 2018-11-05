@@ -129,11 +129,12 @@ $(document).ready(function() {
 <script type="text/javascript">
     function delete_btn(data_input){
         swal({
-          title: "Esta certo disso?",
-          text: "uma vez excluída, não sera possivel recuperar essa informação!",
-          icon: "warning",
-          buttons: true,
-          dangerMode: true,
+            title: "Tem certeza disso?",
+            text: "uma vez excluída, não sera possivel recuperar essa informação!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            showCancelButton: true,
         })
         .then((willDelete) => {
           if (willDelete) {

@@ -39,8 +39,8 @@ class ItensController extends Controller
             ->addColumn('action', function ($item) {
 
                 return '<div class = "col-md-10 offset-1" style="margin-left: 14%">'. '<div class="panel-footer row"><!-- panel-footer -->'.'<div class="col-xs-6 text-center">'.'<div class="previous">'.'<a href="'.Route('itens.edit',[$item->id_itens]).'" class="btn btn-primary"><i class="fas fa-edit"></i>Editar</a>'.'</div>
-                        '.'</div>'.'<div class="col-xs-6 text-right">'.'<div style="margin-left:6%">'.'<form action="'.Route('itens.destroy',[$item->id_itens]).'" method="POST"> '.csrf_field().'
- <input name="_method" type="hidden" value="DELETE"> <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>deletar</button></form>'.'</div>'.'</div>'.'</div>'.'</div>';
+                        '.'</div>'.'<div class="col-xs-6 text-right">'.'<div style="margin-left:6%">'.'<meta name="csrf-token" content="'.csrf_token().'">
+ <button type="button" class="confirm-btn btn btn-danger" value="'.$item->id_itens.'" onclick="(delete_btn(this))"><i class="fas fa-trash-alt"></i>deletar</button></div>'.'</div>'.'</div>'.'</div>';
             })
             ->editColumn('id_unidades_unidades', function ($item){
                 return $item->unidades['nome'].'('.$item->unidades['sigla'].')';
@@ -200,10 +200,10 @@ class ItensController extends Controller
             $item = Item::find($id);
             $item->delete();
             Session::flash('alert-success', 'item removido com sucesso!');
-            return redirect()->route('itens.index');
+            return response('item removido com sucesso!',200);
         }else{
             Session::flash('alert-danger', 'Esse item não pode ser removido pois já está sendo usado em movimentações dentro do sistema!');
-            return redirect()->route('itens.index');
+            return response('Erro ao deletar item!', 405);
         }
     }
 }

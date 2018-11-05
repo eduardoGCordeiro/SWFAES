@@ -10,6 +10,7 @@ use App\TipoItem;
 use App\Item;
 use Auth;
 use Session;
+use Alert;
 
 class HomeController extends Controller
 {
@@ -45,6 +46,7 @@ class HomeController extends Controller
         $tipos_atividades = TipoAtividades::all();
         $tipos_itens = TipoItem::all();
         $itens = Item::all();
+        
 
         return view('relatorios')->with(compact('tipos_atividades','tipos_itens','talhoes','itens'));
     }

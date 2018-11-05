@@ -126,6 +126,51 @@ $(document).ready(function() {
     });
 });
 </script>
+<script type="text/javascript">
+    function delete_btn(data_input){
+        swal({
+          title: "Esta certo disso?",
+          text: "uma vez excluída, não sera possivel recuperar essa informação!",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            var token = $(this).data('token');
+                $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                });
+
+
+                $.ajax({
+                    url:'culturas/'+data_input.value,
+                    type: 'post',
+                    data: {_method: 'delete'},
+                    success:function(msg){
+                        swal("Pronto!", {
+                          icon: "success",
+                        });
+                        location.reload();
+
+                    },
+                    error:function(msg){
+                        location.reload();
+                        swal({
+                          type: 'error',
+                          title: 'Não deu certo!',
+                          text: 'Algo errado com essa ação!'
+                        })
+                    }
+                });
+          } else {
+            swal("Your imaginary file is safe!");
+          }
+        });
+    }
+</script>
 @endsection
 
 @section('style')

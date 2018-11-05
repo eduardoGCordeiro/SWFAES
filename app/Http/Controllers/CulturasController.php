@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 use App\Http\Requests\CulturasRequest;
 use App\Cultura;
 use App\Atividade;
@@ -41,8 +42,9 @@ class CulturasController extends Controller
                     return $cultura->data_fim!=null?date( 'd/m/Y' , strtotime($cultura->data_fim)):"Ativo";
                 })
                 ->addColumn('action', function ($cultura) {
-                    return '<a href="'.Route('culturas.show',[$cultura->id_culturas]).'" class="">ver</a><br><a href="'.Route('culturas.edit',[$cultura->id_culturas]).'" class="btn btn-primary">Editar</a>'.'<form action="'.Route('culturas.destroy',[$cultura->id_culturas]).'" method="POST"> '.csrf_field().'
-     <input name="_method" type="hidden" value="DELETE"> <button type="submit" class="btn btn-danger">deletar</button>';
+                    return '<a href="'.Route('culturas.show',[$cultura->id_culturas]).'" class="">ver</a><br><a href="'.Route('culturas.edit',[$cultura->id_culturas]).'" class="btn btn-primary">Editar</a>     <meta name="csrf-token" content="'.csrf_token().'">
+ <button type="button" class="confirm-btn" value="'.$cultura->id_culturas.'" onclick="(delete_btn(this))">Confirm</button>
+';
                 })->make(true);
         }else{
             return Datatables::of($culturas)
@@ -205,10 +207,10 @@ class CulturasController extends Controller
         if(!count($cultura->atividades)){
             $cultura->delete();
             Session::flash('alert-success', 'sucesso ao deletar cultura!');
-            return redirect()->route('culturas.index');
+            return response('sucesso ao deletar cultura!', 200);
         }else{
             Session::flash('alert-danger', 'Erro ao deletar cultura pois já existem atividades relacionadas!');
-            return redirect()->route('culturas.index');
+            return response('Erro ao deletar cultura pois já existem atividades relacionadas!', 405);
         }
     }
 

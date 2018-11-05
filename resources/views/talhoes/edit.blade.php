@@ -79,10 +79,10 @@
                             <div class="col-lg-3">
 
                                 <div class="input-group">
-                                    <input class="form-control" type="text" name="area" value="{{$talhoes->area}}"  placeholder="00.00"
+                                    <input class="form-control" type="text" name="area" value="{{$talhoes->area}}"  placeholder="0.000,00"
                                            onkeyup="mascara_num(this);">
                                     <div class="input-group-append">
-                                        <span class="input-group-text">m²</span>
+                                        <span class="input-group-text">ha</span>
                                     </div>
                                 </div>
 

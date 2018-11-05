@@ -31,10 +31,6 @@ class TalhoesController extends Controller
         $adm_talhao = AdmTalhao::where('id_funcionarios_funcionarios',Auth::user()->id_funcionarios)->first();
         $adm_geral = AdmGeral::where('id_funcionarios_funcionarios',Auth::user()->id_funcionarios)->first();
 
-
-        //$statusrequisicoes = StatusRequisicoes::where('nome', 'PENDENTE')->get();
-        //$moderarrequisicoes = ModerarRequisicoes::where('id_requisicoes_status_requisicoes', $statusrequisicoes->id_status_requisicoes);
-
         if($adm_geral){
             $talhoes = Talhao::all();
             return view('talhoes.index')->with(compact('talhoes'));
@@ -148,7 +144,8 @@ class TalhoesController extends Controller
 
         $talhao->identificador = strtoupper($request->identificador);
         $talhao ->tipo = $request->tipo;
-        $talhao->area = $request->area;
+        $talhao->area= str_replace('.','',$request->area);
+        $talhao->area =str_replace(',', '.',$talhao->area);
         $talhao->descricao = $request->descricao;
 
         if($talhao->update()){

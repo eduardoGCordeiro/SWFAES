@@ -15,6 +15,9 @@
                 <div class="card-header">
 
                     <h3>Talhão {{$talhao->id_identificador}}</h3>
+                    <button id = "showmodal" type="button" class="btn float-right" style="background: none">
+                        <i class="fas fa-question-circle fa-2x"></i>
+                    </button>
 
 
                 </div>
@@ -76,6 +79,23 @@
                     </table>
 
                 </div>
+
+                <div id = "popup" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Help Talhões</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Help talhões
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -121,6 +141,19 @@
                 ]
             });
         });
+
+        $(document).unbind("keyup").keyup(function(e){
+            var code = e.which;
+            if(code==112)
+            {
+                $("#popup").modal('show', 'handleUpdate');
+            }
+        });
+
+        $('#showmodal').click(function() {
+            $('#popup').modal('show');
+        });
+
     </script>
 @endsection
 

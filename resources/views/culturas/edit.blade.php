@@ -14,7 +14,11 @@
 
                 <div class="card-header">
 
-                    <h3>Editando cultura</h3>
+                    <h3>Editando cultura
+                        <button id = "showmodal" type="button" class="btn float-right" style="background: none">
+                            <i class="fas fa-question-circle fa-2x"></i>
+                        </button>
+                    </h3>
 
 
                 </div>
@@ -121,34 +125,6 @@
                             </div>
                         </div>
 
-
-                    </form>
-                    <form method="POST" action="{{Route('finalizar_culturas',$cultura->id_culturas)}}">
-                        {!! csrf_field() !!}
-
-
-                        <div class="form-group row">
-                            <div class="col-lg-6 offset-lg-4">
-                                <button class="btn btn-warning" type="submit">
-                                    Finalizar
-                                </button>
-
-                            </div>
-
-
-                        @if($cultura->data_fim == null)
-                             <div class="form-group row">
-                                 <div class="col-lg-6 offset-lg-4">
-                                     <button class="btn btn-warning" type="submit">
-                                         Finalizar
-                                     </button>
-
-                                 </div>
-                             </div>
-                        @endif
-
-                    </form>
-
                         <div class = "col-md-10 offset-3" style="padding-bottom: 5%; padding-left:7%;">
                             <div class="panel-footer row"><!-- panel-footer -->
                                 <div class="col-xs-6 text-left">
@@ -186,6 +162,23 @@
 
                 </div>
             </div>
+
+            <div id = "popup" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Help Talhões</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Help talhões
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
@@ -196,6 +189,18 @@
     document.getElementById('select_tipo_safra').value='{{$cultura->tipo_safra}}';
 
     document.getElementById('select_talhao').value={{$cultura->id_talhoes_talhoes}};
+
+    $(document).unbind("keyup").keyup(function(e){
+        var code = e.which;
+        if(code==112)
+        {
+            $("#popup").modal('show', 'handleUpdate');
+        }
+    });
+
+    $('#showmodal').click(function() {
+        $('#popup').modal('show');
+    });
 
 </script>
 

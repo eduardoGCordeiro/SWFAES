@@ -168,9 +168,10 @@ class CulturasController extends Controller
             return abort(403);
         }
 
-        if($request->data_fim == false)
+        $cultura = Cultura::find($id);
+
+        if($cultura->data_fim == false)
         {
-            $cultura = Cultura::find($id);
             $talhoes = Talhao::all();
             Session::flash('alert-danger','A cultura não pode ser editada antes de ser finalizada!');
             return view('culturas.edit')->with(compact('cultura', 'talhoes'));

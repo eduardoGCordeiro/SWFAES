@@ -84,28 +84,31 @@ class ItensController extends Controller
         if (Gate::denies('gerenciar-itens')) {
             return abort(403);
         }
+
         $item = new Item();
         $item->nome = strtoupper($request->nome);
-        $item->custo_por_unidades = str_replace(',', '.', $request->custo_por_unidades);
-
-        $item->quantidade = $request->quantidade;
+        $custo_por_unidade = str_replace('.', '', $request->custo_por_unidades);
+        $item->custo_por_unidades = str_replace(',', '.', $custo_por_unidade);
+        $quantidade = str_replace('.', '', $request->quantidade);
+        $item->quantidade = str_replace(',', '.', $quantidade);
         $item->id_unidades_unidades = $request->id_unidades_unidades;
         $item->id_tipos_itens_tipos_itens = $request->id_tipos_itens_tipos_itens;
 
 
         if($item->save()){
-            if($request->quantidade > 0){
+            if($item->quantidade > 0){
                 $movimentacao = new Movimentacao();
-                $movimentacao->custo = $item->custo_por_unidades * $request->quantidade;
-                $movimentacao->quantidade = abs($request->quantidade);
+                $movimentacao->custo = $item->custo_por_unidades * $item->quantidade;
+                $movimentacao->quantidade = abs($item->quantidade);
                 $movimentacao->tipo_movimentacoes = 'E';
                 $movimentacao->id_itens_itens = $item->id_itens;
+                var_dump($movimentacao -> id_itens_itens);
                 $movimentacao->descricao = "Movimentacao automatica, cadastro de item.";
                 $movimentacao->save();
-            }else if($request->quantidade<0){
+            }else if($item->quantidade<0){
                 $movimentacao = new Movimentacao();
-                $movimentacao->custo = $item->custo_por_unidades * $request->quantidade;
-                $movimentacao->quantidade = abs($request->quantidade);
+                $movimentacao->custo = $item->custo_por_unidades * $item->quantidade;
+                $movimentacao->quantidade = abs($item->quantidade);
                 $movimentacao->tipo_movimentacoes = 'S';
                 $movimentacao->id_itens_itens = $item->id_itens;
                 $movimentacao->descricao = "Movimentacao automatica, cadastro de item.";
@@ -170,8 +173,10 @@ class ItensController extends Controller
         }
         $item = Item::find($id);
         $item->nome = strtoupper($request->nome);
+        $request->custo_por_unidade = str_replace('.', '', $request->custo_por_unidades);
         $item->custo_por_unidades = str_replace(',', '.', $request->custo_por_unidades);
-        $item->quantidade = $request->quantidade;
+        $request->quantidade = str_replace('.', '', $request->quantidade);
+        $item->quantidade = str_replace(',', '.', $request->quantidade);
         $item->id_unidades_unidades = $request->id_unidades_unidades;
         $item->id_tipos_itens_tipos_itens = $request->id_tipos_itens_tipos_itens;
 

@@ -13,27 +13,29 @@
             <div class="card">
 
                 <div class="card-header">
-
-                    <h3>Talhão {{$talhao->id_identificador}}</h3>
-                    <button id = "showmodal" type="button" class="btn float-right" style="background: none">
-                        <i class="fas fa-question-circle fa-2x"></i>
-                    </button>
-
-
+                    <h3>Talhão {{$talhao->identificador}}
+                        <button id = "showmodal" type="button" class="btn float-right" style="background: none">
+                            <i class="fas fa-question-circle fa-2x"></i>
+                        </button></h3>
                 </div>
 
-                <div class="card  border-dark mb-3" style="margin:3%;float:left;height: 15rem;width: 18rem !important ;">
+
+                <div class="card  border-dark mb-3" style="margin: 3%;float:left;height: 15rem;width: 18rem !important;">
                         <div class="card-header" style="color: #158cba">Talhão {{$talhao->identificador}}
-                            <span style="float: center" class="ml-4">Área: {{$talhao->area}}</span>
+                            <span style="float: center" class="ml-4">Área: {{$talhao->area}} ha</span>
                             <span style="float: right" class="badge badge-success">{{count($talhao->requisicoes)}}</span>
                         </div>
                     <div class="card-body">
                         @if($talhao->culturas->first())
-                            <h4 class="card-title text-dark">safra de @if($talhao->culturas->first()->tipo_safra = "I") inverno @else verão @endif</h4>
+                            <h4 class="card-title text-dark">{{$talhao->culturas->last()->descricao}}</h4>
+                            <p class="card-text text-dark" onload="mascaraData(this)">Data de
+                                início: @php
+                                    $data = str_replace('-','/',$talhao->culturas->last()->data_inicio);
+                                    $data = explode('/',$data);
+                                    echo $data[2]."/".$data[1]."/".$data[0];@endphp</p>
                         @else
-                            <h4 class="card-title text-dark">Sem cultura atualmente</h4>
+                            <h4 class="card-title text-dark">Cultura ausente</h4>
                         @endif
-                        <p class="card-text text-dark">{{$talhao->descricao}}</p>
                     </div>
                     <div class="card-footer">
                         @if($talhao->tipo != "pecuaria" && $talhao->tipo != "agricultura")
@@ -43,6 +45,8 @@
                         @endif
                     </div>
                 </div>
+
+                @if(Auth::user()->can('gerenciar-culturas'))
                 <div class = "col-md-10 offset-1" style="padding-bottom: 5%">
                     <div class="panel-footer row"><!-- panel-footer -->
                         <div class="col-xs-6 text-left">
@@ -61,23 +65,22 @@
                     </div>
                 </div>
                 <div class="card-body">
+                @endif
 
+                    @if(!Auth::user()->can('gerenciar-culturas'))
+                    <div style="margin-top: 3% !important;"></div>
+                    @endif
 
                     <table id="data-table-atividades" class="table  table-striped">
-
                         <thead>
                         <tr>
-
                             <th scope="col">Data da atividade</th>
                             <th scope="col">Descrição</th>
                             <th scope="col">Tipo de atividade</th>
                             <th scope="col">Requisição</th>
-
                         </tr>
                         </thead>
-
                     </table>
-
                 </div>
 
                 <div id = "popup" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

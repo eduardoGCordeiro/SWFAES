@@ -12,7 +12,7 @@
                     </ol>
             <div class="card">
                 <div class="card-header">
-                    <h3>Editando talhão {{$talhoes -> id_identificador}}</h3>
+                    <h3>Editando talhão {{$talhoes -> identificador}}</h3>
                 </div>
 
                 <div class="card-body col-md-8 offset-lg-2">

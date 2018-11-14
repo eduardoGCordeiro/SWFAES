@@ -36,40 +36,9 @@
 
 
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">Descrição</label>
-
-                            <div class="col-lg-6">
-                                <textarea
-                                    class="form-control"
-                                    id="exampleTextarea"
-                                    rows="3"
-                                    name="descricao"
-                                   required
-
-
-                                ></textarea>
-                                @if ($errors->has('descricao'))
-                                    <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('descricao') }}</strong>
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-
-
-                        <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Talhão</label>
-
-                            <div class="col-lg-6">
-
-                                <select name="talhao" class="form-control" id="exampleSelect1">
-
-                            <label class="col-lg-4 col-form-label text-lg-right">Talhão</label>
-
                             <div class="col-lg-3">
-
                                 <select name="talhao" class="form-control" id="exampleSelect1" required="">
-
                                     <option value="">Selecione</option>
                                     @foreach($talhoes as $talhao)
                                         <option value="{{$talhao->id_talhoes}}">{{$talhao->identificador}}</option>
@@ -90,11 +59,12 @@
 
                             <div class="col-lg-6">
                                 <textarea
-                                    class="form-control"
-                                    id="exampleTextarea"
-                                    rows="3"
-                                    name="descricao"
-                                    required
+                                        placeholder="Insira a descrição da requisição aqui..."
+                                        class="form-control"
+                                        id="exampleTextarea"
+                                        rows="3"
+                                        name="descricao"
+                                        required
 
                                 ></textarea>
                                 @if ($errors->has('descricao'))

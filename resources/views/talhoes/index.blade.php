@@ -10,10 +10,12 @@
                 </ol>
                 <div class="card">
                     <div class="card-header">
-                        <h3>Lista de Talhões</h3>
-                        <button id = "showmodal" type="button" class="btn float-right" style="background: none">
-                            <i class="fas fa-question-circle fa-2x"></i>
-                        </button>
+                        <h3>Lista de Talhões
+                            <button id = "showmodal" type="button" class="btn float-right align-top" style="background: none">
+                                <i class="fas fa-question-circle fa-2x"></i>
+                            </button>
+                        </h3>
+
                         @if (Auth::user()->can('gerenciar-culturas'))
                             <a href="{{Route('talhoes.create')}}">
                                 <button type="button" class="btn btn-outline-success"><i class="fas fa-plus"> </i>

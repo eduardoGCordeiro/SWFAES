@@ -10576,7 +10576,7 @@ a.text-dark:focus {
 .table-success,
 .table-success > th,
 .table-success > td {
-  background-color: #F2FBEF;
+  background-color: #e1ffd9;
   color: black;
 }
 
@@ -10589,7 +10589,7 @@ a.text-dark:focus {
 .table-danger,
 .table-danger > th,
 .table-danger > td {
-  background-color: #FBEFEF;
+  background-color: #ffe4e4;
   color: black;
 }
 

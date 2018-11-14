@@ -13,7 +13,11 @@
 
                 <div class="card-header">
 
-                    <h3>Cadastro de movimentação @if(isset($atividade)) para atividade {{$atividade}} @endif</h3>
+                    <h3>Cadastro de movimentação @if(isset($atividade)) para atividade {{$atividade}} @endif
+                        <button id = "showmodal" type="button" class="btn float-right" style="background: none">
+                            <i class="fas fa-question-circle fa-2x"></i>
+                        </button>
+                    </h3>
 
 
                 </div>
@@ -97,6 +101,7 @@
                                             class="form-control"
                                             type="text"
                                             name="custo"
+                                            placeholder="00.00"
                                             required
                                     >
                                 </div>
@@ -115,9 +120,9 @@
                                 <div class="input-group mb-3">
                                     <input
 
-                                        class="form-control"
-                                        type="text"
-                                        name="quantidade"
+                                            class="form-control"
+                                            type="text"
+                                            name="quantidade"
 
                                             placeholder="00.00"
 
@@ -136,38 +141,6 @@
                                 @endif
                             </div>
                         </div>
-
-                        @if(!isset($atividade))
-                        <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">Atividade</label>
-                            <div class="col-lg-6">
-
-                                <select name="id_atividades_atividades" class="form-control" id="exampleSelect1" required="">
-                                    <option value="">Selecione</option>
-                                    @foreach($atividades as $atividade)
-                                        <option value="{{$atividade->id_atividades}}">{{$atividade->id_atividades}}</option>
-                                    @endforeach
-                                </select>
-
-                                @if ($errors->has('id_atividades_atividades'))
-                                    <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('id_atividades_atividades') }}</strong>
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-                        @else
-                        <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">Atividade</label>
-                            <div class="col-lg-2">
-
-
-                                    <input name="id_atividades_atividades" class="form-control" value="{{$atividade}}" id="readOnlyInput" type="text" placeholder="Readonly input here…" readonly="">
-
-
-                                @if ($errors->has('id_atividades_atividades'))
-                                    <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('id_atividades_atividades') }}</strong>
 
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Custo</label>
@@ -194,9 +167,6 @@
                                 @endif
                             </div>
                         </div>
-
-                        @endif
-
 
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Descrição</label>
@@ -236,7 +206,6 @@
                             </div>
                         </div>
 
-
                         <div class="form-group row">
                             <div class="col-lg-6 offset-lg-4">
                                 <button type="submit" class="btn btn-primary">
@@ -244,12 +213,31 @@
                                 </button>
                             </div>
                         </div>
-                    </form>
 
+                    </form>
+                </div>
+
+            </div>
+
+            <div id = "popup" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Help Talhões</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Help talhões
+                        </div>
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
+</div>
 </div>
 @endsection
 @section('script')
@@ -294,5 +282,18 @@
                 }
             }
         }
+
+        $(document).unbind("keyup").keyup(function(e){
+            var code = e.which;
+            if(code==112)
+            {
+                $("#popup").modal('show', 'handleUpdate');
+            }
+        });
+
+        $('#showmodal').click(function() {
+            $('#popup').modal('show');
+        });
+
     </script>
 @endsection

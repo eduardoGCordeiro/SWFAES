@@ -13,7 +13,11 @@
 
                 <div class="card-header">
 
-                    <h3>Editando movimentação</h3>
+                    <h3>Editando movimentação
+                        <button id = "showmodal" type="button" class="btn float-right" style="background: none">
+                            <i class="fas fa-question-circle fa-2x"></i>
+                        </button>
+                    </h3>
 
 
                 </div>
@@ -187,8 +191,25 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
                 </div>
-            </div>
+
+                <div id = "popup" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Help Talhões</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Help talhões
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
         </div>
     </div>
 </div>
@@ -196,44 +217,56 @@
 @section('script')
     <script language="javascript">
         function mascara_num(obj){
-  valida_num(obj)
-  if (obj.value.match("-")){
-    mod = "-";
-  }else{
-    mod = "";
-  }
-  valor = obj.value.replace("-","");
-  valor = valor.replace(",","");
-  if (valor.length >= 3){
-    valor = poe_ponto_num(valor.substring(0,valor.length-2))+","+valor.substring(valor.length-2, valor.length);
-  }
-  obj.value = mod+valor;
-}
-function poe_ponto_num(valor){
-  valor = valor.replace(/\./g,"");
-  if (valor.length > 3){
-    valores = "";
-    while (valor.length > 3){
-      valores = "."+valor.substring(valor.length-3,valor.length)+""+valores;
-      valor = valor.substring(0,valor.length-3);
-    }
-    return valor+""+valores;
-  }else{
-    return valor;
-  }
-}
-function valida_num(obj){
-  numeros = new RegExp("[0-9]");
-  while (!obj.value.charAt(obj.value.length-1).match(numeros)){
-    if(obj.value.length == 1 && obj.value == "-"){
-      return true;
-    }
-    if(obj.value.length >= 1){
-      obj.value = obj.value.substring(0,obj.value.length-1)
-    }else{
-      return false;
-    }
-  }
-}
+            valida_num(obj)
+            if (obj.value.match("-")){
+                mod = "-";
+            }else{
+                mod = "";
+            }
+            valor = obj.value.replace("-","");
+            valor = valor.replace(",","");
+            if (valor.length >= 3){
+                valor = poe_ponto_num(valor.substring(0,valor.length-2))+","+valor.substring(valor.length-2, valor.length);
+            }
+            obj.value = mod+valor;
+        }
+        function poe_ponto_num(valor){
+            valor = valor.replace(/\./g,"");
+            if (valor.length > 3){
+                valores = "";
+                while (valor.length > 3){
+                    valores = "."+valor.substring(valor.length-3,valor.length)+""+valores;
+                    valor = valor.substring(0,valor.length-3);
+                }
+                return valor+""+valores;
+            }else{
+                return valor;
+            }
+        }
+        function valida_num(obj){
+            numeros = new RegExp("[0-9]");
+            while (!obj.value.charAt(obj.value.length-1).match(numeros)){
+                if(obj.value.length == 1 && obj.value == "-"){
+                    return true;
+                }
+                if(obj.value.length >= 1){
+                    obj.value = obj.value.substring(0,obj.value.length-1)
+                }else{
+                    return false;
+                }
+            }
+        }
+
+        $(document).unbind("keyup").keyup(function(e){
+            var code = e.which;
+            if(code==112)
+            {
+                $("#popup").modal('show', 'handleUpdate');
+            }
+        });
+
+        $('#showmodal').click(function() {
+            $('#popup').modal('show');
+        });
     </script>
 @endsection

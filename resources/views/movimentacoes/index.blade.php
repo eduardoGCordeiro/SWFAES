@@ -11,7 +11,11 @@
             <div class="card">
 
                 <div class="card-header">
-                    <h4>Listando movimentações</h4>
+                    <h3>Listando movimentações
+                        <button id = "showmodal" type="button" class="btn float-right" style="background: none">
+                            <i class="fas fa-question-circle fa-2x"></i>
+                        </button>
+                    </h3>
                     <a href="{{Route('movimentacoes.create')}}"><button type="button" class="btn btn-outline-success"><i class="fas fa-plus"> </i>  Cadastrar nova</button></a>
                 </div>
 
@@ -46,6 +50,23 @@
 
                 </div>
             </div>
+
+            <div id = "popup" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Help Talhões</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Help talhões
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
@@ -84,8 +105,8 @@
                 ajax: '{{route('data_table_movimentacoes')}}',
                 columns: [
                     {data: 'id_movimentacoes', name: 'id_movimentacoes', width: '0.1%', tragets:0, className:'dt-body-center dt-head-center'},
-                    {data: 'id_itens_itens', name: 'itens', width: '0.1%', tragets:0, className:'dt-body-center dt-head-center'},
                     {data: 'tipo_movimentacoes', name: 'tipo_movimentacoes', width: '1%', tragets:0, className:'dt-body-center dt-head-center'},
+                    {data: 'id_itens_itens', name: 'itens', width: '0.1%', tragets:0, className:'dt-body-center dt-head-center', orderable: false},
                     {data: 'descricao', name: 'descricao', width: '6%', tragets:0, className:'dt-body-rigth dt-head-center'},
                     {data: 'quantidade', name: 'quantidade', width: '1%', tragets:0},
                     {data: 'custo', name: 'custo', render: $.fn.dataTable.render.number( '.', ',', 2, 'R$ ' ), width: '2%', tragets:0},
@@ -93,6 +114,19 @@
                 ]
             });
         });
+
+        $(document).unbind("keyup").keyup(function(e){
+            var code = e.which;
+            if(code==112)
+            {
+                $("#popup").modal('show', 'handleUpdate');
+            }
+        });
+
+        $('#showmodal').click(function() {
+            $('#popup').modal('show');
+        });
+
     </script>
 @endsection
 

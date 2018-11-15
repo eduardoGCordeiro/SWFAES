@@ -77,7 +77,7 @@ class TalhoesController extends Controller
         }
         $this->validate($request, ['identificador' => 'unique:talhoes'], ['identificador.unique' => 'O campo :attribute deve ser único!']);
         $talhao = new Talhao();
-        $talhao->identificador = strtoupper($request->identificador);
+        $talhao->identificador = mb_strtoupper($request->identificador);
         $talhao->tipo = $request->tipo;
         $talhao->area= str_replace('.','',$request->area);
         $talhao->area =str_replace(',', '.',$talhao->area);
@@ -142,7 +142,7 @@ class TalhoesController extends Controller
         $talhao = Talhao::find($id);
 
 
-        $talhao->identificador = strtoupper($request->identificador);
+        $talhao->identificador = mb_strtoupper($request->identificador);
         $talhao ->tipo = $request->tipo;
         $talhao->area= str_replace('.','',$request->area);
         $talhao->area =str_replace(',', '.',$talhao->area);

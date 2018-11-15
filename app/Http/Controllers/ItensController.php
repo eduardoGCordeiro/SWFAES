@@ -86,7 +86,7 @@ class ItensController extends Controller
         }
 
         $item = new Item();
-        $item->nome = strtoupper($request->nome);
+        $item->nome = mb_strtoupper($request->nome);
         $custo_por_unidade = str_replace('.', '', $request->custo_por_unidades);
         $item->custo_por_unidades = str_replace(',', '.', $custo_por_unidade);
         $quantidade = str_replace('.', '', $request->quantidade);
@@ -172,7 +172,7 @@ class ItensController extends Controller
             return abort(403);
         }
         $item = Item::find($id);
-        $item->nome = strtoupper($request->nome);
+        $item->nome = mb_strtoupper($request->nome);
         $request->custo_por_unidade = str_replace('.', '', $request->custo_por_unidades);
         $item->custo_por_unidades = str_replace(',', '.', $request->custo_por_unidades);
         $request->quantidade = str_replace('.', '', $request->quantidade);

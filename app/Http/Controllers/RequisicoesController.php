@@ -84,7 +84,7 @@ class RequisicoesController extends Controller
         //     return abort(403);
         // }
         $requisicao = Requisicao::find($id);
-        $requisicao->resposta = strtoupper($request->resposta);
+        $requisicao->resposta = mb_strtoupper($request->resposta);
         if($request->option == 1){
             $requisicao->id_status_requisicoes_status_requisicoes = 2;
         }else{
@@ -142,7 +142,7 @@ class RequisicoesController extends Controller
         $requisicao -> descricao_adms_gerais = $request->descricao_adms_gerais;
         $requisicao -> resposta = $request->resposta;
         $requisicao->id_adms_talhoes_adms_talhoes = $adm_talhao->id_adms_talhoes;
-        $requisicao->descricao = strtoupper($request->descricao);
+        $requisicao->descricao = mb_strtoupper($request->descricao);
         $requisicao->id_talhoes_talhoes = $request->talhao;
 
         if($requisicao->save()){

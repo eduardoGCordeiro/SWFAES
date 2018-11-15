@@ -60,7 +60,7 @@ class UnidadesController extends Controller
             return abort(403);
         }
         $unidade = new Unidade();
-        $unidade->nome = strtoupper($request->nome);
+        $unidade->nome = mb_strtoupper($request->nome);
         $unidade->sigla = $request->sigla;
 
         if($unidade->save()){
@@ -116,7 +116,7 @@ class UnidadesController extends Controller
         }
 
         $unidade = Unidade::find($id);
-        $unidade->nome = strtoupper($request->nome);
+        $unidade->nome = mb_strtoupper($request->nome);
         $unidade->sigla = $request->sigla;
 
         $movimentacoes = $unidade->movimentacoes;

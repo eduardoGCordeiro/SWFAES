@@ -46,7 +46,7 @@ class TipoItemController extends Controller
             return abort(403);
         }
         $tipo = new TipoItem();
-        $tipo->nome = strtoupper($request->nome);
+        $tipo->nome = mb_strtoupper($request->nome);
 
 
         if($tipo->save()){
@@ -94,7 +94,7 @@ class TipoItemController extends Controller
         }
         //dd($request);
         $tipo = TipoItem::find($id);
-        $tipo->nome = strtoupper($request->nome);
+        $tipo->nome = mb_strtoupper($request->nome);
 
         if($tipo->update()){
 

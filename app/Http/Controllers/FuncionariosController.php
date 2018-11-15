@@ -121,7 +121,7 @@ class FuncionariosController extends Controller
 
         $funcionario = new Funcionario();
         $funcionario->cpf = $request->cpf;
-        $funcionario->nome = strtoupper($request->nome);
+        $funcionario->nome = mb_strtoupper($request->nome);
         $funcionario->login = $request->login;
         $funcionario->email = strtolower($request->email);
         $funcionario->password = $request->acesso_sistema==""?bcrypt("fazendaescola"):bcrypt($request->password);
@@ -213,7 +213,7 @@ class FuncionariosController extends Controller
         ], ['O campo :attribute deve ser único!']);
 
 
-        $funcionario->nome= strtoupper($request->nome);
+        $funcionario->nome= mb_strtoupper($request->nome);
         $funcionario->login= ($request->login);
         $funcionario->cpf= ($request->cpf);
         $funcionario->email= strtolower($request->email);

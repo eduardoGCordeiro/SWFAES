@@ -36,7 +36,7 @@ class AtividadesRequest extends FormRequest
     {
         return [
             'descricao.required' => 'O campo :attribute é obrigatório',
-            'data_data.required' => 'O campo :attribute é obrigatório!',
+            'data.required' => 'O campo :attribute é obrigatório!',
             'descricao.max' => 'O campo :attribute deve ter no máximo 500 caracteres!',
             'descricao.string' => 'O campo :attribute deve ser uma palavra!',
         ];

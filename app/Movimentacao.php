@@ -17,7 +17,7 @@ class Movimentacao extends Model
     * @var array
     */
    protected $fillable = [
-    'custo','quantidade','tipo_movimentacoes','id_itens_itens','id_atividades_atividades','descricao'
+    'custo','quantidade','tipo_movimentacoes','id_itens_itens','id_atividades_atividades','descricao', 'data'
 
    ];
 

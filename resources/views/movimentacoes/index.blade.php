@@ -38,6 +38,7 @@
                         <thead>
                         <tr>
                             <th scope="col">Movimentação</th>
+                            <th scope="col">Data Movimentação</th>
                             <th scope="col">Tipo de movimentação</th>
                             <th scope="col">Item</th>
                             <th scope="col">Descricao</th>
@@ -105,6 +106,7 @@
                 ajax: '{{route('data_table_movimentacoes')}}',
                 columns: [
                     {data: 'id_movimentacoes', name: 'id_movimentacoes', width: '0.1%', tragets:0, className:'dt-body-center dt-head-center'},
+                    {data: 'data', name: 'data_movimentacao', width: '1%', tragets:0, className:'dt-body-center dt-head-center'},
                     {data: 'tipo_movimentacoes', name: 'tipo_movimentacoes', width: '1%', tragets:0, className:'dt-body-center dt-head-center'},
                     {data: 'id_itens_itens', name: 'itens', width: '0.1%', tragets:0, className:'dt-body-center dt-head-center', orderable: false},
                     {data: 'descricao', name: 'descricao', width: '6%', tragets:0, className:'dt-body-rigth dt-head-center'},

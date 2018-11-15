@@ -15,7 +15,11 @@
                 <div class="card-header">
 
 
-                    <h3>Listando tipos de itens</h3>
+                    <h3>Listando tipos de itens
+                        <button id = "showmodal" type="button" class="btn float-right" style="background: none">
+                            <i class="fas fa-question-circle fa-2x"></i>
+                        </button>
+                    </h3>
                     <a href="{{Route('tipo_item.create')}}"><button type="button" class="btn btn-outline-success"><i class="fas fa-plus"></i> Cadastrar novo</button></a>
 
 
@@ -58,6 +62,23 @@
                     </table>
                 </div>
             </div>
+
+            <div id = "popup" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Help tipos</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Nessa página é possível visualizar os tipos de itens já cadastrados no sistema!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
@@ -109,6 +130,18 @@ $(document).ready(function() {
             }
         ]
     });
+});
+
+$(document).unbind("keyup").keyup(function(e){
+    var code = e.which;
+    if(code==112)
+    {
+        $("#popup").modal('show', 'handleUpdate');
+    }
+});
+
+$('#showmodal').click(function() {
+    $('#popup').modal('show');
 });
 </script>
 @endsection

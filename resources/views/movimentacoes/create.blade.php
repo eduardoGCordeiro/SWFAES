@@ -169,6 +169,26 @@
                         </div>
 
                         <div class="form-group row">
+                            <label class="col-lg-4 col-form-label text-lg-right">Data</label>
+
+                            <div class="col-lg-3">
+                                <input
+                                        type="date"
+                                        class="form-control{{ $errors->has('data') ? ' is-invalid' : '' }}"
+                                        name="data"
+                                        style="padding-left: 15%"
+                                        value="{{ old('data') }}"
+                                        required
+                                >
+                                @if ($errors->has('data'))
+                                    <div class="invalid-feedback">
+                                        <strong>{{ $errors->first('data') }}</strong>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Descrição</label>
 
                             <div class="col-lg-6">

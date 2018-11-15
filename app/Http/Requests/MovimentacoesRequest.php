@@ -29,13 +29,15 @@ class MovimentacoesRequest extends FormRequest
             'tipo_movimentacoes' => 'required|string|max:1',
             'id_itens_itens'=>'',
             'id_atividades_atividades' => '',
-            'descricao' => 'string|max:200'
+            'descricao' => 'string|max:200',
+            'data' => 'required'
         ];
     }
 
     public function messages()
     {
         return [
+            'data.required' => 'O campo :attribute é obrigatório!',
             'custo.required' => 'O campo :attribute é obrigatório!',
             'quantidade.required' => 'O campo :attribute é obrigatório!',
             'tipo_movimentacoes.required' => 'O campo :attribute é obrigatório!',

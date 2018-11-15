@@ -7,14 +7,18 @@
         <div class="col-md-12 ">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/inicio">Início</a></li>
-                <li class="breadcrumb-item"><a href="{{Route('unidades.index')}}">Unidades</a></li>
-                <li class="breadcrumb-item active">Editar unidade</li>
+                <li class="breadcrumb-item"><a href="{{Route('unidades.index')}}">Tipos</a></li>
+                <li class="breadcrumb-item active">Editar tipo</li>
             </ol>
             <div class="card">
 
                 <div class="card-header">
 
-                    <h3>Edição de unidade</h3>
+                    <h3>Edição de tipo
+                        <button id = "showmodal" type="button" class="btn float-right" style="background: none">
+                            <i class="fas fa-question-circle fa-2x"></i>
+                        </button>
+                    </h3>
 
 
                 </div>
@@ -94,6 +98,23 @@
 
                 </div>
             </div>
+
+            <div id = "popup" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Help tipos</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Nessa página é possível editar os tipos de itens já cadastrados no sistema!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
@@ -102,4 +123,20 @@
 @section('styles')
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 
+@endsection
+
+@section('script')
+    <script>
+        $(document).unbind("keyup").keyup(function(e){
+            var code = e.which;
+            if(code==112)
+            {
+                $("#popup").modal('show', 'handleUpdate');
+            }
+        });
+
+        $('#showmodal').click(function() {
+            $('#popup').modal('show');
+        });
+    </script>
 @endsection

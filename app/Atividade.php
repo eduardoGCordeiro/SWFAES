@@ -27,17 +27,6 @@ class Atividade extends Model
     */
     protected $hidden = [ ];
 
-    public function movimentacao()
-    {
-        return $this->hasMany('App\Movimentacao','id_atividades_atividades');
-
-    }
-
-    // public function talhoes(){
-    //     return $this->belongsTo('App\Talhao');
-    // }
-
-
     public function talhao()
     {
         return $this->hasOne('App\Talhao','id_talhoes','id_talhoes_talhoes');
@@ -61,6 +50,11 @@ class Atividade extends Model
     public function tipos_atividades()
     {
         return $this->belongsTo('App\TipoAtividades', 'id_tipos_atividades_tipos_atividades');
+    }
+
+    public function movimentacao()
+    {
+        return $this->hasMany('App\Movimentacao');
     }
 
 }

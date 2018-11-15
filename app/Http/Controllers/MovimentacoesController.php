@@ -37,6 +37,9 @@ class MovimentacoesController extends Controller
             ->editColumn('tipo_movimentacoes', function($movimentacao){
                 return $movimentacao->tipo_movimentacoes==="S"?'Saída':'Entrada';
             })
+            ->editColumn('data_movimentacao', function($movimentacao) {
+                return date( 'd/m/Y' , strtotime($movimentacao->data));
+            })
             ->editColumn('id_itens_itens', function($movimentacao){
                 return $movimentacao->item['nome'];
             })
@@ -100,6 +103,7 @@ class MovimentacoesController extends Controller
         $movimentacao->custo =str_replace(',', '.',$movimentacao->custo);
         $movimentacao->quantidade = str_replace('.','',$request->quantidade);
         $movimentacao->quantidade =str_replace(',', '.',$movimentacao->quantidade);
+        $movimentacao->data = $request->data;
         $movimentacao->tipo_movimentacoes = $request->tipo_movimentacoes;
         $movimentacao->descricao =strtoupper($request->descricao);
         $movimentacao->id_itens_itens = $request->id_itens_itens;
@@ -166,18 +170,11 @@ class MovimentacoesController extends Controller
         $movimentacao->custo =str_replace(',', '.',$movimentacao->custo);
         $movimentacao->quantidade = str_replace('.','',$request->quantidade);
         $movimentacao->quantidade =str_replace(',', '.',$movimentacao->quantidade);
+        $movimentacao->data = $request->data;
         $movimentacao->tipo_movimentacoes = $request->tipo_movimentacoes;
         $movimentacao->descricao = $request->descricao;
         $movimentacao->id_itens_itens = $request->id_itens_itens;
         $movimentacao->id_atividades_atividades = $request->id_atividades_atividades;
-
-        //dd($movimentacao);
-        // if($movimentacao->tipo_movimentacoes == "E")
-        // {
-        //     $item->quantidade += $movimentacao->quantidade;
-        // } else{
-        //     $item->quantidade -= $movimentacao->quantidade;
-        // }
 
         if($movimentacao->update()){
             Session::flash('alert-success', 'Movimentação atualizada com sucesso!');

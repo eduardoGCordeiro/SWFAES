@@ -175,10 +175,8 @@
                                 </div>
                     </form>
                                 <div class="col-lg-2 offset-lg-3">
-                                    <form action="{{Route('movimentacoes.destroy',[$movimentacao->id_movimentacoes])}}" method="POST"> {{csrf_field()}}
-                                        <input name="_method" type="hidden" value="DELETE">
-                                        <button type="submit" class="btn btn-danger">deletar</button>
-                                    </form>
+                                <meta name="csrf-token" content="{{csrf_token()}}">
+                                <button type="button" class="confirm-btn btn btn-danger" value="{{$movimentacao->id_movimentacoes}}" onclick="delete_btn(this)"><i class="fas fa-trash-alt"></i>deletar</button>   
                                 </div>
                             </div>
                         </div>
@@ -268,5 +266,51 @@
         $('#showmodal').click(function() {
             $('#popup').modal('show');
         });
+
+
+        function delete_btn(data_input){
+            var base_url = window.location.origin;
+            
+            swal({
+                title: "Tem certeza disso?",
+                text: "uma vez excluída, não sera possivel recuperar essa informação!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                showCancelButton: true,
+                cancelButtonText: 'Cancelar',
+                closeOnCancel: false,
+            }).then((result) => {
+              if (result.value) {
+                var token = $(this).data('token');
+                    $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                    });
+                    $.ajax({
+                        url:base_url+'/movimentacoes/'+data_input.value,
+                        type: 'post',
+                        data: {_method: 'delete'},
+                        success:function(msg){
+                            swal("Pronto!", {
+                              icon: "success",
+                            });
+                            window.location.replace(base_url+'/movimentacoes');
+
+                        },
+                        error:function(msg){
+                            swal({
+                              type: 'error',
+                              title: 'Não deu certo!',
+                              text: 'Algo errado com essa ação!'
+                            })
+                            location.reload();
+                        }
+                    });
+              }
+            });
+        }
+
     </script>
 @endsection

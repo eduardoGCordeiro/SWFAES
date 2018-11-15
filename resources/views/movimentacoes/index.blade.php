@@ -117,6 +117,10 @@
             });
         });
 
+
+        
+
+
         $(document).unbind("keyup").keyup(function(e){
             var code = e.which;
             if(code==112)
@@ -130,6 +134,7 @@
         });
 
     </script>
+
 @endsection
 
 @section('style')

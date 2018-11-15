@@ -25,8 +25,8 @@ class TipoItemController extends Controller
         return Datatables::of($tipos)
             ->addColumn('action', function ($tipo) {
                 return '<div class = "col-md-10" style="margin-rigth: 14%">'. '<div class="panel-footer row" style="margin-rigth:80%"><!-- panel-footer -->'.'<div class="col-xs-6 text-center">'.'<div class="previous">'.'<a href="'.Route('tipo_item.edit',[$tipo->id_tipos_itens]).'" class="btn btn-primary"><i class="fas fa-edit"></i>Editar</a>'.'</div>
-                        '.'</div>'.'<div class="col-xs-6 text-right">'.'<div style="margin-left:6%">'.'<form action="'.Route('tipo_item.destroy',[$tipo->id_tipos_itens]).'" method="POST"> '.csrf_field().'
- <input name="_method" type="hidden" value="DELETE"> <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>deletar</button></form>'.'</div>'.'</div>'.'</div>'.'</div>';
+                        '.'</div>'.'<div class="col-xs-6 text-right">'.'<div style="margin-left:6%">'.'  <meta name="csrf-token" content="'.csrf_token().'">
+ <button type="button" class="confirm-btn btn btn-danger" value="'.$tipo->id_tipos_itens.'" onclick="(delete_btn(this))"><i class="fas fa-trash-alt"></i>deletar</button>'.'</div>'.'</div>'.'</div>'.'</div>';
             })->make(true);
     }
 
@@ -116,15 +116,15 @@ class TipoItemController extends Controller
         $movimentacoes = $tipo->movimentacoes;
         if(count($movimentacoes)){
             Session::flash('alert-danger', 'Erro ao excluir pois já está relacionado com um item!');
-            return redirect()->back();
+            return response('erro ao deletar tipo!', 405);
         }
         if($tipo->delete()){
 
             Session::flash('alert-success', 'deletado com sucesso!');
-            return redirect()->route('tipo_item.index');
+            return response('sucesso ao deletar tipo!', 200);
         }else{
             Session::flash('alert-danger', 'Erro ao editar!');
-            return redirect()->route('tipo_item.index');
+            return response('erro ao deletar tipo!', 405);
         }
     }
 }

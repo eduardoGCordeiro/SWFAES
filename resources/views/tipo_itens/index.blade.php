@@ -144,6 +144,65 @@ $('#showmodal').click(function() {
     $('#popup').modal('show');
 });
 </script>
+
+
+<script type="text/javascript">
+    function delete_btn(data_input){
+            var base_url = window.location.origin;
+            
+            swal({
+                title: "Tem certeza disso?",
+                text: "uma vez excluída, não sera possivel recuperar essa informação!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                showCancelButton: true,
+                cancelButtonText: 'Cancelar',
+                closeOnCancel: false,
+            }).then((result) => {
+              if (result.value) {
+                var token = $(this).data('token');
+                    $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                    });
+                    $.ajax({
+                        url:base_url+'/tipo_item/'+data_input.value,
+                        type: 'post',
+                        data: {_method: 'delete'},
+                        success:function(msg){
+                            swal("Pronto!", {
+                              icon: "success",
+                            });
+                            window.location.replace(base_url+'/tipo_item');
+
+                        },
+                        error:function(msg){
+                            swal({
+                              type: 'error',
+                              title: 'Não deu certo!',
+                              text: 'Algo errado com essa ação!'
+                            })
+                            location.reload();
+                        }
+                    });
+              }
+            });
+        }
+
+    $(document).unbind("keyup").keyup(function(e){
+        var code = e.which;
+        if(code==112)
+        {
+            $("#popup").modal('show', 'handleUpdate');
+        }
+    });
+
+    $('#showmodal').click(function() {
+        $('#popup').modal('show');
+    });
+</script>
 @endsection
 
 @section('style')

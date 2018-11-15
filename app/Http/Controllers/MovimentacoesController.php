@@ -199,11 +199,11 @@ class MovimentacoesController extends Controller
         if($movimentacao->delete() )
         {
             Session::flash('alert-sucess', 'Movimentação deletada com sucesso!');
-            return redirect()->route('movimentacoes.index');
+            return response('item removido com sucesso!',200);
         }else
         {
             Session::flash('alert-danger', 'Movimentação não pode ser deletada!');
-            return redirect()->route('movimentacoes.index');
+            return response('erro ao remover item!',405);
         }
     }
 }

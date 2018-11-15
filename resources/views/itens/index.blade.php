@@ -148,9 +148,10 @@ $(document).ready(function() {
             buttons: true,
             dangerMode: true,
             showCancelButton: true,
-        })
-        .then((willDelete) => {
-          if (willDelete) {
+            cancelButtonText: 'Cancelar',
+            closeOnCancel: false,
+        }).then((result) => {
+          if (result.value) {
             var token = $(this).data('token');
                 $.ajaxSetup({
                         headers: {
@@ -167,20 +168,18 @@ $(document).ready(function() {
                         swal("Pronto!", {
                           icon: "success",
                         });
-                        location.reload();
+                         location.reload();
 
                     },
                     error:function(msg){
-                        location.reload();
                         swal({
                           type: 'error',
                           title: 'Não deu certo!',
                           text: 'Algo errado com essa ação!'
                         })
+                        location.reload();
                     }
                 });
-          } else {
-            swal("Your imaginary file is safe!");
           }
         });
     }

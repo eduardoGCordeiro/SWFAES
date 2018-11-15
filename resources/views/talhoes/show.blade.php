@@ -56,10 +56,8 @@
                         </div>
                         <div class="col-xs-6 text-right">
                             <div class="next offset-1">
-                                <form action="{{Route('talhoes.destroy',[$talhao->id_talhoes])}}" method="POST"> {{csrf_field()}}
-                                    <input name="_method" type="hidden" value="DELETE">
-                                    <button type="submit" class="btn btn-danger">deletar</button>
-                                </form>
+                                <meta name="csrf-token" content="{{csrf_token()}}">
+                                <button type="button" class="confirm-btn btn btn-danger" value="{{$talhao->id_talhoes}}" onclick="delete_btn(this)"><i class="fas fa-trash-alt"></i>deletar</button>   
                             </div>
                         </div>
                     </div>
@@ -156,6 +154,56 @@
         $('#showmodal').click(function() {
             $('#popup').modal('show');
         });
+
+    </script>
+
+    <script type="text/javascript">
+        function delete_btn(data_input){
+            var base_url = window.location.origin;
+
+            swal({
+                title: "Tem certeza disso?",
+                text: "uma vez excluída, não sera possivel recuperar essa informação!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                showCancelButton: true,
+            })
+            .then((willDelete) => {
+              if (willDelete) {
+                var token = $(this).data('token');
+                    $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                    });
+
+
+                    $.ajax({
+                        url:base_url+'/talhoes/'+data_input.value,
+                        type: 'post',
+                        data: {_method: 'delete'},
+                        success:function(msg){
+                            swal("Pronto!", {
+                              icon: "success",
+                            });
+                            
+                            window.location.replace(base_url+'/talhoes');
+
+                        },
+                        error:function(msg){
+                            location.reload();
+                            swal({
+                              type: 'error',
+                              title: 'Não deu certo!',
+                              text: 'Algo errado com essa ação!'
+                            });
+                            delay(800);
+                        }
+                    });
+              }
+            });
+        }
 
     </script>
 @endsection

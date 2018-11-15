@@ -167,16 +167,18 @@ $.fn.dataTable.render.ellipsis = function () {
                         swal("Pronto!", {
                           icon: "success",
                         });
+                        delay(800);
                         location.reload();
 
                     },
                     error:function(msg){
-                        location.reload();
                         swal({
                           type: 'error',
                           title: 'Não deu certo!',
                           text: 'Algo errado com essa ação!'
-                        })
+                        });
+                        delay(800);
+                        location.reload();
                     }
                 });
           } else {

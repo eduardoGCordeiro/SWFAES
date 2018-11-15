@@ -30,8 +30,8 @@ class UnidadesController extends Controller
         return Datatables::of($unidades)
             ->addColumn('action', function ($unidade) {
                 return '<div class = "col-md-10" style="margin-rigth: 14%">'. '<div class="panel-footer row" style="margin-rigth:80%"><!-- panel-footer -->'.'<div class="col-xs-6 text-center">'.'<div class="previous">'.'<a href="'.Route('unidades.edit',[$unidade->id_unidades]).'" class="btn btn-primary"><i class="fas fa-edit"></i>Editar</a>'.'</div>
-                        '.'</div>'.'<div class="col-xs-6 text-right">'.'<div style="margin-left:6%">'.'<form action="'.Route('unidades.destroy',[$unidade->id_unidades]).'" method="POST"> '.csrf_field().'
- <input name="_method" type="hidden" value="DELETE"> <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i>deletar</button></form>'.'</div>'.'</div>'.'</div>'.'</div>';
+                        '.'</div>'.'<div class="col-xs-6 text-right">'.'<div style="margin-left:6%">'.'  <meta name="csrf-token" content="'.csrf_token().'">
+ <button type="button" class="confirm-btn btn btn-danger" value="'.$unidade->id_unidades.'" onclick="(delete_btn(this))"><i class="fas fa-trash-alt"></i>deletar</button>'.'</div>'.'</div>'.'</div>'.'</div>';
             })->make(true);
     }
 
@@ -156,10 +156,10 @@ class UnidadesController extends Controller
         if($unidade->delete()){
 
             Session::flash('alert-success', 'deletado com sucesso!');
-            return redirect()->route('unidades.index');
+            return response('removido com sucesso!',200);
         }else{
             Session::flash('alert-danger', 'Erro ao editar!');
-            return redirect()->route('unidades.index');
+            return response('não removido com sucesso!',405);
         }
     }
 }

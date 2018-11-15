@@ -62,6 +62,7 @@
                                             <option value="">Selecione</option>
                                         @else
                                             <option value="{{$talhoes->id_adms_talhoes_adms_talhoes}}">{{$adms_talhoes_nome->funcionarios->login}}</option>
+                                            <option value="">Selecione</option>
                                         @endif
                                         @foreach($adms_talhoes as $adm_talhao)
                                                 <option value="{{$adm_talhao->id_adms_talhoes}}">{{$adm_talhao->funcionarios->login}}</option>

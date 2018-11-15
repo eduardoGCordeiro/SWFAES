@@ -43,7 +43,7 @@ class RequisicoesController extends Controller
                     return $requisicao->talhao['identificador']!=null?$requisicao->talhao['identificador']:'Sem talhão';
                 })
                 ->editColumn('resposta', function($requisicao){
-                    return $requisicao->resposta!=null?$requisicao->resposta:'Ainda não moderado';
+                    return $requisicao->descricao_adms_gerais!=null?$requisicao->descricao_adms_gerais:'Ainda não moderado';
                 })
                 ->editColumn('data', function($requisicao){
                     return date( 'd/m/Y' , strtotime($requisicao->data));
@@ -84,7 +84,7 @@ class RequisicoesController extends Controller
         //     return abort(403);
         // }
         $requisicao = Requisicao::find($id);
-        $requisicao->resposta = strtoupper($request->resposta);
+        $requisicao->descricao_adms_gerais = strtoupper($request->descricao_adms_gerais);
         if($request->option == 1){
             $requisicao->id_status_requisicoes_status_requisicoes = 2;
         }else{
@@ -140,7 +140,6 @@ class RequisicoesController extends Controller
         $requisicao = new Requisicao();
 
         $requisicao -> descricao_adms_gerais = $request->descricao_adms_gerais;
-        $requisicao -> resposta = $request->resposta;
         $requisicao->id_adms_talhoes_adms_talhoes = $adm_talhao->id_adms_talhoes;
         $requisicao->descricao = strtoupper($request->descricao);
         $requisicao->id_talhoes_talhoes = $request->talhao;

@@ -208,27 +208,27 @@
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
 
-                  <li class="nav-item">
+                  <li id="inicio-menu" class="nav-item">
                     <a class="nav-link active" href="{{url('/inicio')}}">
                       <i class="fas fa-home fa-lg"></i>
                       Início <span class="sr-only">(current)</span>
                     </a>
                   </li>
-                  <li class="nav-item">
+                  <li id="atividades-menu" class="nav-item">
 
                     <a class="nav-link" href="{{Route('atividades.index')}}">
                       <i class="fas fa-calendar-alt fa-lg" ></i>
                       Atividades
                     </a>
                   </li>
-                  <li class="nav-item">
+                  <li id="culturas-menu" class="nav-item">
                     <a class="nav-link" href="{{Route('culturas.index')}}">
                       <i class="fas fa-seedling fa-lg"></i>
                       Culturas
                     </a>
                   </li>
                   @if (Auth::user()->can('gerenciar'))
-                    <li class="nav-item">
+                    <li id="funcionarios-menu" class="nav-item">
                       <a class="nav-link" href="{{Route('funcionarios.index')}}">
                         <i class="fas fa-users fa-lg"></i>
                         Funcionários
@@ -236,7 +236,7 @@
                     </li>
                   @endif
                   @if (Auth::user()->can('gerenciar'))
-                    <li class="nav-item">
+                    <li id="itens-menu" class="nav-item">
                       <a class="nav-link" href="{{Route('itens.index')}}">
                         <i class="fas fa-warehouse fa-lg"></i>
                         Itens
@@ -244,20 +244,20 @@
                     </li>
                   @endif
                   @if (Auth::user()->can('gerenciar'))
-                    <li class="nav-item">
+                    <li id="movimentacoes-menu" class="nav-item">
                       <a class="nav-link" href="{{Route('movimentacoes.index')}}">
                         <i class="fas fa-exchange-alt fa-lg"></i>
                         Movimentações
                       </a>
                     </li>
                   @endif
-                  <li class="nav-item">
+                  <li id="requisicoes-menu" class="nav-item">
                     <a class="nav-link" href="{{Route('requisicoes.index')}}">
                       <i class="fas fa-comment"></i>
                       Requisições
                     </a>
                   </li>
-                  <li class="nav-item">
+                  <li id="talhoes-menu" class="nav-item">
                     <a class="nav-link" href="{{Route('talhoes.index')}}">
                       <i class="fas fa-th fa-lg"></i>
                       Talhões
@@ -279,13 +279,13 @@
                           Tipos de Atividades
                         </a>
                       </li> -->
-                    <li class="nav-item">
+                    <li id="tipo_item-menu" class="nav-item">
                       <a class="nav-link" href="{{Route('tipo_item.index')}}">
 
                         Tipos de Itens
                       </a>
                     </li>
-                    <li class="nav-item">
+                    <li id="unidades-menu" class="nav-item">
                       <a class="nav-link" href="{{Route('unidades.index')}}">
 
                         Unidades de medida
@@ -312,6 +312,13 @@
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
+<script type="text/javascript">
+  pathname = window.location.pathname;
+  var retorno = pathname.split("/");
+  document.getElementById(retorno[1]+'-menu').style.backgroundColor = "#ddd";
+  document.getElementById(retorno[1]+'-menu').style.borderRight = "3px solid #158CBA";
+  document.getElementById(retorno[1]+'-menu').style.marginTop = "1px";
+</script>
 
     @yield('script')
 </body>

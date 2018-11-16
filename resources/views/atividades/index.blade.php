@@ -175,6 +175,7 @@ $.fn.dataTable.render.ellipsis = function () {
                           title: 'Não deu certo!',
                           text: 'Algo errado com essa ação!'
                         });
+                        setTimeout(location.reload(), 1000);
                         
                     }
                 });

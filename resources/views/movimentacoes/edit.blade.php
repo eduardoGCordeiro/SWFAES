@@ -304,7 +304,8 @@
                               type: 'error',
                               title: 'Não deu certo!',
                               text: 'Algo errado com essa ação!'
-                            })
+                            });
+                            setTimeout(location.reload(), 1000);
                         }
                     });
               }

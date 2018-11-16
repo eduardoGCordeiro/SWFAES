@@ -184,7 +184,7 @@ $('#showmodal').click(function() {
                               title: 'Não deu certo!',
                               text: 'Algo errado com essa ação!'
                             })
-                            location.reload();
+                            setTimeout(location.reload(), 1000);
                         }
                     });
               }

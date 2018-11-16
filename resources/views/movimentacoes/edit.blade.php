@@ -281,7 +281,7 @@
                 cancelButtonText: 'Cancelar',
                 closeOnCancel: false,
             }).then((result) => {
-              if (result.value) {
+             if (result.value) {
                 var token = $(this).data('token');
                     $.ajaxSetup({
                             headers: {

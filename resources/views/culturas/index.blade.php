@@ -148,9 +148,8 @@ $(document).ready(function() {
             buttons: true,
             dangerMode: true,
             showCancelButton: true,
-        })
-        .then((willDelete) => {
-          if (willDelete) {
+       }).then((result) => {
+          if (result.value) {
             var token = $(this).data('token');
                 $.ajaxSetup({
                         headers: {
@@ -179,8 +178,6 @@ $(document).ready(function() {
                         })
                     }
                 });
-          } else {
-            swal("Your imaginary file is safe!");
           }
         });
     }

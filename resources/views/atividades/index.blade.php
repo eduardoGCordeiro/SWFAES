@@ -148,9 +148,8 @@ $.fn.dataTable.render.ellipsis = function () {
             buttons: true,
             dangerMode: true,
             showCancelButton: true,
-        })
-        .then((willDelete) => {
-          if (willDelete) {
+         }).then((result) => {
+          if (result.value) {
             var token = $(this).data('token');
                 $.ajaxSetup({
                         headers: {
@@ -181,8 +180,6 @@ $.fn.dataTable.render.ellipsis = function () {
                         location.reload();
                     }
                 });
-          } else {
-            swal("Your imaginary file is safe!");
           }
         });
     }

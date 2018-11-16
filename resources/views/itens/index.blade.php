@@ -150,7 +150,7 @@ $(document).ready(function() {
             showCancelButton: true,
             cancelButtonText: 'Cancelar',
             closeOnCancel: false,
-        }).then((result) => {
+       }).then((result) => {
           if (result.value) {
             var token = $(this).data('token');
                 $.ajaxSetup({

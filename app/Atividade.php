@@ -54,7 +54,7 @@ class Atividade extends Model
 
     public function movimentacao()
     {
-        return $this->hasMany('App\Movimentacao');
+        return $this->hasMany('App\Movimentacao','id_atividades_atividades');
     }
 
 }

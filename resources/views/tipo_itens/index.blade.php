@@ -159,8 +159,8 @@ $('#showmodal').click(function() {
                 showCancelButton: true,
                 cancelButtonText: 'Cancelar',
                 closeOnCancel: false,
-            }).then((result) => {
-              if (result.value) {
+           }).then((result) => {
+          if (result.value) {
                 var token = $(this).data('token');
                     $.ajaxSetup({
                             headers: {

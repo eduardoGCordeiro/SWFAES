@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Notifications\ResetPassword;
 
 class Funcionario extends Authenticatable
 {
@@ -32,6 +33,12 @@ class Funcionario extends Authenticatable
         'password', 'remember_token',
     ];
 
+   
+    public function sendPasswordResetNotification($token)
+    {
+        // Não esquece: use App\Notifications\ResetPassword;
+        $this->notify(new ResetPassword($token));
+    }
 
 
     public function talhoes(){

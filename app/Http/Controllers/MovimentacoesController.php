@@ -37,7 +37,7 @@ class MovimentacoesController extends Controller
             ->editColumn('tipo_movimentacoes', function($movimentacao){
                 return $movimentacao->tipo_movimentacoes==="S"?'Saída':'Entrada';
             })
-            ->editColumn('data_movimentacao', function($movimentacao) {
+            ->editColumn('data', function($movimentacao){
                 return date( 'd/m/Y' , strtotime($movimentacao->data));
             })
             ->editColumn('id_itens_itens', function($movimentacao){

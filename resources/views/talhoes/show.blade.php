@@ -57,7 +57,7 @@
                         <div class="col-xs-6 text-right">
                             <div class="next offset-1">
                                 <meta name="csrf-token" content="{{csrf_token()}}">
-                                <button type="button" class="confirm-btn btn btn-danger" value="{{$talhao->id_talhoes}}" onclick="delete_btn(this)"><i class="fas fa-trash-alt"></i>deletar</button>   
+                                <button type="button" class="confirm-btn btn btn-danger" value="{{$talhao->id_talhoes}}" onclick="delete_btn(this)"><i class="fas fa-trash-alt"></i>deletar</button>
                             </div>
                         </div>
                     </div>
@@ -186,9 +186,9 @@
                             swal("Pronto!", {
                               icon: "success",
                             }).then((reload)=>{
-                                window.location.replace(base_url+'/talhoes');                           
+                                window.location.replace(base_url+'/talhoes');
                             });
-                            
+
                         },
                         error:function(msg){
                             location.reload();
@@ -197,9 +197,9 @@
                               title: 'Não deu certo!',
                               text: 'Algo errado com essa ação!'
                             }).then((reload)=>{
-                                location.reload();                                
+                                location.reload();
                             });
-                           
+
                         }
                     });
               }

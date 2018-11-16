@@ -163,7 +163,7 @@ $('#showmodal').click(function() {
                 cancelButtonText: 'Cancelar',
                 closeOnCancel: false,
             }).then((result) => {
-              if (result.value) {
+            if (result.value) {
                 var token = $(this).data('token');
                     $.ajaxSetup({
                             headers: {
@@ -178,7 +178,7 @@ $('#showmodal').click(function() {
                             swal("Pronto!", {
                               icon: "success",
                             });
-                            window.location.replace(base_url+'/unidades');
+                            setTimeout(location.reload(), 1000);
 
                         },
                         error:function(msg){
@@ -187,7 +187,8 @@ $('#showmodal').click(function() {
                               title: 'Não deu certo!',
                               text: 'Algo errado com essa ação!'
                             })
-                            location.reload();
+                            
+
                         }
                     });
               }

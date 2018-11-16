@@ -168,7 +168,7 @@ $(document).ready(function() {
                         swal("Pronto!", {
                           icon: "success",
                         });
-                         location.reload();
+                        setTimeout(location.reload(), 1000);
 
                     },
                     error:function(msg){
@@ -177,7 +177,7 @@ $(document).ready(function() {
                           title: 'Não deu certo!',
                           text: 'Algo errado com essa ação!'
                         })
-                        location.reload();
+                        
                     }
                 });
           }

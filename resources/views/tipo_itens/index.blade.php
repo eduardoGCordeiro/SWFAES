@@ -175,7 +175,7 @@ $('#showmodal').click(function() {
                             swal("Pronto!", {
                               icon: "success",
                             });
-                            window.location.replace(base_url+'/tipo_item');
+                            setTimeout(window.location.replace(base_url+'/tipo_item'),1000);
 
                         },
                         error:function(msg){

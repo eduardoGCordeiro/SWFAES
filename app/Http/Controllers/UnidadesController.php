@@ -151,7 +151,8 @@ class UnidadesController extends Controller
         $movimentacoes = $unidade->movimentacoes;
         if(count($movimentacoes)){
             Session::flash('alert-danger', 'Erro ao excluir pois já está relacionado com um item!');
-            return redirect()->back();
+            return response('não removido com sucesso!',405);
+
         }
         if($unidade->delete()){
 

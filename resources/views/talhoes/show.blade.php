@@ -186,8 +186,7 @@
                             swal("Pronto!", {
                               icon: "success",
                             });
-                            
-                            window.location.replace(base_url+'/talhoes');
+                            setTimeout(window.location.replace(base_url+'/talhoes',1000));
 
                         },
                         error:function(msg){
@@ -197,7 +196,7 @@
                               title: 'Não deu certo!',
                               text: 'Algo errado com essa ação!'
                             });
-                            delay(800);
+                           
                         }
                     });
               }

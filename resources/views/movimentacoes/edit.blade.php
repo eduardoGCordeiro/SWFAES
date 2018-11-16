@@ -296,7 +296,7 @@
                             swal("Pronto!", {
                               icon: "success",
                             });
-                            window.location.replace(base_url+'/movimentacoes');
+                            setTimeout(window.location.replace(base_url+'/movimentacoes'), 1000);
 
                         },
                         error:function(msg){
@@ -305,7 +305,6 @@
                               title: 'Não deu certo!',
                               text: 'Algo errado com essa ação!'
                             })
-                            location.reload();
                         }
                     });
               }

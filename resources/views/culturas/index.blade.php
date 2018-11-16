@@ -166,7 +166,7 @@ $(document).ready(function() {
                         swal("Pronto!", {
                           icon: "success",
                         });
-                        location.reload();
+                        setTimeout(location.reload(), 1000);
 
                     },
                     error:function(msg){

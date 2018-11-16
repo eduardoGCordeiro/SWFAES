@@ -185,9 +185,10 @@
                         success:function(msg){
                             swal("Pronto!", {
                               icon: "success",
+                            }).then((reload)=>{
+                                window.location.replace(base_url+'/talhoes');                           
                             });
-                            setTimeout(window.location.replace(base_url+'/talhoes',1000));
-
+                            
                         },
                         error:function(msg){
                             location.reload();
@@ -195,8 +196,9 @@
                               type: 'error',
                               title: 'Não deu certo!',
                               text: 'Algo errado com essa ação!'
+                            }).then((reload)=>{
+                                location.reload();                                
                             });
-                            setTimeout(location.reload(), 1000);
                            
                         }
                     });

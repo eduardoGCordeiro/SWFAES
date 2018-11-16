@@ -174,8 +174,10 @@ $('#showmodal').click(function() {
                         success:function(msg){
                             swal("Pronto!", {
                               icon: "success",
+                            }).then((reload)=>{
+                                window.location.replace(base_url+'/tipo_item');                        
                             });
-                            setTimeout(window.location.replace(base_url+'/tipo_item'),1000);
+                            
 
                         },
                         error:function(msg){
@@ -183,8 +185,9 @@ $('#showmodal').click(function() {
                               type: 'error',
                               title: 'Não deu certo!',
                               text: 'Algo errado com essa ação!'
-                            })
-                            setTimeout(location.reload(), 1000);
+                            }).then((reload)=>{
+                                location.reload();                                
+                            });
                         }
                     });
               }

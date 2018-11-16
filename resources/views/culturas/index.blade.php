@@ -165,8 +165,9 @@ $(document).ready(function() {
                     success:function(msg){
                         swal("Pronto!", {
                           icon: "success",
+                        }).then((reload)=>{
+                            location.reload();                                
                         });
-                        setTimeout(location.reload(), 1000);
 
                     },
                     error:function(msg){
@@ -175,8 +176,9 @@ $(document).ready(function() {
                           type: 'error',
                           title: 'Não deu certo!',
                           text: 'Algo errado com essa ação!'
+                        }).then((reload)=>{
+                            location.reload();                                
                         });
-                        setTimeout(location.reload(), 1000);
                     }
                 });
           }

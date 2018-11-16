@@ -165,7 +165,10 @@ $.fn.dataTable.render.ellipsis = function () {
                     success:function(msg){
                         swal("Pronto!", {
                           icon: "success",
+                        }).then((reload)=>{
+                            setTimeout(location.reload(), 1000);                          
                         });
+                        
                         setTimeout(location.reload(), 1000);
 
                     },
@@ -174,8 +177,9 @@ $.fn.dataTable.render.ellipsis = function () {
                           type: 'error',
                           title: 'Não deu certo!',
                           text: 'Algo errado com essa ação!'
+                        }).then((reload)=>{
+                            location.reload();                                
                         });
-                        setTimeout(location.reload(), 1000);
                         
                     }
                 });

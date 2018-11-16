@@ -146,6 +146,7 @@ class TalhoesController extends Controller
         $talhao ->tipo = $request->tipo;
         $talhao->area= str_replace('.','',$request->area);
         $talhao->area =str_replace(',', '.',$talhao->area);
+        $talhao->id_adms_talhoes_adms_talhoes = $request -> id_adms_talhoes_adms_talhoes;
         $talhao->descricao = $request->descricao;
 
         if($talhao->update()){

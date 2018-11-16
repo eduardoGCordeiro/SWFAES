@@ -181,7 +181,7 @@ class TalhoesController extends Controller
             return response('item não removido com sucesso!',405);
         }else
         {
-            if($cultura)
+            if($cultura->data_fim == null)
             {
                 Session::flash('alert-danger', 'Talhão não pode ser deletado pois ainda possui uma cultura!');
                 return response('item não removido com sucesso!',405);

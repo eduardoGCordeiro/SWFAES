@@ -222,15 +222,21 @@ class CulturasController extends Controller
         }
 
         $cultura = Cultura::find($id);
-        //dd(Carbon::now()->toDateString());
         $cultura->data_fim = Carbon::now()->toDateString();
-        //dd(count($cultura->atividades));
-        if($cultura->update()){
-            Session::flash('alert-success', 'Cultura finalizada com sucesso');
+
+        if($cultura->data_inicio > $cultura->data_fim)
+        {
+            Session::flash('alert-danger', 'Cultura só pode ser finalizada com data de fim maior que de início');
             return redirect()->route('culturas.index');
-        }else{
-            Session::flash('alert-danger', 'Erro ao finalizar cultura!');
-            return redirect()->route('culturas.index');
+        }else
+        {
+            if($cultura->update()){
+                Session::flash('alert-success', 'Cultura finalizada com sucesso');
+                return redirect()->route('culturas.index');
+            }else{
+                Session::flash('alert-danger', 'Erro ao finalizar cultura!');
+                return redirect()->route('culturas.index');
+            }
         }
     }
 }

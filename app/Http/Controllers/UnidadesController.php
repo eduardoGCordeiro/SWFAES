@@ -159,7 +159,7 @@ class UnidadesController extends Controller
             Session::flash('alert-success', 'deletado com sucesso!');
             return response('removido com sucesso!',200);
         }else{
-            Session::flash('alert-danger', 'Erro ao editar!');
+            Session::flash('alert-danger', 'Erro ao deletar!');
             return response('não removido com sucesso!',405);
         }
     }

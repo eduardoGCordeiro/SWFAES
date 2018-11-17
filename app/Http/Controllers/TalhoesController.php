@@ -174,11 +174,11 @@ class TalhoesController extends Controller
         if($talhao->delete())
         {
             Session::flash('alert-sucess', 'Talhão deletado com sucesso!');
-            return response('item removido com sucesso!',200);
+            return response('Talhão deletado com sucesso!',200);
         }else
         {
             Session::flash('alert-danger', 'Talhão não pode ser deletado!');
-            return response('item não removido com sucesso!',405);
+            return response('Talhão não pode ser deletado!',405);
         }
     }
 }

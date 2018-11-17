@@ -186,7 +186,7 @@ $('#showmodal').click(function() {
                             swal({
                               type: 'error',
                               title: 'Não deu certo!',
-                              text: "{!! Session::get('alert-danger') !!}"
+                              text: msg.responseText
                             }).then((reload)=>{
                                 location.reload();                                
                             });

@@ -208,7 +208,7 @@ class ItensController extends Controller
             return response('item removido com sucesso!',200);
         }else{
             Session::flash('alert-danger', 'Esse item não pode ser removido pois já está sendo usado em movimentações dentro do sistema!');
-            return response('Erro ao deletar item!', 405);
+            return response('Esse item não pode ser removido pois já está sendo usado em movimentações dentro do sistema!', 405);
         }
     }
 }

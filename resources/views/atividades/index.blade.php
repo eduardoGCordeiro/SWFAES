@@ -166,17 +166,16 @@ $.fn.dataTable.render.ellipsis = function () {
                         swal("Pronto!", {
                           icon: "success",
                         }).then((reload)=>{
-                            setTimeout(location.reload(), 1000);                          
+                            location.reload();                                
                         });
-                        
-                        setTimeout(location.reload(), 1000);
+
 
                     },
                     error:function(msg){
                         swal({
                           type: 'error',
                           title: 'Não deu certo!',
-                          text: "{!! Session::get('alert-danger') !!}"
+                          text: msg.responseText
                         }).then((reload)=>{
                             location.reload();                                
                         });

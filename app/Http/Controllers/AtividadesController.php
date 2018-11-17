@@ -247,7 +247,7 @@ class atividadesController extends Controller
             Session::flash('alert-success', 'deletado com sucesso!');
             return response('sucesso ao deletar atividade!', 200);
         }else{
-            Session::flash('alert-danger', 'Erro ao editar!');
+            Session::flash('alert-danger', 'Erro ao deletar!');
             return response('Erro ao deletar atividade!', 405);
         }
     }

@@ -175,7 +175,7 @@ $(document).ready(function() {
                         swal({
                           type: 'error',
                           title: 'Não deu certo!',
-                          text: 'Algo errado com essa ação!'
+                          text:"{!! Session::get('alert-danger') !!}"
                         }).then((reload)=>{
                             location.reload();                                
                         });

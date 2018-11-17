@@ -171,14 +171,14 @@ $(document).ready(function() {
 
                     },
                     error:function(msg){
-                        location.reload();
                         swal({
                           type: 'error',
                           title: 'Não deu certo!',
                           text: msg.responseText
                         }).then((reload)=>{
                             location.reload();                                
-                        });
+                        });                      
+
                     }
                 });
           }

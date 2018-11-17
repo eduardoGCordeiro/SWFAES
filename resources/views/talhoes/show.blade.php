@@ -191,7 +191,6 @@
                             
                         },
                         error:function(msg){
-                            location.reload();
                             swal({
                               type: 'error',
                               title: 'Não deu certo!',
@@ -199,7 +198,8 @@
                             }).then((reload)=>{
                                 location.reload();                                
                             });
-                           
+                            
+
                         }
                     });
               }

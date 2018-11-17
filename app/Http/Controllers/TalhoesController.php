@@ -178,7 +178,7 @@ class TalhoesController extends Controller
         if($requisicao)
         {
             Session::flash('alert-danger', 'Talhão não pode ser deletado pois ainda possui requisições!');
-            return response('item não removido com sucesso!',405);
+            return response('Talhão não pode ser deletado pois ainda possui requisições!',405);
         }else
         {
             if($cultura->data_fim == null)

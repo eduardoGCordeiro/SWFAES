@@ -73,7 +73,9 @@
                     <div class="container">
                         <a class="navbar-brand" href="{{ url('/inicio') }}">
                             {{ config('app.name', 'Laravel') }} <img height="15%" width="15%" src="/logo2.png">
+
                         </a>
+
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
@@ -85,22 +87,42 @@
                                     <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">Entrar</a></li>
 
                                 @else
+                                    @if (Auth::user()->can('gerenciar'))
+                                    <li class="nav-item nav-link">
+                                        <span class="badge badge-danger">Adm geral</span></sub>
+                                    </li>
+                                    @else
+                                    <li class="nav-item nav-link">
+                                        <span class="badge badge-info">Adm talhão</span></sub>
+                                    </li>
+
+                                    @endif
+
                                     <li class="nav-item dropdown">
+
                                         <a href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
                                            aria-haspopup="true" aria-expanded="false">
                                             {{ Auth::user()->nome }}
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+
+                                            @if (Auth::user()->can('gerenciar'))
+                                            <a href="{{ route('funcionarios.show',[Auth::user()->id_funcionarios]) }}" class="dropdown-item" >
+                                                Perfil
+                                            </a>
                                             <a href="{{ route('logout') }}" class="dropdown-item"
                                                onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                                 Sair
                                             </a>
+                                            @endif
 
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                   style="display: none;">
                                                 {{ csrf_field() }}
                                             </form>
+
                                         </div>
+
                                     </li>
 
 
@@ -207,7 +229,6 @@
         <nav id="left-bar" class="col-md-2 d-none d-md-block bg-silver sidebar">
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
-
                   <li id="inicio-menu" class="nav-item">
                     <a class="nav-link active" href="{{url('/inicio')}}">
                       <i class="fas fa-home fa-lg"></i>

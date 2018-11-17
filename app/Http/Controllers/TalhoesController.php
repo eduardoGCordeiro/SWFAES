@@ -7,6 +7,7 @@ use App\Atividade;
 use App\AdmTalhao;
 use App\Funcionario;
 use App\Requisicao;
+use App\Cultura;
 use App\StatusRequisicoes;
 use App\ModerarRequisicoes;
 use App\Http\Requests\TalhoesRequest;
@@ -169,16 +170,33 @@ class TalhoesController extends Controller
         if (Gate::denies('gerenciar-talhoes')) {
             return abort(403);
         }
-        $talhao = Talhao::find($id);
 
-        if($talhao->delete())
+        $talhao = Talhao::find($id);
+        $requisicao = Requisicao::where('id_talhoes_talhoes', $talhao->id_talhoes)->first();
+        $cultura = Cultura::where('id_talhoes_talhoes', $talhao->id_talhoes)->first();
+
+        if($requisicao)
         {
-            Session::flash('alert-sucess', 'Talhão deletado com sucesso!');
-            return response('Talhão deletado com sucesso!',200);
+            Session::flash('alert-danger', 'Talhão não pode ser deletado pois ainda possui requisições!');
+            return response('item não removido com sucesso!',405);
         }else
         {
-            Session::flash('alert-danger', 'Talhão não pode ser deletado!');
-            return response('Talhão não pode ser deletado!',405);
+            if($cultura->data_fim == null)
+            {
+                Session::flash('alert-danger', 'Talhão não pode ser deletado pois ainda possui uma cultura!');
+                return response('Talhão não pode ser deletado pois ainda possui uma cultura!',405);
+            }else
+            {
+                if($talhao->delete())
+                {
+                    Session::flash('alert-sucess', 'Talhão deletado com sucesso!');
+                    return response('Talhão deletado com sucesso!',200);
+                }else
+                {
+                    Session::flash('alert-danger', 'Talhão não pode ser deletado!');
+                    return response('Talhão não pode ser deletado!',405);
+                }
+            }
         }
     }
 }

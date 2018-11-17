@@ -110,11 +110,11 @@
                                             <a href="{{ route('funcionarios.show',[Auth::user()->id_funcionarios]) }}" class="dropdown-item" >
                                                 Perfil
                                             </a>
+                                            @endif
                                             <a href="{{ route('logout') }}" class="dropdown-item"
                                                onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                                 Sair
                                             </a>
-                                            @endif
 
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                   style="display: none;">

@@ -173,12 +173,11 @@ $(document).ready(function() {
 
                     },
                     error:function(msg){
+                        location.reload();     
                         swal({
                           type: 'error',
                           title: 'Não deu certo!',
                           text: "{!! Session::get('alert-danger') !!}"
-                        }).then((reload)=>{
-                            location.reload();                                
                         });
                         
                     }

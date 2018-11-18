@@ -50,7 +50,7 @@
                                         name="nome"
                                         maxlength="45"
                                         value="{{ old('nome') }}"
-                                        placeholder="Insira seu nome"
+                                        placeholder="Insira o nome"
                                         required
                                 >
                                 @if ($errors->has('nome'))

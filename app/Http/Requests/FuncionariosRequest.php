@@ -32,7 +32,7 @@ class FuncionariosRequest extends FormRequest
             'login'=>'required|max:45|regex:/^[a-z0-9A-Z_]+$/|string|'. Rule::unique('funcionarios')->ignore($this->login,'login'),
             'nome' => 'required|string|max:45|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/|',
             'email' => 'required|string|email|max:45|'.Rule::unique('funcionarios')->ignore($this->email,'email'),
-            'cpf' => 'required|max:11|min:11|regex:/^[0-9]+$/|'.Rule::unique('funcionarios')->ignore($this->cpf,'cpf'),
+            'cpf' => 'required|max:11|min:11|cpf|'.Rule::unique('funcionarios')->ignore($this->cpf,'cpf'),
             'password' => 'string|min:6|confirmed',
             'acesso_sistema' =>''
         ];

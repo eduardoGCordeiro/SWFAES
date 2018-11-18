@@ -93,32 +93,8 @@ class FuncionariosController extends Controller
 
 
 
-            // Extrai somente os números
-            $request->cpf = preg_replace( '/[^0-9]/is', '', $request->cpf );
-
-            // Verifica se foi informado todos os digitos corretamente
-            if (strlen($request->cpf) != 11) {
-                Session::flash('alert-danger', 'CPF inválido!');
-                return redirect()->route('funcionarios.create');
-            }
-            // Verifica se foi informada uma sequência de digitos repetidos. Ex: 111.111.111-11
-            if (preg_match('/(\d)\1{10}/', $request->cpf)) {
-                Session::flash('alert-danger', 'CPF inválido!');
-                return redirect()->route('funcionarios.create');
-            }
-            // Faz o calculo para validar o CPF
-            for ($t = 9; $t < 11; $t++) {
-                for ($d = 0, $c = 0; $c < $t; $c++) {
-                    $d += $cpf{$c} * (($t + 1) - $c);
-                }
-                $d = ((10 * $d) % 11) % 10;
-                if ($cpf{$c} != $d) {
-                    Session::flash('alert-danger', 'CPF inválido!');
-                    return redirect()->route('funcionarios.create');
-                }
-            }
-            $cpf = $request->cpf;
-
+            
+        $cpf = $request->cpf;
         $funcionario = new Funcionario();
         $funcionario->cpf = $request->cpf;
         $funcionario->nome = mb_strtoupper($request->nome);

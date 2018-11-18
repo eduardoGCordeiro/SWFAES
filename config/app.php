@@ -188,6 +188,10 @@ return [
 
         Barryvdh\DomPDF\ServiceProvider::class,
 
+        //validar  cpf
+        LaravelLegends\PtBrValidator\ValidatorProvider::class,
+
+
 
 
 

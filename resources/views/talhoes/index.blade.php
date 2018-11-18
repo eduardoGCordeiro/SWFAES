@@ -36,6 +36,7 @@
                                 @endif
                             @endforeach
                         </div>
+                        @if(isset($talhoes))
                         @foreach($talhoes as $talhao)
                             <div class="card  border-dark mb-3"
                                  style="margin:3%;float:left;height: 15rem;width: 18rem !important ;">
@@ -77,6 +78,7 @@
                             </div>
                             </a>
                         @endforeach
+                        @endif
 
                         <div id = "popup" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">

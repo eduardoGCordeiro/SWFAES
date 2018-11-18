@@ -45,7 +45,7 @@ class TalhoesController extends Controller
                 return view('talhoes.index')->with(compact('talhoes'));
             }
         }else {
-            Session::flash('alert-danger', 'Você ainda não é um administrador!');
+            Session::flash('alert-danger', 'Você ainda não tem talhões para administrar!');
             return view('talhoes.index')->with(compact('talhoes'));
         }
     }

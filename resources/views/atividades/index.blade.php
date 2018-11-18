@@ -67,7 +67,10 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                Help talhões
+                                <p>As atividades são o registro de tarefas realizadas na fazenda escola, essas atividades possuem movimentações e estão relacionadas ou não com algum talhão.</p>
+                                <p>Aqui são listadas todas as atividades registradas para a fazenda. Para cada uma delas é possível através de "Ações", editar, excluir ou ver movimentações.</p>
+                                <p>Também é possível acessar a página de cadastro no botão superior "cadastrar nova".</p>
+                                <p>Não é possível deletar atividades que possuem movimentações.</p>
                             </div>
                         </div>
                     </div>

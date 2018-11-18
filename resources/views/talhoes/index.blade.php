@@ -47,16 +47,25 @@
                                     </div>
                                 </a>
                                 <div class="card-body">
-                                    @if($talhao->culturas->last())
-                                        <h4 class="card-title text-dark">{{$talhao->culturas->last()->descricao}}</h4>
-                                        <p class="card-text text-dark" onload="mascaraData(this)">Data de
-                                            início: @php
-                                                $data = str_replace('-','/',$talhao->culturas->last()->data_inicio);
+                                        @if($talhao->culturas->last())
+                                            <h4 class="card-title text-dark">{{$talhao->culturas->last()->descricao}}</h4>
+                                            <p class="card-text text-dark" onload="mascaraData(this)">Data de
+                                                início: @php
+                                                    $data = str_replace('-','/',$talhao->culturas->last()->data_inicio);
                                                 $data = explode('/',$data);
-                                                echo $data[2]."/".$data[1]."/".$data[0];@endphp</p>
-                                    @else
-                                        <h4 class="card-title text-dark">Cultura ausente</h4>
-                                    @endif
+                                                echo $data[2]."/".$data[1]."/".$data[0];
+                                                @endphp</p>
+                                            <p class="card-text text-dark" onload="mascaraData(this)">Data de
+                                                fim: @php
+                                                        if($talhao->culturas->last()->data_fim){
+                                                            $data = str_replace('-','/',$talhao->culturas->last()->data_fim);
+                                                            $data = explode('/',$data);
+                                                            echo $data[2]."/".$data[1]."/".$data[0];
+                                                        }
+                                                @endphp</p>
+                                        @else
+                                            <h4 class="card-title text-dark">Cultura ausente</h4>
+                                        @endif
                                 </div>
                                 <div class="card-footer">
                                     @if($talhao->tipo != "pecuaria" && $talhao->tipo != "agricultura")

@@ -173,18 +173,27 @@ class TalhoesController extends Controller
 
         $talhao = Talhao::find($id);
         $requisicao = Requisicao::where('id_talhoes_talhoes', $talhao->id_talhoes)->first();
-        $cultura = Cultura::where('id_talhoes_talhoes', $talhao->id_talhoes)->first();
+        $cultura = Cultura::where('id_talhoes_talhoes', $talhao->id_talhoes)->orderby('id_culturas', 'DEC')->first();
+
 
         if($requisicao)
         {
             Session::flash('alert-danger', 'Talhão não pode ser deletado pois ainda possui requisições!');
             return response('Talhão não pode ser deletado pois ainda possui requisições!',405);
         }else
-        {
-            if($cultura->data_fim == null)
+
+            if($cultura)
             {
-                Session::flash('alert-danger', 'Talhão não pode ser deletado pois ainda possui uma cultura!');
-                return response('Talhão não pode ser deletado pois ainda possui uma cultura!',405);
+                if($cultura->data_fim == null)
+                {
+                    Session::flash('alert-danger', 'Talhão não pode ser deletado pois ainda possui uma cultura!');
+                    return response('Talhão não pode ser deletado pois ainda possui uma cultura!',405);
+                }else
+                {
+
+                    Session::flash('alert-danger', 'Talhão não pode ser deletado, pois ainda possui culturas!');
+                    return response('Talhão não pode ser deletado, pois ainda possui culturas!',405);
+                }
             }else
             {
                 if($talhao->delete())
@@ -199,4 +208,3 @@ class TalhoesController extends Controller
             }
         }
     }
-}

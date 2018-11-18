@@ -131,11 +131,11 @@
 
                                 <div class="custom-control custom-radio">
 
-                                    <input id="customRadio1" name="tipo" class="custom-control-input" checked="" type="radio" value="AGRICULTURA">
+                                    <input id="customRadio1" name="tipo" class="custom-control-input" checked="" type="radio" value="agricultura">
                                     <label class="custom-control-label" for="customRadio1">Agricultura</label>
                                 </div>
                                 <div class="custom-control custom-radio">
-                                    <input id="customRadio2" name="tipo" class="custom-control-input" type="radio" value="PECUARIA">
+                                    <input id="customRadio2" name="tipo" class="custom-control-input" type="radio" value="pecuaria">
 
                                     <label class="custom-control-label" for="customRadio2">Pecuária</label>
                                 </div>

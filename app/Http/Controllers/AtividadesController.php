@@ -52,8 +52,8 @@ class atividadesController extends Controller
                 ->addColumn('action', function ($atividade) {
                     return '<div class = "col-md-10 offset-1">'. '<div class="panel-footer row" style="margin-left: 18%"><!-- panel-footer -->'.'<div class="col-xs-6 text-center">'.'<div class="previous">'.'<a href="'.Route('atividades.edit',[$atividade->id_atividades]).'" class="btn btn-primary"><i class="fas fa-edit"></i>Editar</a>'.'</div>
                         '.'</div>'.'<div class="col-xs-6 text-right">'.'<div class="next offset-1"> <meta name="csrf-token" content="'.csrf_token().'">
- <button type="button" class="confirm-btn btn btn-danger" value="'.$atividade->id_atividades.'" onclick="(delete_btn(this))"><i class="fas fa-trash-alt"></i>deletar</button>
-</div>'.'</div>'.'</div>'.'</div>';
+ <button type="button" class="confirm-btn btn btn-danger" value="'.$atividade->id_atividades.'" onclick="(delete_btn(this))"><i class="fas fa-trash-alt"></i>deletar</button></div>'.'</div>'.'<a href="'.Route('atividades.show',[$atividade->id_atividades]).'"><button type="button" class="btn btn-link">Ver movimentações</button></a>
+</div>'.'</div>';
                     })
             ->make(true);
 

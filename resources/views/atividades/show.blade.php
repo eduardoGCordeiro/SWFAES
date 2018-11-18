@@ -52,13 +52,15 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Help Talhões</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Ajuda atividades</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                Help talhões
+                                <p>Aqui são listadas todas as atividades registradas para a fazenda. Para cada uma delas é possível através de "Ações", editar, excluir ou ver movimentações.</p>
+                                <p>Também é possível acessar a página de cadastro no botão superior "cadastrar novo".</p>
+                                <p>Não é possível deletar atividades que possuem movimentações</p>
                             </div>
                         </div>
                     </div>

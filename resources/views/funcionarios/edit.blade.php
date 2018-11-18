@@ -170,13 +170,57 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Help Talhões</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Ajuda edição de funcionários</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            Help talhões
+                            <h7>Tipos de dados</h7>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Campo</th>
+                                        <th scope="col">Tipo de dado</th>
+                                        <th scope="col">Tamanho máximo</th>
+                                        <th scope="col">Tamanho mínimo</th>
+                                        <th scope="col">Restrições</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="table-active">
+                                        <th scope="row">Nome<span style="color:red">*</span></th>
+                                        <td>Texto</td>
+                                        <td>45</td>
+                                        <td>3</td>
+                                        <td>Somente letras e espaços</td>
+                                    </tr>
+                                    <tr >
+                                        <th scope="row">Login<span style="color:red">*</span></th>
+                                        <td>Texto</td>
+                                        <td>45</td>
+                                        <td>3</td>
+                                        <td>Somente letras e números</td>
+                                    </tr>
+                                    <tr  class="table-active">
+                                        <th scope="row">CPF<span style="color:red">*</span></th>
+                                        <td>Texto</td>
+                                        <td>11</td>
+                                        <td>11</td>
+                                        <td>Somente números | formato: 00000000000</td>
+                                    </tr>
+                                    <tr >
+                                        <th scope="row">Permitir acesso ao sistema?</th>
+                                        <td>Marcável</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>Se marcado a senha salva será: <b>fazendaescola</b></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="alert alert-secondary">
+                                <strong><span style="color:red">*</span></strong> Significa que o campo é obrigatório!
+                            </div>
                         </div>
                     </div>
                 </div>

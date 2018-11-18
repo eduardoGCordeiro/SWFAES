@@ -16,6 +16,9 @@
                 <div class="card-header">
 
                     <h3>Cadastro de Funcionários</h3>
+                    <button id = "showmodal" type="button" class="btn float-right" style="background: none">
+                        <i class="fas fa-question-circle fa-2x"></i>
+                    </button>
 
 
                 </div>
@@ -193,6 +196,89 @@
 
                 </div>
             </div>
+
+            <div id = "popup" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Ajuda cadastro de funcionários</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h7>Tipos de dados</h7>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Campo</th>
+                                        <th scope="col">Tipo de dado</th>
+                                        <th scope="col">Tamanho máximo</th>
+                                        <th scope="col">Tamanho mínimo</th>
+                                        <th scope="col">Restrições</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="table-active">
+                                        <th scope="row">Nome<span style="color:red">*</span></th>
+                                        <td>Texto</td>
+                                        <td>45</td>
+                                        <td>3</td>
+                                        <td>Somente letras e espaços</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">E-mail<span style="color:red">*</span></th>
+                                        <td>Texto</td>
+                                        <td>45</td>
+                                        <td>-</td>
+                                        <td>formato: texto@texto.texto</td>
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th scope="row">Login<span style="color:red">*</span></th>
+                                        <td>Texto</td>
+                                        <td>45</td>
+                                        <td>3</td>
+                                        <td>Somente letras e números</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">CPF<span style="color:red">*</span></th>
+                                        <td>Texto</td>
+                                        <td>11</td>
+                                        <td>11</td>
+                                        <td>Somente números | formato: 00000000000</td>
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th scope="row">Senha<span style="color:red">*</span></th>
+                                        <td>Texto</td>
+                                        <td>-</td>
+                                        <td>6</td>
+                                        <td>Deve ser confirmada no campo Confirme a senha</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Confirme a senha<span style="color:red">*</span></th>
+                                        <td>Texto</td>
+                                        <td>-</td>
+                                        <td>6</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th scope="row">Permitir acesso ao sistema?</th>
+                                        <td>Marcável</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>Se marcado o campo senha não é considerado e a senha salva será: <b>fazendaescola</b></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="alert alert-secondary">
+                                <strong><span style="color:red">*</span></strong> Significa que o campo é obrigatório!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
         </div>
     </div>
 </div>
@@ -215,6 +301,20 @@
             if ( isNaN( campo.value ) )
                 campo.value = campo.value.substr( 0 , campo.value.length - 1 );
         }
+
+
+
+        $(document).unbind("keyup").keyup(function(e){
+            var code = e.which;
+            if(code==112)
+            {
+                $("#popup").modal('show', 'handleUpdate');
+            }
+        });
+
+        $('#showmodal').click(function() {
+            $('#popup').modal('show');
+        });
     </script>
 
 @endsection

@@ -45,8 +45,6 @@
 
                           <thead>
                             <tr>
-
-
                                 <th scope="col">ID</th>
                                 <th scope="col">Talhão</th>
                                 <th scope="col">Data início</th>
@@ -80,7 +78,6 @@
                                 </div>
                             </div>
                         </div>
-
 
                 </div>
             </div>

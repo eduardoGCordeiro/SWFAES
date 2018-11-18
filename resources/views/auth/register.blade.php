@@ -15,10 +15,12 @@
 
                 <div class="card-header">
 
-                    <h3>Cadastro de Funcionários</h3>
-                    <button id = "showmodal" type="button" class="btn float-right" style="background: none">
-                        <i class="fas fa-question-circle fa-2x"></i>
-                    </button>
+                    <h3>Cadastro de Funcionários
+                        <button id = "showmodal" type="button" class="btn float-right" style="background: none">
+                            <i class="fas fa-question-circle fa-2x"></i>
+                        </button>
+                    </h3>
+                    
 
 
                 </div>

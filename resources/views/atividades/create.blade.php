@@ -216,6 +216,9 @@
                                         <div class="alert alert-secondary">
                                             <strong><span style="color:red">*</span></strong> Significa que o campo é obrigatório!
                                         </div>
+                                        <div class="alert alert-secondary">
+                                            <strong>Observação:</strong> Atividade cadastrada será vinculada com a cultura ativa no talhão selecionado. Se o talhão não tiver cultura a atividade será vinculada somente ao talhão.
+                                        </div>
                                     </div>
                                 </div>
                             </div>

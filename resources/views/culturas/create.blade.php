@@ -27,7 +27,11 @@
                         @endif
                       @endforeach
                     </div>
-                    <h3>Cadastro de cultura</h3>
+                    <h3>Cadastro de cultura
+                        <button id = "showmodal" type="button" class="btn float-right" style="background: none">
+                            <i class="fas fa-question-circle fa-2x"></i>
+                        </button>
+                    </h3>
 
 
                 </div>
@@ -138,9 +142,87 @@
                         </div>
                     </form>
 
+
+                    <div id = "popup" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Ajuda cadastro de culturas</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                 <div class="modal-body">
+                                    <h7>Tipos de dados</h7>
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Campo</th>
+                                                <th scope="col">Tipo de dado</th>
+                                                <th scope="col">Tamanho máximo</th>
+                                                <th scope="col">Tamanho mínimo</th>
+                                                <th scope="col">Restrições</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="table-active">
+                                                <th scope="row">Data de ínicio<span style="color:red">*</span></th>
+                                                <td>data</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>formato: dd/mm/aaaa</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Tipo de safra<span style="color:red">*</span></th>
+                                                <td>Selecionável</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>Deve ser selecionada uma das opções listadas</td>
+                                            </tr>
+                                            <tr class="table-active">
+                                                <th scope="row">Talhão<span style="color:red">*</span></th>
+                                                <td>Selecionável</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>Deve ser selecionada uma das opções listadas</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Descrição<span style="color:red">*</span></th>
+                                                <td>Texto</td>
+                                                <td>1</td>
+                                                <td>100</td>
+                                                <td>-</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="alert alert-secondary">
+                                        <strong><span style="color:red">*</span></strong> Significa que o campo é obrigatório!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+<script type="text/javascript">
+    $(document).unbind("keyup").keyup(function(e){
+        var code = e.which;
+        if(code==112)
+        {
+            $("#popup").modal('show', 'handleUpdate');
+        }
+    });
+
+    $('#showmodal').click(function() {
+        $('#popup').modal('show');
+    });
+</script>
 @endsection

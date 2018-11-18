@@ -66,13 +66,16 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Help Talhões</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Ajuda culturas</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        Help talhões
+                                        <p>Aqui é possível ver a lista de culturas cadastradas no sistema, assim é possível visualizar as culturas de cada talhão. As culturas já finalizadas contém uma data fim, já as que estão ativas a data fim não é mostrada e informa que a cultura está "Ativa".</p>
+                                        <p>Para cada uma das culturas é possível através de "Ações", editar, excluir ou ver.</p>
+                                        <p>Também é possível acessar a página de cadastro no botão superior "cadastrar nova".</p>
+                                        <p>Não é possível deletar cultura que possuí atividades.</p>
                                     </div>
                                 </div>
                             </div>

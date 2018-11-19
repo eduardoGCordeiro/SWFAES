@@ -88,7 +88,7 @@
                                            type="text"
                                            name="area"
                                            required
-                                           placeholder="00.00"
+                                           placeholder="0,00"
                                            onkeyup="mascara_num(this);">
                                     <div class="input-group-append">
 

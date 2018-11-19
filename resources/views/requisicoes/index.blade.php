@@ -68,13 +68,18 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Help Talhões</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Ajuda requisições</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            Help talhões
+                            <p>Aqui é possível ver a lista de requisições cadastradas no sistema e suas informações, as movimentações são classificadas como <strong>ACEITAS (Representadas na cor verde)</strong> e <strong>REJEITADAS (Representadas na cor vermelha)</strong>. As requisições são relacionados a talhões, ou seja, a requisição é gerada a partir de um talhão. </p>
+                            @if (!Auth::user()->can('gerenciar-requisicoes'))
+                                <p>Também é possível acessar a página de cadastro no botão superior "cadastrar nova".</p>
+                            @else
+                                <p>Para cada uma das requisições é possível através de "Ações", moderar</p>
+                            @endif
                         </div>
                     </div>
                 </div>

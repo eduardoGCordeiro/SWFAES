@@ -154,13 +154,65 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Help Talhões</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Ajuda edição de talhão</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            Help talhões
+                            <h7>Tipos de dados</h7>
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Campo</th>
+                                    <th scope="col">Tipo de dado</th>
+                                    <th scope="col">Tamanho máximo</th>
+                                    <th scope="col">Tamanho mínimo</th>
+                                    <th scope="col">Restrições</th>
+                                </tr>
+                                <tbody>
+                                <tr class="table-active">
+                                    <th scope="row">Identificador<span style="color:red">*</span></th>
+                                    <td>Texto</td>
+                                    <td>1</td>
+                                    <td>45</td>
+                                    <td>Deve conter apenas letras e números.</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Administrador do talhão<span style="color:red"></span></th>
+                                    <td>Selecionável</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>Deve ser selecionada uma das opções listadas</td>
+                                </tr>
+                                <tr class="table-active">
+                                    <th scope="row">Área<span style="color:red">*</span></th>
+                                    <td>Decimal</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>formato: 1.000,0</td>
+                                </tr>
+                                <th scope="row">Descrição<span style="color:red">*</span></th>
+                                <td>Texto</td>
+                                <td>1</td>
+                                <td>400</td>
+                                <td>-</td>
+                                </tr>
+                                <tr class="table-active">
+                                    <th scope="row">Tipo<span style="color:red">*</span></th>
+                                    <td>Selecionável</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>Deve ser selecionada uma das opções listadas</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="alert alert-secondary">
+                                <strong><span style="color:red">*</span></strong> Significa que o campo é obrigatório!
+                            </div>
+                            <div class="alert alert-secondary">
+                                <strong>Observação:</strong> Só será possível selecionar um administrador de talhão se anteriormente for cadastrado um administrador de talhão.
+                            </div>
                         </div>
                     </div>
                 </div>

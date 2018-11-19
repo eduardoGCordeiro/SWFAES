@@ -71,9 +71,11 @@
                                     </div>
                                     <div class="modal-body">
                                         <p>Aqui é possível ver a lista de culturas cadastradas no sistema, assim é possível visualizar as culturas de cada talhão. As culturas já finalizadas contém uma data fim, já as que estão ativas a data fim não é mostrada e informa que a cultura está "Ativa".</p>
-                                        <p>Para cada uma das culturas é possível através de "Ações", editar, excluir ou ver.</p>
-                                        <p>Também é possível acessar a página de cadastro no botão superior "cadastrar nova".</p>
-                                        <p>Não é possível deletar cultura que possuí atividades.</p>
+                                        @if (Auth::user()->can('gerenciar-culturas'))
+                                            <p>Para cada uma das culturas é possível através de "Ações", editar, excluir ou ver.</p>
+                                            <p>Também é possível acessar a página de cadastro no botão superior "cadastrar nova".</p>
+                                            <p>Não é possível deletar cultura que possuí atividades.</p>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

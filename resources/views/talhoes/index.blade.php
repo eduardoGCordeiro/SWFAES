@@ -84,13 +84,19 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Help Talhões</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Ajuda Talhões</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        Help talhões
+                                        <p>Aqui é possível ver a lista de talhões cadastrados no sistema e suas informações, os talhões podem <strong>não</strong> conter uma cultura logo após ser criado.</p>
+                                        <p>Após cadastrar uma cultura para o talhão, ela será exibida com sua data de início e fim. A data de fim pode <strong>não</strong> conter uma data, o que significa que a cultura está ativa.</p>
+                                        @if (!Auth::user()->can('gerenciar-requisicoes'))
+                                            <p>Caso o administrador de talhão ainda não possua talhões para administrar, não será exibido nenhum talhão.</p>
+                                        @else
+                                            <p>Também é possível acessar a página de cadastro no botão superior "cadastrar novo".</p>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

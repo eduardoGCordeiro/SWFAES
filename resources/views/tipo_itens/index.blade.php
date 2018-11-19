@@ -67,13 +67,16 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Help tipos</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Ajuda tipos de itens</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            Nessa página é possível visualizar os tipos de itens já cadastrados no sistema!
+                            <p>Nessa página é possível visualizar os tipos de itens já cadastrados no sistema!</p>
+                            <p>Para cada um dos tipos de itens é possível através de "Ações", editar ou deletar. </p>
+                            <p>A deleção e edição só ocorrerá se o tipo de item não estiver relacionado a um item.</p>
+
                         </div>
                     </div>
                 </div>

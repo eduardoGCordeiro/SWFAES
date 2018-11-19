@@ -102,13 +102,42 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Help unidades de medidas</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Ajuda cadastro de unidades de medidas</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            Nessa página é possível cadastrar as unidades de medida e sua sigla, por exemplo: Litros com a sigla L.
+                            <h7>Tipos de dados</h7>
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Campo</th>
+                                    <th scope="col">Tipo de dado</th>
+                                    <th scope="col">Tamanho máximo</th>
+                                    <th scope="col">Tamanho mínimo</th>
+                                    <th scope="col">Restrições</th>
+                                </tr>
+                                <tbody>
+                                <tr class="table-active">
+                                    <th scope="row">Nome<span style="color:red">*</span></th>
+                                    <td>Texto</td>
+                                    <td>1</td>
+                                    <td>45</td>
+                                    <td>Deve conter apenas letras.</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Sigla<span style="color:red">*</span></th>
+                                    <td>Texto</td>
+                                    <td>1</td>
+                                    <td>10</td>
+                                    <td>Deve conter apenas letras.</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="alert alert-secondary">
+                                <strong><span style="color:red">*</span></strong> Significa que o campo é obrigatório!
+                            </div>
                         </div>
                     </div>
                 </div>

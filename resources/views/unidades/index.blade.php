@@ -76,7 +76,9 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            Nessa página é possível visualizar as unidades de medidas já cadastradas no sistema!
+                            <p>Nessa página é possível visualizar as unidades de medidas já cadastradas no sistema!</p>
+                            <p>Para cada um dos tipos de itens é possível através de "Ações", editar ou deletar. </p>
+                            <p>A deleção e edição só ocorrerá se o tipo de item não estiver relacionado a um item.</p>
                         </div>
                     </div>
                 </div>

@@ -96,13 +96,45 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Help Talhões</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Ajuda cadastro de requisição</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            Help talhões
+                            <h7>Tipos de dados</h7>
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Campo</th>
+                                    <th scope="col">Tipo de dado</th>
+                                    <th scope="col">Tamanho máximo</th>
+                                    <th scope="col">Tamanho mínimo</th>
+                                    <th scope="col">Restrições</th>
+                                </tr>
+                                <tbody>
+                                <tr class="table-active">
+                                    <th scope="row">Talhão<span style="color:red">*</span></th>
+                                    <td>Selecionável</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>Deve ser selecionada uma das opções listadas</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Descrição<span style="color:red">*</span></th>
+                                    <td>Texto</td>
+                                    <td>1</td>
+                                    <td>100</td>
+                                    <td>-</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="alert alert-secondary">
+                                <strong><span style="color:red">*</span></strong> Significa que o campo é obrigatório!
+                            </div>
+                            <div class="alert alert-secondary">
+                                <strong>Observação:</strong> Só será possível cadastrar uma requisição se existir algum talhão pertencente ao administrador de talhão.
+                            </div>
                         </div>
                     </div>
                 </div>

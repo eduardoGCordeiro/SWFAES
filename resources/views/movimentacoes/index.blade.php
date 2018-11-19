@@ -63,6 +63,7 @@
                         </div>
                         <div class="modal-body">
                             <p>Aqui é possível ver a lista de movimentações cadastradas no sistema e suas informações, as movimentações são classificadas como <strong>ENTRADAS (E)</strong> e <strong>SAÍDAS (S)</strong>. As movimentações são relacionados a atividades, ou seja, a movimentação é gerada a partir de uma atividade. </p>
+                            <p>Para cada uma das movimentações é possível através de "Ações", editar</p>
                         </div>
                     </div>
                 </div>

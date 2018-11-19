@@ -85,13 +85,16 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Help Talhões</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Ajuda exibição do talhão</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                Help talhões
+                                <p>Aqui é possível ver os detalhes do talhão selecionado e ver a lista das atividades cadastradas no talhão selecionado. </p>
+                                @if(Auth::user()->can('gerenciar-culturas'))
+                                    <p>Também é possível acessar a página de edição no botão "editar", também é possível deletar um talhão desde que não haja requisições, atividades e nem culturas relacionadas a esse talhão. </p>
+                                @endif
                             </div>
                         </div>
                     </div>

@@ -188,6 +188,18 @@
                         </div>
 
                         <div class="form-group row">
+                            <label class="col-lg-4 col-form-label text-lg-right">Permitir gerenciar sistema? (Administrador geral)</label>
+
+                            <div class="col-lg-2">
+                                <div class="custom-control custom-checkbox">
+                                    <input onchange="verify_password_input();" type="checkbox" class="custom-control-input" id="adm_geral" name="adm_geral" checked="">
+                                <label class="custom-control-label" for="adm_geral">Sim</label>
+                            </div>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <div class="col-lg-6 offset-lg-4">
                                 <button type="submit" class="btn btn-primary">
                                     Cadastrar

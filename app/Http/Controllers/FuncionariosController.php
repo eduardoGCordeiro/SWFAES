@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Funcionario;
 use App\Talhao;
 use App\AdmTalhao;
+use App\AdmGeral;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Requests\FuncionariosRequest;
@@ -92,7 +93,6 @@ class FuncionariosController extends Controller
 
 
 
-
             
         $cpf = $request->cpf;
         $funcionario = new Funcionario();
@@ -101,7 +101,8 @@ class FuncionariosController extends Controller
         $funcionario->login = $request->login;
         $funcionario->email = strtolower($request->email);
         $funcionario->password = $request->acesso_sistema==""?bcrypt("fazendaescola"):bcrypt($request->password);
-        $funcionario->acesso_sistema = $request->acesso_sistema=="on"?TRUE:FALSE;
+        $funcionario->acesso_sistema = ($request->acesso_sistema=="on"||$request->adm_geral)?TRUE:FALSE;
+        $funcionario->adm_geral = $request->adm_geral=="on"?TRUE:FALSE;
 
         //$funcionario->store();
 
@@ -111,6 +112,12 @@ class FuncionariosController extends Controller
                $admTalhao = new AdmTalhao();
                $admTalhao->id_funcionarios_funcionarios = $funcionario->id_funcionarios;
                $admTalhao->save();
+            }
+
+            if( $request->adm_geral == "on" && !(AdmGeral::where('id_funcionarios_funcionarios',$funcionario->id_funcionarios)->first())){
+               $admGeral = new AdmGeral();
+               $admGeral->id_funcionarios_funcionarios = $funcionario->id_funcionarios;
+               $admGeral->save();
             }
 
 
@@ -194,12 +201,34 @@ class FuncionariosController extends Controller
         $funcionario->cpf= ($request->cpf);
         $funcionario->email= strtolower($request->email);
 
-        $funcionario->acesso_sistema = $request->acesso_sistema=="on"?TRUE:FALSE;
+        // $funcionario->acesso_sistema = ($request->acesso_sistema||$request->adm_geral=="on")?TRUE:FALSE;
+        // $funcionario->adm_geral = $request->adm_geral=="on"?TRUE:FALSE;
+
+        
 
 
         if(Auth::user()->cpf != $request->cpf) {
-            $funcionario->acesso_sistema = $request->acesso_sistema == "on" ? TRUE : FALSE;
+            $funcionario->acesso_sistema = ($request->acesso_sistema=="on"||$request->adm_geral == "on") ? TRUE : FALSE;
+            $funcionario->adm_geral = $request->adm_geral=="on"?TRUE:FALSE;
+            if($request->adm_geral=="on"){
+
+                $adm_geral  = AdmGeral::where('id_funcionarios_funcionarios',$funcionario->id_funcionarios)->get();
+                foreach ($adm_geral as $adm ) {
+                    $adm->delete();
+                }
+
+                $adm_geral = new AdmGeral();
+                $adm_geral->id_funcionarios_funcionarios = $funcionario->id_funcionarios;
+                $adm_geral->save();
+
+            }else{
+                $adm_geral  = AdmGeral::where('id_funcionarios_funcionarios',$funcionario->id_funcionarios)->get();
+                foreach ($adm_geral as $adm ) {
+                    $adm->delete();
+                }
+            }
         }
+
 
         if($funcionario->update()){
             Session::flash('alert-success', 'Funcionário editado com sucesso!');

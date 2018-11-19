@@ -21,7 +21,7 @@ class Funcionario extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'cpf','nome','email', 'acesso_sistema', 'login','password'
+        'cpf','nome','email', 'acesso_sistema','adm_geral', 'login','password'
     ];
 
     /**

@@ -50,6 +50,24 @@
                             <th>Acesso ao sistema?</th>
                             <td>{{$funcionario->acesso_sistema?'Sim':'Não'}}</td>
                         </tr>
+                        <tr>
+                            <th>Nível de acesso</th>
+                            <td>
+                                @if ($funcionario->adm_geral)
+                                <li class="nav-item nav-link">
+                                    <span class="badge badge-danger">Adm geral</span></sub>
+                                </li>
+                                @elseif ($funcionario->acesso_sistema)
+                                <li class="nav-item nav-link">
+                                    <span class="badge badge-info">Adm talhão</span></sub>
+                                </li>
+                                @else
+                                <li class="nav-item nav-link">
+                                    <span class="badge badge-secondary">Sem acesso </span></sub>
+                                </li>
+                                @endif
+                            </td>
+                        </tr>
 
 
 

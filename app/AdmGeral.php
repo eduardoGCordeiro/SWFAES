@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AdmGeral extends Model
 {
-    protected $table = 'adms_geral';
+   protected $table = 'adms_geral';
    protected $primaryKey = 'id_adms_geral';
    public $timestamps = false;
 

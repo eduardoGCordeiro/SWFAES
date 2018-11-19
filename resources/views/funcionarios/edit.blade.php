@@ -143,6 +143,18 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label class="col-lg-4 col-form-label text-lg-right">Permitir gerenciar sistema? (Administrador geral)</label>
+
+                            <div class="col-lg-2">
+                                <div class="custom-control custom-checkbox">
+                                    <input onchange="verify_password_input();" type="checkbox" class="custom-control-input" id="adm_geral" name="adm_geral" >
+                                <label class="custom-control-label" for="adm_geral">Sim</label>
+                            </div>
+
+                            </div>
+                        </div>
+
                         @endif
 
 
@@ -238,8 +250,12 @@
 
 @section('script')
 <script type="text/javascript">
-
-    document.getElementById('acesso_sistema').checked={{$funcionario->acesso_sistema}};
+    @if($funcionario->acesso_sistema)
+    document.getElementById("acesso_sistema").checked=true;
+    @endif
+    @if($funcionario->adm_geral)
+    document.getElementById('adm_geral').checked=true;
+    @endif
 
     function numeros( campo )
     {

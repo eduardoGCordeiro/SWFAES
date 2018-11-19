@@ -14,6 +14,7 @@ use Session;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -54,13 +55,18 @@ class FuncionariosController extends Controller
     {
         $funcionario = Funcionario::find($id);
         $adm = AdmTalhao::where('id_funcionarios_funcionarios',$funcionario->id_funcionarios)->first();
-        $talhoes = Talhao::where([['id_adms_talhoes_adms_talhoes','=',$adm->id_adms_talhoes]])->select('*')->get();
-         //dd($adms);
+        if(isset($adm)){
+            $talhoes = Talhao::where([['id_adms_talhoes_adms_talhoes','=',$adm->id_adms_talhoes]])->select('*')->get();
+             //dd($adms);
+            
+        }else{
+             $talhoes = Talhao::where([['id_adms_talhoes_adms_talhoes','=',0]])->select('*')->get();
+        }
         return Datatables::of($talhoes)
-        ->addColumn('action',function($talhao){
-            return '<a href="'.Route('talhoes.show',[$talhao->id_talhoes]).'" >Ver</a>';
-        })
-        ->make(true);
+            ->addColumn('action',function($talhao){
+                return '<a href="'.Route('talhoes.show',[$talhao->id_talhoes]).'" >Ver</a>';
+            })
+            ->make(true);
     }
 
     /**

@@ -173,7 +173,7 @@
                                                     <td>Deve ser selecionada uma das opções listadas</td>
                                                 </tr>
                                                 <tr class="table-active">
-                                                    <th scope="row">Talhão<span style="color:red">*</span></th>
+                                                    <th scope="row">Talhão</th>
                                                     <td>Selecionável</td>
                                                     <td>-</td>
                                                     <td>-</td>

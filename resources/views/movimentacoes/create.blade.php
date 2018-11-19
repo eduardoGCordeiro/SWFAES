@@ -60,8 +60,8 @@
                                 <label class="col-lg-4 col-form-label text-lg-right">Atividade</label>
                                 <div class="col-lg-5">
 
-
-                                    <input name="id_atividades_atividades" class="form-control" value="{{\App\Atividade::find($atividade)->descricao}}" id="readOnlyInput" type="text" placeholder="Readonly input here…" readonly="">
+                                    <p>{{\App\Atividade::find($atividade)->descricao}}</p>
+                                    <input name="id_atividades_atividades" class="form-control" value="{{$atividade}}" id="readOnlyInput" type="text" placeholder="Readonly input here…" readonly="">
 
 
                                     @if ($errors->has('id_atividades_atividades'))

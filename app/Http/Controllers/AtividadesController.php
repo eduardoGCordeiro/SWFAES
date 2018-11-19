@@ -69,7 +69,11 @@ class atividadesController extends Controller
     public function data_tables($id)
     {
         $atividades = Atividade::where('id_talhoes_talhoes', $id)->get();
+  
         return Datatables::of($atividades)
+            ->editColumn('data',function($atividades){
+                return date( 'd/m/Y' , strtotime($atividades->data));
+            })
             ->editColumn('id_tipos_atividades_tipos_atividades', function ($atividades){
                 return $atividades->tipos_atividades->nome;
             })

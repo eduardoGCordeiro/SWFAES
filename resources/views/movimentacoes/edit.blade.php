@@ -63,6 +63,7 @@
                             </div>
                         </div>
 
+
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Quantidade</label>
                             <div class="col-lg-3">
@@ -111,6 +112,26 @@
                         </div>
 
                         <div class="form-group row">
+                            <label class="col-lg-4 col-form-label text-lg-right">Data</label>
+
+                            <div class="col-lg-3">
+                                <input
+                                        type="date"
+                                        class="form-control{{ $errors->has('data') ? ' is-invalid' : '' }}"
+                                        name="data"
+                                        style="padding-left: 15%"
+                                        value="{{$movimentacao->data}}"
+                                        required
+                                >
+                                @if ($errors->has('data'))
+                                    <div class="invalid-feedback">
+                                        <strong>{{ $errors->first('data') }}</strong>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Descrição</label>
 
                             <div class="col-lg-6">
@@ -132,33 +153,33 @@
                         </div>
 
                         @if($movimentacao->tipo_movimentacoes == "E")
-                        <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">Tipo de movimentação</label>
-                            <div class="col-lg-4">
-
-                                <div class="custom-control custom-radio">
-                                    <input id="customRadio1" checked="" name="tipo_movimentacoes" class="custom-control-input" type="radio" value="E">
-                                    <label class="custom-control-label" for="customRadio1">Entrada</label>
-                                </div>
-
-                                <div class="custom-control custom-radio">
-                                    <input id="customRadio2"  name="tipo_movimentacoes" class="custom-control-input" type="radio" value="S">
-                                    <label class="custom-control-label" for="customRadio2">Saída</label>
-                                </div>
-                            </div>
-                        </div>
-                        @else
                             <div class="form-group row">
                                 <label class="col-lg-4 col-form-label text-lg-right">Tipo de movimentação</label>
-                                <div class="col-lg-4">
+                                <div class="col-lg-4 row" style="margin-top: 1%;">
 
-                                    <div class="custom-control custom-radio">
-                                        <input id="customRadio1" name="tipo_movimentacoes" class="custom-control-input" type="radio" value="E">
+                                    <div class="custom-control custom-radio" style="margin-left: 8%;">
+                                        <input id="customRadio1" name="tipo_movimentacoes" class="custom-control-input" checked="" type="radio" value="E">
                                         <label class="custom-control-label" for="customRadio1">Entrada</label>
                                     </div>
 
-                                    <div class="custom-control custom-radio">
-                                        <input id="customRadio2" checked="" name="tipo_movimentacoes" class="custom-control-input" type="radio" value="S">
+                                    <div class="custom-control custom-radio" style="margin-left: 20%;">
+                                        <input id="customRadio2" name="tipo_movimentacoes" class="custom-control-input" type="radio" value="S">
+                                        <label class="custom-control-label" for="customRadio2">Saída</label>
+                                    </div>
+                                </div>
+                            </div>
+                        @else
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label text-lg-right">Tipo de movimentação</label>
+                                <div class="col-lg-4 row" style="margin-top: 1%;">
+
+                                    <div class="custom-control custom-radio" style="margin-left: 8%;">
+                                        <input id="customRadio1" name="tipo_movimentacoes" class="custom-control-input"  type="radio" value="E">
+                                        <label class="custom-control-label" for="customRadio1">Entrada</label>
+                                    </div>
+
+                                    <div class="custom-control custom-radio" style="margin-left: 20%;">
+                                        <input id="customRadio2" name="tipo_movimentacoes" class="custom-control-input" checked="" type="radio" value="S">
                                         <label class="custom-control-label" for="customRadio2">Saída</label>
                                     </div>
                                 </div>
@@ -196,13 +217,73 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Help Talhões</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Ajuda edição de movimentações</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                Help talhões
+                                <h7>Tipos de dados</h7>
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Campo</th>
+                                        <th scope="col">Tipo de dado</th>
+                                        <th scope="col">Tamanho máximo</th>
+                                        <th scope="col">Tamanho mínimo</th>
+                                        <th scope="col">Restrições</th>
+                                    </tr>
+                                    <tbody>
+                                    <tr class="table-active">
+                                        <th scope="row">Atividade<span style="color:red">*</span></th>
+                                        <td>Selecionável</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>Deve ser selecionada uma das opções listadas</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Item<span style="color:red">*</span></th>
+                                        <td>Selecionável</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>Deve ser selecionada uma das opções listadas</td>
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th scope="row">Quantidade<span style="color:red">*</span></th>
+                                        <td>Decimal</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>formato: 1.000,0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Custo<span style="color:red">*</span></th>
+                                        <td>Decimal</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>formato: 1.000,0</td>
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th scope="row">Data<span style="color:red">*</span></th>
+                                        <td>data</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>formato: dd/mm/aaaa</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Descrição<span style="color:red">*</span></th>
+                                        <td>Texto</td>
+                                        <td>1</td>
+                                        <td>200</td>
+                                        <td>-</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div class="alert alert-secondary">
+                                    <strong><span style="color:red">*</span></strong> Significa que o campo é obrigatório!
+                                </div>
+                                <div class="alert alert-secondary">
+                                    <strong>Observação:</strong> <p>Só será possível cadastrar uma movimentação desde que seja cadastrado anteriormente uma atividade e um item.</p>
+                                </div>
                             </div>
                         </div>
                     </div>

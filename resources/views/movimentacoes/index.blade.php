@@ -56,13 +56,13 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Help Talhões</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Ajuda movimentações</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            Help talhões
+                            <p>Aqui é possível ver a lista de movimentações cadastradas no sistema e suas informações, as movimentações são classificadas como <strong>ENTRADAS (E)</strong> e <strong>SAÍDAS (S)</strong>. As movimentações são relacionados a atividades, ou seja, a movimentação é gerada a partir de uma atividade. </p>
                         </div>
                     </div>
                 </div>

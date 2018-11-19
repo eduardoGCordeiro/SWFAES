@@ -92,28 +92,6 @@
                         </div>
 
 
-
-                        <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">Valor total</label>
-                            <div class="col-lg-3">
-                                <div class="input-group mb-3">
-                                    <input  onkeyup="mascara_num(this);"
-                                            class="form-control"
-                                            type="text"
-                                            name="custo"
-                                            placeholder="00.00"
-                                            required
-                                    >
-                                </div>
-
-                                @if ($errors->has('custo'))
-                                    <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('custo') }}</strong>
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-
                         <div class="form-group row">
                             <label class="col-lg-4 col-form-label text-lg-right">Quantidade</label>
                             <div class="col-lg-3">
@@ -243,13 +221,73 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Help Talhões</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Ajuda cadastro de movimentações</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            Help talhões
+                            <h7>Tipos de dados</h7>
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Campo</th>
+                                    <th scope="col">Tipo de dado</th>
+                                    <th scope="col">Tamanho máximo</th>
+                                    <th scope="col">Tamanho mínimo</th>
+                                    <th scope="col">Restrições</th>
+                                </tr>
+                                <tbody>
+                                <tr class="table-active">
+                                    <th scope="row">Atividade<span style="color:red">*</span></th>
+                                    <td>Selecionável</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>Deve ser selecionada uma das opções listadas</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Item<span style="color:red">*</span></th>
+                                    <td>Selecionável</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>Deve ser selecionada uma das opções listadas</td>
+                                </tr>
+                                <tr class="table-active">
+                                    <th scope="row">Quantidade<span style="color:red">*</span></th>
+                                    <td>Decimal</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>formato: 1.000,0</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Custo<span style="color:red">*</span></th>
+                                    <td>Decimal</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>formato: 1.000,0</td>
+                                </tr>
+                                <tr class="table-active">
+                                    <th scope="row">Data<span style="color:red">*</span></th>
+                                    <td>data</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>formato: dd/mm/aaaa</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Descrição<span style="color:red">*</span></th>
+                                    <td>Texto</td>
+                                    <td>1</td>
+                                    <td>200</td>
+                                    <td>-</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="alert alert-secondary">
+                                <strong><span style="color:red">*</span></strong> Significa que o campo é obrigatório!
+                            </div>
+                            <div class="alert alert-secondary">
+                                <strong>Observação:</strong> Só será possível cadastrar uma movimentação desde que seja cadastrado anteriormente uma atividade e um item.
+                            </div>
                         </div>
                     </div>
                 </div>

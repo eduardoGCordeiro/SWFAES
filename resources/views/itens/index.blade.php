@@ -75,13 +75,14 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Help Talhões</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Ajuda itens</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            Help talhões
+                            <p>Aqui é possível ver a lista de itens cadastradas no sistema e suas informações. Os itens são relacionados a movimentações, ou seja, a movimentação é gerada a partir de um item. </p>
+                            <p>Não é possível deletar ou editar um item que esteja relacionado a uma movimentação.</p>
                         </div>
                     </div>
                 </div>
